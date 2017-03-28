@@ -1,0 +1,82 @@
+﻿@using BlueSignal.Models;
+@{
+    ViewBag.Title = "Contact";
+}
+@*<h3>@ViewBag.Message</h3>*@
+<div class="contact">
+    <h2>@*@ViewBag.Title*@ Support Ticket</h2>
+    <div class="alert alert-info">
+        <div class="row">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            <div>
+                <h4>BluSignals Support</h4>
+                <p>Open a support ticket and you will receive a detailed response within 24 hrs. Thank You.</p>
+            </div>
+        </div>
+    </div>
+    @*<div class="col-sm-6">
+            <p>Opening a ticket or contacting us on Skype are the fastest and most efficient methods of support.</p>
+            <h4>Contact Information</h4>
+            <ul class="address">
+                <li>
+                    <p><i class="fa fa-map-marker" aria-hidden="true"></i> 11650 Old Road, Suite #1156 - 19 Fishers, IN 46037</p>
+                </li>
+                <li>
+                    <p><i class="fa fa-skype" aria-hidden="true"></i> mahesh (UTC - 5:00)</p>
+                </li>
+                <li>
+                    <p><i class="fa fa-skype" aria-hidden="true"></i> rohit (UTC - 5:00)</p>
+                </li>
+                <li>
+                    <p><i class="fa fa-skype" aria-hidden="true"></i> sukhjeet (UTC - 5:00)</p>
+                </li>
+                <li>
+                    <p><i class="fa fa-skype" aria-hidden="true"></i> joshi (UTC - 5:00)</p>
+                </li>
+                <li>
+                    <p><i class="fa fa-envelope" aria-hidden="true"></i> support@blusignals.com</p>
+                </li>
+            </ul>
+        </div>*@
+    <div class="row">
+        <div id="ContactLog_Container" class="col-sm-12">
+
+            @{Html.RenderPartial("~/Views/Home/_ContactLog.cshtml", new ContactViewModel() { IsSuccess = 0 });}
+
+        </div>
+    </div>
+
+</div>
+<div class="clearfix"></div>
+@*<div class="company_info">
+        <div class="col-sm-4">
+            <h4><span>About BluSignals</span></h4>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        </div>
+        <div class="col-sm-4">
+            <h4><span><i class="fa fa-rss-square" aria-hidden="true"></i> Our Blog</span></h4>
+            <ul class="blog_list">
+                <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> <span><strong>Lorem Ipsum is simply dummy text</strong> of the printing and typesetting industry.</span></li>
+                <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> <span><strong>Lorem Ipsum is simply dummy text</strong> of the printing and typesetting industry.</span></li>
+                <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> <span><strong>Lorem Ipsum is simply dummy text</strong> of the printing and typesetting industry.</span></li>
+                <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> <span><strong>Lorem Ipsum is simply dummy text</strong> of the printing and typesetting industry.</span></li>
+                <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> <span><strong>Lorem Ipsum is simply dummy text</strong> of the printing and typesetting industry.</span></li>
+            </ul>
+        </div>
+        <div class="col-sm-4">
+            <h4><span>Find Us on Facebook</span></h4>
+            <img src="~/images/fb_fans.png" />
+        </div>
+    </div>*@
+@*<address>
+        One Microsoft Way<br />
+        Redmond, WA 98052-6399<br />
+        <abbr title="Phone">P:</abbr>
+        425.555.0100
+    </address>
+
+    <address>
+        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    </address>*@

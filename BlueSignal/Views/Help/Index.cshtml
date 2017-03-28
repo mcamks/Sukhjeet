@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "Help";
+}
+
+<div class="help_content">
+
+    <div class="need_more_help">
+        <h4>Need more help? <span>Can't find what you're looking for? We'd love to talk.</span></h4>
+        @*<button class="btn btn-primary pull-right"></button>*@
+
+        @Html.ActionLink("Submit a ticket", "Contact", "Home", new {   p = "Help", c = "fa-question" }, new { @class = "btn btn-primary pull-right" })
+    </div>
+    <div class="help_videos">
+        <h4><span>Walk</span>through Videos</h4>
+        <div class="row">
+            <div class="col-sm-3">
+                <img src="~/images/activities.png" class="img-responsive" />
+            </div>
+            <div class="col-sm-3">
+                <img src="~/images/orgs.png" class="img-responsive" />
+            </div>
+            <div class="col-sm-3">
+                <img src="~/images/activities.png" class="img-responsive" />
+            </div>
+            <div class="col-sm-3">
+                <img src="~/images/orgs.png" class="img-responsive" />
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="panel-group accordion" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title pannel_bg_blue">
+                        <span class="option_icons"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <i class="fa fa-print" aria-hidden="true"></i></span>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><i class="fa fa-folder-open-o fa-fw text-muted"></i> Getting Started - BluFractal</a>
+
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="alert alert-warning">
+                            <p><em>Our algorithm recalculates the data on the BluFractal System screen at the end of each trading session.  All information on the screen is relevant to the last completed trading day.</em></p>
+                        </div>
+                        <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Trend Indicator</h4>
+                        <p>
+                            Confirms directional trend of the security's price and that trend-following trading positions are recommended.<br />
+
+                            <em>Probability models show that trades placed consistent with the fractal trend have a statistically significant performance improvement compared to conventional analytical techniques.</em>
+                        </p>
+                        <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Fail Point</h4>
+                        <p>
+                            The price-point that our fractal algorithm projects the current trend will fail.<br />
+
+                            <em>Neutral trends are marked N/A for this value.  If the value displays “UNK”, then the algorithm needs more data to accurately project the fail point (it typically takes a few trading days after the beginning of a new trend for enough data to calculate this value).</em>
+                        </p>
+                        <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Meter</h4>
+                        <p>The projected time remaining in the current trend.  All trends begin with the Meter at the very top of the scale. </p>
+                        <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Starting Date</h4>
+                        <p>The trade day that the current trend began. </p>
+                        <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Starting Price </h4>
+                        <p>The price at which the current trend began. </p>
+                        <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Days in Trend </h4>
+                        <p>The number of days since the current trend began. </p>
+                    </div>
+                    @*<div class="panel-footer">Panel Footer</div>*@
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title pannel_bg_blue">
+                        <span class="option_icons"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <i class="fa fa-print" aria-hidden="true"></i></span>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><i class="fa fa-folder-open-o fa-fw text-muted"></i> Getting Started - BluNeural</a>
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="alert alert-warning">
+                            <p><em>Our algorithm recalculates the data on the BluNeural System screen at the end of each trading session.  All information on the screen is relevant to the last completed trading day.</em></p>
+                        </div>
+                        <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Zone Indicator </h4>
+                        <p>
+                            Signals an imminent Price Pivot (Up or Down) for the security and that counter-trend trading positions are recommend.<br />
+
+                            <em>Green Bars for Buy Zones.  Red Bars for Sell Zones.  Probability models show that pivot signals derived from neural network data have a statistically significant performance improvement compared to conventional mean-reversion techniques.</em>
+
+                        </p>
+                        <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Pivot Indicator </h4>
+                        <p>
+                            Shows the direction of the last price pivot of the security. <br />
+
+                            <em>Probability models show that pivot-point data derived from neural networks have a statistically significant performance improvement compared to conventional trend-following techniques.</em>
+
+                        </p>
+                        <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Starting Date </h4>
+                        <p>The trade day that the current Zone began.</p>
+                        <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Duration </h4>
+                        <p>The number of days since the current Zone began.</p>
+                        <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Last Up Pivot  </h4>
+                        <p>The date of the last Up price pivot of the security.</p>
+                        <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Last Down Pivot  </h4>
+                        <p>The date of the last Down price pivot of the security.</p>
+                    </div>
+                    @*<div class="panel-footer">Panel Footer</div>*@
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title pannel_bg_blue">
+                        <span class="option_icons"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <i class="fa fa-print" aria-hidden="true"></i></span>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><i class="fa fa-folder-open-o fa-fw text-muted"></i> Getting Started - BluQuant</a>
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="alert alert-warning">
+                            <p><em>Our algorithm calculates the data for the Buy and Sell signals generated by the BluQuant System during the current market session in real-time.  Once a security is opened with a Buy Signal it is placed into the Current Portfolio.  Then, when the Sell Signal for that security is issued, it is moved to the Completed Trades List.  To maximize investment returns, BluQuant has been calibrated for use in Margined Brokerage Accounts (for more conservative investors a cash-based account can be used).</em></p>
+                        </div>
+                        <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Today’s Signals  </h4>
+                        <p>
+                            The current day’s live trade signals that are Alerted here and simultaneously sent to you each day via email as they are generated.  <br />
+
+                            <em>There are typically 1 to 7 new positions triggered per week.  Each position’s holding period averages approximately 6 weeks (however, some could just be a few days while others could last a few months).  It is recommended that users execute these trades at the triggered price and time (or as close as possible) for best performance results.</em>
+
+                        </p>
+                        <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Buy Signal   </h4>
+                        <p>
+                            Lists the security’s exchange symbol and the price and time that the Buy Signal to open this position was triggered that day.  User’s should attempt to execute at, or below, the triggered price.  <br />
+                            <em>Users are not required to purchase every Buy Signal generated by the system.  Use discretion based upon the number of open positions desired in your portfolio and current funds available for trading.</em>
+
+                        </p>
+                        <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Sell Signal </h4>
+                        <p>
+                            Lists the security’s exchange symbol and the price and time that the Sell Signal to exit the position was triggered that day.  User’s should attempt to execute at, or above, the triggered price.<br />
+                            <em>However, it is recommended for users to close their position that day because once the security has triggered its Sell Signal it is removed from the Current Portfolio and is no longer tracked by our system. </em>
+
+                        </p>
+                        <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Current Portfolio </h4>
+                        <p>The list of all open positions currently in the BluQuant System Portfolio.</p>
+                        <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Last 10 Trades </h4>
+                        <p>A list of the 10 most recently completed trades.  Completed trades are positions that were triggered with a Buy Signal and then were subsequently closed by a following Sell Signal for that security. The "Result" data is based upon the use of a 2:1  margin account.</p>
+                    </div>
+                    @*<div class="panel-footer">Panel Footer</div>*@
+                </div>
+            </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title pannel_bg_blue">
+                    <span class="option_icons"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <i class="fa fa-print" aria-hidden="true"></i></span>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse4"><i class="fa fa-folder-open-o fa-fw text-muted"></i> Getting Started - Benefits of Combo</a>
+                </h4>
+            </div>
+            <div id="collapse4" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="alert alert-warning">
+                        <p><em>The "Combo" page allows you to view the key elements of the BluFractal System and the BluNeural System on one screen (if you have both Systems in your subscription plan.)</em></p>
+                    </div>
+                    <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Indicators  </h4>
+                    <p>BluFractal Near-Term Trend</p>
+                    <p>BluNeural Current Zone</p>
+                    <p>BluNeural Last Pivot</p>
+                    <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Charts  </h4>
+                    <p>BluFractal (Near-Term)</p>
+                    <p>BluNeural </p>
+                </div>
+                @*<div class="panel-footer">Panel Footer</div>*@
+            </div>
+        </div>
+        </div>
+
+    </div>

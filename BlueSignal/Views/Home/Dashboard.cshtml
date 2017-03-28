@@ -1,0 +1,339 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .panel-body > div,
+    .panel-body > div > iframe
+    {
+        width:100%;
+        height: 100%;
+    }
+    .custom_panel {
+    margin-left: -10px; margin-right: 0px; padding-top: 5px;}
+    .custom_panel .panel, .custom_panel .panel-group {
+        margin-bottom: 5px;
+    }
+    .padding-left-5 {
+    padding-left: 2px;}
+    .padding-right-5 {
+    padding-right: 2px;}
+    .content {
+    padding-top: 5px;}
+    .blue_border {
+    border-top: 5px solid #1e6eff !important
+    }
+</style>
+<div class="dashboard blue_heading_panel custom_panel blue_border">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel-group accordion">
+                <div class="panel">
+                    @*<div class="panel-heading">
+                        <h4 class="panel-title"> <i class="fa fa-newspaper-o" aria-hidden="true"></i> &nbsp;Ticker Widget </h4>
+                    </div>*@
+                    <div id="Div1" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            @*<img src="~/images/graph3.jpg" />*@
+                            <!-- TradingView Widget BEGIN -->
+                            @*<span id="tradingview-copyright">
+                                    Market quotes are powered by <a href="http://www.tradingview.com" rel="nofollow" target="_blank" style="color: #3BB3E4">
+                                        TradingView.com
+                                    </a>
+                                </span>*@
+                            <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js">
+                                {
+                                    "symbols": [
+                                      {
+                                          "description": "The Standard&Poor's Index",
+                                          "proName": "INDEX:SPX"
+                                      },
+                                      {
+                                          "description": "Nasdaq 100 Index",
+                                          "proName": "INDEX:IUXX"
+                                      },
+                                      {
+                                          "description": "Euro Fx/U.S. Dollar",
+                                          "proName": "FX:EURUSD"
+                                      },
+                                      {
+                                          "description": "Light Crude Oil Futures",
+                                          "proName": "NYMEX:CL1!",
+                                          "title": "Crude Oil"
+                                      }
+                                    ],
+                                    "locale": "en",
+                                    "timeframe": "1d"
+                                }
+                            </script>
+                            <!-- TradingView Widget END -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 padding-right-5">
+            <div class="panel-group accordion">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"> <i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp;Market Overview / Quote Board Widget</h4>
+                    </div>
+                    <div id="collapse" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            @*<img src="~/images/graph1.jpg" />*@
+
+                            <!-- TradingView Widget BEGIN -->
+                            @*<span id="tradingview-copyright">
+                                    Market quotes are powered by <a href="http://www.tradingview.com" rel="nofollow" target="_blank" style="color: #3BB3E4">
+                                        TradingView.com
+                                    </a>
+                                </span>*@
+                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js">
+                                {
+                                    "showChart": true,
+                                    "locale": "en",
+                                    "width": "100%",
+                                    "height": "600",
+                                    "largeChartUrl": "@("http://" + HttpContext.Current.Request.Url.Authority + "/home/FinanceInfoView")",
+                                    "plotLineColorGrowing": "#3CBC98",
+                                    "plotLineColorFalling": "#FF4A68",
+                                    "gridLineColor": "#e9e9ea",
+                                    "scaleFontColor": "#DADDE0",
+                                    "belowLineFillColorGrowing": "rgba(60, 188, 152, 0.05)",
+                                    "belowLineFillColorFalling": "rgba(255, 74, 104, 0.05)",
+                                    "symbolActiveColor": "#F2FAFE",
+                                    "tabs": [
+                                      {
+                                          "title": "Equities",
+                                          "symbols": [
+                                            {
+                                                "s": "INDEX:SPX",
+                                                "d": "S&P500"
+                                            },
+                                            {
+                                                "s": "INDEX:IUXX",
+                                                "d": "NQ100"
+                                            },
+                                            {
+                                                "s": "INDEX:DOWI",
+                                                "d": "Dow30"
+                                            },
+                                            {
+                                                "s": "INDEX:NKY",
+                                                "d": "Nikkei225"
+                                            },
+                                            {
+                                                "s": "NASDAQ:AAPL",
+                                                "d": "Apple"
+                                            },
+                                            {
+                                                "s": "NASDAQ:GOOG",
+                                                "d": "Google"
+                                            }
+                                          ]
+                                      },
+                                      {
+                                          "title": "Commodities",
+                                          "symbols": [
+                                            {
+                                                "s": "CME_MINI:ES1!",
+                                                "d": "Emini"
+                                            },
+                                            {
+                                                "s": "CME:E61!",
+                                                "d": "Euro"
+                                            },
+                                            {
+                                                "s": "COMEX:GC1!",
+                                                "d": "Gold"
+                                            },
+                                            {
+                                                "s": "NYMEX:CL1!",
+                                                "d": "Oil"
+                                            },
+                                            {
+                                                "s": "NYMEX:NG1!",
+                                                "d": "Gas"
+                                            },
+                                            {
+                                                "s": "CBOT:ZC1!",
+                                                "d": "Corn"
+                                            }
+                                          ]
+                                      },
+                                      {
+                                          "title": "Bonds",
+                                          "symbols": [
+                                            {
+                                                "s": "CME:GE1!",
+                                                "d": "Eurodollar"
+                                            },
+                                            {
+                                                "s": "CBOT:ZB1!",
+                                                "d": "T-Bond"
+                                            },
+                                            {
+                                                "s": "CBOT:UD1!",
+                                                "d": "Ultra T-Bond"
+                                            },
+                                            {
+                                                "s": "EUREX:GG1!",
+                                                "d": "Euro Bund"
+                                            },
+                                            {
+                                                "s": "EUREX:II1!",
+                                                "d": "Euro BTP"
+                                            },
+                                            {
+                                                "s": "EUREX:HR1!",
+                                                "d": "Euro BOBL"
+                                            }
+                                          ]
+                                      },
+                                      {
+                                          "title": "Forex",
+                                          "symbols": [
+                                            {
+                                                "s": "FX:EURUSD"
+                                            },
+                                            {
+                                                "s": "FX:GBPUSD"
+                                            },
+                                            {
+                                                "s": "FX:USDJPY"
+                                            },
+                                            {
+                                                "s": "FX:USDCHF"
+                                            },
+                                            {
+                                                "s": "FX:AUDUSD"
+                                            },
+                                            {
+                                                "s": "FX:USDCAD"
+                                            }
+                                          ]
+                                      }
+                                    ]
+                                }
+                            </script>
+                            <!-- TradingView Widget END -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 padding-left-5">
+            <div class="panel-group accordion">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"> <i class="fa fa-area-chart" aria-hidden="true"></i> &nbsp;Hotlists Widget</h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            @*<img src="~/images/graph2.jpg" />*@
+                            <!-- TradingView Widget BEGIN -->
+                            @*<span id="tradingview-copyright">
+                                    Market quotes are powered by <a href="http://www.tradingview.com" rel="nofollow" target="_blank" style="color: #3BB3E4">
+                                        TradingView.com
+                                    </a>
+                                </span>*@
+                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-hotlists.js">
+                                {
+                                    "exchange": "BSE",
+                                    "showChart": true,
+                                    "locale": "en",
+                                    "width": "100%",
+                                    "height": "600",
+                                    "largeChartUrl": "@("http://" + HttpContext.Current.Request.Url.Authority + "/home/FinanceInfoView")",
+                                    "plotLineColorGrowing": "#3CBC98",
+                                    "plotLineColorFalling": "#FF4A68",
+                                    "gridLineColor": "#F2F2F2",
+                                    "scaleFontColor": "#DADDE0",
+                                    "belowLineFillColorGrowing": "rgba(60, 188, 152, 0.05)",
+                                    "belowLineFillColorFalling": "rgba(255, 74, 104, 0.05)",
+                                    "symbolActiveColor": "#F2FAFE"
+                                }
+                            </script>
+                            <!-- TradingView Widget END -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 padding-right-5">
+            <div class="panel-group accordion">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"> <i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;Symbol Overview</h4>
+                    </div>
+                    <div id="Div2" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            @*<img src="~/images/graph4.jpg" />*@
+
+                            <!-- TradingView Widget BEGIN -->
+                            <div id="tv-medium-widget-0e2f2"></div>
+                            <script type="text/javascript" src="https://d33t3vvu2t2yu5.cloudfront.net/tv.js"></script>
+                            <script type="text/javascript">
+                                new TradingView.MediumWidget({
+                                    "container_id": "tv-medium-widget-0e2f2",
+                                    "symbols": [
+                                      [
+                                        "Apple",
+                                        "AAPL "
+                                      ],
+                                      [
+                                        "Google",
+                                        "GOOGL"
+                                      ],
+                                      [
+                                        "Yahoo!",
+                                        "YHOO"
+                                      ]
+                                    ],
+                                    "gridLineColor": "#e9e9ea",
+                                    "fontColor": "#83888D",
+                                    "underLineColor": "#dbeffb",
+                                    "trendLineColor": "#4bafe9",
+                                    "width": "100%",
+                                    "height": "600",
+                                    "largeChartUrl": "@("http://" + HttpContext.Current.Request.Url.Authority + "/home/FinanceInfoView")",
+                                    "locale": "en"
+                                });
+                            </script>
+                            <!-- TradingView Widget END -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 padding-left-5">
+            <div class="panel-group accordion">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"> <i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;Economic Calendar</h4>
+                    </div>
+                    <div id="Div2" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            @*<img src="~/images/graph4.jpg" />*@
+                            <!-- TradingView Widget BEGIN -->
+                            @*<span id="tradingview-copyright">Economic Calendar powered by <a href="http://www.tradingview.com" rel="nofollow" target="_blank" style="color: #3BB3E4">TradingView.com</a></span>*@
+                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js">
+                                {
+                                    "width": "100%",
+                                    "height": "600"
+                                }
+                            </script>
+                            <!-- TradingView Widget END -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

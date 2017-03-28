@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Data";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("_MarketDataLists")
+
+<input id="codeIntoSession" type="hidden" value="@ViewBag.Code" />
+
+
+<script>
+    $(document).ready(function () {
+        if ($('#codeIntoSession').val() == "") {
+            BindMarketDataIndividual('SPY');
+        } else { BindMarketDataIndividual($('#codeIntoSession').val()); }
+    });
+
+</script>
+

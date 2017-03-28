@@ -1,0 +1,45 @@
+﻿@using BlueSignalCore.Models
+@model FinanceInfo
+
+@{
+    ViewBag.Title = "Finance Info View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    @if (Model != null && !string.IsNullOrEmpty(Model.Result))
+    {
+        @Html.HiddenFor(m => m.Symbol)
+        <span id="resultSpan">
+            @Model.Result
+        </span>
+    }
+</div>
+
+<script>
+    $(function () {
+        setInterval(Reloadthis, 5000);
+    });
+
+    function Reloadthis() {
+        $.ajax({
+            type: "GET",
+            url: "/Home/ReloadFinanceInfo",
+            dataType: "json",
+            async: true,
+            data: { 'symbol': $('#Symbol').val() },
+            success: function (data) {
+                if (data != null) {
+                    $("#resultSpan").empty();
+                    $("#resultSpan").html(data);
+                }
+            },
+            error: function (error, status) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+
+

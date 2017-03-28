@@ -1,0 +1,808 @@
+﻿<style>
+    .dataTables_filter {
+        display: none;
+    }
+</style>
+<div class="row admin">
+    <div id="mySetupModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="AddEditFormHeading">Select Market</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="hfId" value="0" />
+                    <input type="hidden" id="hdProductTypeId" value="0" />
+                    <input type="hidden" id="hfSelectedEventId" value="" />
+                    <div class="row">
+                        <div class="col-sm-6 userfield" id="SymbolName1">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" id="SymbName1" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6 userfield" id="SymbolCode1">
+                            <div class="form-group">
+                                <label>Symbol</label>
+                                <input type="text" id="Symbol" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6 userfield" id="MarketCategory1">
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="categorySelect" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 userfield" id="TradeAction1">
+                            <div class="form-group">
+                                <label>Action</label>
+                                <select id="TradeAction" class="form-control">
+                                    <option value="Buy">Buy</option>
+                                    <option value="Sell">Sell</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 userfield" id="Price1">
+                            <div class="form-group">
+                                <label>Price</label>
+                                <div class="currency_sign"><span>$</span><input id="Price" type="text" class="form-control" /></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 userfield" id="EntryDate1">
+                            <div class="form-group">
+                                <label>Entry Date</label>
+                                <input id="EntryDate" type="text" class="form-control datepicker1" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6 userfield" id="EntryTime1">
+                            <div class="form-group">
+                                <label>Entry Time</label>
+                                <input id="EntryTime" type="text" class="form-control timepicker1" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6 userfield" id="ExitDate1">
+                            <div class="form-group">
+                                <label>Exit Date</label>
+                                <input id="ExitDate" type="text" class="form-control datepicker1" />
+                            </div>
+                        </div>
+                        @*<div class="col-sm-6 userfield" id="EntryPrice1">
+                                <div class="form-group">
+                                    <label>Entry Price</label>
+                                    <div class="currency_sign"><span>$</span><input id="EntryPrice" type="text" class="form-control" /></div>
+                                </div>
+                            </div>*@
+                        <div class="col-sm-6 userfield" id="Result1">
+                            <div class="form-group">
+                                <label>Result</label>
+                                <input id="Result" type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" id="BtnSave" class="btn btn-primary" value="Save" />
+                    <input type="button" id="BtnCancel" class="btn btn-primary" value="Cancel" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <div class="panel-group accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title pannel_bg_blue"> <a data-toggle="collapse" href="#collapseMD1">Major Markets List</a> </h4>
+                </div>
+                <div id="collapseMD1" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="radio-inline"><input type="radio" onchange="ToggleRadioButtons('#rdBluQuant', '.radioMarketDataType')" class="radioMarketDataType" value="BluQuant" id="rdBluQuant" /> BluQuant</label>
+                                <label class="radio-inline"><input type="radio" onchange="ToggleRadioButtons('#rdOther', '.radioMarketDataType')" class="radioMarketDataType" checked="checked" value="Other" id="rdOther" /> Other</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 addnew_btn">
+                                <input type="button" style="top:12px;" productType="0" id="BtnMD1" title="Add to Major Markets" rFields="SymbolName1,SymbolCode1,MarketCategory1" onclick="ShowHideFields(this); SetButtonText(this);" class="btn btn-primary pull-right addnew" custom='SymbolName1,SymbolCode1,MarketCategory1' data-toggle="modal" value="Add New">
+                            </div>
+                            <div class="col-sm-12">
+                                <div style="overflow:auto;">
+                                    <div class="table-responsive table_style">
+                                        <table id="MarketData1" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Category</th>
+                                                    <th>Name</th>
+                                                    <th>Symbol</th>
+                                                    <th>Options</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <div class="panel-group accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title pannel_bg_blue"> <a data-toggle="collapse" href="#collapseblueQuant">BluQuant Manual Edit</a> </h4>
+                </div>
+                <div id="collapseblueQuant" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="addnew_btn">
+                                <input type="button" id="BtnMD2" title="Send New Trade" productType="103" onclick="ShowHideFields(this); SetButtonText(this);" class="btn btn-primary pull-right addnew" custom='SymbolName1,SymbolCode1,TradeAction1,Price1,EntryDate1,EntryTime1' rFields='SymbolName1,SymbolCode1,TradeAction1,Price1,EntryDate1,EntryTime1' data-toggle="modal" value="Send Signal">
+                            </div>
+                            <div class="col-sm-12">
+                                <div>
+                                    <div class="table-responsive table_style">
+                                        <table id="blueQuant" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Symbol</th>
+                                                    <th>Type</th>
+                                                    <th>Price</th>
+                                                    <th>Date</th>
+                                                    <th>Time</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <div class="panel-group accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title pannel_bg_blue"> <a data-toggle="collapse" href="#collapseLivePortfolio">Live Portfolio</a> </h4>
+                </div>
+                <div id="collapseLivePortfolio" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="addnew_btn">
+                                <input type="button" id="BtnMD3" title="Add Live Portfolio" productType="104" onclick="ShowHideFields(this); SetButtonText(this);" class="btn btn-primary pull-right addnew" custom='SymbolName1,SymbolCode1,EntryDate1,EntryPrice1' rFields='SymbolName1,SymbolCode1,EntryDate1,EntryPrice1' data-toggle="modal" value="Add New">
+                            </div>
+                            <div class="col-sm-12">
+                                <div>
+                                    <div class="table-responsive table_style">
+                                        <table id="livePortfolio" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Symbol</th>
+                                                    <th>Name</th>
+                                                    <th>Entry Date</th>
+                                                    <th>Entry Price</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <div class="panel-group accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title pannel_bg_blue"> <a data-toggle="collapse" href="#collapseDaily">Last 10 Completed Trades</a> </h4>
+                </div>
+                <div id="collapseLast10CompletedTrades" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                @*<input type="button" id="BtnMD3" title="" productType="105" onclick="ShowHideFields(this);" class="btn btn-primary pull-right addnew" custom='SymbolCode1,SymbolName1,EntryDate1,ExitDate1,Result1,EntryPrice1' rFields='SymbolCode1,SymbolName1,EntryDate1,ExitDate1,Result1,EntryPrice1' data-toggle="modal" data-target="#mySetupModal" value="Add New">*@
+                                <input type="button" id="BtnMD3" productType="105" title="Add to Completed Trades List" onclick="ShowHideFields(this); SetButtonText(this);" class="btn btn-primary pull-right addnew" custom='SymbolCode1,SymbolName1,EntryDate1,ExitDate1,Result1,EntryPrice1' rFields='SymbolCode1,SymbolName1,EntryDate1,ExitDate1,Result1,EntryPrice1' data-toggle="modal" value="Add New">
+                            </div>
+                            <div class="col-sm-12">
+                                <div>
+                                    <div class="table-responsive table_style">
+                                        <table id="last10CompletedTrades" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Symbol</th>
+                                                    <th>Name</th>
+                                                    <th>Entry Date</th>
+                                                    <th>Exit Date</th>
+                                                    <th>Result</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#TradeAction").val('Buy');
+
+        GetMarketSetupData();
+        $('.datepicker1').datepicker({
+            //format: 'mm/dd/yyyy',
+            autoclose: true,
+            //todayHighlight: true,
+            //pickSeconds: false,
+            //maxView: 1,
+        });
+        $('.timepicker1').datetimepicker({
+            format: 'hh:ii',
+            use24hours: true,
+            pickDate: false,
+            pickSeconds: false,
+            autoclose: true,
+            startView: 0,
+            todayHighlight: true,
+            maxView: 0,
+            //showMeridian: true,
+            //startView: 1,
+        });
+
+        $("#BtnCancel").click(function () {
+            ResetModalPopup();
+        });
+
+        $("#BtnSave").click(function () {
+            SaveData();
+        });
+
+        $(".addnew").click(function () {
+            var productTypeId = $(this).attr("productType");
+            var result = productTypeId == "105" ? confirm("Do you really want to Add Completed Trades?") : true;
+
+
+            if (result) {
+                $("#Name").val('');
+                $("#Symbol").val('');
+                $("#TradeAction").val('Buy');
+                $("#Price").val('');
+                $("#EntryDate").val('');
+                $("#ExitDate").val('');
+                $("#EntryPrice").val('');
+                $("#Result").val('');
+                $("#hfId").val('');
+                $("#hdProductTypeId").val('');
+
+                if (productTypeId != null) {
+                    if (productTypeId == "0") {
+                        var value = $(".radioMarketDataType:checked").val();
+                        productTypeId = value.indexOf('BluQuant') != -1 ? "103" : "102";
+                    }
+                    $("#hdProductTypeId").val(productTypeId);
+                }
+
+                if (productTypeId == "103")
+                { $("#BtnSave").val('Send'); } else {
+                    $("#BtnSave").val('Save');
+                }
+
+
+                $('#mySetupModal').modal('show');
+            }
+        });
+    });
+
+    //Bind Lists on page load
+    function GetMarketSetupData() {
+
+        ShowLoaderCustom();
+        $.ajax({
+            type: "GET",
+            url: "/Home/GetMarketSetupData",
+            dataType: "json",
+            async: true,
+            data: null,//{ 'startDate': $('#date').val(), 'Type': $('#datafrequency').val(), 'selectedCode': selectedCode },
+            success: function (data) {
+                HideLoaderCustom();
+                if (data != null) {
+                    BindDataTable1("MarketData1", data.blueFractal);
+                    BindBlueQuantDataTable("blueQuant", data.blueQuant);
+                    BindLivePortfolioDataTable("livePortfolio", data.livePortfolio);
+                    BindLast10CompletedTradesDataTable("last10CompletedTrades", data.Last10CompletedTrades);
+
+                    BindDropdownData(data.categories, "#categorySelect", "");
+                }
+            },
+            error: function (error, status) {
+                console.log(error);
+                HideLoaderCustom();
+                //alert('Error');
+            }
+        });
+    }
+
+    //Toggling the Radio buttons for BluNeural and BlueFractal, being used at first section
+    function ToggleRadioButtons(activeSelector, cssClass) {
+        var selectedId = activeSelector.indexOf('BluQuant') != -1 ? "103" : "102";
+        $("#hdProductTypeId").val(selectedId);
+        ShowLoaderCustom();
+        $.ajax({
+            type: "GET",
+            url: "/Home/GetMarketSetDataByType",
+            dataType: "json",
+            async: true,
+            data: { 'typeId': selectedId },//{ 'startDate': $('#date').val(), 'Type': $('#datafrequency').val(), 'selectedCode': selectedCode },
+            success: function (data) {
+                HideLoaderCustom();
+                if (data != null) {
+                    BindDataTable1("MarketData1", data);
+                    $(cssClass).prop("checked", false);
+                    $(activeSelector).prop("checked", "checked");
+                    //var productTypeId = $(this).attr("productType");
+                    //if (productTypeId != null) {
+                    //    if (productTypeId == "0") {
+                    //        var value = $(".radioMarketDataType:checked").val();
+                    //        productTypeId = value.indexOf('BluQuant') != -1 ? "103" : "102";
+                    //    }
+                    //    $("#hdProductTypeId").val(productTypeId);
+                    //}
+                }
+            },
+            error: function (error) {
+                console.log(error);
+                HideLoaderCustom();
+                alert('Error');
+            }
+        });
+    }
+
+    //Binding of the first section i.e. BlueFractal / BlueNeural
+    function BindDataTable1(selector, data) {
+        if ($.fn.dataTable.isDataTable('#' + selector)) {
+            $('#' + selector).DataTable().destroy();
+        }
+
+        var table = $('#' + selector).DataTable({
+            aaData: data,
+            "columns": [
+                     //{
+                     //    "data": "Category", render: function (data, type, row) {
+                     //        return "";
+                     //    }
+                     //},
+                     { "data": "Category", "name": "Category" },
+                     { "data": "SymbolName", "name": "Name" },
+                     { "data": "SymbolCode", "name": "symbol" },
+                     {
+                         "data": null, "name": "Action", "orderable": false, render: function (data, type, row) {
+                             return "<div>" +
+                                 //"<a class='glyphicon glyphicon-plus-sign' href='#'></a> " +
+                                 "<a class='glyphicon glyphicon-edit' id='btnEdit1' rFields=\"SymbolName1,SymbolCode1,MarketCategory1\" title=\"Edit Major Market\" custom='SymbolName1,SymbolCode1,MarketCategory1' onclick='GetSingle(" + data.Id + ", this)' href='#'></a> " +
+                                 "<a class='glyphicon glyphicon-remove-circle' href='#' onclick='RemoveData(" + data.Id + ", this)'></a>" +
+                             "</div>";
+                         }
+                     }
+            ]
+            , select: true
+            //,
+            //"fnDrawCallback": function (oSettings) {
+            //    /* Need to redo the counters if filtered or sorted */
+            //    if (oSettings.bSorted || oSettings.bFiltered) {
+            //        for (var i = 0, iLen = oSettings.aiDisplay.length ; i < iLen ; i++) {
+            //            $('td:eq(0)', oSettings.aoData[oSettings.aiDisplay[i]].nTr).html(i + 1);
+            //        }
+            //    }
+            //},
+
+        });
+    }
+
+    //Binding of the second section i.e. BlueQuant
+    function BindBlueQuantDataTable(selector, data) {
+        if ($.fn.dataTable.isDataTable('#' + selector)) {
+            $('#' + selector).DataTable().destroy();
+        }
+
+        var table = $('#' + selector).DataTable({
+            aaData: data,
+            "columns": [
+                     //{
+                     //    "data": null, render: function (data, type, row) {
+                     //        return "";
+                     //    }
+                     //},
+                     { "data": "SymbolName", "name": "Name" },
+                     { "data": "SymbolCode", "name": "Symbol" },
+                     { "data": "QuantTradingType", "name": "Type" },
+                     {
+                         "data": null, "name": "Price", render: function (data, type, row) {
+                             if (data.Price != null && data.Price != "")
+                                 return "<span> $" + parseFloat(data.Price).toFixed(2) + " USD</span>";
+                             return "<span></span>";
+                         }
+                     },
+                     { "data": "StrEntryDate", "name": "Date" },
+                     { "data": "StrEntryTimeValue", "name": "Time" },
+                     {
+                         "data": null, "name": "Action", "orderable": false, render: function (data, type, row) {
+                             return "<div>" +
+                                 "<a class='glyphicon glyphicon-edit' id='btnEdit2' title=\"Edit BluQuant Trade\" rFields=\"SymbolName1,SymbolCode1,TradeAction1,Price1,EntryDate1,EntryTime1\"  custom='SymbolName1,SymbolCode1,TradeAction1,Price1,EntryDate1,EntryTime1' onclick='GetSingle(" + data.Id + ", this)' href='#'></a> " +
+                                 "<a class='glyphicon glyphicon-remove-circle' href='#' onclick='RemoveData(" + data.Id + ", this)'></a>" +
+                             "</div>";
+                         }
+                     }
+            ]
+            , select: true
+            //,
+            //"fnDrawCallback": function (oSettings) {
+            //    /* Need to redo the counters if filtered or sorted */
+            //    if (oSettings.bSorted || oSettings.bFiltered) {
+            //        for (var i = 0, iLen = oSettings.aiDisplay.length ; i < iLen ; i++) {
+            //            $('td:eq(0)', oSettings.aoData[oSettings.aiDisplay[i]].nTr).html(i + 1);
+            //        }
+            //    }
+            //},
+
+        });
+    }
+
+    //Binding of the third section i.e. Live Portfolio
+    function BindLivePortfolioDataTable(selector, data) {
+        if ($.fn.dataTable.isDataTable('#' + selector)) {
+            $('#' + selector).DataTable().destroy();
+        }
+
+        var table = $('#' + selector).DataTable({
+            aaData: data,
+            "columns": [
+                     { "data": "SymbolCode", "name": "symbol" },
+                     { "data": "SymbolName", "name": "Name" },
+                     { "data": "StrEntryDate", "name": "EntryDate" },
+                     {
+                         "data": null, "name": "EntryPrice", render: function (data, type, row) {
+                             if (data.EntryPrice != null)
+                                 return "<span> $" + parseFloat(data.EntryPrice).toFixed(2) + " USD</span>";
+                             else
+                                 return "<span></span>";
+                         }
+                     },
+                     {
+                         "data": null, "name": "Action", "orderable": false, render: function (data, type, row) {
+                             return "<div>" +
+                                 //"<a class='glyphicon glyphicon-plus-sign' href='#'></a> " +
+                                 "<a class='glyphicon glyphicon-edit' id='btnEdit3' title=\"Live Portfolio Edit\" custom='SymbolName1,SymbolCode1,EntryDate1,EntryPrice1' rFields='SymbolName1,SymbolCode1,EntryDate1,EntryPrice1' onclick='GetSingle(" + data.Id + ", this)' href='#'></a> " +
+                                 "<a class='glyphicon glyphicon-remove-circle' href='#' onclick='RemoveData(" + data.Id + ", this)'></a>" +
+                             "</div>";
+                         }
+                     }
+            ]
+            , select: true,
+
+        });
+        //Binding of the second section i.e. BlueQuant
+    }
+
+    //Binding of the last section i.e. Last 10 Completed Trades
+    function BindLast10CompletedTradesDataTable(selector, data) {
+        if ($.fn.dataTable.isDataTable('#' + selector)) {
+            $('#' + selector).DataTable().destroy();
+        }
+
+        var table = $('#' + selector).DataTable({
+            aaData: data,
+            "bPaginate": false,
+            //paging: false,
+            "columns": [
+                     { "data": "SymbolCode", "name": "Symbol" },
+                     { "data": "SymbolName", "name": "Name" },
+                     { "data": "StrEntryDate", "name": "EntryDate" },
+                     { "data": "StrExitDate", "name": "ExitDate" },
+                     {
+                         "data": null, "name": "Result", render: function (data, type, row) {
+                             if (data.Result != '') {
+                                 return "<span>" + parseFloat(data.Result).toFixed(1) + "%</span>";
+                             }
+                             return "<span>0.0%</span>";
+                         }
+                     },
+                     {
+                         "data": null, "name": "Action", "orderable": false, render: function (data, type, row) {
+                             return "<div>" +
+                                 "<a class='glyphicon glyphicon-edit' id='btnEdit4' title=\"Edit Completed Trade\" rFields='SymbolCode1,SymbolName1,EntryDate1,ExitDate1,Result1,,EntryPrice1' custom='SymbolCode1,SymbolName1,EntryDate1,ExitDate1,Result1,,EntryPrice1' onclick='GetSingle(" + data.Id + ", this)' href='#'></a> " +
+                                 "<a class='glyphicon glyphicon-remove-circle' href='#' onclick='RemoveData(" + data.Id + ", this)'></a>" +
+                             "</div>";
+                         }
+                     }
+            ]
+        });
+    }
+
+    /*Edit Events, START here */
+
+    //Get the current records in edit mode
+    function GetSingle(selected, sender) {
+
+
+        if (selected > 0) {
+            ShowLoaderCustom();
+            $.ajax({
+                type: "GET",
+                url: "/Home/GetMarketDataById",
+                dataType: "json",
+                async: true,
+                data: { "id": selected },
+                success: function (data) {
+
+
+                    if (data != null) {
+                        BindDetailsInEdit(data);
+                        ShowHideFields(sender);
+                    }
+                    HideLoaderCustom();
+                },
+                error: function (error) {
+                    console.log(error);
+                    HideLoaderCustom();
+                    alert('Error');
+                }
+            });
+        }
+        else {
+            $('#mySetupModal').modal('show');
+        }
+    }
+
+    function BindDetailsInEdit(data) {
+        $('#mySetupModal').modal('show');
+        $("#Symbol").val(data.SymbolCode);
+        $("#TradeAction").val(data.QuantTradingType);
+        $("#Price").val(data.Price);
+        $("#EntryDate").val(data.StrEntryDate);
+        $("#EntryTime").val(data.StrEntryTime24Value);
+        $("#ExitDate").val(data.StrExitDate);
+        $("#EntryPrice").val(data.EntryPrice);
+        $("#Result").val(data.Result);
+        $("#hfId").val(data.Id);
+        $("#hdProductTypeId").val(data.ProductTypeID);
+        $("#SymbName1").val(data.SymbolName);
+        $("#categorySelect").val(data.CategoryId);
+        $("#BtnSave").val('Update');
+    }
+    /*Edit Events, END here */
+
+    //Resets the Modal Popup window before it opens up.
+    function ResetModalPopup() {
+        $("#BtnSave").val('Save');
+        //$("#Symbol").val('');
+        //$("#Price").val('');
+        //$("#EntryDate").val('');
+        //$("#ExitDate").val('');
+        //$("#EntryPrice").val('');
+        //$("#Result").val('');
+        //$("#hfId").val('');
+        //$("#hdProductTypeId").val('');
+        //$("#SymbName1").val('');
+        //$("#hfSelectedEventId").val('');
+        $('#mySetupModal').modal('hide');
+        $("#categorySelect").val('0');
+        $("#TradeAction").val('');
+
+        $(".userfield input").each(function () {
+            $(this).removeClass("mandatory");
+            $(this).val("");
+        });
+    }
+
+    //Common Save method for saving market data, fired from each section in Market Admin Setup screen
+    function SaveData() {
+        //Validations
+        $(".userfield").each(function () {
+            var id = $(this).attr('id');
+            if ($("#" + id + " label").length > 0)
+                $("#" + id + " label").removeClass("mandatory");
+        });
+
+        var sender = $("#hfSelectedEventId").val();
+        if (sender != '') {
+            var reqFieldsArray = $("#" + sender).attr('rFields').split(',');
+            if (reqFieldsArray != null && reqFieldsArray.length > 0) {
+                var selected = $.grep(reqFieldsArray, function (i, obj1) {
+                    return $("#" + i + " input").val() == '' || $("#" + i + " select").val() == '' || $("#" + i + " select").val() == "0";
+                });
+                if (selected.length > 0) {
+                    $.each(selected, function (i, item) {
+                        $("#" + item + " label").addClass("mandatory");
+                    });
+                    return;
+                }
+            }
+        }
+
+
+        var jsonData = {
+            'Id': $("#hfId").val(),
+            'ProductTypeID': $("#hdProductTypeId").val(),
+            'SymbolName': $("#SymbName1").val(),
+            'SymbolCode': $("#Symbol").val(),
+            'QuantTradingType': $("#TradeAction").val(),
+            'Price': $("#Price").val(),
+            'EntryPrice': $("#EntryPrice").val(),
+            'EntryDate': $("#EntryDate").val(),
+            'ExitDate': $("#ExitDate").val(),
+            'Result': $("#Result").val(),
+            'StrEntryDate': $("#EntryDate").val(),
+            'StrExitDate': $("#ExitDate").val(),
+            'Time': $("#EntryTime").val(),
+            'CategoryId': $("#categorySelect").val()
+        };
+
+        ShowLoaderCustom();
+        $.ajax({
+            type: "GET",
+            url: "/Home/SaveMarketData",
+            dataType: "json",
+            async: true,
+            data: jsonData,
+            success: function (data) {
+                if (data) {
+                    var productTypeId = $("#hdProductTypeId").val();
+                    ResetModalPopup();
+                    RebindGrid(productTypeId, data.limitedData);
+
+                    if ($("#tblCategoriesList1").length > 0) {
+                        BindMarketCategoriesPopupWindow1(data.allData);
+                        BindActionData(data.allData.list);
+                    }
+                }
+                HideLoaderCustom();
+            },
+            error: function (error) {
+                HideLoaderCustom();
+                console.log(error);
+            }
+        });
+    }
+
+    //Show Hide Fields based on the selected product type e.g. BluFractal will show 2 fields such as Name and Symbol Code.
+    function ShowHideFields(sender) {
+        $(".userfield").each(function () {
+            var id = $(this).attr('id');
+            if ($("#" + id + " label").length > 0)
+                $("#" + id + " label").removeClass("mandatory");
+        });
+
+        $(".userfield").hide();
+        var values = $(sender).attr('custom');
+        var title = $(sender).attr('title');
+        valArray = values.split(',');
+        if (valArray.length > 0) {
+            $.each(valArray, function (i, obj) {
+                $("#" + obj).show();
+            });
+        }
+        if (title != '')
+            $('#AddEditFormHeading').html(title);
+
+        $("#hfSelectedEventId").val($(sender).attr('id'));
+
+        //if (this.attr("value") == "Send Signal") {
+        //    $("#BtnSave").val('Send');
+        //} else { $("#BtnSave").val('Save'); }
+
+        if (sender.id == "BtnMD2")
+        { $("#BtnSave").val('Send'); }
+        else { $("#BtnSave").val('Save'); }
+    }
+
+
+    function SetButtonText(sender) {
+        if (sender.id == "BtnMD2")
+        { $("#BtnSave").val('Send'); }
+        else { $("#BtnSave").val('Save'); }
+    }
+
+    function RemoveData(selected, sender) {
+        if (confirm("This action will delete the current item. Continue?")) {
+
+            ShowLoaderCustom();
+            $.ajax({
+                type: "GET",
+                url: "/Home/DeleteMarketData",
+                dataType: "json",
+                async: true,
+                data: { "id": selected },
+                success: function (data) {
+                    if (data) {
+                        RebindGrid(data.productTypeId, data.list);
+                    }
+                    HideLoaderCustom();
+                },
+                error: function (error) {
+                    console.log(error);
+                    HideLoaderCustom();
+                    alert('Error');
+                }
+            });
+        }
+    }
+
+    /// <summary>
+    /// Binds the dropdown data.
+    /// </summary>
+    /// <param name="data">The data.</param>
+    /// <param name="ddlSelector">The DDL selector.</param>
+    /// <param name="hdSelector">The hd selector.</param>
+    /// <returns></returns>
+    function BindDropdownData(data, ddlSelector, hdSelector) {
+        $(ddlSelector).empty();
+        var items = '<option value="0">--Select--</option>';
+        $.each(data, function (i, obj) {
+            var newItem = "<option id='" + obj.Value + "'  value='" + obj.Value + "'>" + obj.Text + "</option>";
+            items += newItem;
+        });
+
+        $(ddlSelector).html(items);
+        var hdValue = "";
+        if (hdSelector.indexOf('#') != -1) {
+            hdValue = $(hdSelector).val();
+        }
+        else {
+            hdValue = hdSelector;
+        }
+        //
+        if (hdValue != null && hdValue != '') {
+            $(ddlSelector).val(hdValue);
+            if ($(ddlSelector).val() == null || $(ddlSelector).val() == undefined) {
+                $(ddlSelector + " option").filter(function (index) { return $(this).text() === "" + hdValue + ""; }).attr('selected', 'selected');
+            }
+        }
+        else {
+            if ($(ddlSelector).length > 0)
+                $(ddlSelector)[0].selectedIndex = 0;
+        }
+    }
+
+
+    function RebindGrid(productTypeId, data) {
+        var pId = parseInt(productTypeId)
+        switch (pId) {
+            case 103:
+                BindBlueQuantDataTable("blueQuant", data);
+                BindDataTable1("MarketData1", data);
+                break;
+            case 104:
+                BindLivePortfolioDataTable("livePortfolio", data);
+                if ($("#livePortfolio1").length > 0)
+                    BindLivePortfolioMain("livePortfolio1", data);
+                break;
+            case 105:
+                BindLast10CompletedTradesDataTable("last10CompletedTrades", data);
+                if ($("#lastCompletedTradesMain").length > 0)
+                    BindLast10CompletedTradesMain("lastCompletedTradesMain", data);
+                break;
+            default:
+                BindDataTable1("MarketData1", data);
+                break;
+        }
+    }
+</script>

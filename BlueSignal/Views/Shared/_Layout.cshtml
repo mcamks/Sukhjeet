@@ -1,0 +1,218 @@
+﻿@using BlueSignal.Controllers;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title -BluSignals</title>
+    <link rel="icon" type="image/png" href="~/images/favicon.png">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/style.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.0/css/select.dataTables.min.css">
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css">
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/ClearForm.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/common")
+
+    <script src="~/Scripts/tv.js"></script>
+
+
+</head>
+<body>
+    @{
+        if (HttpContextSessionWrapperExtension.SessionUser != null)
+        {
+
+            <div class="navbar navbar-inverse navbar-fixed-top navbar_bg">
+                <div>
+                    <div class="navbar-header">
+                        @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>*@
+                        <a href="http://www.blusignalsystems.com" data-toggle="tooltip" data-placement="bottom" title="BluSignals Website" target="_blank" class="navbar-brand"><img src="~/images/blu_logo.png" /></a>
+                        @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                    </div>
+
+                    <div class="active_page">
+
+
+                        @if (!string.IsNullOrEmpty(Request.QueryString["p"]) && !string.IsNullOrEmpty(Request.QueryString["c"]))
+                        {
+                            <span>
+                                <i class="fa @Request.QueryString["c"]" aria-hidden="true"></i>
+                            </span>
+                            <mu id="settabe" onclick="SetActiveClass('@Request.QueryString["p"]')">@Request.QueryString["p"]</mu>
+                        }
+                        else
+                        {
+                            <span>
+                                <i class="fa fa-tachometer" aria-hidden="true"></i>
+                            </span>
+                            <mu id="settabe" onclick="SetActiveClass('Dashboard')">Dashboard</mu>
+                        }
+
+
+                    </div>
+
+                    @{
+                        DateTime eastern = DateTime.UtcNow.AddHours(-5);
+                        var time = eastern.ToString("hh:mm tt");
+                        var tArr = time.Split(' ');
+                    }
+
+
+                    <div class="date_time">
+                        <div class="date"><i class="fa fa-calendar" aria-hidden="true"></i>@eastern.ToString("MMM - dd - yyyy")</div>
+                        <div class="time"><i class="fa fa-clock-o" aria-hidden="true"></i>@tArr[0]<sub>@tArr[1]</sub></div>
+                    </div>
+
+                    @*<div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><input type="button" class="btn btn-primary" value="Dashboard" /></li>
+
+                        </ul>*@
+
+
+                    @*<div class="current_date">eastern.ToString("MMM - dd - yyyy")</div>*@
+
+                    @* @Html.Partial("_LoginPartial")*@
+                    @*</div>*@
+                </div>
+            </div>
+
+                        }
+                        else
+                        {
+
+                            <h1>@*Please login first*@</h1>
+
+                        }
+    }
+
+
+    <div class="sidemenu">
+        <ul>
+            <li class="remove Dashboard"><a href="@Url.Action("Dashboard","Home",new { p = "Dashboard",c="fa-tachometer" })" data-toggle="tooltip" title="Dashboard" data-placement="right"><i class="fa fa-tachometer" aria-hidden="true"></i></a></li>
+            <li class="remove Charts"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart" })" data-toggle="tooltip" title="Charts" data-placement="right"><i class="fa fa-line-chart" aria-hidden="true"></i></a></li>
+            <li class="remove Charts"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart" })" data-toggle="tooltip" title="Charts" data-placement="right"><i class="fa fa-line-chart" aria-hidden="true"></i></a></li>
+            <li class="remove Charts"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart" })" data-toggle="tooltip" title="Charts" data-placement="right"><i class="fa fa-line-chart" aria-hidden="true"></i></a></li>
+            <li class="remove Settings"><a href="@Url.Action("Index","Home",new { p = "Settings",c= "fa-cogs" })" data-toggle="tooltip" title="Systems" data-placement="right"><i class="fa fa-cogs" aria-hidden="true"></i></a></li>
+            <li class="remove Research">
+                <a href="@Url.Action("Research","Home",new { p = "Research",c= "fa-thermometer-quarter" })" data-toggle="tooltip" title="Research" data-placement="right">
+                    <!--<i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+                    <i class="fa fa-thermometer-quarter" aria-hidden="true"></i>-->
+                </a>
+            </li>
+            <li class="remove Help"><a href="@Url.Action("Index","Help",new { p = "Help",c= "fa-question" })" data-toggle="tooltip" title="Help" data-placement="right"><i class="fa fa-question" aria-hidden="true"></i></a></li>
+
+
+
+            @if (HttpContextSessionWrapperExtension.SessionUser != null && HttpContextSessionWrapperExtension.SessionUser.IsAdminUser)
+            {
+                <li class="remove Admin"><a href="@Url.Action("Admin", "Home",new { p = "Admin",c= "fa-cog" })" data-toggle="tooltip" title="Admin" data-placement="right"><i class="fa fa-cog" aria-hidden="true"></i></a></li>
+                @*<li class="pull-right"><a class="glyphicon glyphicon-cog MarketDataSetupLists setting" data-toggle="tab" title="Admin" data-placement="right" href="#MarketDataSetupLists"><i class="fa fa-cog" aria-hidden="true"></i></a></li>*@
+            }
+
+
+
+            @*<li class="remove Data"><a href="@Url.Action("Data","Home",new { p = "Data",c= "fa-database" })" data-toggle="tooltip" title="Data" data-placement="right"><i class="fa fa-database" aria-hidden="true"></i></a></li>
+                <li class="remove Detail">
+                    <a href="@Url.Action("Detail","Home",new { p = "Detail",c= "fa-info-circle" })"  data-toggle="tooltip" title="Detail" data-placement="right"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+
+                </li>*@
+        </ul>
+    </div>
+    <div class="content">
+        <div class="col-sm-12">
+            @RenderBody()
+
+            @{
+                if (HttpContextSessionWrapperExtension.SessionUser != null)
+                {
+                    <hr />
+
+
+                    <footer>
+                        <div class="col-sm-12">
+                            <p>&copy; @DateTime.Now.Year BluSignals</p>
+                        </div>
+                    </footer>
+                }
+
+            }
+        </div>
+    </div>
+    <!--loader-->
+    <div class="modal fade" id="loading" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal_position">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center">Please wait...</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="~/images/ajax-loader-bar.gif" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ModelBackGround_Custom" class="modal-backdrop fade in" style="display: none;"></div>
+    <!--loader-->
+
+
+
+
+    @RenderSection("scripts", required: false)
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/Customer")
+    }
+
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js">
+    </script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js">
+    </script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.0/js/responsive.bootstrap.min.js">
+
+    </script>
+
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
+    @*<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/dataTables.editor.min.js")"></script>*@
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $('#settabe').click();
+        });
+
+
+
+        function SetActiveClass(item) {
+            $('.remove').removeClass('active');
+            $('.' + item).addClass('active');
+        }
+
+
+    </script>
+</body>
+</html>

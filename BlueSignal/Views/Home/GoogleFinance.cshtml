@@ -1,0 +1,197 @@
+﻿
+@{
+    ViewBag.Title = "GoogleFinance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GoogleFinance</h2>
+
+<style>
+    .width-200 td {
+        width: 200px !important;
+    }
+</style>
+
+<label for="other">Other</label>
+
+<input type="text" id="code" name="code" value="QQQ"><br>
+
+
+<button type="button" onclick="GetTheGoogleCodes(this)">Click Me!</button>
+
+<div id="RefershLable"></div>
+
+
+<table id="tbaleHeader" class="table" width="100%">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            StockSymbol
+        </th>
+        <th>
+            Index
+        </th>
+        <th>
+            LastTradePrice
+        </th>
+        <th>
+            l_fix
+        </th>
+        <th>
+            LastTradeWithCurrency
+        </th>
+        <th>
+            LastTradeSize
+        </th>
+        <th>
+            LastTradeTime
+        </th>
+
+
+        <th>
+            LastTradeDateTimeLong
+        </th>
+        <th>
+            LastTradeDateTime
+        </th>
+        <th>
+            Change
+        </th>
+        <th>
+            c_fix
+        </th>
+
+        <th>
+            ChangePercent
+        </th>
+        <th>
+            cp_fix
+        </th>
+        <th>
+            ccol
+        </th>
+        <th>
+            PreviousClosePrice
+        </th>
+
+        <th>
+            ExtHrsLastTradePrice
+        </th>
+        <th>
+            el_fix
+        </th>
+        <th>
+            ExtHrsLastTradeWithCurrency
+        </th>
+        <th>
+            ExtHrsLastTradeDateTimeLong
+        </th>
+
+        <th>
+            ExtHrsChange
+        </th>
+        <th>
+            ec_fix
+        </th>
+        <th>
+            ExtHrsChangePercent
+        </th>
+        <th>
+            ecp_fix
+        </th>
+
+        <th>
+            eccol
+        </th>
+        <th>
+            Dividend
+        </th>
+        <th>
+            Yield
+        </th>
+    </tr>
+
+
+
+
+</table>
+
+
+<table id="myTable" class="table" width="2000"></table>
+
+
+<script>
+
+
+    //$(document).ready(function () {
+    //    setInterval(function () { GetTheGoogleCodes($('#code').val()); }, 3000);
+    //});
+
+
+
+    function GetTheGoogleCodes(e) {
+
+        //alert(1);
+        //setInterval(function () { GetTheGoogleCodes($('#code').val()); }, 3000);
+        ShowLoaderCustom();
+        $.ajax({
+            type: "GET",
+            url: "/Home/GetGoogleFinanceInfo",
+            dataType: "html",
+            data: { 'q': $('#code').val() },
+            success: function (data) {
+
+                HideLoaderCustom();
+                $("#myTable").empty();
+
+                                $('#RefershLable').html('');
+                $('#RefershLable').text(data);
+
+                if (data != 'Fail') {
+
+                    var json = $.parseJSON(data);
+
+
+                    //var json1 = $.parseJSON(json.data);
+                    if (json.length > 0) {
+
+                        $.each(json, function (i, item) {
+
+                            var newRow = "<tr class='width-200'><td>" + item.id + "</td><td>" + item.t + "</td><td>" + item.e + "</td><td>" + item.l + "</td>" +
+
+
+                                "<td>" + item.l_fix + "</td><td>" + item.l_cur + "</td><td>" + item.s + "</td><td>" + item.ltt + "</td>"
+
+
+                                + "<td>" + item.lt + "</td><td>" + item.lt_dts + "</td><td>" + item.c + "</td><td>" + item.c_fix + "</td>"
+
+
+                                + "<td>" + item.cp + "</td><td>" + item.cp_fix + "</td><td>" + item.ccol + "</td><td>" + item.pcls_fix + "</td>"
+
+                                + "<td>" + item.el + "</td><td>" + item.el_fix + "</td><td>" + item.el_cur + "</td><td>" + item.elt + "</td>"
+
+                                + "<td>" + item.ec + "</td><td>" + item.ec_fix + "</td><td>" + item.ecp + "</td><td>" + item.ecp_fix + "</td>"
+
+                                 + "<td>" + item.eccol + "</td><td>" + item.div + "</td><td>" + item.yld + "</td>"
+
+                                + "</tr>";
+                            $('#myTable').append(newRow);
+
+                        });
+
+
+                    }
+                } else { alert('Code is wrong'); }
+            },
+
+            error: function (error) {
+
+
+            }
+        });
+    }
+</script>
+
+

@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_YahooFinanceApp")
+
+
+<input id="codeIntoSession" type="hidden" value="@ViewBag.Code" />
+<script>
+    $(document).ready(function () {
+        if ($('#codeIntoSession').val() == "") {
+            OpentheMarkeResourceDataFromDashboard('SPY');
+        } else { OpentheMarkeResourceDataFromDashboard($('#codeIntoSession').val()); }
+    });
+
+</script>

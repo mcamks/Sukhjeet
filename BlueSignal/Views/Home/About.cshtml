@@ -1,0 +1,14 @@
+﻿@using BlueSignal.Models;
+@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Use this area to provide additional information.</p>
+
+
+<span id="ContactLog_Container">
+
+    @{Html.RenderPartial("~/Views/Home/_ContactLog.cshtml", new ContactViewModel() { IsSuccess = 0 });}
+</span>

@@ -1,0 +1,65 @@
+﻿
+@model BlueSignal.Models.ContactViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="ticket_form">
+        <h3>Open a Ticket</h3>
+        @{
+            if (Model.IsSuccess == 1)
+            {
+
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Error!</strong> Please fill the required fields.
+                </div>
+            }
+
+            if (Model.IsSuccess == 2)
+            {
+
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Success!</strong> Thank for contacting us, we will response soon.
+                </div>
+            }
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        }
+        <div class="form-group row">
+            <div class="col-sm-4">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", maxlength = 150 } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-4">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "" })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", maxlength = 150 } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        
+
+            <div class="col-sm-4">
+                @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "" })
+                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control", maxlength = 200 } })
+                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-12">
+                @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "" })
+                @*<textarea class="form-control"></textarea>*@
+                @Html.TextAreaFor(model => model.Message, new { @class = "form-control message", maxlength = 1000  })
+                @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-12">
+                <input type="button" style="margin-top:30px;" onclick="AddContact(this);" class="btn btn-primary" value="Submit Ticket" />
+
+            </div>
+        </div>
+        
+    </div>
+
+
+}

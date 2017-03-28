@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    This is sample code to navigate logged in user to ASP.net site from wordpress
+    <br />
+
+    Right now we are exchanging the credentials from query string in plain text.
+    <br />
+
+    later we will exchange with WEB-API
+    <br />
+
+    <h2>Step 1</h2>
+    <br />
+    Suppose following is Dashboard button
+
+    <br />
+
+    <input type="button" onclick="return NavigateToDashboard()" value='Dashboard'> </input>
+    <br />
+    <h2>Step 2</h2>
+    Call the function when user click on Dashboard button.
+
+    <h2>Step 3</h2>
+    Please set the values in variables  userEncrptedPassword, userEmail as directed in respective comments.
+
+
+</body>
+
+<script type="text/javascript">
+    function NavigateToDashboard() {
+
+
+        var userEncrptedPassword = '$P$BmZmWikvFx99zFEeCiytDaLLK1vYpz.';// Please set the encrypted password here
+        var userEmail = 'nitin@spadezgroup.com';// Please set the email
+        var testLink = 'http://localhost:51170/Home/Auth?E=' + userEmail + '&P=' + userEncrptedPassword;
+        window.open(testLink, '_blank');
+
+
+
+    }
+
+
+</script>
+</html>

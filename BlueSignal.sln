@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueSignal", "BlueSignal\BlueSignal.csproj", "{12B73941-B37A-4B41-8123-308EB32205BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluSignalHelpMethod", "Comman\BluSignalHelpMethod.csproj", "{57215DB8-A606-4651-B5E7-8BC4EEEFBDE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueSignalCore", "BlueSignalCore\BlueSignalCore.csproj", "{B50061B7-B2B8-493E-AB67-3B29BBBA900C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueSignalCommon", "BlueSignalCommon\BlueSignalCommon.csproj", "{63F6BC7B-A75B-4A27-98B1-DFB310D963F0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12B73941-B37A-4B41-8123-308EB32205BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12B73941-B37A-4B41-8123-308EB32205BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12B73941-B37A-4B41-8123-308EB32205BF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{12B73941-B37A-4B41-8123-308EB32205BF}.Debug|x86.Build.0 = Debug|Any CPU
+		{12B73941-B37A-4B41-8123-308EB32205BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12B73941-B37A-4B41-8123-308EB32205BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12B73941-B37A-4B41-8123-308EB32205BF}.Release|x86.ActiveCfg = Release|Any CPU
+		{12B73941-B37A-4B41-8123-308EB32205BF}.Release|x86.Build.0 = Release|Any CPU
+		{57215DB8-A606-4651-B5E7-8BC4EEEFBDE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57215DB8-A606-4651-B5E7-8BC4EEEFBDE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57215DB8-A606-4651-B5E7-8BC4EEEFBDE6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{57215DB8-A606-4651-B5E7-8BC4EEEFBDE6}.Debug|x86.Build.0 = Debug|Any CPU
+		{57215DB8-A606-4651-B5E7-8BC4EEEFBDE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57215DB8-A606-4651-B5E7-8BC4EEEFBDE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57215DB8-A606-4651-B5E7-8BC4EEEFBDE6}.Release|x86.ActiveCfg = Release|Any CPU
+		{57215DB8-A606-4651-B5E7-8BC4EEEFBDE6}.Release|x86.Build.0 = Release|Any CPU
+		{B50061B7-B2B8-493E-AB67-3B29BBBA900C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B50061B7-B2B8-493E-AB67-3B29BBBA900C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B50061B7-B2B8-493E-AB67-3B29BBBA900C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B50061B7-B2B8-493E-AB67-3B29BBBA900C}.Debug|x86.Build.0 = Debug|Any CPU
+		{B50061B7-B2B8-493E-AB67-3B29BBBA900C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B50061B7-B2B8-493E-AB67-3B29BBBA900C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B50061B7-B2B8-493E-AB67-3B29BBBA900C}.Release|x86.ActiveCfg = Release|Any CPU
+		{B50061B7-B2B8-493E-AB67-3B29BBBA900C}.Release|x86.Build.0 = Release|Any CPU
+		{63F6BC7B-A75B-4A27-98B1-DFB310D963F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63F6BC7B-A75B-4A27-98B1-DFB310D963F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63F6BC7B-A75B-4A27-98B1-DFB310D963F0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{63F6BC7B-A75B-4A27-98B1-DFB310D963F0}.Debug|x86.Build.0 = Debug|Any CPU
+		{63F6BC7B-A75B-4A27-98B1-DFB310D963F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63F6BC7B-A75B-4A27-98B1-DFB310D963F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63F6BC7B-A75B-4A27-98B1-DFB310D963F0}.Release|x86.ActiveCfg = Release|Any CPU
+		{63F6BC7B-A75B-4A27-98B1-DFB310D963F0}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

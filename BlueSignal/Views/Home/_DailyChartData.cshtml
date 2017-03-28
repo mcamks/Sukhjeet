@@ -1,0 +1,219 @@
+﻿@using BlueSignal.Controllers;
+<style>
+    #chartcontainer_dailySecond .highcharts-container, #chartcontainer_dailySecond .highcharts-container .highcharts-root {
+        width: 100% !important;
+    }
+</style>
+
+
+<div class="tab_block">
+
+    <div class="col-sm-5 ">
+        <div class="info_block">
+            <div class="blue_block">
+
+
+
+
+                @if (HttpContextSessionWrapperExtension.SessionUser.IsBluNeutral)
+                {
+
+
+                    <div class="col-sm-8">
+                        <div class="row">
+                            <label class="col-sm-3 symbol_text" for="code">Symbol:</label>
+                            <div class="col-sm-6 search_symbol">
+                                <input type="text" id="codeD" name="code" placeholder="Type valid Symbol" data-toggle="tooltip" title="Type a Valid Symbol" value="SPY" class="form-control codeValue">
+                                <span onclick="InitilizeMarketListWithCode($('#codeD'))"><i class="fa fa-search" data-toggle="tooltip" title="Lookup Symbol" aria-hidden="true"></i></span>
+                            </div>
+                            <div class="col-sm-3">
+
+                                <button type="button" id="btnLoad" data-toggle="tooltip" title="Load Symbol" class="btn btn-primary btn_style btn_whitegray" onclick="InitilizeMarketListWithCode($('#codeD'))">Load</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <button type="button" class="btn btn-primary btn_style pull-right btn_whitegray" data-toggle="modal" data-target="#myModal" title="Choose Major Market" @*onclick="callYahooFinance()"*@>Major Markets</button>
+                    </div>
+                }
+                else
+                {
+
+                    <div class="col-sm-8">
+                        <div class="row">
+                            <label class="col-sm-3 symbol_text" for="code">Symbol:</label>
+                            <div class="col-sm-6 search_symbol">
+                                <input type="text" id="codeD" readonly name="code" placeholder="Type valid Symbol" data-toggle="tooltip" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage" value="SPY" class="form-control codeValue">
+                                <span><i class="fa fa-search" data-toggle="tooltip" title="Lookup Symbol" aria-hidden="true"></i></span>
+                            </div>
+                            <div class="col-sm-3">
+
+                                <button type="button" disabled="disabled" id="btnLoad" data-toggle="tooltip" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage" class="btn btn-primary btn_style btn_whitegray" onclick="InitilizeMarketListWithCode($('#codeD'))">Load</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <button type="button" disabled="disabled" class="btn btn-primary btn_style pull-right btn_whitegray" data-toggle="modal" data-target="#myModal" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage" @*onclick="callYahooFinance()"*@>Major Markets</button>
+                    </div>
+
+                }
+
+
+
+
+
+
+                <div class="col-sm-3" style="display:none;">
+                    <div class="form-group row">
+                        <label class="col-sm-5" for="datafrequency">Frequency</label>
+                        <div class="col-sm-7">
+                            <select id="datafrequency" class="form-control">
+                                <option value="daily">daily</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-3" style="display:none;">
+                    <div class="form-group row">
+                        <label class="col-sm-3" for="date">Start Date</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="date" name="codedate" class="form-control" value="20161101000000">
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="sub_info">
+                <div class="">
+
+
+                    <div class="form-group row">
+
+                        <label class="col-sm-6"><span><img src="~/images/sideicon.jpg" /></span>Name of Security</label>
+                        <div class="col-sm-6">
+                            <input type="text" id="Namebldjr" disabled class="form-control form-width NameClass" />
+                            @*<label type="text" id="Namebldj" class="NameClass form-control form-width"> </label>*@
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-6"><span><img src="~/images/sideicon.jpg" /></span>Last Trade Date</label>
+                        <div class="col-sm-6">
+                            <input type="text" disabled class="form-control form-width LastTradingDay">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-6"><span><img src="~/images/sideicon.jpg" /></span>Previous Day's Close</label>
+                        <div class="col-sm-6">
+                            <input type="text" id="ClosingPriceQW" disabled class="form-control form-width ClosingPriceClass">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-6">
+                            <span><img src="~/images/sideicon.jpg" /></span>
+                            Avg. Volume (90 Days)
+                        </label>
+                        <div class="col-sm-6">
+                            <input type="text" id="AvgVolumeQW" disabled class="form-control form-width AvgVolumeClass">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-7 terms">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-default trend_signal">
+                    <div class="panel-heading"><img class="term_icon" src="../../images/clock2.png" alt="" />Current Zone</div>
+
+                    <div class="panel-body">
+                        <div class="square">
+                            <span><img src="../../images/chart.png" alt="" /></span>
+                            Sell Zone
+                        </div>
+                        <div class="info_row">
+
+                            <span class="icon"><img src="~/images/date_icon.jpg" /></span>
+                            <label class="date_text">Starting Date</label>
+                            <label class="days_text">06 Jan, 2017</label>
+
+                        </div>
+                        <div class="info_row">
+
+                            <span class="icon"><img src="~/images/dollar_icon.png" /></span>
+                            <label class="date_text">Starting Price</label>
+                            <label class="days_text">$50.00</label>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-default trend_signal">
+                    <div class="panel-heading"><img class="term_icon" src="../../images/pivot.png" alt="" />Last Pivot</div>
+
+                    <div class="panel-body">
+
+                        <div class="square2">
+                            UP
+                            <span><img src="../../images/arrow_up.png" alt="" /></span>
+                        </div>
+
+                        @*<div class="trend_status"><div class="status_pointer"><i class="fa fa-sort-asc" aria-hidden="true"></i></div> <p style="top:33px;">Up</p></div>*@
+                        <div class="info_row">
+
+                            <span class="icon"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></span>
+                            <label class="date_text">Last Up Pivot</label>
+                            <label class="days_text">15 Dec, 2017</label>
+
+                        </div>
+                        <div class="info_row">
+
+                            <span class="icon"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></span>
+                            <label class="date_text">Last Down Pivot</label>
+                            <label class="days_text">15 Dec, 2017</label>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel-group accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse3">
+                            <img src="../../images/bluneural_active.png" alt="" />
+                            <span class="blue_text">Blu</span>Neural
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div id="chartcontainer_dailySecond" style="height:400px; min-width: 1108px;"></div>
+                    </div>
+                    @*<div class="panel-footer">Panel Footer</div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

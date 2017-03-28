@@ -1,0 +1,584 @@
+﻿@using BlueSignal.Controllers;
+@{
+    // ViewBag.Title = "MarketData";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+    var btnClassQuant = "btnGetDataBlueQuant";
+    var btnClassLivePortfolio = "btnClassLivePortfolio";
+
+    var btnClassToDisabled = "";
+
+
+    if (HttpContextSessionWrapperExtension.SessionUser.IsBluQuant)
+    {
+        btnClassQuant = "btnGetDataBlueQuant";
+        btnClassLivePortfolio = "btnClassLivePortfolio";
+        btnClassToDisabled = "";
+
+    }
+    else
+    {
+        btnClassQuant = "disabled";
+        btnClassLivePortfolio = "disabled";
+
+        btnClassToDisabled = "disabled";
+    }
+
+}
+<div class="tab_block">
+    <div class="col-sm-12">
+        <div class="col-sm-5 ">
+            <div class="info_block">
+                <div class="blue_block">
+                    <label class="col-sm-12 symbol_text text-center" for="code"><strong>Selected Security</strong></label>
+                </div>
+                <div class="sub_info">
+                    <div class="form-group row">
+                        <label class="col-sm-6"><span><img src="~/images/sideicon.jpg" /></span>Symbol</label>
+                        <div class="col-sm-6">
+                            @*<input type="text" id="Name" disabled class="form-control form-width ">*@
+                            @*<label type="text" id="Namequent" class="codeValue form-control form-width"> </label>*@
+                            <input type="text" id="codeDquent" disabled name="code" class="form-control codeValue codeClassbluequont">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-6"><span><img src="~/images/sideicon.jpg" /></span>Name of Security</label>
+                        <div class="col-sm-6">
+                            <input type="text" id="Namequent" disabled class="form-control form-width NameClassbluequont">
+                            @*<label type="text" id="Namequent" class="NameClass form-control form-width NameClassbluequont"> </label>*@
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-6"><span><img src="~/images/sideicon.jpg" /></span>Current Price</label>
+                        <div class="col-sm-6">
+                            <input type="text" id="ClosingPrice" disabled class="form-control form-width ClosingPriceClass ClosingPriceClassbluequont">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-6"><span><img src="~/images/sideicon.jpg" /></span> Avg. Volume (90 Days) </label>
+                        <div class="col-sm-6">
+                            <input type="text" id="AvgVolume" disabled class="form-control form-width AvgVolumeClass AvgVolumeClassbluequont">
+                        </div>
+                        <input id="BlueQuanteCode" style="display:none;" class="form-control codeClass" type="text" value="SPY" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-7 terms">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default todays_signal">
+                        <div class="panel-heading text-center">Today's Signals</div>
+                        <div class="panel-body">
+                            <div class="green_heading"><i class="fa fa-shopping-cart" aria-hidden="true"></i> BUY</div>
+                            <div class="red_heading"><i class="fa fa-usd" aria-hidden="true"></i> SELL</div>
+                            <input type="hidden" id="hfcssDisabled" value="@btnClassToDisabled" />
+
+                            <div class="col-sm-6 border_right">
+                                <div class="todays_signal_list" id="buyItemsDiv">
+                                    <div class="info_row">
+                                        <p>
+                                            QQQ &nbsp; $17.53 &#64;11:03 am
+                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                        </p>
+                                    </div>
+                                    <div class="info_row">
+                                        <p>
+                                            QQQ &nbsp; $17.53 &#64;11:03 am
+                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                        </p>
+                                    </div>
+                                    <div class="info_row">
+                                        <p>
+                                            QQQ &nbsp; $17.53 &#64;11:03 am
+                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                        </p>
+                                    </div>
+                                    <div class="info_row">
+                                        <p>
+                                            QQQ &nbsp; $17.53 &#64;11:03 am
+                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                        </p>
+                                    </div>
+                                    <div class="info_row">
+                                        <p>
+                                            QQQ &nbsp; $17.53 &#64;11:03 am
+                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                        </p>
+                                    </div>
+                                    <div class="info_row">
+                                        <p>
+                                            QQQ &nbsp; $17.53 &#64;11:03 am
+                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                        </p>
+                                    </div>
+                                    <div class="info_row">
+                                        <p>
+                                            QQQ &nbsp; $17.53 &#64;11:03 am
+                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="todays_signal_list" id="sellItemsDiv">
+                                    <div class="info_row">
+                                        <p>
+                                            QQQ &nbsp; $17.53 &#64;11:03 am
+                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                        </p>
+                                    </div>
+                                    <div class="info_row">
+                                        <p>
+                                            QQQ &nbsp; $17.53 &#64;11:03 am
+                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                        </p>
+                                    </div>
+                                    <div class="info_row">
+                                        <p>
+                                            QQQ &nbsp; $17.53 &#64;11:03 am
+                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                        </p>
+                                    </div>
+                                    <div class="info_row">
+                                        <p>
+                                            QQQ &nbsp; $17.53 &#64;11:03 am
+                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                        </p>
+                                    </div>
+                                    <div class="info_row">
+                                        <p>
+                                            QQQ &nbsp; $17.53 &#64;11:03 am
+                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                        </p>
+                                    </div>
+                                    <div class="info_row">
+                                        <p>
+                                            QQQ &nbsp; $17.53 &#64;11:03 am
+                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                        </p>
+                                    </div>
+                                    <div class="info_row">
+                                        <p>
+                                            QQQ &nbsp; $17.53 &#64;11:03 am
+                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel-group accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="head_form">
+                        <button type="button" class="btn btn-xs btn_major_market" @btnClassToDisabled data-toggle="modal" data-target="#myModalBlueQuant" title="Choose Major Market" @* onclick="callYahooFinance()" *@>Major Markets</button>
+                    </div>
+                    <h4 class="panel-title"> <a data-toggle="collapse" href="#collapse6">Chart</a> </h4>
+                </div>
+                <div id="collapse6" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div id="chartcontainer_dailyBulQuantData" style="height:400px; min-width: 1108px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="myModalBlueQuant" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg modal_style">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Select Market</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info"> <strong>Note:</strong> If your symbol is not preset, please type it directly into the textbox </div>
+                    <div class="table-responsive">
+                        <input type="hidden" id="hfCssClass" value="@btnClassQuant" />
+                        @*<table class="table table-bordered table-striped" id="tblCategoriesList">
+                            <thead>
+                            <tr>
+                            <th>US Market</th>
+                            <th>Foreign Market</th>
+                            <th>Currency</th>
+                            <th>Metal</th>
+                            <th>Energy</th>
+                            <th>Other</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            <td><a href="#" class="@btnClassQuant">Dow 30 - DIA</a></td>
+                            <td><a href="#" class="@btnClassQuant">Europe - EZU</a></td>
+                            <td><a href="#" class="@btnClassQuant">Dollar - UUP</a></td>
+                            <td><a href="#" class="@btnClassQuant">Gold - GLD</a></td>
+                            <td><a href="#" class="@btnClassQuant">Crude Oil - USO</a></td>
+                            <td><a href="#" class="@btnClassQuant">Treasury Bonds - TLT</a></td>
+                            </tr>
+                            <tr>
+                            <td><a href="#" class="@btnClassQuant">SP500 - SPY</a></td>
+                            <td><a href="#" class="@btnClassQuant">China - FXI</a></td>
+                            <td><a href="#" class="@btnClassQuant">Euro - FXE</a></td>
+                            <td><a href="#" class="@btnClassQuant">Platinum - PPLT</a></td>
+                            <td><a href="#" class="@btnClassQuant">Brent Oil - BNO</a></td>
+                            <td><a href="#" class="@btnClassQuant">Corporate Bonds - JNK</a></td>
+                            </tr>
+                            <tr>
+                            <td><a href="#" class="@btnClassQuant">NASD100 - QQQ</a></td>
+                            <td><a href="#" class="@btnClassQuant">Japan - EWJ</a></td>
+                            <td><a href="#" class="@btnClassQuant">Pound - FXB</a></td>
+                            <td><a href="#" class="@btnClassQuant">Silver - SLV</a></td>
+                            <td><a href="#" class="@btnClassQuant">Natural Gas - UNG</a></td>
+                            <td><a href="#" class="@btnClassQuant">U.S.Real Estate - IYR</a></td>
+                            </tr>
+                            <tr>
+                            <td><a href="#" class="@btnClassQuant">Russ2000 - IWM</a></td>
+                            <td><a href="#" class="@btnClassQuant">Emerging - EEM</a></td>
+                            <td><a href="#" class="@btnClassQuant">Yen - FXY</a></td>
+                            <td><a href="#" class="@btnClassQuant">Copper - JJC</a></td>
+                            <td><a href="#" class="@btnClassQuant">Heating Oil - UHN</a></td>
+                            <td><a href="#" class="@btnClassQuant">Agriculture - DBA</a></td>
+                            </tr>
+                            </tbody>
+                            </table>
+                            <br />
+                            <br />*@
+                        <table class="table table-bordered" id="tblCategoriesList1"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="panel-group accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title pannel_bg_blue"> <a data-toggle="collapse" href="#collapse7" aria-expanded="true" class=""> <img src="../../images/live_portfolio.png" alt="" /> Live Portfolio</a> </h4>
+                </div>
+                <div id="collapse7" class="panel-collapse collapse in" aria-expanded="true" style="">
+                    <div class="panel-body profile">
+                        <div id="chartcontainer_daily">
+                            <div class="row">
+                                @*<div class="col-sm-6">
+                                        <div style="height:200px; overflow:auto;">
+                                            <div class="table-responsive table_style">
+                                                <table class="table table-bordered table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Symbol</th>
+                                                            <th width="210" class="text-center">Name</th>
+                                                            <th>Entry Date</th>
+                                                            <th>Entry Price</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">QQQ</a></td>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">Smith</a></td>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">Dec 4</a></td>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">21.45</a></td>
+                                                            <td style="text-align:center;"><input type="button" id="btnloanQuantData" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">QQQ</a></td>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">Smith</a></td>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">Dec 4</a></td>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">21.45</a></td>
+                                                            <td><input type="button" id="btnloanQuantData" class="btn btn-success btn-xs btn_load" @btnClassToDisabled onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">QQQ</a></td>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">Smith</a></td>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">Dec 4</a></td>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">21.45</a></td>
+                                                            <td><input type="button" id="btnloanQuantData" class="btn btn-success btn-xs btn_load" @btnClassToDisabled onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">QQQ</a></td>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">Smith</a></td>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">Dec 4</a></td>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">21.45</a></td>
+                                                            <td><input type="button" id="btnloanQuantData" class="btn btn-success btn-xs btn_load" @btnClassToDisabled onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">QQQ</a></td>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">Smith</a></td>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">Dec 4</a></td>
+                                                            <td><a href="#" class="@btnClassLivePortfolio">21.45</a></td>
+                                                            <td><input type="button" id="btnloanQuantData" class="btn btn-success btn-xs btn_load" @btnClassToDisabled onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" /></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                <div class="col-sm-12">
+                                    <div style="height:200px; overflow:auto;">
+                                        <div class="table-responsive table_style">
+                                            <table class="table table-bordered table-striped" id="livePortfolio1" style="width:100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Symbol</th>
+                                                        <th width="210" class="text-center">Name</th>
+                                                        <th>Entry Date</th>
+                                                        <th>Entry Price</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="panel-group accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title pannel_bg_blue"> <a data-toggle="collapse" href="#collapse8" aria-expanded="true" class=""><i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp; Last 10 Completed Trades</a> </h4>
+                </div>
+                <div id="collapse8" class="panel-collapse collapse in" aria-expanded="true">
+                    <div class="panel-body profile">
+                        <div id="chartcontainer_daily">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="table-responsive table_style">
+                                        <table class="table table-bordered table-striped" id="lastCompletedTradesMain" style="width:100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Symbol</th>
+                                                    <th width="230" class="text-center">Name</th>
+                                                    <th>Entry Date</th>
+                                                    <th>Exit Date</th>
+                                                    <th align="center">Result</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                @*<div class="col-sm-6">
+                                        <div class="table-responsive table_style">
+                                            <table class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Symbol</th>
+                                                        <th width="230" class="text-center">Name</th>
+                                                        <th>Entry Date</th>
+                                                        <th>Exit Date</th>
+                                                        <th align="center">Result</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">QQQ</a></td>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">Smith</a></td>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">Dec 4</a></td>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">Dec 4</a></td>
+                                                        <td>+14.8%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">QQQ</a></td>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">Smith</a></td>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">Dec 4</a></td>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">Dec 4</a></td>
+                                                        <td>+22.8%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">QQQ</a></td>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">Smith</a></td>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">Dec 4</a></td>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">Dec 4</a></td>
+                                                        <td>+19.8%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">QQQ</a></td>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">Smith</a></td>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">Dec 4</a></td>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">Dec 4</a></td>
+                                                        <td>+46.8%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">QQQ</a></td>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">Smith</a></td>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">Dec 4</a></td>
+                                                        <td><a href="#" class="@btnClassLivePortfolio">Dec 4</a></td>
+                                                        <td>+51.8%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $.ajax({
+            type: "GET",
+            url: "/Home/GetAllMarketSetupData",
+            dataType: "json",
+            async: true,
+            cache: false,
+            data: null,
+            success: function (data) {
+                if (data != null) {
+                    BindMarketCategoriesPopupWindow1(data);
+                    BindActionData(data.list);
+                    BindLivePortfolioMain("livePortfolio1", data.livePortfolio1);
+                    BindLast10CompletedTradesMain("lastCompletedTradesMain", data.lastCompletedTradesMain);
+                }
+            },
+            error: function (error, status) {
+                console.log(error);
+            }
+        });
+    });
+
+    function BindMarketCategoriesPopupWindow1(data) {
+        var cssClass = $("#hfCssClass").val();
+        $("#tblCategoriesList1").empty();
+        var htmlContent = '<thead><tr>';
+        var trHtml = '';
+        var newInnerTable = '';
+        var categoryId = 0;
+        $.each(data.categories, function (i, obj) {
+            htmlContent += '<th>' + obj.Text + '</th>';
+
+            var items = $.grep(data.list, function (i, obj1) {
+                return (i.CategoryId == obj.Value);
+            });
+
+            trHtml += categoryId == 0 ? '<tbody><tr><td>' : "<td>";
+
+            var newInnerTable = "<table class='table table-bordered table-striped'>";
+            if (items.length > 0) {
+                $.each(items, function (i, item) {
+                    newInnerTable += '<tr><td><a href="#" class="' + cssClass + '">' + item.SymbolName + ' </td></tr>';
+                });
+            }
+
+            newInnerTable += "</table>";
+            trHtml += newInnerTable + '</td>';
+
+            categoryId = obj.Value;
+        });
+
+        trHtml += '</tr>';
+        htmlContent += '</thead>';
+
+        if (trHtml != '')
+            trHtml += '</tbody>';
+
+        htmlContent += trHtml;
+        $("#tblCategoriesList1").html(htmlContent);
+    }
+
+    function BindActionData(data) {
+        var cssClassDisabled = $("#hfcssDisabled").val();
+        var buyItems = $.grep(data, function (i, obj) {
+            return i.QuantTradingType != null && i.QuantTradingType != "" && i.QuantTradingType.toLowerCase().indexOf("buy") != -1;
+        });
+
+        var actionHtml = "";
+        $("#buyItemsDiv").empty();
+        if (buyItems.length > 0) {
+            $.each(buyItems, function (i, bItem) {
+                actionHtml += "<div class='info_row'><p>" + bItem.SymbolCode + "  $" + bItem.Price + " &#64; " + bItem.StrEntryTimeValue;
+                actionHtml += "<input type=\"button\" id=\"btnloanQuantData\" data-toggle=\"tooltip\" title=\"Load Symbol\" " + cssClassDisabled + " class=\"btn btn-success btn-xs btn_load\" onclick=\"IntializeOnlyBlueQuanteWithCode('" + bItem.SymbolCode + "')\" value=\"Load\" />"
+                actionHtml += "</p></div>";
+            });
+
+            $("#buyItemsDiv").html(actionHtml);
+        }
+
+        var sellItems = $.grep(data, function (i, obj) {
+            return i.QuantTradingType != null && i.QuantTradingType != "" && i.QuantTradingType.toLowerCase().indexOf("sell") != -1;
+        });
+
+        actionHtml = "";
+        $("#sellItemsDiv").empty();
+        if (sellItems.length > 0) {
+            $.each(sellItems, function (i, bItem) {
+                actionHtml += "<div class='info_row'><p>" + bItem.SymbolCode + "  $" + bItem.Price + " &#64; " + bItem.StrEntryTimeValue;
+                actionHtml += "<input type=\"button\" id=\"btnloanQuantData\" data-toggle=\"tooltip\" title=\"Load Symbol\" " + cssClassDisabled + " class=\"btn btn-success btn-xs btn_load\" onclick=\"IntializeOnlyBlueQuanteWithCode('" + bItem.SymbolCode + "')\" value=\"Load\" />"
+                actionHtml += "</p></div>";
+            });
+
+            $("#sellItemsDiv").html(actionHtml);
+        }
+        actionHtml = "";
+    }
+
+    function BindLivePortfolioMain(selector, data) {
+        var cssClassDisabled = $("#hfcssDisabled").val();
+        if ($.fn.dataTable.isDataTable('#' + selector)) {
+            $('#' + selector).DataTable().destroy();
+        }
+
+        var table = $('#' + selector).DataTable({
+            aaData: data,
+            searching: false, paging: false,
+            bFilter: false, bInfo: false,
+            "columns": [
+                     { "data": "SymbolCode", "name": "symbol" },
+                     { "data": "SymbolName", "name": "Name" },
+                     { "data": "StrEntryDate", "name": "EntryDate" },
+                     {
+                         "data": null, "name": "EntryPrice", render: function (data, type, row) {
+                             return "<span> $" + data.EntryPrice + " USD </span>";
+                         }
+                     },
+                     {
+                         "data": null, "name": "Load", "orderable": false, render: function (data, type, row) {
+                             return "<input type=\"button\" id=\"btnloanQuantData\" class=\"btn btn-success btn-xs btn_load\" " + cssClassDisabled + " onclick=\"IntializeOnlyBlueQuanteWithCode('" + data.SymbolCode + "')\" value=\"Load\" />";
+                         }
+                     }
+            ]
+            , select: true,
+
+        });
+    }
+
+    function BindLast10CompletedTradesMain(selector, data) {
+        if ($.fn.dataTable.isDataTable('#' + selector)) {
+            $('#' + selector).DataTable().destroy();
+        }
+
+        var table = $('#' + selector).DataTable({
+            aaData: data,
+            searching: false, paging: false,
+            bFilter: false, bInfo: false,
+            "columns": [
+                     { "data": "SymbolCode", "name": "symbol" },
+                     { "data": "SymbolName", "name": "Name" },
+                     { "data": "StrEntryDate", "name": "EntryDate" },
+                     { "data": "StrExitDate", "name": "ExitDate" },
+                     {
+                         "data": null, "name": "Result", render: function (data, type, row) {
+                             return "<span> +" + data.Result + "%</span>";
+                         }
+                     }]
+        });
+    }
+</script>
