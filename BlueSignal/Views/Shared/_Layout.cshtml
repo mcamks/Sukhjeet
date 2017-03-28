@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title -BluSignals</title>
-    <link rel="icon" type="image/png" href="~/images/favicon.png">
+    <link rel="icon" type="image/png" href="~/favicon.ico">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/style.css" rel="stylesheet" />
@@ -134,6 +134,7 @@
                     <a href="@Url.Action("Detail","Home",new { p = "Detail",c= "fa-info-circle" })"  data-toggle="tooltip" title="Detail" data-placement="right"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 
                 </li>*@
+            <li class="remove credential"><a href="#login_window" data-toggle="modal" title="Login" data-placement="right"><i class="fa fa-user" aria-hidden="true"></i></a></li>
         </ul>
     </div>
     <div class="content">
@@ -171,6 +172,32 @@
     </div>
 
     <div id="ModelBackGround_Custom" class="modal-backdrop fade in" style="display: none;"></div>
+
+    <div class="modal fade" id="login_window" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm custom_width">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Change Password</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger text-center">Dashboard failed to launch.</div>
+                    <p>Lorem imsum is dummy text. Lorem imsum is dummy text. Lorem imsum is dummy text. Lorem imsum is dummy text.</p>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="btn btn-primary" value="Save" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--loader-->
 
 

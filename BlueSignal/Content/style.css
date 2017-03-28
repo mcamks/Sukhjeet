@@ -19,6 +19,8 @@ label {padding-top: 5px; font-weight:normal;}
 .m-l-10{margin-left:10px;}
 .m-t-15{margin-top:15px;}
 
+.custom_width{width:350px;}
+
 hr{border-color:#d1d1d1; }
 .btn-primary{background:#1e6eff;}
 
@@ -414,8 +416,8 @@ hr{border-color:#d1d1d1; }
 .mandatory:after{content:" *"; color:red;}
 
 .active_page{position:absolute; left:45%; padding:5px 10px; font-size:22px; font-weight:bold; color:#1e6eff; line-height:31px; top:3px;} 
-.active_page span{float:left; padding:4px 7px 8px; background:#1e6eff; border-radius:50px; margin-right:5px; color:#fff;}
-.active_page span i{float:left;}
+.active_page span{float:left; padding:0px 7px 8px; background:#1e6eff; border-radius:50px; margin-right:5px; color:#fff; width:44px; height:33px; text-align:center;}
+/*.active_page span i{float:left;}*/
 
 .date_time{float:right; margin:2px 2px 0 0; font-size:13px;}
 .date_time .date{background:#1e6eff; color:#fff; padding:2px 8px;}
