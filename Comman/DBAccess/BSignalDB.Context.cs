@@ -27,8 +27,7 @@ namespace Comman.DBAccess
     
         public virtual DbSet<ContactLog> ContactLogs { get; set; }
         public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
-        public virtual DbSet<MarketData> MarketData { get; set; }
         public virtual DbSet<ProductType> ProductType { get; set; }
-        public virtual DbSet<MarketCategory> MarketCategory { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

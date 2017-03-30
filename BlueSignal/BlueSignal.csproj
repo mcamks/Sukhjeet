@@ -313,6 +313,7 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\gruppo-regular-webfont.woff" />
     <Content Include="fonts\gruppo-regular-webfont.woff2" />
+    <None Include="Properties\PublishProfiles\BS.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ClearForm.js" />
@@ -402,6 +403,7 @@
     <Content Include="Views\Home\Research.cshtml" />
     <Content Include="Views\Home\Detail.cshtml" />
     <Content Include="Views\Home\FinanceInfoView.cshtml" />
+    <Content Include="Views\Home\_BSLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

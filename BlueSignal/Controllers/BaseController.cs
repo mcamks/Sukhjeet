@@ -40,8 +40,8 @@ namespace BlueSignal.Controllers
                 {
                     var values = new RouteValueDictionary(new
                     {
-                        action = "authFailed",
-                        controller = "home",
+                        action = "login",
+                        controller = "account",
                         ReturnUrl = filterContext.HttpContext.Request.Url.PathAndQuery
                     });
                     filterContext.Result = new RedirectToRouteResult(values);
@@ -50,7 +50,7 @@ namespace BlueSignal.Controllers
                 {
                     filterContext.Result =
                        new RedirectResult(
-                           "/home/authFailed", false);
+                           "/account/login", false);
                 }
             }
 
@@ -70,8 +70,8 @@ namespace BlueSignal.Controllers
                     {
                         var values = new RouteValueDictionary(new
                         {
-                            action = "authFailed",
-                            controller = "home",
+                            action = "login",
+                            controller = "account",
                             ReturnUrl = filterContext.HttpContext.Request.Url.PathAndQuery
                         });
                         filterContext.Result = new RedirectToRouteResult(values);
@@ -80,7 +80,7 @@ namespace BlueSignal.Controllers
                     {
                         filterContext.Result =
                            new RedirectResult(
-                               "/home/authFailed", false);
+                               "/account/login", false);
                     }
                 }
             }

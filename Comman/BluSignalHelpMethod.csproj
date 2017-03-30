@@ -75,13 +75,10 @@
     <Compile Include="DBAccess\EmailTemplate.cs">
       <DependentUpon>BSignalDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBAccess\MarketCategory.cs">
-      <DependentUpon>BSignalDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBAccess\MarketData.cs">
-      <DependentUpon>BSignalDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="DBAccess\ProductType.cs">
+      <DependentUpon>BSignalDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBAccess\Users.cs">
       <DependentUpon>BSignalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="MailHelper.cs" />

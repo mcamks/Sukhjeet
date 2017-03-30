@@ -7,9 +7,8 @@
       <Diagram DiagramId="c4b31a1a145b454babf51f1f178f6129" Name="Diagram1">
         <EntityTypeShape EntityType="BluSignalsModel.ContactLog" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BluSignalsModel.EmailTemplate" Width="1.5" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="BluSignalsModel.MarketData" Width="1.5" PointX="3.375" PointY="4.75" />
         <EntityTypeShape EntityType="BluSignalsModel.ProductType" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="BluSignalsModel.MarketCategory" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BluSignalsModel.Users" Width="1.5" PointX="5.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

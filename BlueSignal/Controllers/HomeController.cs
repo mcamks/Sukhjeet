@@ -26,7 +26,7 @@ namespace BlueSignal.Controllers
     {
         public string apiKey = BluSignalComman.APIkey;
         WebClientHelp webClientHelp = new WebClientHelp();
-        // [LogonAuthorize]
+        [LogonAuthorize]
         public async Task<ActionResult> Index()
         {
             if (Session["SystemUser"] == null)
@@ -43,6 +43,10 @@ namespace BlueSignal.Controllers
             var Password = Request.QueryString["P"];
             using (var bal = new MarketBal())
             {
+                BluSignalsEntities db = new BluSignalsEntities();
+                var IsUserExist = db.Users.FirstOrDefault(x => x.Email.ToLower() == userName.ToLower());
+
+
                 var user = bal.GetWpUser(userName, Password);
                 if (user == null)
                 {
@@ -60,8 +64,15 @@ namespace BlueSignal.Controllers
 
                 if (user != null)
                 {
+                    if (IsUserExist != null)
+                    {
+                        user.IsAlreadyRegisteredWithBSPortal = true;
+                    }
+                    else
+                    {
+                        user.IsAlreadyRegisteredWithBSPortal = false;
+                    }
                     SystemLogin(user);
-
                     await CheckUserBundle(user);
                     var loggedInUser = Session["SystemUser"];
                     return RedirectToAction("Dashboard");
@@ -135,7 +146,7 @@ namespace BlueSignal.Controllers
             return View();
         }
 
-
+        [LogonAuthorize]
         public async Task<ActionResult> Dashboard()
         {
             if (Session["SystemUser"] == null)
@@ -143,6 +154,7 @@ namespace BlueSignal.Controllers
 
             return View();
         }
+        [LogonAuthorize]
         public ActionResult Charts()
         {
 
@@ -421,9 +433,9 @@ namespace BlueSignal.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var db = new BluSignalsEntities();
+                    var db = new Comman.DBAccess.BluSignalsEntities();
 
-                    var conact = new ContactLog()
+                    var conact = new Comman.DBAccess.ContactLog()
                     {
 
                         Name = model.Name,
@@ -477,6 +489,73 @@ namespace BlueSignal.Controllers
                 throw;
             }
             return PartialView("_ContactLog", model);
+        }
+
+
+        [HttpPost]
+        public ActionResult SetPassword(SetPassowrdModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                   
+                    model.IsSuccess = 0;
+                    if (model.pwd != model.cpwd)
+                    {
+                        ModelState.AddModelError("cpwd", "Password does not match!");
+                        return PartialView("_BSLogin", model);
+                    }
+
+                    var loggedInUser = HttpContextSessionWrapperExtension.SessionUser;
+                    if (loggedInUser != null)
+                    {
+                        loggedInUser.IsAlreadyRegisteredWithBSPortal= false;
+                        var db = new Comman.DBAccess.BluSignalsEntities();
+
+                        var conact = new Comman.DBAccess.Users()
+                        {
+                            PasswordHash = model.pwd,
+                            UserName = loggedInUser.user_email,
+                            Email = loggedInUser.user_email
+                        };
+                        var emailTemp = db.Users.Where(e => e.Email == loggedInUser.user_email || e.UserName == loggedInUser.user_email).Any();
+
+                        if (!emailTemp)
+                        {
+                            model.IsSuccess = 2;
+                            db.Users.Add(conact);
+                            db.SaveChanges();
+                            ModelState.AddModelError("cpwd", "User is successfully registered!");
+                            loggedInUser.IsAlreadyRegisteredWithBSPortal = true;
+                            SystemLogin(loggedInUser);
+                            CheckUserBundle(loggedInUser).ConfigureAwait(false);
+                            return PartialView("_BSLogin", model);
+                        }
+                        else
+                        {
+
+                            ModelState.AddModelError("cpwd", "User already register!");
+                            return PartialView("_BSLogin", model);
+                        }
+                    }
+                    
+                    var model2 = new SetPassowrdModel();
+                    ModelState.Clear();
+                    model2.IsSuccess = 2;
+                    return PartialView("_BSLogin", model2);
+                }
+                else
+                {
+                    model.IsSuccess = 1;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return PartialView("_BSLogin", model);
         }
 
 

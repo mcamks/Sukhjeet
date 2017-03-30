@@ -142,4 +142,19 @@ namespace BlueSignal.Models
 
         public int IsSuccess { get; set; }
     }
+
+
+    public class SetPassowrdModel
+    {
+        [Required]
+        //[EmailAddress]
+        
+        [Display(Name = "Password")]
+        public string pwd { get; set; }
+        [Required]
+        [Display(Name = "Confirm Password")]
+        public string cpwd { get; set; }
+        public string ActionResultMessage { get; set; }
+        public int IsSuccess { get; set; }
+    }
 }

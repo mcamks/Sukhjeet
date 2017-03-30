@@ -49,6 +49,8 @@ namespace BlueSignalCore.Models
         public string display_name { get; set; }
         public string display_AdminKey { get; set; }
 
+        public bool IsAlreadyRegisteredWithBSPortal { get; set; }
+
         //public List<WP_UserBundle> user_bundle { get; set; }
 
         public List<bundles> bundles { get; set; }

@@ -102,6 +102,46 @@ function AddContact(btn) {
     });
 }
 
+//
+function LoginWithNew(btn) {
+
+    
+    if (btn != undefined) {
+        btn.disabled = true;
+    }
+
+    var data = {
+        'pwd': $('#pwd').val(),
+        'cpwd': $('#cpwd').val()      
+    };
+
+    $.ajax({
+        type: "Post",
+        url: "/Home/SetPassword",
+        dataType: "html",
+        async: true,
+        data: data,
+        success: function (data) {
+            if (data != null) {               
+                $('#_loginBSPartial').html('');
+                $('#_loginBSPartial').html(data);
+                //$('#LoginForm').hide();
+                
+                btn.disabled = false;
+            }
+        },
+        error: function (error) {
+            //console.log(error);
+            btn.disabled = false;
+            //alert('Error');
+        }
+    });
+}
+function CloseThisLoginPopup()
+{
+    $('#login_window').modal('hide');
+}
+
 
 /**********************Main JS***************************/
 
