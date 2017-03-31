@@ -90,6 +90,17 @@ namespace BlueSignalCore.UOW
             }
         }
 
+        private UsersRepository _UsersRepository;
+        public UsersRepository UsersRepository
+        {
+            get
+            {
+                if (_UsersRepository == null)
+                    _UsersRepository = new UsersRepository();
+                return _UsersRepository;
+            }
+        }
+
 
         #endregion
     }

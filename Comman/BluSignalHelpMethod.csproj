@@ -54,61 +54,13 @@
   <ItemGroup>
     <Compile Include="BluSignalComman.cs" />
     <Compile Include="CommonConfig.cs" />
-    <Compile Include="DBAccess\BSignalDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BSignalDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBAccess\BSignalDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BSignalDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBAccess\BSignalDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BSignalDB.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DBAccess\ContactLog.cs">
-      <DependentUpon>BSignalDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBAccess\EmailTemplate.cs">
-      <DependentUpon>BSignalDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBAccess\ProductType.cs">
-      <DependentUpon>BSignalDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBAccess\Users.cs">
-      <DependentUpon>BSignalDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="MailHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebClientHelp.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="DBAccess\BSignalDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BSignalDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="DBAccess\BSignalDB.edmx.diagram">
-      <DependentUpon>BSignalDB.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DBAccess\BSignalDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BSignalDB.edmx</DependentUpon>
-      <LastGenOutput>BSignalDB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DBAccess\BSignalDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BSignalDB.edmx</DependentUpon>
-      <LastGenOutput>BSignalDB.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

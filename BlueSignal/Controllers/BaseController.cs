@@ -3,24 +3,19 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using BlueSignalCore.Bal;
 using BlueSignalCore.Models;
+using System.Configuration;
 
 namespace BlueSignal.Controllers
 {
     public class BaseController : Controller
     {
-        private MarketBal _marketBal;
-
-        public MarketBal MarketBal
+        public string ApiBaseUrl
         {
             get
             {
-                if (_marketBal == null)
-                    _marketBal = new MarketBal();
-                return _marketBal;
+                return ConfigurationManager.AppSettings["ApiBaseUrl"];
             }
         }
-
-
 
         /// <summary>
         /// Check If User is Logged In

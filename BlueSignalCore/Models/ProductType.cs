@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace BlueSignalCore.Models
 {
-    public class MarketCategory : BaseEntity
+    public partial class ProductType
     {
         [Key]
         public long Id { get; set; }
-        public string CategoryName { get; set; }
-        public long SortOrder { get; set; }
-        public Nullable<bool> IsActive { get; set; }
+        public string Code { get; set; }
+        public string ProductName { get; set; }
+        public bool IsActive { get; set; }
     }
 }

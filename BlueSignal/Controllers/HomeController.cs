@@ -14,16 +14,21 @@ using BlueSignalCore.Bal;
 using BlueSignalCore.Dto;
 using BlueSignalCore.Models;
 using BluSignalHelpMethod;
-using Comman.DBAccess;
+//using Comman.DBAccess;
 using Newtonsoft.Json;
+using System.Net.Http.Formatting;
 
 namespace BlueSignal.Controllers
 {
 
-
-
     public class HomeController : BaseController
     {
+        private readonly MarketBal _marketBal;
+        public HomeController(MarketBal marketBal)
+        {
+            _marketBal = marketBal;
+        }
+
         public string apiKey = BluSignalComman.APIkey;
         WebClientHelp webClientHelp = new WebClientHelp();
         [LogonAuthorize]
@@ -31,6 +36,8 @@ namespace BlueSignal.Controllers
         {
             if (Session["SystemUser"] == null)
                 await Auth();
+
+            var data = GetMinutesChartData("SPY");
 
             return await Task.FromResult(View());
         }
@@ -41,47 +48,51 @@ namespace BlueSignal.Controllers
         {
             var userName = Request.QueryString["E"];
             var Password = Request.QueryString["P"];
-            using (var bal = new MarketBal())
+            //using (var bal = new MarketBal())
+            //{
+
+
+            //}
+
+            //BluSignalsEntities db = new BluSignalsEntities();
+            //var IsUserExist = db.Users.FirstOrDefault(x => x.Email.ToLower() == userName.ToLower());
+
+            var IsUserExist = await _marketBal.IsUserExists(userName.ToLower(), Password);
+
+            var user = _marketBal.GetWpUser(userName, Password);
+            if (user == null)
             {
-                BluSignalsEntities db = new BluSignalsEntities();
-                var IsUserExist = db.Users.FirstOrDefault(x => x.Email.ToLower() == userName.ToLower());
+                user = new WP_User();
+                user.ID = Convert.ToString(1).Trim();
+                user.user_login = Convert.ToString("true").Trim();
+                user.user_password = Convert.ToString("true").Trim();
+                user.user_nicename = Convert.ToString("true").Trim();
+                user.user_email = Convert.ToString("true").Trim();
+                user.user_registered = Convert.ToString("true").Trim();
+                user.display_name = Convert.ToString("true").Trim();
+                user.display_AdminKey = Convert.ToString("administrator").Trim();
+            }
 
 
-                var user = bal.GetWpUser(userName, Password);
-                if (user == null)
+            if (user != null)
+            {
+                if (IsUserExist != null)
                 {
-                    user = new WP_User();
-                    user.ID = Convert.ToString(1).Trim();
-                    user.user_login = Convert.ToString("true").Trim();
-                    user.user_password = Convert.ToString("true").Trim();
-                    user.user_nicename = Convert.ToString("true").Trim();
-                    user.user_email = Convert.ToString("true").Trim();
-                    user.user_registered = Convert.ToString("true").Trim();
-                    user.display_name = Convert.ToString("true").Trim();
-                    user.display_AdminKey = Convert.ToString("administrator").Trim();
-                }
-
-
-                if (user != null)
-                {
-                    if (IsUserExist != null)
-                    {
-                        user.IsAlreadyRegisteredWithBSPortal = true;
-                    }
-                    else
-                    {
-                        user.IsAlreadyRegisteredWithBSPortal = false;
-                    }
-                    SystemLogin(user);
-                    await CheckUserBundle(user);
-                    var loggedInUser = Session["SystemUser"];
-                    return RedirectToAction("Dashboard");
+                    user.IsAlreadyRegisteredWithBSPortal = true;
                 }
                 else
                 {
-                    SystemLogout();
-                    //Redirect To Unknown payment page
+                    user.IsAlreadyRegisteredWithBSPortal = false;
                 }
+                SystemLogin(user);
+                await CheckUserBundle(user);
+                var loggedInUser = Session["SystemUser"];
+                return RedirectToAction("Dashboard");
+            }
+            else
+            {
+                SystemLogout();
+                //Redirect To Unknown payment page
             }
             return await Task.FromResult(View());
         }
@@ -412,8 +423,8 @@ namespace BlueSignal.Controllers
                     vm.ChartData = ChartData;
                 }
 
-                vm.MarketLists = await MarketBal.GetMarketData();
-                vm.Categories = await MarketBal.GetActiveMarketCategories();
+                vm.MarketLists = await _marketBal.GetMarketData();
+                vm.Categories = await _marketBal.GetActiveMarketCategories();
             }
             catch (WebException ex) //if server is off it will throw exeception and here we need notify user
             {
@@ -427,42 +438,57 @@ namespace BlueSignal.Controllers
 
 
         [HttpPost]
-        public ActionResult Contact(ContactViewModel model)
+        public async Task<ActionResult> Contact(ContactViewModel model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var db = new Comman.DBAccess.BluSignalsEntities();
+                    //var db = new Comman.DBAccess.BluSignalsEntities();
 
-                    var conact = new Comman.DBAccess.ContactLog()
+                    //var conact = new Comman.DBAccess.ContactLog()
+                    //{
+
+                    //    Name = model.Name,
+                    //    Email = model.Email,
+                    //    Message = model.Message,
+                    //    Subject = model.Subject,
+                    //    CreatedDate = DateTime.UtcNow
+
+                    //};
+                    //var emailTemp = db.EmailTemplates.Where(e => e.EmailType == 1).FirstOrDefault();
+
+                    //var EB = new StringBuilder(emailTemp.EmailBody);
+
+                    //EB.Replace("@Name", conact.Name);
+                    //EB.Replace("@Email", conact.Email);
+                    //EB.Replace("@Subject", conact.Subject);
+                    //EB.Replace("@Query", conact.Message);
+                    //MailHelper.SendMailMessage(CommonConfig.AdminEmailID, "", "", emailTemp.EmailSubject + "-" + conact.Subject, EB.ToString(), true);
+
+                    //db.ContactLogs.Add(conact);
+                    //db.SaveChanges();
+
+                    var contact = new ContactLog
                     {
-
                         Name = model.Name,
                         Email = model.Email,
                         Message = model.Message,
                         Subject = model.Subject,
                         CreatedDate = DateTime.UtcNow
-
                     };
+                    var emailTemp = await _marketBal.SaveContactLog(contact);
 
+                    if (emailTemp != null)
+                    {
+                        var EB = new StringBuilder(emailTemp.EmailBody);
 
-                    var emailTemp = db.EmailTemplates.Where(e => e.EmailType == 1).FirstOrDefault();
-
-                    var EB = new StringBuilder(emailTemp.EmailBody);
-
-                    EB.Replace("@Name", conact.Name);
-                    EB.Replace("@Email", conact.Email);
-                    EB.Replace("@Subject", conact.Subject);
-                    EB.Replace("@Query", conact.Message);
-                    MailHelper.SendMailMessage(CommonConfig.AdminEmailID, "", "", emailTemp.EmailSubject + "-" + conact.Subject, EB.ToString(), true);
-
-                    db.ContactLogs.Add(conact);
-                    db.SaveChanges();
-
-
-
-
+                        EB.Replace("@Name", contact.Name);
+                        EB.Replace("@Email", contact.Email);
+                        EB.Replace("@Subject", contact.Subject);
+                        EB.Replace("@Query", contact.Message);
+                        MailHelper.SendMailMessage(CommonConfig.AdminEmailID, "", "", emailTemp.EmailSubject + "-" + contact.Subject, EB.ToString(), true);
+                    }
 
                     var model2 = new ContactViewModel();
                     ModelState.Clear();
@@ -493,13 +519,13 @@ namespace BlueSignal.Controllers
 
 
         [HttpPost]
-        public ActionResult SetPassword(SetPassowrdModel model)
+        public async Task<ActionResult> SetPassword(SetPassowrdModel model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                   
+
                     model.IsSuccess = 0;
                     if (model.pwd != model.cpwd)
                     {
@@ -510,22 +536,25 @@ namespace BlueSignal.Controllers
                     var loggedInUser = HttpContextSessionWrapperExtension.SessionUser;
                     if (loggedInUser != null)
                     {
-                        loggedInUser.IsAlreadyRegisteredWithBSPortal= false;
-                        var db = new Comman.DBAccess.BluSignalsEntities();
+                        loggedInUser.IsAlreadyRegisteredWithBSPortal = false;
+                        //var db = new Comman.DBAccess.BluSignalsEntities();
 
-                        var conact = new Comman.DBAccess.Users()
+                        var newUser = new Users()
                         {
                             PasswordHash = model.pwd,
                             UserName = loggedInUser.user_email,
                             Email = loggedInUser.user_email
                         };
-                        var emailTemp = db.Users.Where(e => e.Email == loggedInUser.user_email || e.UserName == loggedInUser.user_email).Any();
+                        //var user = db.Users.Where(e => e.Email == loggedInUser.user_email || e.UserName == loggedInUser.user_email).Any();
+                        var user = await _marketBal.UserExists(loggedInUser.user_email.ToLower(), loggedInUser.user_email);
 
-                        if (!emailTemp)
+                        if (!user)
                         {
                             model.IsSuccess = 2;
-                            db.Users.Add(conact);
-                            db.SaveChanges();
+                            //db.Users.Add(newUser);
+                            //db.SaveChanges();
+                            _marketBal.SaveUser(newUser);
+
                             ModelState.AddModelError("cpwd", "User is successfully registered!");
                             loggedInUser.IsAlreadyRegisteredWithBSPortal = true;
                             SystemLogin(loggedInUser);
@@ -539,7 +568,7 @@ namespace BlueSignal.Controllers
                             return PartialView("_BSLogin", model);
                         }
                     }
-                    
+
                     var model2 = new SetPassowrdModel();
                     ModelState.Clear();
                     model2.IsSuccess = 2;
@@ -592,7 +621,7 @@ namespace BlueSignal.Controllers
             JsonResult json = null;
             try
             {
-                var vm = await MarketBal.GetMarketDataById(id);
+                var vm = await _marketBal.GetMarketDataById(id);
                 json = new JsonResult
                 {
                     Data = vm,
@@ -613,8 +642,8 @@ namespace BlueSignal.Controllers
             JsonResult json = null;
             try
             {
-                var list = await MarketBal.GetMarketData();
-                var categories = await MarketBal.GetActiveMarketCategories();
+                var list = await _marketBal.GetMarketData();
+                var categories = await _marketBal.GetActiveMarketCategories();
                 json = new JsonResult
                 {
                     Data = new
@@ -643,7 +672,7 @@ namespace BlueSignal.Controllers
             JsonResult json = null;
             try
             {
-                var list = await MarketBal.GetMarketData(typeId);
+                var list = await _marketBal.GetMarketData(typeId);
                 json = new JsonResult
                 {
                     Data = list,
@@ -661,7 +690,7 @@ namespace BlueSignal.Controllers
 
         public async Task<JsonResult> SaveMarketData(MarketDataDto vm)
         {
-            var result = await MarketBal.SaveMarketData(vm);
+            var result = await _marketBal.SaveMarketData(vm);
             if (result >= 0)
             {
                 var limitedData = await GetMarketSetDataByType(vm.ProductTypeID);
@@ -677,7 +706,7 @@ namespace BlueSignal.Controllers
 
         public async Task<JsonResult> DeleteMarketData(long id)
         {
-            var result = await MarketBal.DeleteMarketData(id);
+            var result = await _marketBal.DeleteMarketData(id);
             if (result >= 0)
             {
                 var jsonResult = await GetMarketSetDataByType(Convert.ToString(result));
@@ -695,8 +724,8 @@ namespace BlueSignal.Controllers
             JsonResult json = null;
             try
             {
-                var list = await MarketBal.GetMarketData();
-                var categories = await MarketBal.GetActiveMarketCategories();
+                var list = await _marketBal.GetMarketData();
+                var categories = await _marketBal.GetActiveMarketCategories();
                 json = new JsonResult
                 {
                     Data = new
@@ -779,7 +808,6 @@ namespace BlueSignal.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
         public JsonResult GetMarketChartDataOnLoad(string startDate, string symbol)
         {
             //For Daily
@@ -823,5 +851,87 @@ namespace BlueSignal.Controllers
             }
         }
 
+        private async Task<string> GetMinutesChartData(string type)
+        {
+            try
+            {
+                var pData = new LoggingData { param1 = string.IsNullOrEmpty(type) ? "SPY" : type };
+                var client = new HttpClient();
+                var url = $"{ApiBaseUrl}{ApiActions.chartData}";
+                var data = (await client.PostAsync(url, pData, new JsonMediaTypeFormatter())).Content.ReadAsAsync<IEnumerable<LoggingData>>().Result;
+                if (data != null && data.Any())
+                {
+                    var obj = new MarketDataResult();
+                    obj.status = new status { code = "200", message = "success" };
+                    var list = new List<results>();
+                    foreach (var item in data)
+                    {
+                        list.Add(new results
+                        {
+                            symbol = type,
+                            timestamp = item.param4,
+                            tradingDay = item.param5,
+                            open = item.param6,
+                            high = item.param7,
+                            low = item.param8,
+                            close = item.param9,
+                            volume = item.param10,
+                            openInterest = null
+                        });
+                    }
+
+                    obj.results = list;
+
+                    var result = JsonConvert.SerializeObject(obj);
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return string.Empty;
+        }
+    }
+
+    public class LoggingData
+    {
+        public string param1 { get; set; }
+        public DateTime? param2 { get; set; }
+        public DateTime? param3 { get; set; }
+        public string param4 { get; set; }
+        public string param5 { get; set; }
+        public string param6 { get; set; }
+        public string param7 { get; set; }
+        public string param8 { get; set; }
+        public string param9 { get; set; }
+        public string param10 { get; set; }
+    }
+
+
+    public class MarketDataResult
+    {
+        public status status { get; set; }
+        public IEnumerable<results> results { get; set; }
+    }
+
+    public class status
+    {
+        public string code { get; set; }
+        public string message { get; set; }
+    }
+
+    public class results
+    {
+        public string symbol { get; set; }
+        public string timestamp { get; set; }
+        public string tradingDay { get; set; }
+        public string open { get; set; }
+        public string high { get; set; }
+        public string low { get; set; }
+        public string close { get; set; }
+        public string volume { get; set; }
+        public string openInterest { get; set; }
     }
 }

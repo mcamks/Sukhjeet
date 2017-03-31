@@ -9,7 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BlueSignal.Models;
-using Comman.DBAccess;
+//using Comman.DBAccess;
 using BlueSignalCore.Models;
 using System.Web.Script.Serialization;
 using BlueSignalCore.Bal;
@@ -21,9 +21,10 @@ namespace BlueSignal.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
-        public AccountController()
+        private readonly MarketBal _marketBal;
+        public AccountController(MarketBal marketBal)
         {
+            _marketBal = marketBal;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -79,44 +80,44 @@ namespace BlueSignal.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            BluSignalsEntities db = new BluSignalsEntities();
-            var IsUserExist = db.Users.FirstOrDefault(x => x.Email.ToLower() == model.Email.ToLower() && x.PasswordHash == model.Password);
 
-            if (IsUserExist!=null)
+            var IsUserExist = await _marketBal.IsUserExists(model.Email.ToLower(), model.Password);
+
+            //BluSignalsEntities db = new BluSignalsEntities();
+            //var IsUserExist = db.Users.FirstOrDefault(x => x.Email.ToLower() == model.Email.ToLower() && x.PasswordHash == model.Password);
+
+            if (IsUserExist != null)
             {
                 var userName = IsUserExist.Email;
                 var Password = "Test"; //Option
-                using (var bal = new MarketBal())
+                var user = _marketBal.GetWpUser(userName, Password);
+                if (user == null)
                 {
-                    var user = bal.GetWpUser(userName, Password);
-                    if (user == null)
-                    {
-                        user = new WP_User();
-                        user.ID = Convert.ToString(1).Trim();
-                        user.user_login = Convert.ToString("true").Trim();
-                        user.user_password = Convert.ToString("true").Trim();
-                        user.user_nicename = Convert.ToString("true").Trim();
-                        user.user_email = Convert.ToString("true").Trim();
-                        user.user_registered = Convert.ToString("true").Trim();
-                        user.display_name = Convert.ToString("true").Trim();
-                        user.display_AdminKey = Convert.ToString("administrator").Trim();
-                        user.IsAlreadyRegisteredWithBSPortal = true;
-                    }
+                    user = new WP_User();
+                    user.ID = Convert.ToString(1).Trim();
+                    user.user_login = Convert.ToString("true").Trim();
+                    user.user_password = Convert.ToString("true").Trim();
+                    user.user_nicename = Convert.ToString("true").Trim();
+                    user.user_email = Convert.ToString("true").Trim();
+                    user.user_registered = Convert.ToString("true").Trim();
+                    user.display_name = Convert.ToString("true").Trim();
+                    user.display_AdminKey = Convert.ToString("administrator").Trim();
+                    user.IsAlreadyRegisteredWithBSPortal = true;
+                }
 
 
-                    if (user != null)
-                    {
-                        user.IsAlreadyRegisteredWithBSPortal = true;
-                        SystemLogin(user);
-                        await CheckUserBundle(user);
-                        var loggedInUser = Session["SystemUser"];
-                        return RedirectToAction("Dashboard","Home");
-                    }
-                    else
-                    {
-                        SystemLogout();
-                        //Redirect To Unknown payment page
-                    }
+                if (user != null)
+                {
+                    user.IsAlreadyRegisteredWithBSPortal = true;
+                    SystemLogin(user);
+                    await CheckUserBundle(user);
+                    var loggedInUser = Session["SystemUser"];
+                    return RedirectToAction("Dashboard", "Home");
+                }
+                else
+                {
+                    SystemLogout();
+                    //Redirect To Unknown payment page
                 }
                 return await Task.FromResult(View());
             }

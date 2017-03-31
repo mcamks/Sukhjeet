@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -10,16 +9,33 @@ using AutoMapper;
 using BlueSignalCore.Dto;
 using BlueSignalCore.Models;
 using MySql.Data.MySqlClient;
-using System.Data.SqlClient;
 using System.Data.Entity;
 using BlueSignalCommon;
+using BlueSignalCore.Repository;
+using System.Linq.Expressions;
+using System.Data.Entity;
+using System.Text;
 
 namespace BlueSignalCore.Bal
 {
     public class MarketBal : BaseBal
     {
-        public MarketBal()
+        private readonly IRepository<Users> _usersRep;
+        private readonly IRepository<EmailTemplate> _emailTemplateRep;
+        private readonly IRepository<ContactLog> _contactLogRep;
+        private readonly IRepository<MarketData> _marketDataRep;
+        private readonly IRepository<MarketCategory> _marketCategoryRep;
+
+
+        public MarketBal(IRepository<Users> usersRep, IRepository<EmailTemplate> emailTemplateRep, IRepository<ContactLog> contactLogRep, IRepository<MarketCategory> marketCategoryRep, IRepository<MarketData> marketDataRep)
         {
+            _usersRep = usersRep;
+            _emailTemplateRep = emailTemplateRep;
+            _contactLogRep = contactLogRep;
+            _marketCategoryRep = marketCategoryRep;
+            _marketDataRep = marketDataRep;
+
+
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<MarketData, MarketDataDto>();
@@ -32,22 +48,16 @@ namespace BlueSignalCore.Bal
             try
             {
                 var list = new List<MarketDataDto>();
-                using (var rep = uw.MarketDataRepository)
+                var m = await _marketDataRep.Where(a => a.IsActive).ToListAsync();
+                if (m.Any())
                 {
-                    var m = rep.Where(a => a.IsActive).ToList();
-                    if (m.Any())
-                    {
-                        list.AddRange(m.Select(a =>
+                    list.AddRange(m.Select(a =>
                         {
                             var vm = Mapper.Map<MarketDataDto>(a);
                             if (vm != null && vm.CategoryId.HasValue)
-                            {
-                                using (var rep1 = uw.MarketCategoryRepository)
-                                    vm.Category = rep1.Where(w => w.Id == vm.CategoryId.Value).Select(c => c.CategoryName).FirstOrDefault();
-                            }
+                                vm.Category = _marketCategoryRep.Where(w => w.Id == vm.CategoryId.Value).Select(c => c.CategoryName).FirstOrDefault();
                             return vm;
                         }));
-                    }
                 }
                 return await Task.FromResult(list);
             }
@@ -161,8 +171,6 @@ namespace BlueSignalCore.Bal
 
         public WP_User GetWpUser(string un, string pwd)
         {
-
-
             var user = new WP_User();
 
             MySqlConnection myConnection = new MySqlConnection(ConfigurationSettings.AppSettings["Wb_ConnectionString"]);
@@ -251,6 +259,54 @@ namespace BlueSignalCore.Bal
                 return list;
             }
         }
+
+        #region Users Section
+        public async Task<Users> IsUserExists(string userName, string pwd)
+        {
+            //using ( var rep = uw.UsersRepository)
+            //{
+            //    var result = rep.Where(x => x.Email.ToLower().Equals(userName) && x.PasswordHash.Equals(pwd));
+            //    //var result = _usersRep.Where(x => x.Email.ToLower().Equals(userName) && x.PasswordHash.Equals(pwd));
+            //    return await result.FirstOrDefaultAsync();
+            //}
+            try
+            {
+                var result = _usersRep.Where(x => x.Email.Equals(userName) && x.PasswordHash.Equals(pwd));
+                return await result.FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+                return null;
+            }
+            return null;
+        }
+
+        public async Task<bool> UserExists(string userName, string email)
+        {
+            var result = _usersRep.Where(x => x.Email.Equals(email) || x.UserName.ToLower().Equals(userName));
+            return await result.AnyAsync();
+        }
+        public void SaveUser(Users model)
+        {
+            _usersRep.Insert(model);
+        }
+
+        #endregion
+
+
+        #region Email Template and Contact Log
+        public async Task<EmailTemplate> SaveContactLog(ContactLog model)
+        {
+            _contactLogRep.Insert(model);
+
+            var emailTemp = await _emailTemplateRep.Where(e => e.EmailType == 1).FirstOrDefaultAsync();
+            return emailTemp;
+        }
+        #endregion
+
+
+
     }
 
     public static class Extensions
