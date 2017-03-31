@@ -1,8 +1,12 @@
 using System;
 using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
 using BlueSignalCore.Bal;
 using BlueSignalCore.Repository;
+using Microsoft.AspNet.Identity;
+using BlueSignal.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using BlueSignal.Controllers;
+using System.Data.Entity;
 
 namespace BlueSignal.App_Start
 {
@@ -38,7 +42,20 @@ namespace BlueSignal.App_Start
             // container.LoadConfiguration();
 
             // TODO: Register your types here
-            // container.RegisterType<IProductRepository, ProductRepository>();
+            // container.RegisterType<IProductRepository, ProductepRository>();
+            //container.RegisterType<DbContext, ApplicationDbContext>(new HierarchicalLifetimeManager());
+            //container.RegisterType<UserManager<ApplicationUser>>(new HierarchicalLifetimeManager());
+            //container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(new HierarchicalLifetimeManager());
+            //container.RegisterType<AccountController>(new InjectionConstructor());
+            container.RegisterType<DbContext, ApplicationDbContext>(
+    new HierarchicalLifetimeManager());
+            container.RegisterType<UserManager<ApplicationUser>>(
+                new HierarchicalLifetimeManager());
+            container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(
+                new HierarchicalLifetimeManager());
+
+            //container.RegisterType<AccountController>(
+            //    new InjectionConstructor());
             container.RegisterType<MarketBal>();
             container.RegisterType(typeof(IRepository<>), typeof(Repository<>));
         }
