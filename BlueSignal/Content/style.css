@@ -427,7 +427,7 @@ hr{border-color:#d1d1d1; }
 .date_time .time i{margin-right:6px;}
 .date_time .time sub{color:#a9b2c2;}
 
-.sidemenu{float:left; width:46px; position:fixed; z-index:99; margin-top:213px;}
+.sidemenu{float:left; width:46px; position:fixed; z-index:99; margin-top: 116px;}
 .sidemenu ul{list-style:none; padding:0; margin:0;}
 .sidemenu ul li{float:left; border-bottom:1px solid #e7e4e4;}
 .sidemenu ul li a{color:#707070; width:46px; text-align:center; padding:10px 0; display:block; font-size:18px; height:41px;}
@@ -456,3 +456,14 @@ hr{border-color:#d1d1d1; }
     .yahoo-custom #maincontent .threewide.addgutter .block {
     width: 100% !important;
 }
+
+    .dashboard_style{background: #fff none repeat scroll 0 0; border-bottom:4px solid #1E6EFF; height: 116px; margin-top: 0; overflow:hidden;}
+        .dashboard_style .panel-body {
+            height: 110px;
+        }
+         .dashboard_style .panel {
+            margin:0px !important; border:none !important; box-shadow:none !important;
+        }
+          .dashboard_style .panel-group {
+            margin:0px !important; 
+        }
