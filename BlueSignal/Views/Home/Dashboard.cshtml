@@ -25,54 +25,9 @@
     border-top: 5px solid #1e6eff !important
     }
 </style>
-<div class="dashboard blue_heading_panel custom_panel blue_border">
+<div class="dashboard blue_heading_panel custom_panel ">@*blue_border*@
     <div class="row">
-        <div class="col-sm-12">
-            <div class="panel-group accordion">
-                <div class="panel">
-                    @*<div class="panel-heading">
-                        <h4 class="panel-title"> <i class="fa fa-newspaper-o" aria-hidden="true"></i> &nbsp;Ticker Widget </h4>
-                    </div>*@
-                    <div id="Div1" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                            @*<img src="~/images/graph3.jpg" />*@
-                            <!-- TradingView Widget BEGIN -->
-                            @*<span id="tradingview-copyright">
-                                    Market quotes are powered by <a href="http://www.tradingview.com" rel="nofollow" target="_blank" style="color: #3BB3E4">
-                                        TradingView.com
-                                    </a>
-                                </span>*@
-                            <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js">
-                                {
-                                    "symbols": [
-                                      {
-                                          "description": "The Standard&Poor's Index",
-                                          "proName": "INDEX:SPX"
-                                      },
-                                      {
-                                          "description": "Nasdaq 100 Index",
-                                          "proName": "INDEX:IUXX"
-                                      },
-                                      {
-                                          "description": "Euro Fx/U.S. Dollar",
-                                          "proName": "FX:EURUSD"
-                                      },
-                                      {
-                                          "description": "Light Crude Oil Futures",
-                                          "proName": "NYMEX:CL1!",
-                                          "title": "Crude Oil"
-                                      }
-                                    ],
-                                    "locale": "en",
-                                    "timeframe": "1d"
-                                }
-                            </script>
-                            <!-- TradingView Widget END -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <div class="col-sm-6 padding-right-5">
             <div class="panel-group accordion">
                 <div class="panel">

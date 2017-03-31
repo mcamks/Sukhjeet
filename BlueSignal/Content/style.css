@@ -427,7 +427,7 @@ hr{border-color:#d1d1d1; }
 .date_time .time i{margin-right:6px;}
 .date_time .time sub{color:#a9b2c2;}
 
-.sidemenu{float:left; width:46px; position:fixed; z-index:99;}
+.sidemenu{float:left; width:46px; position:fixed; z-index:99; margin-top:213px;}
 .sidemenu ul{list-style:none; padding:0; margin:0;}
 .sidemenu ul li{float:left; border-bottom:1px solid #e7e4e4;}
 .sidemenu ul li a{color:#707070; width:46px; text-align:center; padding:10px 0; display:block; font-size:18px; height:41px;}
