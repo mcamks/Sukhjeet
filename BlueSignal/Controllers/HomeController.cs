@@ -31,13 +31,14 @@ namespace BlueSignal.Controllers
 
         public string apiKey = BluSignalComman.APIkey;
         WebClientHelp webClientHelp = new WebClientHelp();
+
+        public int AverageVolumn { get; private set; }
+
         [LogonAuthorize]
         public async Task<ActionResult> Index()
         {
             if (Session["SystemUser"] == null)
                 await Auth();
-
-            var data = GetMinutesChartData("SPY");
 
             return await Task.FromResult(View());
         }
@@ -213,64 +214,84 @@ namespace BlueSignal.Controllers
         }
 
 
-        public string GetMarketData(string startDate, string Type, string symbol)
+        public async Task<string> GetMarketData(string startDate, string Type, string symbol)
         {
             try
             {
-                using (WebClient client = new WebClient())
+                //using (WebClient client = new WebClient())
+                //{
+                //    string s = await client.DownloadStringTaskAsync("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol=" + symbol + "&type=" + Type + "&startDate=" + startDate);
+                //    return s.Replace("//", "");
+                //}
+
+                var obj = await GetMinutesChartData(symbol, startDate);
+                if (obj.results != null && obj.results.Any())
                 {
-                    string s = client.DownloadString("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol=" + symbol + "&type=" + Type + "&startDate=" + startDate);
-                    return s.Replace("//", "");
+                    var data = JsonConvert.SerializeObject(obj.results, new JsonSerializerSettings { ContractResolver = new DynamicContractResolver("timestamp,tradingDay") });
+                    return data.Replace("timestamp1", "timestamp").Replace("tradingDay1", "tradingDay").Replace("//", "");
                 }
             }
             catch (WebException ex) //if server is off it will throw exeception and here we need notify user
             {
-            }
 
+            }
             return "Fail";
 
         }
 
-        public JsonResult GetMarketChartData(string startDate, string Type, string symbol)
+        public async Task<JsonResult> GetMarketChartData(string startDate, string Type, string symbol)
         {
             try
             {
                 startDate = BluSignalComman.DateTime9MonthBack;
 
                 if (Type == "weekly")
-                {
                     startDate = BluSignalComman.DateTime9MonthWeeksBack;
-                }
+
 
                 if (Type == "dailySecond" || Type == "dailyBulQuantData" || Type == "dailyBuleFractal" || Type == "dailyBlueNeural")
-                {
                     Type = "daily";
-                }
 
                 Session["DefaultKey"] = symbol;
 
-                using (WebClient client = new WebClient())
+                //using (WebClient client = new WebClient())
+                //{
+                //    string s = client.DownloadString("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol=" + symbol + "&type=" + Type + "&startDate=" + startDate);
+                //    var returnstring = s.Replace("//", "");
+                //    var chartJsonData = Helpers.GetJsonResponse<List<resultsData>>(returnstring, "results");
+                //    var stringtoReturn = chartJsonData.ToList().Select(item => new object[]
+                //    {
+                //       item.tradingDay.ToString(),
+                //       //Convert.ToDecimal(Convert.ToDateTime(item.tradingDay).ToString("yyyyMMddHHmmssfff")),
+                //       Math.Round(Convert.ToDecimal((item.open)),2),
+                //       Math.Round(Convert.ToDecimal((item.high)),2),
+                //       Math.Round(Convert.ToDecimal((item.low)),2),
+                //       Math.Round(Convert.ToDecimal((item.close)),2)
+                //    });
+                //    return Json(stringtoReturn, JsonRequestBehavior.AllowGet);
+                //}
+
+                var obj = await GetMinutesChartData(symbol, startDate);
+                if (obj.results != null && obj.results.Any())
                 {
-                    string s = client.DownloadString("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol=" + symbol + "&type=" + Type + "&startDate=" + startDate);
-                    var returnstring = s.Replace("//", "");
-                    var chartJsonData = Helpers.GetJsonResponse<List<resultsData>>(returnstring, "results");
-                    var stringtoReturn = chartJsonData.ToList().Select(item => new object[]
-                    {
-                       item.tradingDay.ToString(),
-                       //Convert.ToDecimal(Convert.ToDateTime(item.tradingDay).ToString("yyyyMMddHHmmssfff")),
-                       Math.Round(Convert.ToDecimal((item.open)),2),
-                       Math.Round(Convert.ToDecimal((item.high)),2),
-                       Math.Round(Convert.ToDecimal((item.low)),2),
-                       Math.Round(Convert.ToDecimal((item.close)),2)
+                    var stringtoReturn = obj.results.Select(item => new object[] {
+                        item.tradingDay.ToString(),
+                        Math.Round(Convert.ToDecimal((item.open)),2),
+                        Math.Round(Convert.ToDecimal((item.high)),2),
+                        Math.Round(Convert.ToDecimal((item.low)),2),
+                        Math.Round(Convert.ToDecimal((item.close)),2)
                     });
-                    return Json(stringtoReturn, JsonRequestBehavior.AllowGet);
+                    var jsonResult = new JsonResult { Data = stringtoReturn, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = int.MaxValue };
+                    return jsonResult;
                 }
+
             }
             catch (WebException ex) //if server is off it will throw exeception and here we need notify user
             {
             }
             return Json("");
         }
+
         private JsonResult GetNameFromSymbol(string symbol)
         {
             // symbol = "QQQ";
@@ -291,7 +312,6 @@ namespace BlueSignal.Controllers
             startDate = BluSignalComman.DateTime9MonthBack;
             MarketDataViewModel vm = new MarketDataViewModel();
 
-            //var types = new[] { "daily", "weekly", "monthly", "quarterly", "yearly" };
             var result = string.Empty;
             try
             {
@@ -307,10 +327,6 @@ namespace BlueSignal.Controllers
                 if (dddd != null)
                 {
                     vm.SymbolNameData = Convert.ToString(dddd.Data);
-
-
-
-
                 }
 
 
@@ -322,96 +338,123 @@ namespace BlueSignal.Controllers
                     var apiUrl = string.Empty;
 
                     /**DAILY DATA**/
-                    apiUrl = string.Format("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol={0}&type=daily&startDate={1}", vm.Code, startDate);
-                    result = await client.DownloadStringTaskAsync(new System.Uri(apiUrl));
-                    if (!string.IsNullOrEmpty(result))
-                    {
-                        result = result.Replace("//", "");
-                        vm.MarketDataDaily = result;
+                    //apiUrl = string.Format("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol={0}&type=daily&startDate={1}", vm.Code, startDate);
+                    //result = await client.DownloadStringTaskAsync(new Uri(apiUrl));
+                    //if (!string.IsNullOrEmpty(result))
+                    //{
+                    //    result = result.Replace("//", "");
+                    //    vm.MarketDataDaily = result;
 
-
-
-                        var data = JsonConvert.DeserializeObject<Data>(result);
-                        if (data != null && data.results != null && data.results.Any())
-                        {
-
-                            int lastDays = 90;
-                            var maxRexord = data.results.OrderByDescending(a => a.tradingDay).Take(lastDays).Sum(x => Convert.ToSingle(x.volume));
-                            if (maxRexord > 0)
-                            {
-                                vm.AverageVolumn = Convert.ToString(Math.Round((maxRexord / lastDays), 0));
-                            }
-                        }
-
-
-                        vm.ClosingPrice = string.Empty;
-                    }
+                    //    var data = JsonConvert.DeserializeObject<Data>(result);
+                    //    if (data != null && data.results != null && data.results.Any())
+                    //    {
+                    //        int lastDays = 90;
+                    //        var maxRexord = data.results.OrderByDescending(a => a.tradingDay).Take(lastDays).Sum(x => Convert.ToSingle(x.volume));
+                    //        if (maxRexord > 0)
+                    //            vm.AverageVolumn = Convert.ToString(Math.Round((maxRexord / lastDays), 0));
+                    //    }
+                    //    vm.ClosingPrice = string.Empty;
+                    //}
                     /**DAILY DATA**/
 
 
                     /**Weekly DATA**/
-                    apiUrl = string.Format("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol={0}&type=weekly&startDate={1}", vm.Code, startDate);
-                    result = await client.DownloadStringTaskAsync(new System.Uri(apiUrl));
-                    if (!string.IsNullOrEmpty(result))
-                    {
-                        result = result.Replace("//", "");
-                        vm.MarketDataWeekly = result;
-                    }
+                    //apiUrl = string.Format("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol={0}&type=weekly&startDate={1}", vm.Code, startDate);
+                    //result = await client.DownloadStringTaskAsync(new System.Uri(apiUrl));
+                    //if (!string.IsNullOrEmpty(result))
+                    //{
+                    //    result = result.Replace("//", "");
+                    //    vm.MarketDataWeekly = result;
+                    //}
                     /**Weekly DATA**/
 
 
 
                     /**Monthly DATA**/
-                    apiUrl = string.Format("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol={0}&type=monthly&startDate={1}", vm.Code, startDate);
-                    result = await client.DownloadStringTaskAsync(new System.Uri(apiUrl));
-                    if (!string.IsNullOrEmpty(result))
-                    {
-                        result = result.Replace("//", "");
-                        vm.MarketDataMonthly = result;
+                    //apiUrl = string.Format("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol={0}&type=monthly&startDate={1}", vm.Code, startDate);
+                    //result = await client.DownloadStringTaskAsync(new System.Uri(apiUrl));
+                    //if (!string.IsNullOrEmpty(result))
+                    //{
+                    //    result = result.Replace("//", "");
+                    //    vm.MarketDataMonthly = result;
 
-                        var data = JsonConvert.DeserializeObject<Data>(result);
-                        if (data != null && data.results != null && data.results.Any())
-                        {
-                            var maxRexord = data.results.OrderByDescending(a => a.timestamp).First();
-                            if (maxRexord != null)
-                                vm.ClosingPrice = maxRexord.close;
-
-
-
-
-
-
-                        }
-                    }
+                    //    var data = JsonConvert.DeserializeObject<Data>(result);
+                    //    if (data != null && data.results != null && data.results.Any())
+                    //    {
+                    //        var maxRexord = data.results.OrderByDescending(a => a.timestamp).First();
+                    //        if (maxRexord != null)
+                    //            vm.ClosingPrice = maxRexord.close;
+                    //    }
+                    //}
                     /**Monthly DATA**/
 
 
 
                     /**Quarterly DATA**/
-                    apiUrl = string.Format("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol={0}&type=quarterly&startDate={1}", vm.Code, startDate);
-                    result = await client.DownloadStringTaskAsync(new System.Uri(apiUrl));
-                    if (!string.IsNullOrEmpty(result))
-                    {
-                        result = result.Replace("//", "");
-                        vm.MarketDataQuartely = result;
-                    }
+                    //apiUrl = string.Format("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol={0}&type=quarterly&startDate={1}", vm.Code, startDate);
+                    //result = await client.DownloadStringTaskAsync(new System.Uri(apiUrl));
+                    //if (!string.IsNullOrEmpty(result))
+                    //{
+                    //    result = result.Replace("//", "");
+                    //    vm.MarketDataQuartely = result;
+                    //}
                     /**Quarterly DATA**/
 
 
 
                     /**Yearly DATA**/
-                    apiUrl = string.Format("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol={0}&type=yearly&startDate={1}", vm.Code, startDate);
-                    result = await client.DownloadStringTaskAsync(new System.Uri(apiUrl));
-                    if (!string.IsNullOrEmpty(result))
-                    {
-                        result = result.Replace("//", "");
-                        vm.MarketDataYearly = result;
-                    }
+                    //apiUrl = string.Format("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol={0}&type=yearly&startDate={1}", vm.Code, startDate);
+                    //result = await client.DownloadStringTaskAsync(new Uri(apiUrl));
+                    //if (!string.IsNullOrEmpty(result))
+                    //{
+                    //    result = result.Replace("//", "");
+                    //    vm.MarketDataYearly = result;
+                    //}
                     /**Yearly DATA**/
 
-                    var chartJsonData = Helpers.GetJsonResponse<List<resultsData>>(result, "result");
+
+
+
+
+                    /*
+                     * Daily, Monthly, Yearly and Quartely Data
+                     */
+                    var chartResult = await GetMinutesChartData(vm.SymbolName, startDate);
+                    if (chartResult.results != null && chartResult.results.Any())
+                    {
+                        result = JsonConvert.SerializeObject(chartResult.results, new JsonSerializerSettings { ContractResolver = new DynamicContractResolver("timestamp,tradingDay") });
+                        result = result.Replace("timestamp1", "timestamp").Replace("tradingDay1", "tradingDay").Replace("//", "");
+                        int lastDays = 90;
+
+                        var averageVolumn = chartResult.results.OrderByDescending(a => a.tradingDay).Take(lastDays).Sum(x => Convert.ToSingle(x.volume));
+                        if (averageVolumn > 0)
+                            vm.AverageVolumn = Convert.ToString(Math.Round((averageVolumn / lastDays), 0));
+
+                        var maxRexord = chartResult.results.OrderByDescending(a => a.timestamp).FirstOrDefault();
+                        if (maxRexord != null)
+                            vm.ClosingPrice = maxRexord.close;
+
+                        vm.MarketDataDaily = result;
+                        //vm.MarketDataWeekly = result;
+                        //vm.MarketDataMonthly = result;
+                        //vm.MarketDataQuartely = result;
+                        //vm.MarketDataYearly = result;
+                    }
+
+                    //var chartJsonData = Helpers.GetJsonResponse<List<resultsData>>(result, "result");
+                    //var ChartData = new List<ChartDataModel>();
+                    //ChartData.AddRange(chartJsonData.ToList().Select(item => new ChartDataModel()
+                    //{
+                    //    symbol = item.symbol,
+                    //    close = Convert.ToDecimal(item.close),
+                    //    high = Convert.ToDecimal(item.high),
+                    //    low = Convert.ToDecimal(item.low),
+                    //    open = Convert.ToDecimal(item.open),
+                    //    TradingDayTimeStamp = Convert.ToDateTime(item.tradingDay).ToString("yyyyMMddHHmmssfff"),
+                    //}));
+
                     var ChartData = new List<ChartDataModel>();
-                    ChartData.AddRange(chartJsonData.ToList().Select(item => new ChartDataModel()
+                    ChartData.AddRange(chartResult.results.Select(item => new ChartDataModel()
                     {
                         symbol = item.symbol,
                         close = Convert.ToDecimal(item.close),
@@ -430,9 +473,8 @@ namespace BlueSignal.Controllers
             {
                 throw ex;
             }
-
-            return Json(vm, JsonRequestBehavior.AllowGet);
-
+            var jsonResult = new JsonResult { Data = vm, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = int.MaxValue };
+            return jsonResult;
         }
 
 
@@ -808,20 +850,52 @@ namespace BlueSignal.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetMarketChartDataOnLoad(string startDate, string symbol)
+        public async Task<JsonResult> GetMarketChartDataOnLoad(string startDate, string symbol)
         {
             //For Daily
             startDate = BluSignalComman.DateTime9MonthBack;
 
             Session["DefaultKey"] = symbol;
 
-            using (WebClient client = new WebClient())
-            {
-                string s = client.DownloadString("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol=" + symbol + "&type=daily&startDate=" + startDate);
-                var returnstring = s.Replace("//", "");
-                var chartJsonData = Helpers.GetJsonResponse<List<resultsData>>(returnstring, "results");
+            //using (WebClient client = new WebClient())
+            //{
+            //    string s = client.DownloadString("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol=" + symbol + "&type=daily&startDate=" + startDate);
+            //    var returnstring = s.Replace("//", "");
+            //    var chartJsonData = Helpers.GetJsonResponse<List<resultsData>>(returnstring, "results");
 
-                var dailyData = chartJsonData.Select(item => new object[]
+            //    var dailyData = chartJsonData.Select(item => new object[]
+            //    {
+            //           item.tradingDay.ToString(),
+            //           Math.Round(Convert.ToDecimal((item.open)),2),
+            //           Math.Round(Convert.ToDecimal((item.high)),2),
+            //           Math.Round(Convert.ToDecimal((item.low)),2),
+            //           Math.Round(Convert.ToDecimal((item.close)),2)
+            //    });
+
+            //    //For Weekly
+            //    startDate = BluSignalComman.DateTime9MonthWeeksBack;
+
+            //    s = client.DownloadString("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol=" + symbol + "&type=weekly&startDate=" + startDate);
+            //    returnstring = s.Replace("//", "");
+            //    chartJsonData = Helpers.GetJsonResponse<List<resultsData>>(returnstring, "results");
+
+            //    var weeklyData = chartJsonData.Select(item => new object[]
+            //    {
+            //           item.tradingDay.ToString(),
+            //           Math.Round(Convert.ToDecimal((item.open)),2),
+            //           Math.Round(Convert.ToDecimal((item.high)),2),
+            //           Math.Round(Convert.ToDecimal((item.low)),2),
+            //           Math.Round(Convert.ToDecimal((item.close)),2)
+            //    });
+
+            //    var jsonToReturn = new { dailyData, weeklyData };
+            //    return Json(jsonToReturn, JsonRequestBehavior.AllowGet);
+            //}
+
+            var chartResult = await GetMinutesChartData(symbol, startDate);
+            if (chartResult.results != null && chartResult.results.Any())
+            {
+                var dailyData = chartResult.results.Select(item => new object[]
                 {
                        item.tradingDay.ToString(),
                        Math.Round(Convert.ToDecimal((item.open)),2),
@@ -833,11 +907,7 @@ namespace BlueSignal.Controllers
                 //For Weekly
                 startDate = BluSignalComman.DateTime9MonthWeeksBack;
 
-                s = client.DownloadString("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol=" + symbol + "&type=weekly&startDate=" + startDate);
-                returnstring = s.Replace("//", "");
-                chartJsonData = Helpers.GetJsonResponse<List<resultsData>>(returnstring, "results");
-
-                var weeklyData = chartJsonData.Select(item => new object[]
+                var weeklyData = chartResult.results.Select(item => new object[]
                 {
                        item.tradingDay.ToString(),
                        Math.Round(Convert.ToDecimal((item.open)),2),
@@ -847,30 +917,43 @@ namespace BlueSignal.Controllers
                 });
 
                 var jsonToReturn = new { dailyData, weeklyData };
-                return Json(jsonToReturn, JsonRequestBehavior.AllowGet);
+                var jsonResult = new JsonResult { Data = jsonToReturn, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = int.MaxValue };
+                return jsonResult;
             }
+
+            return Json("Fail");
         }
 
-        private async Task<string> GetMinutesChartData(string type)
+        private async Task<Data> GetMinutesChartData(string symbol, string startDate, string endDate = "")
         {
+            var obj = new Data();
             try
             {
-                var pData = new LoggingData { param1 = string.IsNullOrEmpty(type) ? "SPY" : type };
+                var pData = new LoggingData { param1 = string.IsNullOrEmpty(symbol) ? "SPY" : symbol };
+
+                if (!string.IsNullOrEmpty(startDate))
+                    pData.param4 = startDate;
+
+                if (!string.IsNullOrEmpty(endDate))
+                    pData.param5 = endDate;
+
                 var client = new HttpClient();
                 var url = $"{ApiBaseUrl}{ApiActions.chartData}";
                 var data = (await client.PostAsync(url, pData, new JsonMediaTypeFormatter())).Content.ReadAsAsync<IEnumerable<LoggingData>>().Result;
                 if (data != null && data.Any())
                 {
-                    var obj = new MarketDataResult();
                     obj.status = new status { code = "200", message = "success" };
-                    var list = new List<results>();
+                    var list = new List<resultsData>();
                     foreach (var item in data)
                     {
-                        list.Add(new results
+                        var dateValue = DateTime.Parse(item.param4);
+                        list.Add(new resultsData
                         {
-                            symbol = type,
-                            timestamp = item.param4,
-                            tradingDay = item.param5,
+                            symbol = symbol,
+                            timestamp1 = item.param4,
+                            tradingDay1 = item.param5,
+                            timestamp = dateValue,
+                            tradingDay = dateValue.Date,
                             open = item.param6,
                             high = item.param7,
                             low = item.param8,
@@ -881,17 +964,13 @@ namespace BlueSignal.Controllers
                     }
 
                     obj.results = list;
-
-                    var result = JsonConvert.SerializeObject(obj);
-                    return result;
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
-            return string.Empty;
+            return obj;
         }
     }
 
@@ -910,28 +989,17 @@ namespace BlueSignal.Controllers
     }
 
 
-    public class MarketDataResult
-    {
-        public status status { get; set; }
-        public IEnumerable<results> results { get; set; }
-    }
 
-    public class status
-    {
-        public string code { get; set; }
-        public string message { get; set; }
-    }
-
-    public class results
-    {
-        public string symbol { get; set; }
-        public string timestamp { get; set; }
-        public string tradingDay { get; set; }
-        public string open { get; set; }
-        public string high { get; set; }
-        public string low { get; set; }
-        public string close { get; set; }
-        public string volume { get; set; }
-        public string openInterest { get; set; }
-    }
+    //public class results
+    //{
+    //    public string symbol { get; set; }
+    //    public string timestamp { get; set; }
+    //    public string tradingDay { get; set; }
+    //    public string open { get; set; }
+    //    public string high { get; set; }
+    //    public string low { get; set; }
+    //    public string close { get; set; }
+    //    public string volume { get; set; }
+    //    public string openInterest { get; set; }
+    //}
 }

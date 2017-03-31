@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,5 +36,32 @@ namespace BlueSignal.Common
         {
             return obj.HasValue ? obj.Value.ToString("d") : string.Empty;
         }
+    }
+
+    public class DynamicContractResolver : DefaultContractResolver
+    {
+        private readonly List<string> _propertiesNotToSerialize;
+        public DynamicContractResolver(string propertiesNotToSerialize = "")
+        {
+            var list = !string.IsNullOrEmpty(propertiesNotToSerialize) ? propertiesNotToSerialize.Split(',').ToList() : new List<string>();
+            _propertiesNotToSerialize = list;
+        }
+
+        protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
+        {
+            var properties = base.CreateProperties(type, memberSerialization);
+
+            //// only serializer properties that start with the specified character
+            //properties =
+            //  properties.Where(p => p.PropertyName.StartsWith(_startingWithChar.ToString())).ToList();
+
+            // only serializer properties that start with the specified character
+            properties = properties.Where(p => !_propertiesNotToSerialize.Contains(p.PropertyName.ToLower())).ToList();
+
+            return properties;
+        }
+
+
+
     }
 }

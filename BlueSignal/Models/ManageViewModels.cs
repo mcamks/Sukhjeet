@@ -112,7 +112,13 @@ namespace BlueSignal.Models
 
     public class Data
     {
-        public List<resultsData> results { get; set; }
+        public status status { get; set; }
+        public IEnumerable<resultsData> results { get; set; }
+    }
+    public class status
+    {
+        public string code { get; set; }
+        public string message { get; set; }
     }
 
     public class resultsData
@@ -126,6 +132,8 @@ namespace BlueSignal.Models
         public string close { get; set; }
         public string volume { get; set; }
         public string openInterest { get; set; }
+        public string timestamp1 { get; set; }
+        public string tradingDay1 { get; set; }
     }
 
     public class ChartDataModel
