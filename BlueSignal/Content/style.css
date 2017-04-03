@@ -427,7 +427,7 @@ hr{border-color:#d1d1d1; }
 .date_time .time i{margin-right:6px;}
 .date_time .time sub{color:#a9b2c2;}
 
-.sidemenu{float:left; width:46px; position:fixed; z-index:99; margin-top: 116px;}
+.sidemenu{float:left; width:46px; position:fixed; z-index:99; margin-top: 172px;}
 .sidemenu ul{list-style:none; padding:0; margin:0;}
 .sidemenu ul li{float:left; border-bottom:1px solid #e7e4e4;}
 .sidemenu ul li a{color:#707070; width:46px; text-align:center; padding:10px 0; display:block; font-size:18px; height:41px;}
@@ -457,9 +457,9 @@ hr{border-color:#d1d1d1; }
     width: 100% !important;
 }
 
-    .dashboard_style{background: #fff none repeat scroll 0 0; border-bottom:4px solid #1E6EFF; height: 116px; margin-top: 0; overflow:hidden;}
+    .dashboard_style{background: #fff none repeat scroll 0 0; border-bottom:4px solid #1E6EFF; height: 176px; margin-top: 0; }
         .dashboard_style .panel-body {
-            height: 110px;
+            height: 172px;
         }
          .dashboard_style .panel {
             margin:0px !important; border:none !important; box-shadow:none !important;
@@ -467,3 +467,8 @@ hr{border-color:#d1d1d1; }
           .dashboard_style .panel-group {
             margin:0px !important; 
         }
+.sprite_icon {
+     background: url('../images/sprite_1.png') no-repeat center top;padding:4px 0px !important;
+     height:32px !important;
+}
+.sidemenu ul li a:hover.sprite_icon:hover{ background: url('../images/sprite_1.png') no-repeat bottom center #1f6df7;}

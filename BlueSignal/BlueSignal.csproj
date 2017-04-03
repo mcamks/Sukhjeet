@@ -271,6 +271,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\1.png" />
+    <Content Include="images\1a.png" />
+    <Content Include="images\2.png" />
+    <Content Include="images\2a.png" />
+    <Content Include="images\3.png" />
+    <Content Include="images\3a.png" />
     <Content Include="images\activities.png" />
     <Content Include="images\ajax-loader-bar.gif" />
     <Content Include="images\favicon.png" />
@@ -313,6 +319,7 @@
     <Content Include="images\short_term_icon.png" />
     <Content Include="images\sideicon.jpg" />
     <Content Include="images\sidemenu_bg.png" />
+    <Content Include="images\sprite_1.png" />
     <Content Include="images\trends.png" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
