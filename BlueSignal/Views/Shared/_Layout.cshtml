@@ -263,6 +263,8 @@
                 var tArray = time.split(' ');
                 $("#divTimeOnly").html('<i class="fa fa-clock-o" aria-hidden="true"></i>' + tArray[0] + '<sub>' + tArray[1] + '</sub>');
             },1000);
+
+            setInterval(RefreshUserSession,10000);
         });
 
         function formatAMPM(date) {
@@ -280,6 +282,25 @@
         function SetActiveClass(item) {
             $('.remove').removeClass('active');
             $('.' + item).addClass('active');
+        }
+
+        function RefreshUserSession()
+        {
+            $.ajax({
+                type: "POST",
+                url: "/Shared/SessionAliveHandler.ashx",
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: null,
+                success: function (response) {
+
+                },
+                error: function (msg, error) {
+                    console.log(msg);
+                    console.log(error);
+                }
+            });
         }
     </script>
 </body>

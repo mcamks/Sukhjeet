@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -14,7 +13,6 @@ using BlueSignalCore.Bal;
 using BlueSignalCore.Dto;
 using BlueSignalCore.Models;
 using BluSignalHelpMethod;
-//using Comman.DBAccess;
 using Newtonsoft.Json;
 using System.Net.Http.Formatting;
 
@@ -972,6 +970,14 @@ namespace BlueSignal.Controllers
             }
             return obj;
         }
+
+
+        public JsonResult RefreshSessions()
+        {
+            if(Session["SystemUser"] !=null)
+                Session["SystemUser"] = Session["SystemUser"];
+            return Json("");
+        }
     }
 
     public class LoggingData
@@ -987,8 +993,7 @@ namespace BlueSignal.Controllers
         public string param9 { get; set; }
         public string param10 { get; set; }
     }
-
-
+    
 
     //public class results
     //{
