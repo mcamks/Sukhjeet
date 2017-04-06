@@ -10,15 +10,11 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/style.css" rel="stylesheet" />
-
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.bootstrap.min.css">
-
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.0/css/select.dataTables.min.css">
-
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet" type="text/css">
     <script src="~/Scripts/jquery-3.1.1.min.js"></script>
@@ -26,9 +22,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/common")
-
     <script src="~/Scripts/tv.js"></script>
-
 
 </head>
 <body>
@@ -47,9 +41,7 @@
                         <a href="http://www.blusignalsystems.com" data-toggle="tooltip" data-placement="bottom" title="BluSignals Website" target="_blank" class="navbar-brand"><img src="~/images/blu_logo.png" /></a>
                         @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
                     </div>
-
                     <div class="active_page">
-
 
                         @if (!string.IsNullOrEmpty(Request.QueryString["p"]) && !string.IsNullOrEmpty(Request.QueryString["c"]))
                         {
@@ -77,30 +69,24 @@
                             <mu id="settabe" onclick="SetActiveClass('Dashboard')">Dashboard</mu>
                         }
 
-
                     </div>
-
                     @{
                         DateTime eastern = DateTime.UtcNow.AddHours(-5);
                         var time = eastern.ToString("hh:mm tt");
                         var tArr = time.Split(' ');
                     }
 
-
                     <div class="date_time">
-                        <div class="date"><i class="fa fa-calendar" aria-hidden="true"></i>@eastern.ToString("MMM - dd - yyyy")</div>
-                        <div class="time"><i class="fa fa-clock-o" aria-hidden="true"></i>@tArr[0]<sub>@tArr[1]</sub></div>
+                        <div class="date" id="divDateOnly"><i class="fa fa-calendar" aria-hidden="true"></i>@eastern.ToString("MMM - dd - yyyy")</div>
+                        <div class="time" id="divTimeOnly"><i class="fa fa-clock-o" aria-hidden="true"></i>@tArr[0]<sub>@tArr[1]</sub></div>
                     </div>
-
                     @*<div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li><input type="button" class="btn btn-primary" value="Dashboard" /></li>
 
                         </ul>*@
 
-
                     @*<div class="current_date">eastern.ToString("MMM - dd - yyyy")</div>*@
-
                     @* @Html.Partial("_LoginPartial")*@
                     @*</div>*@
                 </div>
@@ -114,7 +100,6 @@
 
                         }
     }
-
     <div class="col-sm-12 dashboard_style">
         <div class="panel-group accordion" style="margin-bottom:5px; margin-top:5px;">
             <div class="panel">
@@ -131,29 +116,29 @@
                                 </a>
                             </span>*@
                         <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js">
-                                {
-                                    "symbols": [
-                                      {
-                                          "description": "The Standard&Poor's Index",
-                                          "proName": "INDEX:SPX"
-                                      },
-                                      {
-                                          "description": "Nasdaq 100 Index",
-                                          "proName": "INDEX:IUXX"
-                                      },
-                                      {
-                                          "description": "Euro Fx/U.S. Dollar",
-                                          "proName": "FX:EURUSD"
-                                      },
-                                      {
-                                          "description": "Light Crude Oil Futures",
-                                          "proName": "NYMEX:CL1!",
-                                          "title": "Crude Oil"
-                                      }
-                                    ],
-                                    "locale": "en",
-                                    "timeframe": "1d"
-                                }
+                            {
+                                "symbols": [
+                                  {
+                                      "description": "The Standard&Poor's Index",
+                                      "proName": "INDEX:SPX"
+                                  },
+                                  {
+                                      "description": "Gold",
+                                      "proName": "TVC:GOLD"
+                                  },
+                                  {
+                                      "description": "Euro Fx/U.S. Dollar",
+                                      "proName": "FX:EURUSD"
+                                  },
+                                  {
+                                      "description": "Light Crude Oil Futures",
+                                      "proName": "NYMEX:CL1!",
+                                      "title": "Crude Oil"
+                                  }
+                                ],
+                                "locale": "en",
+                                "timeframe": "1d"
+                            }
                         </script>
                         <!-- TradingView Widget END -->
                     </div>
@@ -161,7 +146,6 @@
             </div>
         </div>
     </div>
-
     <div class="sidemenu">
         <ul>
             <li class="remove Dashboard"><a href="@Url.Action("Dashboard","Home",new { p = "Dashboard",c="fa-tachometer" })" data-toggle="tooltip" title="Dashboard" data-placement="right"><i class="fa fa-tachometer" aria-hidden="true"></i></a></li>
@@ -176,8 +160,6 @@
                 </a>
             </li>
             <li class="remove Help"><a href="@Url.Action("Index","Help",new { p = "Help",c= "fa-question" })" data-toggle="tooltip" title="Help" data-placement="right"><i class="fa fa-question" aria-hidden="true"></i></a></li>
-
-
 
             @if (HttpContextSessionWrapperExtension.SessionUser != null && HttpContextSessionWrapperExtension.SessionUser.IsAdminUser)
             {
@@ -198,7 +180,6 @@
     <div class="content">
         <div class="col-sm-12">
             @RenderBody()
-
             @{
                 if (HttpContextSessionWrapperExtension.SessionUser != null)
                 {
@@ -228,9 +209,7 @@
             </div>
         </div>
     </div>
-
     <div id="ModelBackGround_Custom" class="modal-backdrop fade in" style="display: none;"></div>
-
     <div class="modal fade" id="login_window" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm custom_width">
             <div class="modal-content">
@@ -239,29 +218,22 @@
                     <h4 class="modal-title">Change Password</h4>
                 </div>
                 <div id="_loginBSPartial" class="modal-body">
-                  
 
 
-                     @{Html.RenderPartial("~/Views/Home/_BSLogin.cshtml", new SetPassowrdModel() { IsSuccess = 0 });}
-
+                    @{Html.RenderPartial("~/Views/Home/_BSLogin.cshtml", new SetPassowrdModel() { IsSuccess = 0 });}
 
                 </div>
             </div>
         </div>
     </div>
-
     <!--loader-->
 
 
-
-
     @RenderSection("scripts", required: false)
-
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
         @Scripts.Render("~/bundles/Customer")
     }
-
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js">
     </script>
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js">
@@ -271,31 +243,65 @@
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.0/js/responsive.bootstrap.min.js">
 
     </script>
-
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
     @*<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/dataTables.editor.min.js")"></script>*@
     <script src="https://code.highcharts.com/stock/highstock.js"></script>
     <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
-
     <script>
         $(document).ready(function () {
+            var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             $('[data-toggle="tooltip"]').tooltip();
 
             $('#settabe').click();
+
+            setInterval(function() {
+                var d = new Date();
+                var monthName = monthNames[d.getMonth()];
+                var day = d.getDate();
+                var year = d.getFullYear();
+                var time = formatAMPM(d);
+                var tArray = time.split(' ');
+                $("#divTimeOnly").html('<i class="fa fa-clock-o" aria-hidden="true"></i>' + tArray[0] + '<sub>' + tArray[1] + '</sub>');
+            },1000);
+
+            setInterval(RefreshUserSession,10000);
         });
 
-
+        function formatAMPM(date) {
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var ampm = hours >= 12 ? 'pm' : 'am';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            hours = hours < 10 ? '0'+ hours : hours;
+            minutes = minutes < 10 ? '0'+ minutes : minutes;
+            var strTime = hours + ':' + minutes + ' ' + ampm;
+            return strTime;
+        }
 
         function SetActiveClass(item) {
             $('.remove').removeClass('active');
             $('.' + item).addClass('active');
         }
 
+        function RefreshUserSession()
+        {
+            $.ajax({
+                type: "POST",
+                url: "/Shared/SessionAliveHandler.ashx",
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: null,
+                success: function (response) {
 
-
-
-
+                },
+                error: function (msg, error) {
+                    //console.log(msg);
+                    //console.log(error);
+                }
+            });
+        }
     </script>
 </body>
-
 </html>

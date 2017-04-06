@@ -19,9 +19,9 @@ http://marketdata.websol.barchart.com/getQuote.json?key=40ae86537412ad8042cbbaca
         public static string APIkey { get { return "40ae86537412ad8042cbbaca14906020"; } }
         public static DateTime HistoricalDailyDataStartsWithDate { get { return DateTime.Now.AddMonths(-9); } }
 
-        public static string DateTime9MonthBack { get { return DateTime.Now.AddMonths(-9).ToString("yyyyMMdd000000"); } }
+        public static string DateTime9MonthBack { get { return DateTime.Now.AddMonths(-6).ToString("yyyyMMdd000000"); } }
 
-        public static string DateTime9MonthWeeksBack { get { return DateTime.Now.AddMonths(-(9 * 43)).ToString("yyyyMMdd000000"); } }
+        public static string DateTime9MonthWeeksBack { get { return DateTime.Now.AddMonths(-(6 * 43)).ToString("yyyyMMdd000000"); } }
 
     }
 }
