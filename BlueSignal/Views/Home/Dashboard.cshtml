@@ -25,6 +25,7 @@
     border-top: 5px solid #1e6eff !important
     }
 </style>
+
 <div class="dashboard blue_heading_panel custom_panel ">@*blue_border*@
     <div class="row">
         
@@ -32,7 +33,7 @@
             <div class="panel-group accordion">
                 <div class="panel">
                     <div class="panel-heading">
-                        <h4 class="panel-title"> <i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp;Market Overview / Quote Board Widget</h4>
+                        <h4 class="panel-title"> <i class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp;Market Overview</h4>
                     </div>
                     <div id="collapse" class="panel-collapse collapse in">
                         <div class="panel-body">
@@ -182,7 +183,7 @@
             <div class="panel-group accordion">
                 <div class="panel">
                     <div class="panel-heading">
-                        <h4 class="panel-title"> <i class="fa fa-area-chart" aria-hidden="true"></i> &nbsp;Hotlists Widget</h4>
+                        <h4 class="panel-title"> <i class="fa fa-area-chart" aria-hidden="true"></i> &nbsp;Hot Lists</h4>
                     </div>
                     <div id="collapse2" class="panel-collapse collapse in">
                         <div class="panel-body">
@@ -257,7 +258,7 @@
                                 });
                             </script>
                             <!-- TradingView Widget END -->
-
+                            <span id="sss" ></span>
                         </div>
                     </div>
                 </div>
@@ -292,3 +293,19 @@
 
 
 </div>
+@*<script type="text/javascript">
+    $(document).ready(
+
+    function ()
+    {
+       // debugger;
+        var aa = $(":contains('Quotes by')") ;
+        $("#tradingview_2c083-wrapper div").eq(2).hide();
+      //  $(aa).parent().parent().hide();
+      
+        alert('hello');
+      //  $($($(aa)[16]).parent()[0]).hide();
+    }
+        );
+
+</script>*@

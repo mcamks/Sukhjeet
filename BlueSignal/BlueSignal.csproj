@@ -319,6 +319,9 @@
     <Content Include="images\short_term_icon.png" />
     <Content Include="images\sideicon.jpg" />
     <Content Include="images\sidemenu_bg.png" />
+    <Content Include="images\sprite1.png" />
+    <Content Include="images\sprite2.png" />
+    <Content Include="images\sprite3.png" />
     <Content Include="images\sprite_1.png" />
     <Content Include="images\trends.png" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
