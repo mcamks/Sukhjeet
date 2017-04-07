@@ -4,6 +4,7 @@ using System.Web.Routing;
 using BlueSignalCore.Bal;
 using BlueSignalCore.Models;
 using System.Configuration;
+using System.IO;
 
 namespace BlueSignal.Controllers
 {
@@ -78,6 +79,24 @@ namespace BlueSignal.Controllers
                                "/account/login", false);
                     }
                 }
+            }
+        }
+
+
+        public string RenderPartialViewToStringBase(string viewName, object model)
+        {
+            if (string.IsNullOrEmpty(viewName))
+                viewName = ControllerContext.RouteData.GetRequiredString("action");
+
+            ViewData.Model = model;
+
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
+                var viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+
+                return sw.GetStringBuilder().ToString();
             }
         }
     }
