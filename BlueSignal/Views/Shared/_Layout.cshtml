@@ -168,7 +168,23 @@
                     <a href="@Url.Action("Detail","Home",new { p = "Detail",c= "fa-info-circle" })"  data-toggle="tooltip" title="Detail" data-placement="right"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 
                 </li>*@
-            <li class="remove credential"><a href="#login_window" data-toggle="modal" title="Login" data-placement="right"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+            <li class="remove credential dropdown">
+                <div class="btn-group">
+                    <a href="#" class="dropbtn dropdown-toggle">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </a>
+                        <ul class="dropdown-content">
+                            <li>
+                                <a href="#">User Name:</a>
+                            </li>
+                            <li>
+                                <a href="#">Account</a></li>
+                            <li><a href="#">Website</a></li>
+                            <li><a href="#">Logout</a></li>
+</ul>
+                   
+                </div>
+            </li>
         </ul>
     </div>
     <div class="content">
