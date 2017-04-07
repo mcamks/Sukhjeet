@@ -103,7 +103,7 @@
                         <h4 class="panel-title"> <i class="fa fa-newspaper-o" aria-hidden="true"></i> &nbsp;Ticker Widget </h4>
                     </div>*@
                 <div id="Div1" class="panel-collapse collapse in">
-                    <div class="panel-body">
+                    <div class="panel-body trading_view">
                         @*<img src="~/images/graph3.jpg" />*@
                         <!-- TradingView Widget BEGIN -->
                         @*<span id="tradingview-copyright">
@@ -145,9 +145,9 @@
     <div class="sidemenu">
         <ul>
             <li class="remove Dashboard"><a href="@Url.Action("Dashboard","Home",new { p = "Dashboard",c="fa-tachometer" })" data-toggle="tooltip" title="Dashboard" data-placement="right"><i class="fa fa-tachometer" aria-hidden="true"></i></a></li>
-            <li class="remove Charts"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart" })" data-toggle="tooltip" title="Charts" data-placement="right" class="sprite_icon1"></a></li>
-            <li class="remove Charts"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart" })" data-toggle="tooltip" title="Charts" data-placement="right" class="sprite_icon2"></a></li>
-            <li class="remove Charts"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart" })" data-toggle="tooltip" title="Charts" data-placement="right" class="sprite_icon3"></a></li>
+            <li class="remove Charts"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart" })" data-toggle="tooltip" title="Charts" data-placement="right"></a></li>
+            <li class="remove Charts2"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart" })" data-toggle="tooltip" title="Charts" data-placement="right"></a></li>
+            <li class="remove Charts3"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart" })" data-toggle="tooltip" title="Charts" data-placement="right"></a></li>
             <li class="remove Settings"><a href="@Url.Action("Index","Home",new { p = "Settings",c= "fa-cogs" })" data-toggle="tooltip" title="Systems" data-placement="right"><i class="fa fa-cogs" aria-hidden="true"></i></a></li>
             <li class="remove Research">
                 <a href="@Url.Action("Research","Home",new { p = "Research",c= "Research" })" data-toggle="tooltip" title="Research" data-placement="right">
@@ -184,7 +184,7 @@
                                     email = session.user_email;
                                 }
                             }
-                            <p>User Name: @email</p>
+                            <a href="#">User Name:<br />@email</a>
                         </li>
                         <li>
                             <a href="https://www.blusignalsystems.com/myaccount/">Account</a>
