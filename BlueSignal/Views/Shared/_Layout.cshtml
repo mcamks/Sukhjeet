@@ -1,4 +1,5 @@
-﻿@using BlueSignal.Controllers;
+﻿@using BlueSignalCore.Models
+@using BlueSignal.Controllers;
 @using BlueSignal.Models
 <!DOCTYPE html>
 <html>
@@ -170,19 +171,27 @@
                 </li>*@
             <li class="remove credential dropdown">
                 <div class="btn-group">
-                    <a href="#" class="dropbtn dropdown-toggle">
+                    <a href="#login_window" data-toggle="modal" title="Login" data-placement="right" class="dropbtn dropdown-toggle">
                         <i class="fa fa-user" aria-hidden="true"></i>
                     </a>
-                        <ul class="dropdown-content">
-                            <li>
-                                <a href="#">User Name:</a>
-                            </li>
-                            <li>
-                                <a href="#">Account</a></li>
-                            <li><a href="#">Website</a></li>
-                            <li><a href="#">Logout</a></li>
-</ul>
-                   
+                    <ul class="dropdown-content">
+                        <li>
+                            @{
+                                var email = string.Empty;
+                                if (Session["SystemUser"] != null)
+                                {
+                                    var session = Session["SystemUser"] as WP_User;
+                                    email = session.user_email;
+                                }
+                            }
+                            <p>User Name: @email</p>
+                        </li>
+                        <li>
+                            <a href="https://www.blusignalsystems.com/myaccount/">Account</a>
+                        </li>
+                        <li><a href="http://dashboard.blusignals.com/home/Dashboard" target="_blank">Website</a></li>
+                        <li><a href="@Url.Action("LogOff","Home")">Logout</a></li>
+                    </ul>
                 </div>
             </li>
         </ul>
@@ -234,7 +243,6 @@
         </div>
     </div>
     <!--loader-->
-
     @RenderSection("scripts", required: false)
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
@@ -272,8 +280,8 @@
 
             setInterval(RefreshUserSession,10000);
 
-            var isCurrentSessionNull = @Session["firstTimeCheck"];
-            if(isCurrentSessionNull !=null && isCurrentSessionNull == "1")
+            var isCurrentSessionNull = @Session["firstTimeCheck"] !=null ? @Session["firstTimeCheck"] : "0";
+            if(isCurrentSessionNull == "1")
                 $("#login_window").modal("show");
             else
                 $("#login_window").modal("hide");
