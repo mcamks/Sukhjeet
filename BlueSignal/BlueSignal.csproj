@@ -350,6 +350,7 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\gruppo-regular-webfont.woff" />
     <Content Include="fonts\gruppo-regular-webfont.woff2" />
+    <None Include="Properties\PublishProfiles\aj.pubxml" />
     <None Include="Properties\PublishProfiles\BluSignalPublishFile.pubxml" />
     <None Include="Properties\PublishProfiles\BS.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />

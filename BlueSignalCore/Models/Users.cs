@@ -20,6 +20,8 @@ namespace BlueSignalCore.Models
 
         public string PhoneNumber { get; set; }
 
+        //public string Url { get; set; } = "http://dashboard.blusignals.com/login";
+
         public bool PhoneNumberConfirmed { get; set; }
 
         public bool LockoutEnabled { get; set; }
