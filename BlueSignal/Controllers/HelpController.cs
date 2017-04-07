@@ -7,6 +7,7 @@ namespace BlueSignal.Controllers
         // GET: Help
         public ActionResult Index()
         {
+            Session["ActiveCssClass"] = "Help";
             return View();
         }
     }
