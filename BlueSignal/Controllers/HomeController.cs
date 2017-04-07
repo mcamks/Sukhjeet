@@ -222,7 +222,8 @@ namespace BlueSignal.Controllers
                 //    return s.Replace("//", "");
                 //}
 
-                var obj = await GetMinutesChartData(symbol, startDate);
+                var endDate = BluSignalComman.EndDate;
+                var obj = await GetLoggingData(symbol, startDate, endDate, Type);
                 if (obj.results != null && obj.results.Any())
                 {
                     var data = JsonConvert.SerializeObject(obj.results, new JsonSerializerSettings { ContractResolver = new DynamicContractResolver("timestamp,tradingDay") });
@@ -242,6 +243,7 @@ namespace BlueSignal.Controllers
             try
             {
                 startDate = BluSignalComman.DateTime9MonthBack;
+                var endDate = BluSignalComman.EndDate;
 
                 if (Type == "weekly")
                     startDate = BluSignalComman.DateTime9MonthWeeksBack;
@@ -269,7 +271,7 @@ namespace BlueSignal.Controllers
                 //    return Json(stringtoReturn, JsonRequestBehavior.AllowGet);
                 //}
 
-                var obj = await GetMinutesChartData(symbol, startDate);
+                var obj = await GetLoggingData(symbol, startDate, endDate, Type);
                 if (obj.results != null && obj.results.Any())
                 {
                     var stringtoReturn = obj.results.Select(item => new object[] {
@@ -282,7 +284,6 @@ namespace BlueSignal.Controllers
                     var jsonResult = new JsonResult { Data = stringtoReturn, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = int.MaxValue };
                     return jsonResult;
                 }
-
             }
             catch (WebException ex) //if server is off it will throw exeception and here we need notify user
             {
@@ -335,6 +336,7 @@ namespace BlueSignal.Controllers
                 {
                     var apiUrl = string.Empty;
 
+                    #region Commented Code
                     /**DAILY DATA**/
                     //apiUrl = string.Format("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol={0}&type=daily&startDate={1}", vm.Code, startDate);
                     //result = await client.DownloadStringTaskAsync(new Uri(apiUrl));
@@ -409,35 +411,32 @@ namespace BlueSignal.Controllers
                     //    vm.MarketDataYearly = result;
                     //}
                     /**Yearly DATA**/
+                    #endregion
 
+                    ///*
+                    // * Daily, Monthly, Yearly and Quartely Data
+                    // */
+                    //var chartResult = await GetMinutesChartData(vm.SymbolName, startDate);
+                    //if (chartResult.results != null && chartResult.results.Any())
+                    //{
+                    //    result = JsonConvert.SerializeObject(chartResult.results, new JsonSerializerSettings { ContractResolver = new DynamicContractResolver("timestamp,tradingDay") });
+                    //    result = result.Replace("timestamp1", "timestamp").Replace("tradingDay1", "tradingDay").Replace("//", "");
+                    //    int lastDays = 90;
 
+                    //    var averageVolumn = chartResult.results.OrderByDescending(a => a.tradingDay).Take(lastDays).Sum(x => Convert.ToSingle(x.volume));
+                    //    if (averageVolumn > 0)
+                    //        vm.AverageVolumn = Convert.ToString(Math.Round((averageVolumn / lastDays), 0));
 
+                    //    var maxRexord = chartResult.results.OrderByDescending(a => a.timestamp).FirstOrDefault();
+                    //    if (maxRexord != null)
+                    //        vm.ClosingPrice = maxRexord.close;
 
-
-                    /*
-                     * Daily, Monthly, Yearly and Quartely Data
-                     */
-                    var chartResult = await GetMinutesChartData(vm.SymbolName, startDate);
-                    if (chartResult.results != null && chartResult.results.Any())
-                    {
-                        result = JsonConvert.SerializeObject(chartResult.results, new JsonSerializerSettings { ContractResolver = new DynamicContractResolver("timestamp,tradingDay") });
-                        result = result.Replace("timestamp1", "timestamp").Replace("tradingDay1", "tradingDay").Replace("//", "");
-                        int lastDays = 90;
-
-                        var averageVolumn = chartResult.results.OrderByDescending(a => a.tradingDay).Take(lastDays).Sum(x => Convert.ToSingle(x.volume));
-                        if (averageVolumn > 0)
-                            vm.AverageVolumn = Convert.ToString(Math.Round((averageVolumn / lastDays), 0));
-
-                        var maxRexord = chartResult.results.OrderByDescending(a => a.timestamp).FirstOrDefault();
-                        if (maxRexord != null)
-                            vm.ClosingPrice = maxRexord.close;
-
-                        vm.MarketDataDaily = result;
-                        //vm.MarketDataWeekly = result;
-                        //vm.MarketDataMonthly = result;
-                        //vm.MarketDataQuartely = result;
-                        //vm.MarketDataYearly = result;
-                    }
+                    //    vm.MarketDataDaily = result;
+                    //    //vm.MarketDataWeekly = result;
+                    //    //vm.MarketDataMonthly = result;
+                    //    //vm.MarketDataQuartely = result;
+                    //    //vm.MarketDataYearly = result;
+                    //}
 
                     //var chartJsonData = Helpers.GetJsonResponse<List<resultsData>>(result, "result");
                     //var ChartData = new List<ChartDataModel>();
@@ -451,17 +450,17 @@ namespace BlueSignal.Controllers
                     //    TradingDayTimeStamp = Convert.ToDateTime(item.tradingDay).ToString("yyyyMMddHHmmssfff"),
                     //}));
 
-                    var ChartData = new List<ChartDataModel>();
-                    ChartData.AddRange(chartResult.results.Select(item => new ChartDataModel()
-                    {
-                        symbol = item.symbol,
-                        close = Convert.ToDecimal(item.close),
-                        high = Convert.ToDecimal(item.high),
-                        low = Convert.ToDecimal(item.low),
-                        open = Convert.ToDecimal(item.open),
-                        TradingDayTimeStamp = Convert.ToDateTime(item.tradingDay).ToString("yyyyMMddHHmmssfff"),
-                    }));
-                    vm.ChartData = ChartData;
+                    //var ChartData = new List<ChartDataModel>();
+                    //ChartData.AddRange(chartResult.results.Select(item => new ChartDataModel()
+                    //{
+                    //    symbol = item.symbol,
+                    //    close = Convert.ToDecimal(item.close),
+                    //    high = Convert.ToDecimal(item.high),
+                    //    low = Convert.ToDecimal(item.low),
+                    //    open = Convert.ToDecimal(item.open),
+                    //    TradingDayTimeStamp = Convert.ToDateTime(item.tradingDay).ToString("yyyyMMddHHmmssfff"),
+                    //}));
+                    //vm.ChartData = ChartData;
                 }
 
                 vm.MarketLists = await _marketBal.GetMarketData();
@@ -853,44 +852,30 @@ namespace BlueSignal.Controllers
             //For Daily
             startDate = BluSignalComman.DateTime9MonthBack;
 
+            var endDate = BluSignalComman.EndDate;
+
             Session["DefaultKey"] = symbol;
 
-            //using (WebClient client = new WebClient())
-            //{
-            //    string s = client.DownloadString("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol=" + symbol + "&type=daily&startDate=" + startDate);
-            //    var returnstring = s.Replace("//", "");
-            //    var chartJsonData = Helpers.GetJsonResponse<List<resultsData>>(returnstring, "results");
+            var chartResult = await GetLoggingData(symbol, startDate, endDate, "daily");
+            var avgVolume = string.Empty;
+            var closingPrice = string.Empty;
+            var marketDataDaily = string.Empty;
 
-            //    var dailyData = chartJsonData.Select(item => new object[]
-            //    {
-            //           item.tradingDay.ToString(),
-            //           Math.Round(Convert.ToDecimal((item.open)),2),
-            //           Math.Round(Convert.ToDecimal((item.high)),2),
-            //           Math.Round(Convert.ToDecimal((item.low)),2),
-            //           Math.Round(Convert.ToDecimal((item.close)),2)
-            //    });
+            if (chartResult.results != null && chartResult.results.Any())
+            {
+                marketDataDaily = JsonConvert.SerializeObject(chartResult.results, new JsonSerializerSettings { ContractResolver = new DynamicContractResolver("timestamp,tradingDay") });
+                marketDataDaily = marketDataDaily.Replace("timestamp1", "timestamp").Replace("tradingDay1", "tradingDay").Replace("//", "");
+                int lastDays = 90;
 
-            //    //For Weekly
-            //    startDate = BluSignalComman.DateTime9MonthWeeksBack;
+                var averageVolumn = chartResult.results.OrderByDescending(a => a.tradingDay).Take(lastDays).Sum(x => Convert.ToSingle(x.volume));
+                if (averageVolumn > 0)
+                    avgVolume = Convert.ToString(Math.Round((averageVolumn / lastDays), 0));
 
-            //    s = client.DownloadString("http://marketdata.websol.barchart.com/getHistory.json?key=" + apiKey + "&symbol=" + symbol + "&type=weekly&startDate=" + startDate);
-            //    returnstring = s.Replace("//", "");
-            //    chartJsonData = Helpers.GetJsonResponse<List<resultsData>>(returnstring, "results");
+                var maxRexord = chartResult.results.OrderByDescending(a => a.timestamp).FirstOrDefault();
+                if (maxRexord != null)
+                    closingPrice = maxRexord.close;
+            }
 
-            //    var weeklyData = chartJsonData.Select(item => new object[]
-            //    {
-            //           item.tradingDay.ToString(),
-            //           Math.Round(Convert.ToDecimal((item.open)),2),
-            //           Math.Round(Convert.ToDecimal((item.high)),2),
-            //           Math.Round(Convert.ToDecimal((item.low)),2),
-            //           Math.Round(Convert.ToDecimal((item.close)),2)
-            //    });
-
-            //    var jsonToReturn = new { dailyData, weeklyData };
-            //    return Json(jsonToReturn, JsonRequestBehavior.AllowGet);
-            //}
-
-            var chartResult = await GetMinutesChartData(symbol, startDate);
             if (chartResult.results != null && chartResult.results.Any())
             {
                 var dailyData = chartResult.results.Select(item => new object[]
@@ -904,6 +889,7 @@ namespace BlueSignal.Controllers
 
                 //For Weekly
                 startDate = BluSignalComman.DateTime9MonthWeeksBack;
+                chartResult = await GetLoggingData(symbol, startDate, endDate, "weekly");
 
                 var weeklyData = chartResult.results.Select(item => new object[]
                 {
@@ -914,15 +900,23 @@ namespace BlueSignal.Controllers
                        Math.Round(Convert.ToDecimal((item.close)),2)
                 });
 
-                var jsonToReturn = new { dailyData, weeklyData };
+                var jsonToReturn = new
+                {
+                    dailyData,
+                    weeklyData,
+                    marketDataDaily,
+                    avgVolume,
+                    closingPrice
+                };
                 var jsonResult = new JsonResult { Data = jsonToReturn, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = int.MaxValue };
                 return jsonResult;
             }
 
+
             return Json("Fail");
         }
 
-        private async Task<Data> GetMinutesChartData(string symbol, string startDate, string endDate = "")
+        private async Task<Data> GetLoggingData(string symbol, string startDate, string endDate = "", string intervalType = "")
         {
             var obj = new Data();
             try
@@ -935,6 +929,9 @@ namespace BlueSignal.Controllers
                 if (!string.IsNullOrEmpty(endDate))
                     pData.param5 = endDate;
 
+                if (!string.IsNullOrEmpty(intervalType))
+                    pData.param6 = intervalType;
+
                 var client = new HttpClient();
                 var url = $"{ApiBaseUrl}{ApiActions.chartData}";
                 var data = (await client.PostAsync(url, pData, new JsonMediaTypeFormatter())).Content.ReadAsAsync<IEnumerable<LoggingData>>().Result;
@@ -944,20 +941,20 @@ namespace BlueSignal.Controllers
                     var list = new List<resultsData>();
                     foreach (var item in data)
                     {
-                        var dateValue = DateTime.Parse(item.param4);
+                        var dateValue = DateTime.Parse(item.param10);
                         list.Add(new resultsData
                         {
-                            symbol = symbol,
-                            timestamp1 = item.param4,
-                            tradingDay1 = item.param5,
+                            symbol = item.param1,
+                            timestamp1 = item.param10,
+                            tradingDay1 = item.param10,
                             timestamp = dateValue,
                             tradingDay = dateValue.Date,
-                            open = item.param6,
-                            high = item.param7,
-                            low = item.param8,
-                            close = item.param9,
-                            volume = item.param10,
-                            openInterest = null
+                            open = item.param4,
+                            high = item.param5,
+                            low = item.param6,
+                            close = item.param7,
+                            volume = item.param8,
+                            openInterest = item.param9
                         });
                     }
 
@@ -974,7 +971,7 @@ namespace BlueSignal.Controllers
 
         public JsonResult RefreshSessions()
         {
-            if(Session["SystemUser"] !=null)
+            if (Session["SystemUser"] != null)
                 Session["SystemUser"] = Session["SystemUser"];
             return Json("");
         }
@@ -993,7 +990,7 @@ namespace BlueSignal.Controllers
         public string param9 { get; set; }
         public string param10 { get; set; }
     }
-    
+
 
     //public class results
     //{

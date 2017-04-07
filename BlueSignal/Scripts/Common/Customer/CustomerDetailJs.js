@@ -1,7 +1,7 @@
 ﻿
 
 $(document).ready(function () {
-    InitilizeMarketList();
+    InitilizeMarketList1();  //get all market data.
     GetMarketChartNearTermData('daily');
     GetMarketChartNearTermData('weekly');
     $(".btnGetData").click(function () {
@@ -12,7 +12,7 @@ $(document).ready(function () {
     });
 });
 
-function InitilizeMarketList() {
+function InitilizeMarketList1() {
     $.ajax({
         type: "GET",
         url: "/Home/GetMarketData",
@@ -47,40 +47,6 @@ function InitilizeMarketList() {
     });
 }
 
-//function GetMarketChartData() {
-//    $.ajax({
-//        type: "GET",
-//        url: "/Home/GetMarketChartData",
-//        dataType: "json",
-//        data: { 'startDate': $('#date').val(), 'Type': $('#datafrequency').val(), 'symbol': $('#code').val() },
-//        success: function (data) {
-//            if (data != '') {
-//                for (i in data) {
-//                    data[i][0] = new Date(data[i][0]).getTime();
-//                }
-
-//                Highcharts.stockChart('chartcontainer', {
-//                    title: {
-//                        text: 'IBM'
-//                    },
-//                    rangeSelector : {
-//                        enabled: false
-//                    },
-//                    navigator: {
-//                        enabled: false
-//                    },
-//                    series: [{
-//                        type: 'ohlc',
-//                        name: 'IBM',
-//                        data: data
-//                    }]
-//                });
-//            } else { alert('Code is wrong'); }
-//        },
-//        error: function (error) { }
-//    });
-//}
-
 function RebindMarketData(selectedCode) {
     $.ajax({
         type: "GET",
@@ -90,20 +56,31 @@ function RebindMarketData(selectedCode) {
         data: { 'startDate': $('#date').val(), 'Type': $('#datafrequency').val(), 'selectedCode': selectedCode },
         success: function (data) {
             if (data != null) {
-                var dailyData = $.parseJSON(data.MarketDataDaily);
-                bindDatatable('Id_MarketDataList', dailyData.results);
 
-                var weeklyData = $.parseJSON(data.MarketDataWeekly);
-                bindDatatable('Id_MarketDataListWeekly', weeklyData.results);
+                if ($("#Id_MarketDataList").length > 0) {
+                    var dailyData = $.parseJSON(data.MarketDataDaily);
+                    bindDatatable('Id_MarketDataList', dailyData.results);
+                }
 
-                var monthlyData = $.parseJSON(data.MarketDataMonthly);
-                bindDatatable('Id_MarketDataListMonthly', monthlyData.results);
+                if ($("#Id_MarketDataListWeekly").length > 0) {
+                    var weeklyData = $.parseJSON(data.MarketDataWeekly);
+                    bindDatatable('Id_MarketDataListWeekly', weeklyData.results);
+                }
 
-                var quarterlyData = $.parseJSON(data.MarketDataQuartely);
-                bindDatatable('Id_MarketDataListQuarterly', quarterlyData.results);
+                if ($("#Id_MarketDataListMonthly").length > 0) {
+                    var monthlyData = $.parseJSON(data.MarketDataMonthly);
+                    bindDatatable('Id_MarketDataListMonthly', monthlyData.results);
+                }
 
-                var yearlyData = $.parseJSON(data.MarketDataYearly);
-                bindDatatable('Id_MarketDataListYearly', yearlyData.results);
+                if ($("#Id_MarketDataListQuarterly").length > 0) {
+                    var quarterlyData = $.parseJSON(data.MarketDataQuartely);
+                    bindDatatable('Id_MarketDataListQuarterly', quarterlyData.results);
+                }
+
+                if ($("#Id_MarketDataListYearly").length > 0) {
+                    var yearlyData = $.parseJSON(data.MarketDataYearly);
+                    bindDatatable('Id_MarketDataListYearly', yearlyData.results);
+                }
 
                 $("#code").val(data.Code);
                 $("#Name").val(data.Name);

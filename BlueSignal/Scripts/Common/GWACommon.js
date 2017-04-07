@@ -105,14 +105,14 @@ function AddContact(btn) {
 //
 function LoginWithNew(btn) {
 
-    
+
     if (btn != undefined) {
         btn.disabled = true;
     }
 
     var data = {
         'pwd': $('#pwd').val(),
-        'cpwd': $('#cpwd').val()      
+        'cpwd': $('#cpwd').val()
     };
 
     $.ajax({
@@ -122,11 +122,11 @@ function LoginWithNew(btn) {
         async: true,
         data: data,
         success: function (data) {
-            if (data != null) {               
+            if (data != null) {
                 $('#_loginBSPartial').html('');
                 $('#_loginBSPartial').html(data);
                 //$('#LoginForm').hide();
-                
+
                 btn.disabled = false;
             }
         },
@@ -137,8 +137,7 @@ function LoginWithNew(btn) {
         }
     });
 }
-function CloseThisLoginPopup()
-{
+function CloseThisLoginPopup() {
     $('#login_window').modal('hide');
 }
 
@@ -179,17 +178,11 @@ function ValidateTheCodeInTextBoxWithBox(item) {
 }
 
 function InitilizeMarketList() {
-
-
-
     if (!ValidateTheCodeInTextBox()) {
         return false;
     }
-
     RebindMarketData($('#code').val());
 }
-
-
 
 function InitilizeMarketListWithCode(item) {
     if (!ValidateTheCodeInTextBoxWithBox(item)) {
@@ -244,7 +237,6 @@ function GetMarketChartNearTermData(typeID) {
         data: { 'startDate': $('#date').val(), 'Type': typeID, 'symbol': symb },
         success: function (data) {
             if (data != '') {
-
                 for (i in data) {
                     data[i][0] = new Date(data[i][0]).getTime();
                 }
@@ -311,12 +303,9 @@ function GetMarketChartNearTermData(typeID) {
 }
 
 function GetAndBindMarketAllChartsData() {
-
     var symb = $('#code').val();
-
-    ShowLoaderCustom();
+    //ShowLoaderCustom();
     var rangeEnabled = true;
-
     $.ajax({
         async: false,
         type: "GET",
@@ -324,9 +313,46 @@ function GetAndBindMarketAllChartsData() {
         dataType: "json",
         data: { 'startDate': $('#date').val(), 'symbol': symb },
         success: function (response) {
-            debugger;
             var data = response.dailyData;
             var data1 = response.weeklyData;
+            var dataDaily = response.marketDataDaily;
+            var avgVolume = response.avgVolume;
+            var closingPrice = response.closingPrice;
+
+            if (dataDaily != null) {
+                if ($("#Id_MarketDataListDaily").length > 0) {
+                    var dailyData = $.parseJSON(dataDaily);
+                    bindDatatable('Id_MarketDataListDaily', dailyData);
+                }
+
+                if (avgVolume != "") {
+                    var avgVol = CommaFormatted(parseFloat(avgVolume).toFixed(0));
+                    if ($("#AvgVolume").length > 0)
+                        $("#AvgVolume").val(avgVol);
+                    if ($("#AvgVolumeClass").length > 0) {
+                        $(".AvgVolumeClass").text(avgVol);
+                        $(".AvgVolumeClass").val(avgVol);
+                    }
+
+                    if ($("#AvgVolumeClassbluequont").length > 0)
+                        $(".AvgVolumeClassbluequont").text(avgVol);
+                }
+
+                if (closingPrice != "") {
+                    if ($("#ClosingPrice").length > 0)
+                        $("#ClosingPrice").val(data.ClosingPrice);
+
+                    if ($(".ClosingPriceClass").length > 0) {
+                        $(".ClosingPriceClass").text(data.ClosingPrice);
+                        $(".ClosingPriceClass").val(data.ClosingPrice);
+                    }
+
+                    if ($(".ClosingPriceClassbluequont").length > 0)
+                        $(".ClosingPriceClassbluequont").text(data.ClosingPrice);
+                }
+
+            }
+
 
             if (data != null) {
                 for (i in data) {
@@ -417,7 +443,6 @@ function CloseGWAModelPopup2(id) {
 }
 function RebindMarketData(selectedCode) {
     var a = $('#date').val(); var Type = $('#datafrequency').val();
-
     ShowLoaderCustom();
     $.ajax({
         type: "GET",
@@ -426,14 +451,15 @@ function RebindMarketData(selectedCode) {
         async: true,
         data: { 'startDate': $('#date').val(), 'Type': $('#datafrequency').val(), 'selectedCode': selectedCode },
         success: function (data) {
-
             if (data != null) {
-                var dailyData = $.parseJSON(data.MarketDataDaily);
-                $.each(dailyData.results, function (i, d) {
-                    d.volume = CommaFormatted(parseFloat(d.volume).toFixed(0));
-                });
+                //if ($("#Id_MarketDataListDaily").length > 0) {
+                //    var dailyData = $.parseJSON(data.MarketDataDaily);
+                //    $.each(dailyData.results, function (i, d) {
+                //        d.volume = CommaFormatted(parseFloat(d.volume).toFixed(0));
+                //    });
 
-                bindDatatable('Id_MarketDataListDaily', dailyData.results);
+                //    bindDatatable('Id_MarketDataListDaily', dailyData.results);
+                //}
 
                 /* $$$$$$$$$$$$--Commented for now, by AJ ---------$$$$$$$$$$$$$$$$$ */
 
@@ -497,9 +523,6 @@ function RebindMarketData(selectedCode) {
                 if (data.SymbolNameData != undefined && data.SymbolNameData != null && data.SymbolNameData != '') {
                     var symbolData = $.parseJSON(data.SymbolNameData);
                     if (symbolData.status.code == 200 && symbolData.results.length > 0) {
-
-
-
                         symbolTitle = symbolData.results[0].name;
                         var sysmbolName = symbolData.results[0].name.replace(symbolData.results[0].symbol, "").trim();
                         $("#Name").val(sysmbolName);
@@ -542,8 +565,8 @@ function RebindMarketData(selectedCode) {
                         //GetMarketChartNearTermData('dailyBuleFractal');
                         //GetMarketChartNearTermData('dailyBlueNeural');
 
-                        GetAndBindMarketAllChartsData();
                         HideLoaderCustom();
+                        setTimeout(GetAndBindMarketAllChartsData, 1000);
                     }
                 }
 
@@ -601,14 +624,9 @@ function RebindBuleQuentData(selectedCode) {
                     if (symbolData.status.code == 204 && symbolData.status.message == "Success, but no content to return.") {
 
                         clearChart('dailyBulQuantData');
-
-
-
-
                         alert(symbolData.status.message);
                         HideLoaderCustom();
                     } else {
-
                         GetMarketChartNearTermData('dailyBulQuantData');
                         HideLoaderCustom();
 
@@ -746,8 +764,7 @@ function BindMarketDataIndividual(selectedCode) {
         async: true,
         data: { 'startDate': $('#date').val(), 'Type': $('#datafrequency').val(), 'selectedCode': selectedCode },
         success: function (data) {
-
-            if (data != null) {
+            if (data != null && $("#Id_MarketDataListDaily").length > 0) {
                 var dailyData = $.parseJSON(data.MarketDataDaily);
                 $.each(dailyData.results, function (i, d) {
                     d.volume = CommaFormatted(parseFloat(d.volume).toFixed(0));

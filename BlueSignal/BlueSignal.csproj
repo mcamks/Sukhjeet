@@ -312,6 +312,7 @@
     <Content Include="images\graph4.jpg" />
     <Content Include="images\green_triangle.png" />
     <Content Include="images\live_portfolio.png" />
+    <Content Include="images\loadingRipple.gif" />
     <Content Include="images\logo.png" />
     <Content Include="images\meter.jpg" />
     <Content Include="images\orgs.png" />
@@ -442,6 +443,7 @@
     <Content Include="Views\Home\FinanceInfoView.cshtml" />
     <Content Include="Views\Home\_BSLogin.cshtml" />
     <Content Include="Shared\SessionAliveHandler.ashx" />
+    <Content Include="Views\Home\_GetMarketChartDataPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
