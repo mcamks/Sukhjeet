@@ -1,4 +1,5 @@
-﻿@using BlueSignal.Controllers;
+﻿@using BlueSignalCore.Models
+@using BlueSignal.Controllers;
 @using BlueSignal.Models
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,6 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/common")
     <script src="~/Scripts/tv.js"></script>
-
 </head>
 <body>
     @{
@@ -42,7 +42,6 @@
                         @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
                     </div>
                     <div class="active_page">
-
                         @if (!string.IsNullOrEmpty(Request.QueryString["p"]) && !string.IsNullOrEmpty(Request.QueryString["c"]))
                         {
 
@@ -68,14 +67,12 @@
                             </span>
                             <mu id="settabe" onclick="SetActiveClass('Dashboard')">Dashboard</mu>
                         }
-
                     </div>
                     @{
                         DateTime eastern = DateTime.UtcNow.AddHours(-5);
                         var time = eastern.ToString("hh:mm tt");
                         var tArr = time.Split(' ');
                     }
-
                     <div class="date_time">
                         <div class="date" id="divDateOnly"><i class="fa fa-calendar" aria-hidden="true"></i>@eastern.ToString("MMM - dd - yyyy")</div>
                         <div class="time" id="divTimeOnly"><i class="fa fa-clock-o" aria-hidden="true"></i>@tArr[0]<sub>@tArr[1]</sub></div>
@@ -85,7 +82,6 @@
                             <li><input type="button" class="btn btn-primary" value="Dashboard" /></li>
 
                         </ul>*@
-
                     @*<div class="current_date">eastern.ToString("MMM - dd - yyyy")</div>*@
                     @* @Html.Partial("_LoginPartial")*@
                     @*</div>*@
@@ -160,7 +156,6 @@
                 </a>
             </li>
             <li class="remove Help"><a href="@Url.Action("Index","Help",new { p = "Help",c= "fa-question" })" data-toggle="tooltip" title="Help" data-placement="right"><i class="fa fa-question" aria-hidden="true"></i></a></li>
-
             @if (HttpContextSessionWrapperExtension.SessionUser != null && HttpContextSessionWrapperExtension.SessionUser.IsAdminUser)
             {
                 <li class="remove Admin"><a href="@Url.Action("Admin", "Home",new { p = "Admin",c= "fa-cog" })" data-toggle="tooltip" title="Admin" data-placement="right"><i class="fa fa-cog" aria-hidden="true"></i></a></li>
@@ -176,19 +171,27 @@
                 </li>*@
             <li class="remove credential dropdown">
                 <div class="btn-group">
-                    <a href="#" class="dropbtn dropdown-toggle">
+                    <a href="#login_window" data-toggle="modal" title="Login" data-placement="right" class="dropbtn dropdown-toggle">
                         <i class="fa fa-user" aria-hidden="true"></i>
                     </a>
-                        <ul class="dropdown-content">
-                            <li>
-                                <a href="#">User Name:<br />abc@gmail.com</a>
-                            </li>
-                            <li>
-                                <a href="#">Account</a></li>
-                            <li><a href="#">Website</a></li>
-                            <li><a href="#">Logout</a></li>
-</ul>
-                   
+                    <ul class="dropdown-content">
+                        <li>
+                            @{
+                                var email = string.Empty;
+                                if (Session["SystemUser"] != null)
+                                {
+                                    var session = Session["SystemUser"] as WP_User;
+                                    email = session.user_email;
+                                }
+                            }
+                            <p>User Name: @email</p>
+                        </li>
+                        <li>
+                            <a href="https://www.blusignalsystems.com/myaccount/">Account</a>
+                        </li>
+                        <li><a href="http://dashboard.blusignals.com/home/Dashboard" target="_blank">Website</a></li>
+                        <li><a href="@Url.Action("LogOff","Home")">Logout</a></li>
+                    </ul>
                 </div>
             </li>
         </ul>
@@ -230,21 +233,16 @@
         <div class="modal-dialog modal-sm custom_width">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
                     <h4 class="modal-title">Change Password</h4>
                 </div>
                 <div id="_loginBSPartial" class="modal-body">
-
-
                     @{Html.RenderPartial("~/Views/Home/_BSLogin.cshtml", new SetPassowrdModel() { IsSuccess = 0 });}
-
                 </div>
             </div>
         </div>
     </div>
     <!--loader-->
-
-
     @RenderSection("scripts", required: false)
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
@@ -281,6 +279,12 @@
             },1000);
 
             setInterval(RefreshUserSession,10000);
+
+            var isCurrentSessionNull = @Session["firstTimeCheck"] !=null ? @Session["firstTimeCheck"] : "0";
+            if(isCurrentSessionNull == "1")
+                $("#login_window").modal("show");
+            else
+                $("#login_window").modal("hide");
         });
 
         function formatAMPM(date) {

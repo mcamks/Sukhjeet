@@ -5,6 +5,7 @@ using BlueSignalCore.Bal;
 using BlueSignalCore.Models;
 using System.Configuration;
 using System.IO;
+using System;
 
 namespace BlueSignal.Controllers
 {
@@ -58,9 +59,11 @@ namespace BlueSignal.Controllers
             /// <returns></returns>
             public override void OnAuthorization(AuthorizationContext filterContext)
             {
+                var sess = new HttpContextSessionWrapper();
+                var uu = filterContext.HttpContext != null && filterContext.HttpContext.Request != null && filterContext.HttpContext.Request["username"] != null;
+                var userName = uu ? Convert.ToString(filterContext.HttpContext.Request["username"]) : string.Empty;
 
-                var objSessionWrapper = new HttpContextSessionWrapper();
-                if ((objSessionWrapper != null && objSessionWrapper.SessionUser == null) || string.IsNullOrEmpty(objSessionWrapper.SessionUser.ID))
+                if (sess.SessionUser == null || string.IsNullOrEmpty(sess.SessionUser.ID))
                 {
                     if (filterContext.HttpContext.Request.Url != null)
                     {
@@ -78,6 +81,11 @@ namespace BlueSignal.Controllers
                            new RedirectResult(
                                "/account/login", false);
                     }
+                }
+                else
+                {
+                    userName = sess.SessionUser.user_email;
+                    //_mb
                 }
             }
         }

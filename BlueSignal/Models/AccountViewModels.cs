@@ -146,15 +146,21 @@ namespace BlueSignal.Models
 
     public class SetPassowrdModel
     {
-        [Required]
         //[EmailAddress]
-        
+
         [Display(Name = "Password")]
+        [MaxLength(50)]
         public string pwd { get; set; }
+
         [Required]
+        [MaxLength(50)]
         [Display(Name = "Confirm Password")]
         public string cpwd { get; set; }
+
         public string ActionResultMessage { get; set; }
         public int IsSuccess { get; set; }
+
+        [Display(Name = "URL")]
+        public string Url { get; set; } = "http://dashboard.blusignals.com/home/Dashboard"; //"http://dashboard.blusignals.com/home/Dashboard";
     }
 }

@@ -2,8 +2,8 @@
 @model BlueSignal.Models.SetPassowrdModel
 
 
-<div class="alert alert-danger text-center">Dashboard failed to launch.</div>
-<p>Lorem imsum is dummy text. Lorem imsum is dummy text. Lorem imsum is dummy text. Lorem imsum is dummy text.</p>
+<div class="alert alert-info text-center">Direct Access to Your Dashboard</div>
+<p>Copy the URL Below and save it in your browser to use in direct log-in access to your BluSignals Dashboard Page</p>
 
 @using (Html.BeginForm())
 {
@@ -54,31 +54,29 @@
                         </div>
                     </div>
                 }
-
                 else
                 {
-
                     <div class="form-group">
-                        @Html.LabelFor(model => model.pwd)
-                        @Html.PasswordFor(model => model.pwd, new { @class = "form-control", maxlength = 150  })
-                        @Html.ValidationMessageFor(model => model.pwd, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.Url)
+                        @Html.TextBoxFor(model => model.Url, new { @class = "form-control", maxlength = 150 })
+                        @Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.cpwd)
-                        @Html.PasswordFor(model => model.cpwd, new {@class = "form-control", maxlength = 150 })
+                        @Html.PasswordFor(model => model.cpwd, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.cpwd, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
-                        <input id="LoginForm" type="button"  onclick="LoginWithNew(this);" class="btn btn-primary" value="Login" />
+                        <input id="LoginForm" type="button" onclick="LoginWithNew(this);" class="btn btn-primary" value="Continue" />
                     </div>
 
-                    
-                    
+
+
 
 
                 }
             }
-            
+
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         }
 

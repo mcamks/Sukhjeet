@@ -183,7 +183,6 @@ namespace BlueSignalCore.Bal
 
             if (myDataSet != null && myDataSet.Tables.Count > 0 && myDataSet.Tables[0].Rows.Count > 0)
             {
-                //var objInList = myDataSet.Tables[0].ToList<WP_User>();
                 var objInList = myDataSet.Tables[0].Rows[0];
                 user.ID = Convert.ToString(objInList["ID"]).Trim();
                 user.user_login = Convert.ToString(objInList["user_login"]).Trim();
@@ -192,10 +191,8 @@ namespace BlueSignalCore.Bal
                 user.user_email = Convert.ToString(objInList["user_email"]).Trim();
                 user.user_registered = Convert.ToString(objInList["user_registered"]).Trim();
                 user.display_name = Convert.ToString(objInList["display_name"]).Trim();
-                //user.display_AdminKey = Convert.ToString(objInList["display_name"]).Trim();
-
-
             }
+
             DataSet myDataSetUserType = new DataSet();
             if (Convert.ToString(user.ID).Length > 0)
             {
@@ -271,7 +268,8 @@ namespace BlueSignalCore.Bal
             //}
             try
             {
-                var result = _usersRep.Where(x => x.Email.Equals(userName) && x.PasswordHash.Equals(pwd));
+                //var result = _usersRep.Where(x => x.Email.Equals(userName) && x.PasswordHash.Equals(pwd));
+                var result = _usersRep.Where(x => x.Email.Equals(userName));
                 return await result.FirstOrDefaultAsync();
             }
             catch (Exception ex)
@@ -282,10 +280,34 @@ namespace BlueSignalCore.Bal
             return null;
         }
 
-        public async Task<bool> UserExists(string userName, string email)
+        public async Task<bool> CheckUserAndUpdatePassword(string userName, string email, string pwd)
         {
-            var result = _usersRep.Where(x => x.Email.Equals(email) || x.UserName.ToLower().Equals(userName));
-            return await result.AnyAsync();
+            bool result;
+            var user = await _usersRep.Where(x => (x.Email.Equals(email) || x.UserName.ToLower().Equals(userName))).FirstOrDefaultAsync();
+
+            if (user != null)
+            {
+                user.IsActive = true;
+                user.PasswordHash = pwd;
+                _usersRep.Update(user);
+                result = true;
+            }
+            else
+            {
+                user = new Users
+                {
+                    IsActive = true,
+                    PasswordHash = pwd,
+                    UserName = userName,
+                    Email = email,
+                    CreatedBy = 1,
+                    CreatedDate = DateTime.Now,
+                    IsDeleted = false
+                };
+                _usersRep.Insert(user);
+                result = true;
+            }
+            return result;
         }
         public void SaveUser(Users model)
         {
@@ -293,7 +315,6 @@ namespace BlueSignalCore.Bal
         }
 
         #endregion
-
 
         #region Email Template and Contact Log
         public async Task<EmailTemplate> SaveContactLog(ContactLog model)
@@ -304,9 +325,6 @@ namespace BlueSignalCore.Bal
             return emailTemp;
         }
         #endregion
-
-
-
     }
 
     public static class Extensions

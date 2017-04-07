@@ -5,7 +5,6 @@ using BlueSignalCore.Repository;
 using Microsoft.AspNet.Identity;
 using BlueSignal.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
-using BlueSignal.Controllers;
 using System.Data.Entity;
 
 namespace BlueSignal.App_Start
