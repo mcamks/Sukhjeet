@@ -18,7 +18,6 @@ using System.Net.Http.Formatting;
 
 namespace BlueSignal.Controllers
 {
-
     public class HomeController : BaseController
     {
         private readonly MarketBal _marketBal;
@@ -40,7 +39,6 @@ namespace BlueSignal.Controllers
 
             return await Task.FromResult(View());
         }
-
 
         [AllowAnonymous]
         public async Task<ActionResult> Auth()
@@ -935,13 +933,6 @@ namespace BlueSignal.Controllers
             return obj;
         }
 
-
-        public JsonResult RefreshSessions()
-        {
-            if (Session["SystemUser"] != null)
-                Session["SystemUser"] = Session["SystemUser"];
-            return Json("");
-        }
     }
 
     public class LoggingData
