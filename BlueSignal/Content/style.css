@@ -427,7 +427,7 @@ hr{border-color:#d1d1d1; }
 .date_time .time i{margin-right:6px;}
 .date_time .time sub{color:#a9b2c2;}
 
-.sidemenu{float:left; width:46px; position:fixed; z-index:99; margin-top: 170px;}
+.sidemenu{float:left; width:46px; position:fixed; z-index:99; margin-top: 174px;}
 .sidemenu ul{list-style:none; padding:0; margin:0;}
 .sidemenu ul li{float:left; border-bottom:1px solid #e7e4e4;}
 .sidemenu ul li a{color:#707070; width:46px; text-align:center; padding:10px 0; display:block; font-size:18px; height:41px;}
@@ -482,4 +482,72 @@ hr{border-color:#d1d1d1; }
 .navbar_custom{padding:8px 0px;}
 .navbar_custom .active_page{top:13px !important;}
 
-/*.dashboard_style .tv-embed-widget-wrapper__header{display:none !important;}*/
+/*.tv-embed-widget-wrapper__header{display:none !important;}*/
+.tv-embed-widget-wrapper__logo-link{display:none !important;}
+
+.dropbtn {
+    /*background-color: #4CAF50;*/
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    left:53px;
+    top:0px;
+}
+.dropdown-content li{display:inline; width:100%;}
+.dropdown-content li:first-child{font-weight:bold;}
+.dropdown-content li a{width:100% !important; float:left; font-size:14px !important; text-align:left !important;padding:10px !important;}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    width:100%;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    /*background-color: #3e8e41;*/
+}
+.dropdown .btn-group .dropdown-content::before {
+    border-bottom: 7px solid #f9f9f9;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    content: "";
+    display: inline-block !important;
+    position: absolute;
+    right: 156px;
+    top: 17px;
+    transform:rotate(-89deg);
+}
+.dropdown .btn-group .dropdown-content::after {
+    border-bottom: 6px solid #fff;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    content: "";
+    display: inline-block !important;
+    position: absolute;
+    right: 10px;
+    top: -6px;
+}
