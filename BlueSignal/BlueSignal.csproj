@@ -282,6 +282,8 @@
     <Content Include="images\3a.png" />
     <Content Include="images\activities.png" />
     <Content Include="images\ajax-loader-bar.gif" />
+    <Content Include="images\bar1_active.png" />
+    <Content Include="images\bar1_gray.png" />
     <Content Include="images\chart1_active.png" />
     <Content Include="images\chart1_gray.png" />
     <Content Include="images\chart2_active.png" />
