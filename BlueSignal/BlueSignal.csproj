@@ -282,6 +282,14 @@
     <Content Include="images\3a.png" />
     <Content Include="images\activities.png" />
     <Content Include="images\ajax-loader-bar.gif" />
+    <Content Include="images\chart1_active.png" />
+    <Content Include="images\chart1_gray.png" />
+    <Content Include="images\chart2_active.png" />
+    <Content Include="images\chart2_gray.png" />
+    <Content Include="images\chart3_active.png" />
+    <Content Include="images\chart3_gray.png" />
+    <Content Include="images\chart_gray.png" />
+    <Content Include="images\chart_white.png" />
     <Content Include="images\favicon.png" />
     <Content Include="images\arrow_up.png" />
     <Content Include="images\blufractal_active.png" />
@@ -350,7 +358,6 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\gruppo-regular-webfont.woff" />
     <Content Include="fonts\gruppo-regular-webfont.woff2" />
-    <None Include="Properties\PublishProfiles\aj.pubxml" />
     <None Include="Properties\PublishProfiles\BluSignalPublishFile.pubxml" />
     <None Include="Properties\PublishProfiles\BS.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />

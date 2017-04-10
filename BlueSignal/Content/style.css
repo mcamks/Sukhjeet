@@ -427,7 +427,7 @@ hr{border-color:#d1d1d1; }
 .date_time .time i{margin-right:6px;}
 .date_time .time sub{color:#a9b2c2;}
 
-.sidemenu{float:left; width:46px; position:fixed; z-index:99; margin-top: 174px;}
+.sidemenu{float:left; width:46px; position:absolute; z-index:99; margin-top: 117px;}
 .sidemenu ul{list-style:none; padding:0; margin:0;}
 .sidemenu ul li{float:left; border-bottom:1px solid #e7e4e4;}
 .sidemenu ul li a{color:#707070; width:46px; text-align:center; padding:10px 0; display:block; font-size:18px; /*height:41px;*/}
@@ -437,6 +437,18 @@ hr{border-color:#d1d1d1; }
 .sidemenu ul .Research a{background:url(../images/research_icon.png) center center no-repeat;height:41px;}
 .sidemenu ul .Research a:hover{background:#1e6eff url(../images/research_icon_active.png) center center no-repeat;}
 .sidemenu ul .Research.active a{background:#1e6eff url(../images/research_icon_active.png) center center no-repeat;}
+
+.sidemenu ul .Charts a{background:url(../images/chart1_active.png) center center no-repeat;height:41px;}
+.sidemenu ul .Charts a:hover{background:#1e6eff url(../images/chart1_gray.png) center center no-repeat;}
+.sidemenu ul .Charts.active a{background:#1e6eff url(../images/chart1_gray.png) center center no-repeat;}
+
+.sidemenu ul .Charts2 a{background:url(../images/chart2_gray.png) center center no-repeat;height:41px;}
+.sidemenu ul .Charts2 a:hover{background:#1e6eff url(../images/chart2_active.png) center center no-repeat;}
+.sidemenu ul .Charts2.active a{background:#1e6eff url(../images/chart2_active.png) center center no-repeat;}
+
+.sidemenu ul .Charts3 a{background:url(../images/chart3_gray.png) center center no-repeat;height:41px;}
+.sidemenu ul .Charts3 a:hover{background:#1e6eff url(../images/chart3_active.png) center center no-repeat;}
+.sidemenu ul .Charts3.active a{background:#1e6eff url(../images/chart3_active.png) center center no-repeat;}
 
 .content{margin-left:50px; padding-top:20px;}
 
@@ -458,9 +470,9 @@ hr{border-color:#d1d1d1; }
     width: 100% !important;
 }
 
-    .dashboard_style{background: #fff none repeat scroll 0 0; height: 170px; margin-top: 0;width:100%; float:left;padding:10px 0px 0px 0px; }
+    .dashboard_style{background: #fff none repeat scroll 0 0; height: 117px; margin-top: 0;width:100%; float:left;padding:10px 0px 0px 0px; }
     
-    .dashboard_style .panel-body {height:151px; padding:6px 6px;}
+    .dashboard_style .panel-body {height:107px; padding:14px 6px 0px;}
     .dashboard_style .panel {margin:0px !important; border:none !important; box-shadow:none !important;}
     .dashboard_style .panel-group {margin:0px !important;}
 
@@ -479,11 +491,15 @@ hr{border-color:#d1d1d1; }
 .sidemenu ul li a:hover.sprite_icon1:hover{ background: url('../images/sprite1.png') no-repeat bottom center #1f6df7;}
 .sidemenu ul li a:hover.sprite_icon2:hover{ background: url('../images/sprite2.png') no-repeat bottom center #1f6df7;}
 .sidemenu ul li a:hover.sprite_icon3:hover{ background: url('../images/sprite3.png') no-repeat bottom center #1f6df7;}
+
+.sidemenu ul li a:hover.sprite_icon1.active a{ background: url('../images/sprite1.png') no-repeat bottom center #1f6df7;}
 .navbar_custom{padding:8px 0px;}
 .navbar_custom .active_page{top:13px !important;}
 
-/*.tv-embed-widget-wrapper__header{display:none !important;}*/
+.tv-embed-widget-wrapper__header{display:none !important;}
 .tv-embed-widget-wrapper__logo-link{display:none !important;}
+.dashboard_style > .trading_view > span{display:none !important}
+.dashboard_style > .trading_view > div{height:120 !important}
 
 .dropbtn {
     /*background-color: #4CAF50;*/
