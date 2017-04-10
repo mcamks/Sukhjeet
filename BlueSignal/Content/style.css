@@ -438,6 +438,11 @@ hr{border-color:#d1d1d1; }
 .sidemenu ul .Research a:hover{background:#1e6eff url(../images/research_icon_active.png) center center no-repeat;}
 .sidemenu ul .Research.active a{background:#1e6eff url(../images/research_icon_active.png) center center no-repeat;}
 
+
+.sidemenu ul .bar_chart a{background:url(../images/bar1_gray.png) center center no-repeat;height:41px;}
+.sidemenu ul .bar_chart a:hover{background:#1e6eff url(../images/bar1_active.png) center center no-repeat;}
+.sidemenu ul .bar_chart.active a{background:#1e6eff url(../images/bar1_active.png) center center no-repeat;}
+
 .sidemenu ul .Charts a{background:url(../images/chart1_active.png) center center no-repeat;height:41px;}
 .sidemenu ul .Charts a:hover{background:#1e6eff url(../images/chart1_gray.png) center center no-repeat;}
 .sidemenu ul .Charts.active a{background:#1e6eff url(../images/chart1_gray.png) center center no-repeat;}
@@ -476,7 +481,7 @@ hr{border-color:#d1d1d1; }
     .dashboard_style .panel {margin:0px !important; border:none !important; box-shadow:none !important;}
     .dashboard_style .panel-group {margin:0px !important;}
 
-.sprite_icon1 {
+/*.sprite_icon1 {
      background: url('../images/sprite1.png') no-repeat center top;padding:4px 0px !important;
      height:32px !important;
 }
@@ -492,14 +497,14 @@ hr{border-color:#d1d1d1; }
 .sidemenu ul li a:hover.sprite_icon2:hover{ background: url('../images/sprite2.png') no-repeat bottom center #1f6df7;}
 .sidemenu ul li a:hover.sprite_icon3:hover{ background: url('../images/sprite3.png') no-repeat bottom center #1f6df7;}
 
-.sidemenu ul li a:hover.sprite_icon1.active a{ background: url('../images/sprite1.png') no-repeat bottom center #1f6df7;}
+.sidemenu ul li a:hover.sprite_icon1.active a{ background: url('../images/sprite1.png') no-repeat bottom center #1f6df7;}*/
 .navbar_custom{padding:8px 0px;}
 .navbar_custom .active_page{top:13px !important;}
 
 .tv-embed-widget-wrapper__header{display:none !important;}
 .tv-embed-widget-wrapper__logo-link{display:none !important;}
 .dashboard_style > .trading_view > span{display:none !important}
-.dashboard_style > .trading_view > div{height:120 !important}
+.dashboard_style > .trading_view > div{height:120px !important}
 
 .dropbtn {
     /*background-color: #4CAF50;*/
