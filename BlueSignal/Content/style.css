@@ -443,7 +443,7 @@ hr{border-color:#d1d1d1; }
 .sidemenu ul .bar_chart a:hover{background:#1e6eff url(../images/bar1_active.png) center center no-repeat;}
 .sidemenu ul .bar_chart.active a{background:#1e6eff url(../images/bar1_active.png) center center no-repeat;}
 
-.sidemenu ul .Charts a{background:url(../images/chart1_active.png) center center no-repeat;height:41px;}
+/*.sidemenu ul .Charts a{background:url(../images/chart1_active.png) center center no-repeat;height:41px;}*/
 .sidemenu ul .Charts a:hover{background:#1e6eff url(../images/chart1_gray.png) center center no-repeat;}
 .sidemenu ul .Charts.active a{background:#1e6eff url(../images/chart1_gray.png) center center no-repeat;}
 
