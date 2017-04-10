@@ -64,4 +64,23 @@ namespace BlueSignal.Common
 
 
     }
+
+
+    public static class Helpers2
+    {
+        public static string IsFirstTime()
+        {
+            return HttpContext.Current.Session["firstTimeCheck"] != null ? Convert.ToString(HttpContext.Current.Session["firstTimeCheck"]) : "0";
+        }
+
+
+        public static string ActiveCssClass
+        {
+            get
+            {
+                return HttpContext.Current.Session["ActiveCssClass"] != null ? Convert.ToString(HttpContext.Current.Session["ActiveCssClass"]) : "Dashboard";
+            }
+        }
+
+    }
 }

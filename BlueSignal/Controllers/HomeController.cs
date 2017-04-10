@@ -35,8 +35,11 @@ namespace BlueSignal.Controllers
         public async Task<ActionResult> Index()
         {
             if (Session["SystemUser"] == null)
+            {
                 await Auth();
+            }
 
+            Session["ActiveCssClass"] = "Settings";
             return await Task.FromResult(View());
         }
 
@@ -148,13 +151,13 @@ namespace BlueSignal.Controllers
             if (Session["SystemUser"] == null)
                 await Auth();
 
+            Session["ActiveCssClass"] = "Dashboard";
             return View();
         }
         [LogonAuthorize]
-        public ActionResult Charts()
+        public ActionResult Charts(string p, string c, string css)
         {
-
-
+            Session["ActiveCssClass"] = css;
             return View();
         }
         [LogonAuthorize]
@@ -755,6 +758,7 @@ namespace BlueSignal.Controllers
         [LogonAuthorize]
         public ActionResult Admin()
         {
+            Session["ActiveCssClass"] = "Admin";
             return View();
         }
         [LogonAuthorize]
@@ -762,6 +766,7 @@ namespace BlueSignal.Controllers
         {
             var codeInSession = Convert.ToString(Session["DefaultKey"]);
             ViewBag.Code = codeInSession;
+            Session["ActiveCssClass"] = "Data";
             return View();
         }
 
@@ -771,6 +776,7 @@ namespace BlueSignal.Controllers
         {
             var codeInSession = Convert.ToString(Session["DefaultKey"]);
             ViewBag.Code = codeInSession;
+            Session["ActiveCssClass"] = "Research";
             return View();
         }
 
@@ -781,7 +787,6 @@ namespace BlueSignal.Controllers
             ViewBag.Code = codeInSession;
             return View();
         }
-
 
         public async Task<ActionResult> FinanceInfoView(string symbol)
         {
@@ -796,7 +801,6 @@ namespace BlueSignal.Controllers
             }
             return View(new FinanceInfo { Result = result });
         }
-
 
         public async Task<JsonResult> ReloadFinanceInfo(string symbol)
         {

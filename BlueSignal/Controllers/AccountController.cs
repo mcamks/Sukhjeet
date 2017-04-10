@@ -491,11 +491,17 @@ namespace BlueSignal.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
         public ActionResult LogOff()
         {
             Session.RemoveAll();
             Session.Abandon();
+
+            // Invalidate the Cache on the Client Side
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
+            Response.Cache.SetNoStore();
+
+
             //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Login", "Account");
         }
