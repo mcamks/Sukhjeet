@@ -438,15 +438,15 @@ hr{border-color:#d1d1d1; }
 .sidemenu ul .Research a:hover{background:#1e6eff url(../images/research_icon_active.png) center center no-repeat;}
 .sidemenu ul .Research.active a{background:#1e6eff url(../images/research_icon_active.png) center center no-repeat;}
 
-.sidemenu ul .Charts a{background:url(../images/chart1_active.png) center center no-repeat;height:41px;}
+/*.sidemenu ul .Charts a{background:url(../images/chart1_active.png) center center no-repeat;height:41px;}*/
 .sidemenu ul .Charts a:hover{background:#1e6eff url(../images/chart1_gray.png) center center no-repeat;}
 .sidemenu ul .Charts.active a{background:#1e6eff url(../images/chart1_gray.png) center center no-repeat;}
 
-.sidemenu ul .Charts2 a{background:url(../images/chart2_gray.png) center center no-repeat;height:41px;}
+/*.sidemenu ul .Charts2 a{background:url(../images/chart2_gray.png) center center no-repeat;height:41px;}*/
 .sidemenu ul .Charts2 a:hover{background:#1e6eff url(../images/chart2_active.png) center center no-repeat;}
 .sidemenu ul .Charts2.active a{background:#1e6eff url(../images/chart2_active.png) center center no-repeat;}
 
-.sidemenu ul .Charts3 a{background:url(../images/chart3_gray.png) center center no-repeat;height:41px;}
+/*.sidemenu ul .Charts3 a{background:url(../images/chart3_gray.png) center center no-repeat;height:41px;}*/
 .sidemenu ul .Charts3 a:hover{background:#1e6eff url(../images/chart3_active.png) center center no-repeat;}
 .sidemenu ul .Charts3.active a{background:#1e6eff url(../images/chart3_active.png) center center no-repeat;}
 
