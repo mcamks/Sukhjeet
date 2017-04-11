@@ -376,13 +376,13 @@ function GetAndBindMarketAllChartsData() {
                 customColor = ['#f45b5b', '#8085e9', '#8d4654', '#7798BF', '#aaeeee', '#ff0066', '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'];
 
                 if ($("#chartcontainer_dailySecond").length > 0)
-                    BindCharts("chartcontainer_dailySecond", data, symbolTitle, customColor, 1, false, false, false);
+                    BindCharts("chartcontainer_dailySecond", data, symbolTitle, customColor, 1, false, true, true);
                 if ($("#chartcontainer_dailyBulQuantData").length > 0)
-                    BindCharts("chartcontainer_dailyBulQuantData", data, symbolTitle, customColor, 1, false, false, false);
+                    BindCharts("chartcontainer_dailyBulQuantData", data, symbolTitle, customColor, 1, false, true, true);
                 if ($("#chartcontainer_dailyBuleFractal").length > 0)
-                    BindCharts("chartcontainer_dailyBuleFractal", data, symbolTitle, customColor, 1, false, false, false);
+                    BindCharts("chartcontainer_dailyBuleFractal", data, symbolTitle, customColor, 1, false, true, true);
                 if ($("#chartcontainer_dailyBlueNeural").length > 0)
-                    BindCharts("chartcontainer_dailyBlueNeural", data, symbolTitle, customColor, 1, false, false, false);
+                    BindCharts("chartcontainer_dailyBlueNeural", data, symbolTitle, customColor, 1, false, true, true);
 
                 $('.highcharts-scrollbar').hide();
             }

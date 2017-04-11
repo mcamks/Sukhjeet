@@ -443,15 +443,15 @@ hr{border-color:#d1d1d1; }
 .sidemenu ul .bar_chart a:hover{background:#1e6eff url(../images/bar1_active.png) center center no-repeat;}
 .sidemenu ul .bar_chart.active a{background:#1e6eff url(../images/bar1_active.png) center center no-repeat;}
 
-/*.sidemenu ul .Charts1 a{background:url(../images/chart1_gray.png) center center no-repeat;height:41px;}*/
+.sidemenu ul .Charts1 a{background:url(../images/chart1_gray.png) center center no-repeat;height:41px;}
 .sidemenu ul .Charts1 a:hover{background:#1e6eff url(../images/chart1_active.png) center center no-repeat;}
 .sidemenu ul .Charts1.active a{background:#1e6eff url(../images/chart1_active.png) center center no-repeat;}
 
-/*.sidemenu ul .Charts2 a{background:url(../images/chart2_gray.png) center center no-repeat;height:41px;}*/
+.sidemenu ul .Charts2 a{background:url(../images/chart2_gray.png) center center no-repeat;height:41px;}
 .sidemenu ul .Charts2 a:hover{background:#1e6eff url(../images/chart2_active.png) center center no-repeat;}
 .sidemenu ul .Charts2.active a{background:#1e6eff url(../images/chart2_active.png) center center no-repeat;}
 
-/*.sidemenu ul .Charts3 a{background:url(../images/chart3_gray.png) center center no-repeat;height:41px;}*/
+.sidemenu ul .Charts3 a{background:url(../images/chart3_gray.png) center center no-repeat;height:41px;}
 .sidemenu ul .Charts3 a:hover{background:#1e6eff url(../images/chart3_active.png) center center no-repeat;}
 .sidemenu ul .Charts3.active a{background:#1e6eff url(../images/chart3_active.png) center center no-repeat;}
 
@@ -577,8 +577,8 @@ hr{border-color:#d1d1d1; }
     border-bottom: 7px solid #1E6EFF;
     
 }
-.arrow img{float:right; margin-right:9px; margin-top:8px;}
+.arrow img{}
 .arrow_open {
     transform: rotate(180deg);
 }
-                  .showHide_btn{background:#1E6EFF; color:#fff; position:absolute; z-index:2;border:none;padding:6px;border-radius:4px;width:229px;bottom:229px; right:0px;}
+.showHide_btn{background:#1E6EFF; color:#fff; width:46px; height:24px; text-align:center; cursor:pointer;}
