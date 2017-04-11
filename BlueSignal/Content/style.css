@@ -427,7 +427,7 @@ hr{border-color:#d1d1d1; }
 .date_time .time i{margin-right:6px;}
 .date_time .time sub{color:#a9b2c2;}
 
-.sidemenu{float:left; width:46px; position:absolute; z-index:99; margin-top: 117px;}
+.sidemenu{float:left; width:46px; position:fixed; /*z-index:99;*/ z-index:1;background:#fff;  margin-top: 178px;}
 .sidemenu ul{list-style:none; padding:0; margin:0;}
 .sidemenu ul li{float:left; border-bottom:1px solid #e7e4e4;}
 .sidemenu ul li a{color:#707070; width:46px; text-align:center; padding:10px 0; display:block; font-size:18px; /*height:41px;*/}
@@ -443,9 +443,9 @@ hr{border-color:#d1d1d1; }
 .sidemenu ul .bar_chart a:hover{background:#1e6eff url(../images/bar1_active.png) center center no-repeat;}
 .sidemenu ul .bar_chart.active a{background:#1e6eff url(../images/bar1_active.png) center center no-repeat;}
 
-/*.sidemenu ul .Charts a{background:url(../images/chart1_active.png) center center no-repeat;height:41px;}*/
-.sidemenu ul .Charts a:hover{background:#1e6eff url(../images/chart1_gray.png) center center no-repeat;}
-.sidemenu ul .Charts.active a{background:#1e6eff url(../images/chart1_gray.png) center center no-repeat;}
+/*.sidemenu ul .Charts1 a{background:url(../images/chart1_gray.png) center center no-repeat;height:41px;}*/
+.sidemenu ul .Charts1 a:hover{background:#1e6eff url(../images/chart1_active.png) center center no-repeat;}
+.sidemenu ul .Charts1.active a{background:#1e6eff url(../images/chart1_active.png) center center no-repeat;}
 
 /*.sidemenu ul .Charts2 a{background:url(../images/chart2_gray.png) center center no-repeat;height:41px;}*/
 .sidemenu ul .Charts2 a:hover{background:#1e6eff url(../images/chart2_active.png) center center no-repeat;}
@@ -455,13 +455,14 @@ hr{border-color:#d1d1d1; }
 .sidemenu ul .Charts3 a:hover{background:#1e6eff url(../images/chart3_active.png) center center no-repeat;}
 .sidemenu ul .Charts3.active a{background:#1e6eff url(../images/chart3_active.png) center center no-repeat;}
 
-.content{margin-left:50px; padding-top:20px;}
+.content{margin-left:50px; padding-top:20px; margin-top:171px;}
 
 .blue_heading_panel .panel{border:5px solid #eaecef;}
 .blue_heading_panel .panel > .panel-heading{padding:10px 15px !important;}
 .blue_heading_panel .panel > .panel-heading{background:#c3c3c3 !important; color:#fff !important;}
 .blue_heading_panel .panel > .panel-heading .panel-title{background:#c3c3c3 !important; color:#1e6eff !important;}
 .blue_heading_panel .panel > .panel-heading .panel-title i{background: #1e6eff; color: #fff; padding: 3px;}
+.panel > .panel-heading .panel-title a i{background: #1e6eff; color: #fff; padding: 3px;}
 
 .yahoo-custom #maincontent, .yahoo-custom .sixwide{
     width: 100% !important;
@@ -475,9 +476,9 @@ hr{border-color:#d1d1d1; }
     width: 100% !important;
 }
 
-    .dashboard_style{background: #fff none repeat scroll 0 0; height: 117px; margin-top: 0;width:100%; float:left;padding:10px 0px 0px 0px; }
+    .dashboard_style{background: #fafafa; border-bottom:4px solid #1e6eff; height: 178px; margin-top: 0;width:100%; float:left;padding:4px 0px 0px 0px; position:fixed; z-index:1; }
     
-    .dashboard_style .panel-body {height:107px; padding:14px 6px 0px;}
+    .dashboard_style .panel-body {height:168px; padding:14px 6px 0px; background:#fafafa;}
     .dashboard_style .panel {margin:0px !important; border:none !important; box-shadow:none !important;}
     .dashboard_style .panel-group {margin:0px !important;}
 
@@ -528,7 +529,7 @@ hr{border-color:#d1d1d1; }
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     left:53px;
-    top:0px;
+    top:-43px;
 }
 .dropdown-content li{display:inline; width:100%;}
 .dropdown-content li:first-child{font-weight:bold; /*height:42px !important;*/}
@@ -562,7 +563,7 @@ hr{border-color:#d1d1d1; }
     top: 17px;
     transform:rotate(-89deg);
 }
-.dropdown .btn-group .dropdown-content::after {
+/*.dropdown .btn-group .dropdown-content::after {
     border-bottom: 6px solid #fff;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
@@ -571,8 +572,13 @@ hr{border-color:#d1d1d1; }
     position: absolute;
     right: 10px;
     top: -6px;
-}
+}*/
 .dropdown .btn-group .dropdown-content::before:hover {
     border-bottom: 7px solid #1E6EFF;
     
 }
+.arrow img{float:right; margin-right:9px; margin-top:8px;}
+.arrow_open {
+    transform: rotate(180deg);
+}
+                  .showHide_btn{background:#1E6EFF; color:#fff; position:absolute; z-index:2;border:none;padding:6px;border-radius:4px;width:229px;bottom:229px; right:0px;}
