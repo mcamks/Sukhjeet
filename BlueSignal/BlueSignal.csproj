@@ -290,8 +290,6 @@
     <Content Include="images\chart2_gray.png" />
     <Content Include="images\chart3_active.png" />
     <Content Include="images\chart3_gray.png" />
-    <Content Include="images\chart_gray.png" />
-    <Content Include="images\chart_white.png" />
     <Content Include="images\favicon.png" />
     <Content Include="images\arrow_up.png" />
     <Content Include="images\blufractal_active.png" />
@@ -363,6 +361,7 @@
     <Content Include="fonts\gruppo-regular-webfont.woff2" />
     <None Include="Properties\PublishProfiles\BluSignalPublishFile.pubxml" />
     <None Include="Properties\PublishProfiles\BS.pubxml" />
+    <None Include="Properties\PublishProfiles\SK.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ClearForm.js" />
