@@ -127,7 +127,7 @@ namespace BlueSignal.Controllers
                 var objResponse = jsonString;
                 Rootobject facebookFriends = new JavaScriptSerializer().Deserialize<Rootobject>(objResponse);
 
-                if (facebookFriends != null && facebookFriends.response_code == "200" && facebookFriends.response_data != null && facebookFriends.response_data.bundles != null && facebookFriends.response_data.bundles.Count > 0)
+                if (facebookFriends != null && facebookFriends.response_code == "200" && facebookFriends.response_data != null && facebookFriends.response_data.bundles != null && (facebookFriends.response_data.bundles.Count > 0 || !string.IsNullOrEmpty(facebookFriends.response_data.membership_level_name)))
                 {
                     if (facebookFriends.response_data.bundles.Count == 0 && !string.IsNullOrEmpty(facebookFriends.response_data.membership_level_name))
                     {
