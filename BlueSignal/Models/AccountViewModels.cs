@@ -161,6 +161,6 @@ namespace BlueSignal.Models
         public int IsSuccess { get; set; }
 
         [Display(Name = "URL")]
-        public string Url { get; set; } = "http://dashboard.blusignals.com/home/Dashboard"; //"http://dashboard.blusignals.com/home/Dashboard";
+        public string Url { get; set; } = "https://dashboard.blusignals.com/home/Dashboard"; //"https://dashboard.blusignals.com/home/Dashboard";
     }
 }

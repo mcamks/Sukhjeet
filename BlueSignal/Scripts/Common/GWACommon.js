@@ -377,6 +377,8 @@ function GetAndBindMarketAllChartsData() {
 
                 if ($("#chartcontainer_dailySecond").length > 0)
                     BindCharts("chartcontainer_dailySecond", data, symbolTitle, customColor, 1, false, true, true);
+                if ($("#chartcontainer_dailySecond1").length > 0)
+                    BindCharts("chartcontainer_dailySecond1", data, symbolTitle, customColor, 1, false, true, true);
                 if ($("#chartcontainer_dailyBulQuantData").length > 0)
                     BindCharts("chartcontainer_dailyBulQuantData", data, symbolTitle, customColor, 1, false, true, true);
                 if ($("#chartcontainer_dailyBuleFractal").length > 0)
@@ -829,4 +831,8 @@ function BindBluFractalMarketsPopup(data, selector) {
 }
 
 
-
+function GetToggleTickerState() {
+    $.get("/Charts/GetTickerToggleState", null, function (data) {
+        ToggleTickerIcon1(data.Data);
+    });
+}

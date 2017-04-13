@@ -242,6 +242,7 @@
     <Compile Include="Common\Helpers.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ChartsController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -364,11 +365,13 @@
     <None Include="Properties\PublishProfiles\SK.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\charting_library.min.js" />
     <Content Include="Scripts\ClearForm.js" />
     <Content Include="Scripts\Common\CommonEnums.js" />
     <Content Include="Scripts\Common\Customer\CustomerDetailJs.js" />
     <Content Include="Scripts\Common\GWACommon.js" />
     <Content Include="Scripts\Common\Index.js" />
+    <Content Include="Scripts\datafeed.js" />
     <Content Include="Scripts\dataTables.editor.min.js" />
     <Content Include="Scripts\dataTables.select.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -454,6 +457,7 @@
     <Content Include="Views\Home\_BSLogin.cshtml" />
     <Content Include="Shared\SessionAliveHandler.ashx" />
     <Content Include="Views\Home\_GetMarketChartDataPartial.cshtml" />
+    <Content Include="Views\Charts\_Chart1View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

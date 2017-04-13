@@ -52,6 +52,12 @@
                                     <img src="~/images/research_icon_active.png" />
                                 </span>
                             }
+                            else if (Request.QueryString["p"] == "Systems")
+                            {
+                                <span class="cogs_icon">
+                                    <i class="fa @Request.QueryString["c"]" aria-hidden="true"></i>
+                                </span>
+                            }
                             else
                             {
                                 <span>
@@ -97,7 +103,6 @@
 
                         }
     }
-
 
     <div class="col-sm-12 dashboard_style open" id="c_1">
         <div class="panel-group accordion" style="margin-bottom:5px; margin-top:5px;">
@@ -147,15 +152,14 @@
     </div>
     <div class="sidemenu">
         <ul>
-            <li id="tab_1" onClick="abc('1')" class="showHide_btn arrow">
-               <img src="~/images/white.png" id="up_1" class="arrow_remove arrow_open" />
-               
+            <li id="tab_1" onClick="ToggleTickerIcon('1')" class="showHide_btn arrow">
+                <img src="~/images/white.png" id="up_1" class="arrow_remove arrow_open" />
             </li>
             <li class="remove Dashboard active"><a href="@Url.Action("Dashboard","Home",new { p = "Dashboard",c="fa-tachometer" })" data-toggle="tooltip" title="Dashboard" data-placement="right"><i class="fa fa-tachometer" aria-hidden="true"></i></a></li>
-            <li class="remove bar_chart"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart" })" data-toggle="tooltip" title="Charts" data-placement="right"></a></li>
-            <li class="remove Charts Charts1"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart", css ="Chart1" })" data-toggle="tooltip" title="Charts" data-placement="right" class="sprite_icon1"></a></li>
-            <li class="remove Charts Charts2"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart", css ="Chart2" })" data-toggle="tooltip" title="Charts" data-placement="right" class="sprite_icon2"></a></li>
-            <li class="remove Charts Charts3"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart", css ="Chart3" })" data-toggle="tooltip" title="Charts" data-placement="right" class="sprite_icon3"></a></li>
+            <li class="remove bar_chart"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart" })" data-toggle="tooltip" title="4 Chart Windows" data-placement="right"></a></li>
+            <li class="remove Charts Charts1"><a href="@Url.Action("Charts","Charts",new { p = "Charts",c= "fa-line-chart", css ="Chart1" })" data-toggle="tooltip" title="Symbol Chart 1" data-placement="right" class="sprite_icon1"></a></li>
+            <li class="remove Charts Charts2"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart", css ="Chart2" })" data-toggle="tooltip" title="Symbol Chart 2" data-placement="right" class="sprite_icon2"></a></li>
+            <li class="remove Charts Charts3"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart", css ="Chart3" })" data-toggle="tooltip" title="Symbol Chart 3" data-placement="right" class="sprite_icon3"></a></li>
             <li class="remove Settings"><a href="@Url.Action("Index","Home",new { p = "Systems",c= "fa-cogs" })" data-toggle="tooltip" title="Systems" data-placement="right"><i class="fa fa-cogs" aria-hidden="true"></i></a></li>
             <li class="remove Research">
                 <a href="@Url.Action("Research","Home",new { p = "Research",c= "Research" })" data-toggle="tooltip" title="Research" data-placement="right">
@@ -211,8 +215,6 @@
                 if (HttpContextSessionWrapperExtension.SessionUser != null)
                 {
                     <hr />
-
-
                     <footer>
                         <div class="col-sm-12">
                             <p>&copy; @DateTime.Now.Year BluSignals</p>
@@ -242,7 +244,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
-                    <h4 class="modal-title">Change Password</h4>
+                    <h4 class="modal-title">Dashboard Link</h4>
                 </div>
                 <div id="_loginBSPartial" class="modal-body">
                     @{Html.RenderPartial("~/Views/Home/_BSLogin.cshtml", new SetPassowrdModel() { IsSuccess = 0 });}
@@ -270,34 +272,76 @@
     <script src="https://code.highcharts.com/stock/highstock.js"></script>
     <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 
-
     <script>
-
-
-        function abc(id)
+        function ToggleTickerIcon(id)
         {
             var tab = "tab_" + id;
             var c = "c_" + id;
             var up = "up_" + id;
-
+            var state = "hide";
             if ($("#" + c).is(':hidden')) {
-
                 $(".open").hide();
                 $(".arrow_remove").removeClass("arrow_open");
                 $("#" + c).show();
                 $("#" + up).addClass("arrow_open");
                 $(".sidemenu").css("margin-top", "178px");
                 $(".content").css("margin-top", "171px");
-
+                $("#"+tab).attr("title","Close");
+                state="open";
             } else {
                 $("#" + c).hide();
                 $(".arrow_remove").removeClass("arrow_open");
                 $(".sidemenu").css("margin-top", "19px");
                 $(".content").css("margin-top", "16px");
+                $("#"+tab).attr("title","Open");
+                state="close";
             }
+            SetTickerToggleState(state);
         }
 
+        function SetTickerToggleState(toggleState)
+        {
+            var data1 = {
+                'state': toggleState
+            };
 
+            $.ajax({
+                type: "POST",
+                url: "/Charts/SetTickerToggleState",
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify(data1),
+                success: function (response) {
+
+                },
+                error: function (msg, error) {
+
+                }
+            });
+        }
+
+        function ToggleTickerIcon1(state)
+        {
+            var tab = "tab_" + id;
+            var c = "c_" + id;
+            var up = "up_" + id;
+            if (state == "open") {
+                $(".open").hide();
+                $(".arrow_remove").removeClass("arrow_open");
+                $("#" + c).show();
+                $("#" + up).addClass("arrow_open");
+                $(".sidemenu").css("margin-top", "178px");
+                $(".content").css("margin-top", "171px");
+                $("#"+tab).attr("title","Close");
+            } else {
+                $("#" + c).hide();
+                $(".arrow_remove").removeClass("arrow_open");
+                $(".sidemenu").css("margin-top", "19px");
+                $(".content").css("margin-top", "16px");
+                $("#"+tab).attr("title","Open");
+            }
+        }
     </script>
     <script>
         $(document).ready(function () {
@@ -327,6 +371,8 @@
 
 
             SetActiveClass('@Helpers2.ActiveCssClass');
+
+            GetToggleTickerState();
         });
 
         function formatAMPM(date) {
