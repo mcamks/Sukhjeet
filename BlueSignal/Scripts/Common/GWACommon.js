@@ -833,6 +833,6 @@ function BindBluFractalMarketsPopup(data, selector) {
 
 function GetToggleTickerState() {
     $.get("/Charts/GetTickerToggleState", null, function (data) {
-        ToggleTickerIcon1(data.Data);
+        ToggleTickerIcon1(data);
     });
 }
