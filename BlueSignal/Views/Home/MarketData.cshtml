@@ -1,6 +1,5 @@
 ﻿
 @using BlueSignal.Controllers;
-
 <script type="text/javascript">
     function callYahooFinance() {
         var a = $('#code').val();
@@ -8,15 +7,12 @@
         window.open(_url, '_blank');
     }
 </script>
-
 <style>
     .highcharts-input-group {
         display: none;
     }
 </style>
-
 @*<h2 class="market_title">MarketData</h2>*@
-
 
 <div>
     <div class="tab_block">
@@ -26,7 +22,6 @@
                     <div class="col-sm-8">
                         <div class="row">
                             <label class="col-sm-3 symbol_text" for="code">Symbol:</label>
-
 
                             @if (HttpContextSessionWrapperExtension.SessionUser.IsBluFactrol)
                             {
@@ -52,20 +47,7 @@
                                     @*<i class="fa fa-window-maximize" title="Major Market" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i>*@
                                     <button type="button" id="btnLoad" data-toggle="tooltip" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage" class="btn btn-primary btn_style btn_whitegray disabled" onclick="return false;">Load</button>
                                 </div>
-
-
                             }
-
-
-
-
-
-
-
-
-
-
-
                         </div>
                     </div>
                     <div class="col-sm-3" style="display:none;">
@@ -76,32 +58,29 @@
                                     <option value="daily">daily</option>
                                 </select>
                             </div>
-
                         </div>
                     </div>
-
                     <div class="col-sm-3" style="display:none;">
                         <div class="form-group row">
                             <label class="col-sm-3" for="date">Start Date</label>
                             <div class="col-sm-4">
                                 <input type="text" id="date" name="codedate" class="form-control" value="20161101000000">
                             </div>
-
                         </div>
                     </div>
                     <div class="col-sm-4">
-
                         @if (HttpContextSessionWrapperExtension.SessionUser.IsBluFactrol)
                         {
                             <button type="button" class="btn btn-primary btn_style pull-right btn_whitegray" data-toggle="modal" data-target="#modalBluFractalMarkets" title="Choose Major Market" @*onclick="callYahooFinance()"*@>Major Markets</button>
                         }
                         else
-                        { <button type="button" disabled="disabled" class="btn btn-primary btn_style pull-right btn_whitegray" data-toggle="modal" data-target="#myModal" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage">Major Markets</button> }
+                        {
+                            <button type="button" disabled="disabled" class="btn btn-primary btn_style pull-right btn_whitegray" data-toggle="modal" data-target="#myModal" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage">Major Markets</button> 
+                        }
                     </div>
                 </div>
                 <div class="sub_info">
                     <div class="">
-
                         @*<div class="form-group row">
                                 <label class="col-sm-3">Symbd:</label>
                                 <div class="col-sm-4">
@@ -113,7 +92,6 @@
                             </div>
                         *@
                         <div class="form-group row">
-
                             <label class="col-sm-6"><span><img src="~/images/sideicon.jpg" /></span>Name of Security</label>
                             <div class="col-sm-6">
                                 <input type="text" id="Name" disabled class="form-control form-width">
@@ -161,43 +139,32 @@
                                         <div class="trend_status">
                                             <div class="status_signal"><h3>Positive</h3></div>
                                         </div>
-
                                         <div class="info_row">
-
                                             <span class="icon"><img src="~/images/date_icon.jpg" /></span>
                                             <label class="date_text">Starting Date</label>
                                             <label class="days_text">06 Jan,2017</label>
-
                                         </div>
                                         <div class="info_row">
-
                                             <span class="icon"><img src="~/images/dollar_icon.png" /></span>
                                             <label class="date_text">Starting Price</label>
                                             <label class="days_text">$50.00</label>
-
                                         </div>
                                         <div class="info_row">
-
                                             <span class="icon"><img src="~/images/days_icon.png" /></span>
                                             <label class="date_text">Days in Trend</label>
                                             <label class="days_text">5 days</label>
-
                                         </div>
-
                                     </td>
                                     <td align="center">
                                         <img src="~/images/meter.jpg" />
                                     </td>
                                 </tr>
-
                             </tbody>
-
                         </table>
                         <div class="fail_points">
                             <label>$14444.56</label>
                             <label class="projected">Projected Fail Point <i class="fa fa-angle-right" aria-hidden="true"></i></label>
                         </div>
-
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -214,29 +181,21 @@
                                     <td>
                                         <div class="text-center"><div class="pannel_inner_new">Neutral</div></div>
 
-
                                         <div class="info_row">
-
                                             <span class="icon"><img src="~/images/date_icon.jpg" /></span>
                                             <label class="date_text">Starting Date</label>
                                             <label class="days_text">06 Jan,2017</label>
-
                                         </div>
                                         <div class="info_row">
-
                                             <span class="icon"><img src="~/images/dollar_icon.png" /></span>
                                             <label class="date_text">Starting Price</label>
                                             <label class="days_text">$50.00</label>
-
                                         </div>
                                         <div class="info_row">
-
                                             <span class="icon"><img src="~/images/days_icon.png" /></span>
                                             <label class="date_text">Days in Trend</label>
                                             <label class="days_text">5 days</label>
-
                                         </div>
-
                                     </td>
                                     <td align="center">
                                         @*<div class="meter">
@@ -263,7 +222,6 @@
                                     </td>
                                 </tr>
                             </tbody>
-
                         </table>
                         <div class="fail_points">
                             <label>$14444.56</label>

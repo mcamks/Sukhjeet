@@ -37,7 +37,7 @@ namespace BlueSignal.Controllers
         public ActionResult GetTickerToggleState()
         {
             if (Session["TickerToggleState"] == null)
-                Session["TickerToggleState"] = "open";
+                Session["TickerToggleState"] = "close";
 
             return Json(Convert.ToString(Session["TickerToggleState"]), JsonRequestBehavior.AllowGet);
         }

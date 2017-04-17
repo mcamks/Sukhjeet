@@ -19,6 +19,7 @@
         btnClassToDisabled = "disabled";
         ToolTipText = @HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage;
     }
+
 }
 
 
@@ -81,7 +82,7 @@
 
                     @if (btnClassToDisabled == "")
                     {
-                        <button type="button" @btnClassToDisabled class="btn btn-primary btn_style pull-right btn_whitegray" data-toggle="modal" data-target="#myModal" title="Choose Major Market" @*onclick="callYahooFinance()"*@>Major Markets</button>
+                        <button type="button" @btnClassToDisabled class="btn btn-primary btn_style pull-right btn_whitegray" data-toggle="modal" data-target="#myModalBlueCombo" title="Choose Major Market" @*onclick="callYahooFinance()"*@>Major Markets</button>
                     }
                     else
                     {
@@ -270,6 +271,24 @@
 </div>
 
 <div class="row">
+    <div id="myModalBlueCombo" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg modal_style">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Select Market</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info"> <strong>Note:</strong> If your symbol is not preset, please type it directly into the textbox </div>
+                    <div class="table-responsive">
+                        <input type="hidden" id="hfCssClass1" value="@btnClassToDisabled" />
+                        <table class="table table-bordered" id="tblCategoriesListCombo"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-sm-12">
         <div class="panel-group accordion">
             <div class="panel panel-default">
@@ -295,7 +314,6 @@
                     <h4 class="panel-title">
                         <a data-toggle="collapse" href="#collapse3">
                             <img src="../../images/bluneural_active.png" alt="" />
-
                             <span class="blue_text">Blu</span>Neural | Zones & Pivots
                         </a>
                     </h4>
@@ -309,5 +327,46 @@
             </div>
         </div>
     </div>
+
+    @*<script>
+        function BindMarketCategoriesPopupWindow1(data) {
+            var cssClass = $("#hfCssClass").val();
+            $("#tblCategoriesList1").empty();
+            var htmlContent = '<thead><tr>';
+            var trHtml = '';
+            var newInnerTable = '';
+            var categoryId = 0;
+            $.each(data.categories, function (i, obj) {
+                htmlContent += '<th>' + obj.Text + '</th>';
+
+                var items = $.grep(data.list, function (i, obj1) {
+                    return (i.CategoryId == obj.Value);
+                });
+
+                trHtml += categoryId == 0 ? '<tbody><tr><td>' : "<td>";
+
+                var newInnerTable = "<table class='table table-bordered table-striped'>";
+                if (items.length > 0) {
+                    $.each(items, function (i, item) {
+                        newInnerTable += '<tr><td><a href="#" class="' + cssClass + '">' + item.SymbolName + ' </td></tr>';
+                    });
+                }
+
+                newInnerTable += "</table>";
+                trHtml += newInnerTable + '</td>';
+
+                categoryId = obj.Value;
+            });
+
+            trHtml += '</tr>';
+            htmlContent += '</thead>';
+
+            if (trHtml != '')
+                trHtml += '</tbody>';
+
+            htmlContent += trHtml;
+            $("#tblCategoriesList1").html(htmlContent);
+        }
+    </script>*@
 </div>
 

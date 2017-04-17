@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="col-sm-4">
-                        <button type="button" class="btn btn-primary btn_style pull-right btn_whitegray" data-toggle="modal" data-target="#myModal" title="Choose Major Market" @*onclick="callYahooFinance()"*@>Major Markets</button>
+                        <button type="button" class="btn btn-primary btn_style pull-right btn_whitegray" data-toggle="modal" data-target="#myModalBlueNueral" title="Choose Major Market" @*onclick="callYahooFinance()"*@>Major Markets</button>
                     </div>
                 }
                 else
@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="col-sm-4">
-                        <button type="button" disabled="disabled" class="btn btn-primary btn_style pull-right btn_whitegray" data-toggle="modal" data-target="#myModal" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage" @*onclick="callYahooFinance()"*@>Major Markets</button>
+                        <button type="button" disabled="disabled" class="btn btn-primary btn_style pull-right btn_whitegray" data-toggle="modal" data-target="#myModalBlueNueral" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage" @*onclick="callYahooFinance()"*@>Major Markets</button>
                     </div>
 
                 }
@@ -196,6 +196,24 @@
 
 
 <div class="row">
+
+    <div id="myModalBlueNueral" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg modal_style">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Select Market</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info"> <strong>Note:</strong> If your symbol is not preset, please type it directly into the textbox </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="tblCategoriesListNeural"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-sm-12">
         <div class="panel-group accordion">
             <div class="panel panel-default">

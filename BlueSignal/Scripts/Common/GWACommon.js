@@ -667,8 +667,8 @@ function bindDatatable(selector, data) {
         aaData: data,
         "columns": [
                  { "data": "symbol", "name": "symbol" },
-                 { "data": "timestamp", "name": "timestamp" },
-                 { "data": "tradingDay", "name": "tradingDay" },
+                 //{ "data": "timestamp", "name": "timestamp" },
+                 { "data": "tradingDay", "name": "TradingDate" },
                  { "data": "open", "name": "open" },
                   { "data": "high", "name": "high" },
                    { "data": "low", "name": "low" },

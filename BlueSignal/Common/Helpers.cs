@@ -60,9 +60,6 @@ namespace BlueSignal.Common
 
             return properties;
         }
-
-
-
     }
 
 
@@ -79,6 +76,14 @@ namespace BlueSignal.Common
             get
             {
                 return HttpContext.Current.Session["ActiveCssClass"] != null ? Convert.ToString(HttpContext.Current.Session["ActiveCssClass"]) : "Dashboard";
+            }
+        }
+
+        public static string TickerToggleState
+        {
+            get
+            {
+                return HttpContext.Current.Session["TickerToggleState"] != null ? Convert.ToString(HttpContext.Current.Session["TickerToggleState"]) : "Close";
             }
         }
 

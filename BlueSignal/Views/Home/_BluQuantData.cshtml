@@ -60,7 +60,6 @@
                         </div>
                         <input id="BlueQuanteCode" style="display:none;" class="form-control codeClass" type="text" value="SPY" />
                     </div>
-
                 </div>
             </div>
         </div>
@@ -73,7 +72,6 @@
                             <div class="green_heading"><i class="fa fa-shopping-cart" aria-hidden="true"></i> BUY</div>
                             <div class="red_heading"><i class="fa fa-usd" aria-hidden="true"></i> SELL</div>
                             <input type="hidden" id="hfcssDisabled" value="@btnClassToDisabled" />
-
                             <div class="col-sm-6 border_right">
                                 <div class="todays_signal_list" id="buyItemsDiv">
                                     <div class="info_row">
@@ -166,7 +164,6 @@
                                     </div>
                                 </div>
                             </div>
-
 
                         </div>
                     </div>
@@ -492,6 +489,12 @@
 
         htmlContent += trHtml;
         $("#tblCategoriesList1").html(htmlContent);
+
+        if ($("#tblCategoriesListCombo").length > 0)
+            $("#tblCategoriesListCombo").html(htmlContent);
+
+        if ($("#tblCategoriesListNeural").length > 0)
+            $("#tblCategoriesListNeural").html(htmlContent);
     }
 
     function BindActionData(data) {
