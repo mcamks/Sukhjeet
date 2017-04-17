@@ -374,6 +374,11 @@
 
             if(ttState.toLowerCase() == "open")
                 ToggleTickerIcon1(ttState);
+
+
+            $("#login_window1").click(function() {
+                $(".dropdown-content").toggle();
+            });
         });
 
         function formatAMPM(date) {
@@ -411,6 +416,8 @@
                 }
             });
         }
+
+
     </script>
 </body>
 </html>
