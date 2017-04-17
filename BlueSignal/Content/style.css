@@ -250,6 +250,7 @@ hr{border-color:#d1d1d1; }
     content:"\e114";
     position:absolute;
     right:14px;
+    top:15px;
     color: #c7c6c6;
 }
 .panel-heading a.collapsed:after {
@@ -346,6 +347,7 @@ hr{border-color:#d1d1d1; }
 .blue_text {
     color: #196bfb;
 }
+.bar_type{float:right; margin:3px 22px 0 0;}
 
 .need_more_help{border:1px solid #f39b93; border-left:4px solid #f39b93; background:#fff; padding:15px; margin-bottom:20px; float:left; width:100%;}
 .need_more_help .btn-primary{background:#b00; text-transform:uppercase; border:1px solid #b00;}
@@ -416,10 +418,13 @@ hr{border-color:#d1d1d1; }
 
 .mandatory:after{content:" *"; color:red;}
 
-.active_page{position:absolute; left:45%; padding:5px 10px; font-size:22px; font-weight:bold; color:#1e6eff; line-height:28px; top:3px;} 
-.active_page span{float:left; padding:4px 7px 0px; background:#1e6eff; border-radius:50%; margin-right:5px; color:#fff; width:36px; height:36px; text-align:center;}
-.active_page span.cogs_icon { padding:3px 5px 0px !important; }
-.active_page span.cogs_icon i {font-size:16px !important;}
+.active_page{position:absolute; left:45%; padding:5px 10px; font-size:22px; font-weight:bold; color:#1e6eff;  top:3px;} 
+.active_page span{float:left; padding:1px 7px 0px; background:#1e6eff; border-radius:50%; margin-right:5px; color:#fff; width:36px; height:36px; text-align:center;}
+.active_page span.cogs_icon { padding:1px 5px 0px !important; }
+.active_page span i {font-size:16px !important; float:left; margin:9px 0 0 3px;}
+.active_page span img{float:left; margin:6px 0 0 3px;}
+.active_page span i.fa-question{margin:7px 0 0 5px; font-size:20px !important;}
+/*.active_page span mu{line-height:33px;}*/
 /*.active_page span i{float:left;}*/
 
 .date_time{float:right; margin:2px 2px 0 0; font-size:13px;}
@@ -429,7 +434,7 @@ hr{border-color:#d1d1d1; }
 .date_time .time i{margin-right:6px;}
 .date_time .time sub{color:#a9b2c2;}
 
-.sidemenu{float:left; width:46px; position:fixed; /*z-index:99;*/ z-index:1;background:#fff;  margin-top: 178px;}
+.sidemenu{float:left; width:46px; position:fixed; /*z-index:99;*/ z-index:1031;background:#fff;  margin-top: 178px;}
 .sidemenu ul{list-style:none; padding:0; margin:0;}
 .sidemenu ul li{float:left; border-bottom:1px solid #e7e4e4;}
 .sidemenu ul li a{color:#707070; width:46px; text-align:center; padding:10px 0; display:block; font-size:18px; /*height:41px;*/}
@@ -547,9 +552,9 @@ hr{border-color:#d1d1d1; }
 
 .dropdown-content a:hover {background-color: #f1f1f1}
 
-.dropdown:hover .dropdown-content {
+/*.dropdown:hover .dropdown-content {
     display: block;
-}
+}*/
 
 .dropdown:hover .dropbtn {
     /*background-color: #3e8e41;*/
@@ -562,7 +567,7 @@ hr{border-color:#d1d1d1; }
     display: inline-block !important;
     position: absolute;
     right: 156px;
-    top: 17px;
+    top: 66px;
     transform:rotate(-89deg);
 }
 /*.dropdown .btn-group .dropdown-content::after {
@@ -584,3 +589,64 @@ hr{border-color:#d1d1d1; }
     transform: rotate(180deg);
 }
 .showHide_btn{background:#1E6EFF; color:#fff; width:46px; height:24px; text-align:center; cursor:pointer;}
+.showHide_btn:hover .tooltip{display:block;}
+
+.tooltips {
+  position: relative;
+  display: inline;
+}
+.tooltips .tiptext {
+  position: absolute;
+  
+  color: #FFFFFF;
+  background: #000000;
+  height: 22px;
+  line-height: 20px;
+  text-align: center;
+  visibility: hidden;
+  border-radius: 4px;  
+  font-size:11px;
+  
+}
+.btn_whitegray .tiptext:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -8px;
+  width: 0; height: 0;
+  border-top: 4px solid #000000;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+.btn_whitegray:hover .tiptext {
+  visibility: visible;
+  opacity: 0.8;
+  left: 18%;
+  margin-left: -22px;
+  z-index: 999;
+  bottom:42px;
+  width:122px;
+}
+
+.pull-right .tooltips .tiptext:after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 60%;
+  margin-left: -8px;
+  width: 0; height: 0;
+  border-bottom: 4px solid #000000;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+.pull-right .tooltips:hover .tiptext {
+  visibility: visible;
+  opacity: 0.8;
+  left: 50%;
+  margin-left: -22px;
+  z-index: 999;
+  top:52px;
+  width:50px;
+}
+

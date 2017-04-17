@@ -93,10 +93,10 @@
 
                         @if (HttpContextSessionWrapperExtension.SessionUser.IsBluFactrol)
                         {
-                            <button type="button" class="btn btn-primary btn_style pull-right btn_whitegray" data-toggle="modal" data-target="#modalBluFractalMarkets" title="Choose Major Market" @*onclick="callYahooFinance()"*@>Major Markets</button>
+                            <button type="button" class="btn btn-primary btn_style pull-right btn_whitegray tooltips" data-toggle="modal" data-target="#modalBluFractalMarkets" @*onclick="callYahooFinance()"*@>Major Markets <span class="tiptext">Choose Major Market</span></button>
                         }
                         else
-                        { <button type="button" disabled="disabled" class="btn btn-primary btn_style pull-right btn_whitegray" data-toggle="modal" data-target="#myModal" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage">Major Markets</button> }
+                        { <button type="button" disabled="disabled" class="btn btn-primary btn_style pull-right btn_whitegray tooltips" data-toggle="modal" data-target="#myModal" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage">Major Markets <span class="tiptext">Choose Major Market</span></button> }
                     </div>
                 </div>
                 <div class="sub_info">

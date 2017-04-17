@@ -81,12 +81,12 @@
 
                     @if (btnClassToDisabled == "")
                     {
-                        <button type="button" @btnClassToDisabled class="btn btn-primary btn_style pull-right btn_whitegray" data-toggle="modal" data-target="#myModal" title="Choose Major Market" @*onclick="callYahooFinance()"*@>Major Markets</button>
+                        <button type="button" @btnClassToDisabled class="btn btn-primary btn_style pull-right btn_whitegray tooltips" data-toggle="modal" data-target="#myModal" title="Choose Major Market" @*onclick="callYahooFinance()"*@>Major Markets <span class="tiptext">Choose Major Market</span></button>
                     }
                     else
                     {
 
-                        <button type="button" @btnClassToDisabled class="btn btn-primary btn_style pull-right btn_whitegray" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage" data-toggle="modal" data-target="#myModal" @*onclick="callYahooFinance()"*@>Major Markets</button>
+                        <button type="button" @btnClassToDisabled class="btn btn-primary btn_style pull-right btn_whitegray tooltips" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage" data-toggle="modal" data-target="#myModal" @*onclick="callYahooFinance()"*@>Major Markets <span class="tiptext">Choose Major Market</span></button>
                     }
 
                 </div>

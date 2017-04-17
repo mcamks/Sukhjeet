@@ -29,7 +29,10 @@
         <div class="col-sm-5 ">
             <div class="info_block">
                 <div class="blue_block">
-                    <label class="col-sm-12 symbol_text text-center" for="code"><strong>Selected Security</strong></label>
+                    <label class="col-sm-6 symbol_text text-uppercase" for="code"><strong>Selected Security</strong> </label>
+                    <div class="col-sm-6">
+                        <button type="button" class="btn btn-primary btn_style pull-right btn_whitegray tooltips" @btnClassToDisabled data-toggle="modal" data-target="#myModalBlueQuant" @* onclick="callYahooFinance()" *@>Major Markets <span class="tiptext">Choose Major Market</span></button>
+                    </div>
                 </div>
                 <div class="sub_info">
                     <div class="form-group row">
@@ -68,7 +71,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel panel-default todays_signal">
-                        <div class="panel-heading text-center">Today's Signals</div>
+                        <div class="panel-heading text-center text-uppercase">Today's Signals</div>
                         <div class="panel-body">
                             <div class="green_heading"><i class="fa fa-shopping-cart" aria-hidden="true"></i> BUY</div>
                             <div class="red_heading"><i class="fa fa-usd" aria-hidden="true"></i> SELL</div>
@@ -180,9 +183,7 @@
         <div class="panel-group accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div class="head_form">
-                        <button type="button" class="btn btn-xs btn_major_market" @btnClassToDisabled data-toggle="modal" data-target="#myModalBlueQuant" title="Choose Major Market" @* onclick="callYahooFinance()" *@>Major Markets</button>
-                    </div>
+                   
                     <h4 class="panel-title"> <a data-toggle="collapse" href="#collapse6">Chart</a> </h4>
                 </div>
                 <div id="collapse6" class="panel-collapse collapse in">

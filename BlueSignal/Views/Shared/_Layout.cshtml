@@ -103,7 +103,6 @@
 
                         }
     }
-
     <div class="col-sm-12 dashboard_style open" id="c_1">
         <div class="panel-group accordion" style="margin-bottom:5px; margin-top:5px;">
             <div class="panel">
@@ -152,8 +151,9 @@
     </div>
     <div class="sidemenu">
         <ul>
-            <li id="tab_1" onClick="ToggleTickerIcon('1')" class="showHide_btn arrow">
+            <li id="tab_1" onClick="ToggleTickerIcon('1')" class="showHide_btn arrow" data-toggle="tooltip" data-placement="right" title="Trading View">
                 <img src="~/images/white.png" id="up_1" class="arrow_remove arrow_open" />
+
             </li>
             <li class="remove Dashboard active"><a href="@Url.Action("Dashboard","Home",new { p = "Dashboard",c="fa-tachometer" })" data-toggle="tooltip" title="Dashboard" data-placement="right"><i class="fa fa-tachometer" aria-hidden="true"></i></a></li>
             <li class="remove bar_chart"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart" })" data-toggle="tooltip" title="4 Chart Windows" data-placement="right"></a></li>
@@ -183,8 +183,9 @@
                 </li>*@
             <li class="remove credential dropdown">
                 <div class="btn-group">
-                    <a href="#login_window" data-toggle="modal" title="Login" data-placement="right" class="dropbtn dropdown-toggle">
+                    <a href="#login_window" id="login_window1" data-toggle="tooltip" data-placement="bottom" title="Login" class="dropbtn tooltips">
                         <i class="fa fa-user" aria-hidden="true"></i>
+                        @*<div class="tiptext">Login</div>*@
                     </a>
                     <ul class="dropdown-content">
                         <li>
@@ -271,7 +272,6 @@
     @*<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/dataTables.editor.min.js")"></script>*@
     <script src="https://code.highcharts.com/stock/highstock.js"></script>
     <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
-
     <script>
         function ToggleTickerIcon(id)
         {
@@ -286,18 +286,20 @@
                 $("#" + up).addClass("arrow_open");
                 $(".sidemenu").css("margin-top", "178px");
                 $(".content").css("margin-top", "171px");
-                $("#"+tab).attr("title","Close");
+                //$("#"+tab).attr("title","Close");
                 state="open";
             } else {
                 $("#" + c).hide();
                 $(".arrow_remove").removeClass("arrow_open");
                 $(".sidemenu").css("margin-top", "19px");
                 $(".content").css("margin-top", "16px");
-                $("#"+tab).attr("title","Open");
+                //$("#"+tab).attr("title","Open");
                 state="close";
             }
             SetTickerToggleState(state);
         }
+
+
 
         function SetTickerToggleState(toggleState)
         {
@@ -333,13 +335,13 @@
                 $("#" + up).addClass("arrow_open");
                 $(".sidemenu").css("margin-top", "178px");
                 $(".content").css("margin-top", "171px");
-                $("#"+tab).attr("title","Close");
+                //$("#"+tab).attr("title","Close");
             } else {
                 $("#" + c).hide();
                 $(".arrow_remove").removeClass("arrow_open");
                 $(".sidemenu").css("margin-top", "19px");
                 $(".content").css("margin-top", "16px");
-                $("#"+tab).attr("title","Open");
+                //$("#"+tab).attr("title","Open");
             }
         }
     </script>
@@ -373,6 +375,11 @@
             SetActiveClass('@Helpers2.ActiveCssClass');
 
             GetToggleTickerState();
+
+            $("#login_window1").click(function() {
+                var selector = $(".dropdown-content");
+                selector.toggle();
+            });
         });
 
         function formatAMPM(date) {
