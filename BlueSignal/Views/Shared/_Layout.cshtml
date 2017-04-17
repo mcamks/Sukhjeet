@@ -176,8 +176,9 @@
                 </li>*@
             <li class="remove credential dropdown">
                 <div class="btn-group">
-                    <a href="#login_window" data-toggle="modal" title="Login" data-placement="right" class="dropbtn dropdown-toggle">
+                    <a href="#login_window" id="login_window1" data-toggle="tooltip" data-placement="bottom" title="Login" class="dropbtn tooltips">
                         <i class="fa fa-user" aria-hidden="true"></i>
+                        @*<div class="tiptext">Login</div>*@
                     </a>
                     <ul class="dropdown-content">
                         <li>
@@ -264,7 +265,6 @@
     @*<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/dataTables.editor.min.js")"></script>*@
     <script src="https://code.highcharts.com/stock/highstock.js"></script>
     <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
-
     <script>
         //function ToggleTickerIcon(id)
         //{
@@ -291,6 +291,8 @@
         //    }
         //    SetTickerToggleState(state);
         //}
+
+
 
         function SetTickerToggleState(toggleState)
         {

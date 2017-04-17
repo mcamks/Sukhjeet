@@ -74,9 +74,9 @@ namespace BlueSignalCore.Models
         //public bool IsBluQuant { get { return ((this.bundles.Any(x => (x.id == (int)WP_UserBundle.BLUQA) || x.id == (int)WP_UserBundle.BLUQM)) || IsAdminUser); } }
 
 
-        public bool IsBluFactrol { get { return (bundles.Any(x => x.name.ToLower().Trim().Contains("blufractal")) || IsAdminUser); } }
-        public bool IsBluNeutral { get { return (bundles.Any(x => x.name.ToLower().Trim().Contains("bluneural")) || IsAdminUser); } }
-        public bool IsBluQuant { get { return (bundles.Any(x => x.name.ToLower().Trim().Contains("bluquant")) || IsAdminUser); } }
+        public bool IsBluFactrol { get { return (bundles.Any(x => x.name.ToLower().Trim().Contains("fractal")) || IsAdminUser); } }
+        public bool IsBluNeutral { get { return (bundles.Any(x => x.name.ToLower().Trim().Contains("neural")) || IsAdminUser); } }
+        public bool IsBluQuant { get { return (bundles.Any(x => x.name.ToLower().Trim().Contains("quant")) || IsAdminUser); } }
         public bool IsBluCombo { get { return ((IsBluNeutral && IsBluFactrol) || IsAdminUser); } }
         public bool IsAdminUser { get { return display_AdminKey.Contains("administrator"); } } //We will change logic once we get
 

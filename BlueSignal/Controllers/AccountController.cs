@@ -189,12 +189,12 @@ namespace BlueSignal.Controllers
                         var bundles = new List<bundles>();
                         var nm = facebookFriends.response_data.membership_level_name.ToLower().Trim();
 
-                        if (nm.Contains("blufractal"))
-                            bundles.Add(new bundles { id = 1, name = "blufractal", value = "blufractal" });
-                        if (nm.Contains("bluneural"))
-                            bundles.Add(new bundles { id = 2, name = "bluneural", value = "bluneural" });
-                        if (nm.Contains("bluquant"))
-                            bundles.Add(new bundles { id = 3, name = "bluquant", value = "bluquant" });
+                        if (nm.Contains("fractal"))
+                            bundles.Add(new bundles { id = 1, name = "fractal", value = "fractal" });
+                        if (nm.Contains("neural"))
+                            bundles.Add(new bundles { id = 2, name = "neural", value = "neural" });
+                        if (nm.Contains("quant"))
+                            bundles.Add(new bundles { id = 3, name = "quant", value = "quant" });
 
                         user.bundles = bundles;
                     }
