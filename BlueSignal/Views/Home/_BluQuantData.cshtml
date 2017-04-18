@@ -80,13 +80,13 @@
                                     <div class="info_row">
                                         <p>
                                             QQQ &nbsp; $17.53 &#64;11:03 am
-                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" data-placement="top" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
                                         </p>
                                     </div>
                                     <div class="info_row">
                                         <p>
                                             QQQ &nbsp; $17.53 &#64;11:03 am
-                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" data-placement="top" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
                                         </p>
                                     </div>
                                     <div class="info_row">
@@ -185,7 +185,7 @@
                 </div>
                 <div id="collapse6" class="panel-collapse collapse in">
                     <div class="panel-body">
-                        <div id="chartcontainer_dailyBulQuantData" style="height:400px; width:100%;"></div>
+                        <div id="chartcontainer_dailyBulQuantData" style="height:600px; width:100%;"></div>
                     </div>
                 </div>
             </div>
@@ -509,7 +509,7 @@
         if (buyItems.length > 0) {
             $.each(buyItems, function (i, bItem) {
                 actionHtml += "<div class='info_row'><p>" + bItem.SymbolCode + "  $" + bItem.Price + " &#64; " + bItem.StrEntryTimeValue;
-                actionHtml += "<input type=\"button\" id=\"btnloanQuantData\" data-toggle=\"tooltip\" title=\"Load Symbol\" " + cssClassDisabled + " class=\"btn btn-success btn-xs btn_load\" onclick=\"IntializeOnlyBlueQuanteWithCode('" + bItem.SymbolCode + "')\" value=\"Load\" />"
+                actionHtml += "<input type=\"button\" id=\"btnloanQuantData\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Load Symbol\" " + cssClassDisabled + " class=\"btn btn-success btn-xs btn_load\" onclick=\"IntializeOnlyBlueQuanteWithCode('" + bItem.SymbolCode + "')\" value=\"Load\" />"
                 actionHtml += "</p></div>";
             });
 
@@ -525,13 +525,15 @@
         if (sellItems.length > 0) {
             $.each(sellItems, function (i, bItem) {
                 actionHtml += "<div class='info_row'><p>" + bItem.SymbolCode + "  $" + bItem.Price + " &#64; " + bItem.StrEntryTimeValue;
-                actionHtml += "<input type=\"button\" id=\"btnloanQuantData\" data-toggle=\"tooltip\" title=\"Load Symbol\" " + cssClassDisabled + " class=\"btn btn-success btn-xs btn_load\" onclick=\"IntializeOnlyBlueQuanteWithCode('" + bItem.SymbolCode + "')\" value=\"Load\" />"
+                actionHtml += "<input type=\"button\" id=\"btnloanQuantData\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Load Symbol\" " + cssClassDisabled + " class=\"btn btn-success btn-xs btn_load\" onclick=\"IntializeOnlyBlueQuanteWithCode('" + bItem.SymbolCode + "')\" value=\"Load\" />"
                 actionHtml += "</p></div>";
             });
 
             $("#sellItemsDiv").html(actionHtml);
         }
         actionHtml = "";
+
+        $('[data-toggle="tooltip"]').tooltip();
     }
 
     function BindLivePortfolioMain(selector, data) {
@@ -555,7 +557,7 @@
                      },
                      {
                          "data": null, "name": "Load", "orderable": false, render: function (data, type, row) {
-                             return "<input type=\"button\" id=\"btnloanQuantData\" class=\"btn btn-success btn-xs btn_load\" " + cssClassDisabled + " onclick=\"IntializeOnlyBlueQuanteWithCode('" + data.SymbolCode + "')\" value=\"Load\" />";
+                             return "<input type=\"button\" id=\"btnloanQuantData\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Load Symbol\" class=\"btn btn-success btn-xs btn_load\" " + cssClassDisabled + " onclick=\"IntializeOnlyBlueQuanteWithCode('" + data.SymbolCode + "')\" value=\"Load\" />";
                          }
                      }
             ]

@@ -82,7 +82,7 @@
 
                     @if (btnClassToDisabled == "")
                     {
-                        <button type="button" @btnClassToDisabled class="btn btn-primary btn_style pull-right btn_whitegray" data-toggle="modal" data-target="#myModalBlueCombo" title="Choose Major Market" @*onclick="callYahooFinance()"*@>Major Markets</button>
+                        <button type="button" @btnClassToDisabled class="btn btn-primary btn_style pull-right btn_whitegray tooltips" data-toggle="modal" data-target="#myModalBlueCombo" title="Choose Major Market" @*onclick="callYahooFinance()"*@>Major Markets <span class="tiptext">Choose Major Market</span></button>
                     }
                     else
                     {
@@ -302,7 +302,7 @@
                 </div>
                 <div id="collapse1" class="panel-collapse collapse in">
                     <div class="panel-body">
-                        <div id="chartcontainer_dailyBuleFractal" style="height:400px; width:93.5%;"></div>
+                        <div id="chartcontainer_dailyBuleFractal" style="height:600px; width:93.5%;"></div>
                     </div>
                     @*<div class="panel-footer">Panel Footer</div>*@
                 </div>
@@ -320,7 +320,7 @@
                 </div>
                 <div id="collapse3" class="panel-collapse collapse in">
                     <div class="panel-body">
-                        <div id="chartcontainer_dailyBlueNeural" style="height:400px; width:93.5%;"></div>
+                        <div id="chartcontainer_dailyBlueNeural" style="height:600px; width:93.5%;"></div>
                     </div>
                     @*<div class="panel-footer">Panel Footer</div>*@
                 </div>
