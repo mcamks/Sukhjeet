@@ -1,6 +1,28 @@
 ﻿
-<div class="">
-    <div class="row">
+<div class="tab_block">
+    <div class="">
+        <div class="col-sm-12 ">
+            <div class="info_block" style="margin-bottom:10px;">
+                <div class="blue_block">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <label class="col-sm-3 symbol_text" for="code">Symbol:</label>
+                            <div class="col-sm-6 search_symbol">
+                                <input type="text" id="code" name="code" placeholder="Type valid Symbol" data-toggle="tooltip" title="Type a Valid Symbol" value="SPY" class="form-control codeValue">
+                                <span onclick="InitilizeMarketList()"><i class="fa fa-search" data-toggle="tooltip" title="Lookup Symbol" aria-hidden="true"></i></span>
+                            </div>
+                            <div class="col-sm-3">
+                                @*<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="Choose Major Market">*@
+                                @*<i class="fa fa-window-maximize" title="Major Market" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i>*@
+                                <button type="button" id="btnLoad" data-toggle="tooltip" title="Load Symbol" class="btn btn-primary btn_style btn_whitegray" onclick="InitilizeMarketList()">Load</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
         <div class="col-sm-12">
             <div class="panel-group accordion">
                 <div class="panel panel-default">

@@ -434,7 +434,8 @@ hr{border-color:#d1d1d1; }
 .date_time .time i{margin-right:6px;}
 .date_time .time sub{color:#a9b2c2;}
 
-.sidemenu{float:left; width:46px; position:fixed; /*z-index:99;*/ z-index:1031;background:#fff;  margin-top: 178px;}
+.sidemenu{float:left; width:46px; position:fixed; /*z-index:99;*/ z-index:1031;background:#fff;  margin-top: 19px; transition: margin-top 1s; -webkit-transition: margin-top 1s;}
+.sidemenu_position{margin-top:178px;}
 .sidemenu ul{list-style:none; padding:0; margin:0;}
 .sidemenu ul li{float:left; border-bottom:1px solid #e7e4e4;}
 .sidemenu ul li a{color:#707070; width:46px; text-align:center; padding:10px 0; display:block; font-size:18px; /*height:41px;*/}
@@ -462,7 +463,8 @@ hr{border-color:#d1d1d1; }
 .sidemenu ul .Charts3 a:hover{background:#1e6eff url(../images/chart3_active.png) center center no-repeat;}
 .sidemenu ul .Charts3.active a{background:#1e6eff url(../images/chart3_active.png) center center no-repeat;}
 
-.content{margin-left:50px; padding-top:20px; margin-top:171px;}
+.content{margin-left:50px; padding-top:20px; margin-top:16px; -webkit-transition: margin-top 1s; transition: margin-top 1s;}
+.content_position{margin-top:171px;}
 
 .blue_heading_panel .panel{border:5px solid #eaecef;}
 .blue_heading_panel .panel > .panel-heading{padding:10px 15px !important;}
@@ -483,11 +485,15 @@ hr{border-color:#d1d1d1; }
     width: 100% !important;
 }
 
-    .dashboard_style{background: #fafafa; border-bottom:4px solid #1e6eff; height: 178px; margin-top: 0;width:100%; float:left;padding:4px 0px 0px 0px; position:fixed; z-index:1; }
+    .dashboard_style{background: #fafafa; border-bottom:4px solid #1e6eff; height: 0px; margin-top: 0;width:100%; float:left;padding:4px 0px 0px 0px; position:fixed; z-index:1; -webkit-transition: height 1s; transition: height 1s;}
     
-    .dashboard_style .panel-body {height:168px; padding:14px 6px 0px; background:#fafafa;}
+    .dashboard_style .panel-body {height:0px; padding:14px 6px 0px; background:#fafafa; -webkit-transition: height 1s; transition: height 1s;}
     .dashboard_style .panel {margin:0px !important; border:none !important; box-shadow:none !important;}
     .dashboard_style .panel-group {margin:0px !important;}
+
+
+.show_tradingview{height:178px;}
+.show_tradingview .panel-body{height:168px;}
 
 /*.sprite_icon1 {
      background: url('../images/sprite1.png') no-repeat center top;padding:4px 0px !important;

@@ -104,7 +104,7 @@
                         }
     }
 
-    <div class="col-sm-12 dashboard_style open" style="display:none;" id="c_1">
+    <div class="col-sm-12 dashboard_style" id="c_1">
         <div class="panel-group accordion" style="margin-bottom:5px; margin-top:5px;">
             <div class="panel">
                 @*<div class="panel-heading">
@@ -143,7 +143,7 @@
             </div>
         </div>
     </div>
-    <div class="sidemenu" style="margin-top: 19px;">
+    <div class="sidemenu">
         <ul>
             <li id="tab_1" onClick="ToggleTickerIcon1('')" class="showHide_btn arrow"  data-toggle="tooltip" data-placement="right" title="Trading View">
                 <img src="~/images/white.png" id="up_1" class="arrow_remove" />
@@ -202,7 +202,7 @@
             </li>
         </ul>
     </div>
-    <div class="content" style="margin-top: 16px;">
+    <div class="content">
         <div class="col-sm-12">
             @RenderBody()
             @{
@@ -318,27 +318,33 @@
 
         function ToggleTickerIcon1(state)
         {
-            var tab = "tab_1";
-            var c = "c_1";
-            var up = "up_1";
-            if (state == "open" || $("#" + c).is(':hidden')) {
-                $(".open").hide();
-                $(".arrow_remove").removeClass("arrow_open");
-                $("#" + c).show();
-                $("#" + up).addClass("arrow_open");
-                $(".sidemenu").css("margin-top", "178px");
-                $(".content").css("margin-top", "171px");
-                $("#"+tab).attr("title","Close");
-                state="open";
-            } else {
-                $("#" + c).hide();
-                $(".arrow_remove").removeClass("arrow_open");
-                $(".sidemenu").css("margin-top", "19px");
-                $(".content").css("margin-top", "16px");
-                $("#"+tab).attr("title","Open");
-                state="close";
-            }
-            SetTickerToggleState(state);
+            $(".sidemenu").toggleClass("sidemenu_position");
+            $("#c_1").toggleClass("show_tradingview");
+            $(".content").toggleClass("content_position");
+            
+            //var tab = "tab_1";
+            //var c = "c_1";
+            //var up = "up_1";
+            //if (state == "open" || $("#" + c).is(':hidden')) {
+            //    $(".open").hide();
+            //    $(".arrow_remove").removeClass("arrow_open");
+            //    $("#" + c).removeClass("hide_tradingview");
+            //    $("#" + c).addClass("show_tradingview");
+            //    $("#" + up).addClass("arrow_open");
+            //    $(".sidemenu").css("margin-top", "178px", "transition", "margin-top 2s", "-webkit-transition", "margin-top 2s");
+            //    $(".content").css("margin-top", "171px");
+            //    $("#"+tab).attr("title","Close");
+            //    state="open";
+            //} else {
+            //    $("#" + c).removeClass("show_tradingview");
+            //    $("#" + c).addClass("hide_tradingview");
+            //    $(".arrow_remove").removeClass("arrow_open");
+            //    $(".sidemenu").css("margin-top", "19px", "transition", "margin-top 2s", "-webkit-transition", "margin-top 2s");
+            //    $(".content").css("margin-top", "16px");
+            //    $("#"+tab).attr("title","Open");
+            //    state="close";
+            //}
+            //SetTickerToggleState(state);
         }
     </script>
     <script>
