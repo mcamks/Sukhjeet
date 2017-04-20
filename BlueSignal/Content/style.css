@@ -485,15 +485,15 @@ hr{border-color:#d1d1d1; }
     width: 100% !important;
 }
 
-    .dashboard_style{background: #fafafa; border-bottom:4px solid #1e6eff; height: 0px; margin-top: 0;width:100%; float:left;padding:4px 0px 0px 0px; position:fixed; z-index:1; -webkit-transition: height 1s; transition: height 1s;}
+    .dashboard_style{background: #fafafa; border-bottom:4px solid #1e6eff; height: 0px; margin-top: 0;width:100%; float:left;padding:4px 0px 0px 0px; position:fixed; z-index:1; -webkit-transition: height 1s; transition: height 1s;  overflow:hidden;}
     
-    .dashboard_style .panel-body {height:0px; padding:14px 6px 0px; background:#fafafa; -webkit-transition: height 1s; transition: height 1s;}
+    .dashboard_style .panel-body {height:168px; padding:14px 6px 0px; background:#fafafa; -webkit-transition: height 1s; transition: height 1s;}
     .dashboard_style .panel {margin:0px !important; border:none !important; box-shadow:none !important;}
     .dashboard_style .panel-group {margin:0px !important;}
 
 
 .show_tradingview{height:178px;}
-.show_tradingview .panel-body{height:168px;}
+/*.show_tradingview .panel-body{height:168px;}*/
 
 /*.sprite_icon1 {
      background: url('../images/sprite1.png') no-repeat center top;padding:4px 0px !important;
