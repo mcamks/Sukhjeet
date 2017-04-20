@@ -33,12 +33,15 @@ namespace BlueSignal.Controllers
         public int AverageVolumn { get; private set; }
 
         [LogonAuthorize]
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string symbol)
         {
             if (Session["SystemUser"] == null)
             {
                 await Auth();
             }
+
+            if (!string.IsNullOrEmpty(symbol))
+                ViewBag.Symbol = symbol;
 
             Session["ActiveCssClass"] = "Settings";
             return await Task.FromResult(View());
@@ -953,33 +956,53 @@ namespace BlueSignal.Controllers
             return obj;
         }
 
+        public async Task<JsonResult> GetDailyMarketData(string symbol)
+        {
+            //For Daily
+            var startDate = BluSignalComman.DateTime9MonthBack;
+            var endDate = BluSignalComman.EndDate;
+            var chartResult = await GetLoggingData(symbol, startDate, endDate, "daily");
+            var marketDataDaily = string.Empty;
+
+            if (chartResult.results != null && chartResult.results.Any())
+            {
+                marketDataDaily = JsonConvert.SerializeObject(chartResult.results, new JsonSerializerSettings
+                {
+                    ContractResolver = new DynamicContractResolver("timestamp,tradingDay")
+                });
+                marketDataDaily = marketDataDaily.Replace("timestamp1", "timestamp").Replace("tradingDay1", "tradingDay").Replace("//", "");
+            }
+            var jsonResult = new JsonResult { Data = marketDataDaily, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = int.MaxValue };
+            return jsonResult;
+        }
+
+
+        public class LoggingData
+        {
+            public string param1 { get; set; }
+            public DateTime? param2 { get; set; }
+            public DateTime? param3 { get; set; }
+            public string param4 { get; set; }
+            public string param5 { get; set; }
+            public string param6 { get; set; }
+            public string param7 { get; set; }
+            public string param8 { get; set; }
+            public string param9 { get; set; }
+            public string param10 { get; set; }
+        }
+
+
+        //public class results
+        //{
+        //    public string symbol { get; set; }
+        //    public string timestamp { get; set; }
+        //    public string tradingDay { get; set; }
+        //    public string open { get; set; }
+        //    public string high { get; set; }
+        //    public string low { get; set; }
+        //    public string close { get; set; }
+        //    public string volume { get; set; }
+        //    public string openInterest { get; set; }
+        //}
     }
-
-    public class LoggingData
-    {
-        public string param1 { get; set; }
-        public DateTime? param2 { get; set; }
-        public DateTime? param3 { get; set; }
-        public string param4 { get; set; }
-        public string param5 { get; set; }
-        public string param6 { get; set; }
-        public string param7 { get; set; }
-        public string param8 { get; set; }
-        public string param9 { get; set; }
-        public string param10 { get; set; }
-    }
-
-
-    //public class results
-    //{
-    //    public string symbol { get; set; }
-    //    public string timestamp { get; set; }
-    //    public string tradingDay { get; set; }
-    //    public string open { get; set; }
-    //    public string high { get; set; }
-    //    public string low { get; set; }
-    //    public string close { get; set; }
-    //    public string volume { get; set; }
-    //    public string openInterest { get; set; }
-    //}
 }

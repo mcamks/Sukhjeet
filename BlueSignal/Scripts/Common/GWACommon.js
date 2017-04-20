@@ -666,7 +666,7 @@ function bindDatatable(selector, data) {
     var table = $('#' + selector).DataTable({
         aaData: data,
         "columns": [
-                 { "data": "symbol", "name": "symbol" },
+                 //{ "data": "symbol", "name": "symbol" },
                  //{ "data": "timestamp", "name": "timestamp" },
                  { "data": "tradingDay", "name": "TradingDate" },
                  { "data": "open", "name": "open" },
