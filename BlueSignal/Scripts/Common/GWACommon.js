@@ -320,10 +320,10 @@ function GetAndBindMarketAllChartsData() {
             var closingPrice = response.closingPrice;
 
             if (dataDaily != null) {
-                if ($("#Id_MarketDataListDaily").length > 0) {
-                    var dailyData = $.parseJSON(dataDaily);
-                    bindDatatable('Id_MarketDataListDaily', dailyData);
-                }
+                //if ($("#Id_MarketDataListDaily").length > 0) {
+                //    var dailyData = $.parseJSON(dataDaily);
+                //    bindDatatable('Id_MarketDataListDaily', dailyData);
+                //}
 
                 if (avgVolume != "") {
                     var avgVol = CommaFormatted(parseFloat(avgVolume).toFixed(0));
@@ -673,8 +673,8 @@ function bindDatatable(selector, data) {
                   { "data": "high", "name": "high" },
                    { "data": "low", "name": "low" },
                     { "data": "close", "name": "close" },
-                     { "data": "volume", "name": "volume" },
-                      { "data": "openInterest", "name": "openInterest" }
+                     { "data": "volume", "name": "volume" }
+                      //,{ "data": "openInterest", "name": "openInterest" }
         ]
     });
 }
@@ -774,13 +774,13 @@ function BindMarketDataIndividual(selectedCode) {
         async: true,
         data: { 'startDate': $('#date').val(), 'Type': $('#datafrequency').val(), 'selectedCode': selectedCode },
         success: function (data) {
-            if (data != null && $("#Id_MarketDataListDaily").length > 0) {
-                var dailyData = $.parseJSON(data.MarketDataDaily);
-                $.each(dailyData.results, function (i, d) {
-                    d.volume = CommaFormatted(parseFloat(d.volume).toFixed(0));
-                });
-                bindDatatable('Id_MarketDataListDaily', dailyData.results);
-            }
+            //if (data != null && $("#Id_MarketDataListDaily").length > 0) {
+            //    var dailyData = $.parseJSON(data.MarketDataDaily);
+            //    $.each(dailyData.results, function (i, d) {
+            //        d.volume = CommaFormatted(parseFloat(d.volume).toFixed(0));
+            //    });
+            //    bindDatatable('Id_MarketDataListDaily', dailyData.results);
+            //}
 
             HideLoaderCustom();
         },

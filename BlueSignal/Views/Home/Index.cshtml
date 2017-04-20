@@ -63,10 +63,7 @@
         }*@
 </ul>
 <div class="tab-content">
-
-
-
-    <div id="BluFractal" class="tab-pane fade in active">
+    <div id="BluFractal" class="tab-pane fade">
 
         @if (HttpContextSessionWrapperExtension.SessionUser.IsBluFactrol)
         {
@@ -119,8 +116,8 @@
         @Html.Partial("_YahooFinanceApp")
     </div>
     <div id="MarketDataLists" style="height:700px;" class="tab-pane fade">
-        @Html.Hidden("hfSymbolDaily")
-        @Html.Partial("_MarketDataLists")
+        @*@Html.Partial("_MyPartial", (double) @ViewBag.piValue)*@
+        @Html.Partial("_MarketDataLists", (string)ViewBag.Symbol)
     </div>
     <div id="Data" class="tab-pane fade">
         <div class="tab_block">
@@ -363,6 +360,8 @@
 
     var symbolTitle = '';
     $(document).ready(function () {
+        $("#hfSymbolDaily").val('@ViewBag.Symbol');
+
         InitilizeMarketList();
 
         //AddContact();
@@ -438,7 +437,6 @@
 
         $("#li" + '@activeTab').addClass("active");
         $("#@activeTab").addClass("in active");
-        $("#hfSymbolDaily").val('@ViewBag.Symbol');
     });
 
 

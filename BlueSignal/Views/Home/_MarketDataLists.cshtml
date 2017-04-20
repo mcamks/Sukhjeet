@@ -1,5 +1,12 @@
-﻿
+﻿@{
+    var symbol = string.Empty;
+    if (Model != null)
+    {
+        symbol = Model;
+    }
+}
 <div class="tab_block">
+    @Html.Hidden("hfSymbol11", symbol)
     <div class="">
         <div class="col-sm-12 ">
             <div class="info_block" style="margin-bottom:10px;">
@@ -8,11 +15,11 @@
                         <div class="row">
                             <label class="col-sm-3 symbol_text" for="code">Symbol:</label>
                             <div class="col-sm-6 search_symbol">
-                                <input type="text" id="txtMDDailyCode" name="code" placeholder="Type valid Symbol" data-toggle="tooltip" title="Type a Valid Symbol" value="SPY" class="form-control codeValue">
-                                <span onclick="ReloadDailyMarketData();"><i class="fa fa-search" data-toggle="tooltip" title="Lookup Symbol" aria-hidden="true"></i></span>
+                                <input type="text" id="txtMDDailyCode" name="txtMDDailyCode" placeholder="Type valid Symbol" data-toggle="tooltip" title="Type a Valid Symbol" value="SPY" class="form-control">
+                                <span onclick="ReloadDailyMarketData(true);"><i class="fa fa-search" data-toggle="tooltip" title="Lookup Symbol" aria-hidden="true"></i></span>
                             </div>
                             <div class="col-sm-3">
-                                <button type="button" id="btnLoad" data-toggle="tooltip" title="Load Symbol" class="btn btn-primary btn_style btn_whitegray" onclick="ReloadDailyMarketData();">Load</button>
+                                <button type="button" id="btnLoad" data-toggle="tooltip" title="Load Symbol" class="btn btn-primary btn_style btn_whitegray" onclick="ReloadDailyMarketData(true);">Load</button>
                             </div>
                         </div>
                     </div>
@@ -45,7 +52,7 @@
                                                         <th>Low</th>
                                                         <th>Close</th>
                                                         <th>Volume</th>
-                                                        <th>Open Interest</th>
+                                                        @*<th>Open Interest</th>*@
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -62,10 +69,11 @@
 </div>
 
 <script>
-    function ReloadDailyMarketData() {
+    function ReloadDailyMarketData(showLoader) {
         var sym = $("#txtMDDailyCode").val();
         if (sym != "") {
-            ShowLoaderCustom();
+            if (showLoader)
+                ShowLoaderCustom();
             $.ajax({
                 type: "GET",
                 url: "/Home/GetDailyMarketData",
@@ -83,7 +91,9 @@
                         if ($("#Id_MarketDataListDaily").length > 0)
                             bindDatatable('Id_MarketDataListDaily', dailyData);
                     }
-                    HideLoaderCustom();
+
+                    if (showLoader)
+                        HideLoaderCustom();
                 },
                 error: function (error, status) {
                     console.log(error);
@@ -92,4 +102,15 @@
             });
         }
     }
+
+
+    $(document).ready(function () {
+        if ($("#hfSymbol11").val() != "") {
+            $("#txtMDDailyCode").val($("#hfSymbol11").val());
+        }
+        else {
+            $("#txtMDDailyCode").val('SPY');
+        }
+        ReloadDailyMarketData(false);
+    });
 </script>

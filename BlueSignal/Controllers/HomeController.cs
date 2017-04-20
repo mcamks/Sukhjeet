@@ -36,12 +36,15 @@ namespace BlueSignal.Controllers
         public async Task<ActionResult> Index(string symbol)
         {
             if (Session["SystemUser"] == null)
-            {
                 await Auth();
-            }
+
 
             if (!string.IsNullOrEmpty(symbol))
+            {
+                symbol = symbol.Replace("INDEX:", "");
                 ViewBag.Symbol = symbol;
+                ViewBag.activeTab = "MarketDataLists";
+            }
 
             Session["ActiveCssClass"] = "Settings";
             return await Task.FromResult(View());
