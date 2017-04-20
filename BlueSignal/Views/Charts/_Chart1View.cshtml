@@ -13,14 +13,19 @@
     }
 
     TradingView.onready(function () {
+        var sym = "AAPL";
+        var startDate = "20150101"
+        var key = "40ae86537412ad8042cbbaca14906020"
+        var type = "minutes";
+        var url = "http://marketdata.websol.barchart.com/getHistory.json?key=" + key + "&symbol=" + sym + "&type=" + type + "&startDate=" + startDate;
         var widget = window.tvWidget = new TradingView.widget({
             fullscreen: true,
-            symbol: 'AAPL',
+            symbol: sym,
             interval: 'D',
             container_id: "tv_chart_container",
             //	BEWARE: no trailing slash is expected in feed URL
             //datafeed: new Datafeeds.UDFCompatibleDatafeed("https://demo_feed.tradingview.com"),
-            datafeed: new Datafeeds.UDFCompatibleDatafeed("http://marketdata.websol.barchart.com/getHistory.json?key=40ae86537412ad8042cbbaca14906020&symbol=AAPL&type=minutes&startDate=20150101"),
+            datafeed: new Datafeeds.UDFCompatibleDatafeed(url),
             library_path: "charting_library/",
             locale: getParameterByName('lang') || "en",
             //	Regression Trend-related functionality is not implemented yet, so it's hidden for a while
@@ -30,7 +35,8 @@
             charts_storage_url: 'http://saveload.tradingview.com',
             charts_storage_api_version: "1.1",
             client_id: 'tradingview.com',
-            user_id: 'public_user_id'
+            user_id: 'public_user_id',
+            autosize: true,
         });
     });
 
@@ -49,8 +55,8 @@
                         </h4>
                     </div>
                     <div id="collapse" class="panel-collapse collapse in">
-                        <div class="panel-body" style="height:500px;">
-                            <div id="tv_chart_container"></div>
+                        <div class="panel-body" id="tv_chart_container" style="height:500px;">
+
                         </div>
                     </div>
                 </div>

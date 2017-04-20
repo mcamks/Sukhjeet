@@ -8,19 +8,18 @@
                         <div class="row">
                             <label class="col-sm-3 symbol_text" for="code">Symbol:</label>
                             <div class="col-sm-6 search_symbol">
-                                <input type="text" id="code" name="code" placeholder="Type valid Symbol" data-toggle="tooltip" title="Type a Valid Symbol" value="SPY" class="form-control codeValue">
-                                <span onclick="InitilizeMarketList()"><i class="fa fa-search" data-toggle="tooltip" title="Lookup Symbol" aria-hidden="true"></i></span>
+                                <input type="text" id="txtMDDailyCode" name="code" placeholder="Type valid Symbol" data-toggle="tooltip" title="Type a Valid Symbol" value="SPY" class="form-control codeValue">
+                                <span onclick="ReloadDailyMarketData();"><i class="fa fa-search" data-toggle="tooltip" title="Lookup Symbol" aria-hidden="true"></i></span>
                             </div>
                             <div class="col-sm-3">
-                                @*<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="Choose Major Market">*@
-                                @*<i class="fa fa-window-maximize" title="Major Market" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i>*@
-                                <button type="button" id="btnLoad" data-toggle="tooltip" title="Load Symbol" class="btn btn-primary btn_style btn_whitegray" onclick="InitilizeMarketList()">Load</button>
+                                <button type="button" id="btnLoad" data-toggle="tooltip" title="Load Symbol" class="btn btn-primary btn_style btn_whitegray" onclick="ReloadDailyMarketData();">Load</button>
                             </div>
                         </div>
                     </div>
-                    
+                    <div class="col-sm-4">
+                        <button type="button" class="btn btn-primary btn_style pull-right btn_whitegray tooltips" data-toggle="modal" data-target="#modalBluFractalMarkets">Major Markets <span class="tiptext">Choose Major Market</span></button>
+                    </div>
                 </div>
-                
             </div>
         </div>
         <div class="col-sm-12">
@@ -38,11 +37,10 @@
                                             <table id="Id_MarketDataListDaily" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                                                 <thead>
                                                     <tr>
-                                                        <th>Symbol</th>
+                                                        @*<th>Symbol</th>*@
                                                         @*<th>TimeStamp</th>*@
                                                         <th>Trading Date</th>
                                                         <th>Open</th>
-
                                                         <th>High</th>
                                                         <th>Low</th>
                                                         <th>Close</th>
@@ -62,3 +60,36 @@
         </div>
     </div>
 </div>
+
+<script>
+    function ReloadDailyMarketData() {
+        var sym = $("#txtMDDailyCode").val();
+        if (sym != "") {
+            ShowLoaderCustom();
+            $.ajax({
+                type: "GET",
+                url: "/Home/GetDailyMarketData",
+                dataType: "json",
+                data: JSON.stringify({ "symbol": sym }),
+                async: true,
+                data: { "symbol": sym },
+                success: function (data) {
+                    if (data != null && $("#Id_MarketDataListDaily").length > 0) {
+                        var dailyData = $.parseJSON(data);
+                        $.each(dailyData, function (i, d) {
+                            d.volume = CommaFormatted(parseFloat(d.volume).toFixed(0));
+                        });
+
+                        if ($("#Id_MarketDataListDaily").length > 0)
+                            bindDatatable('Id_MarketDataListDaily', dailyData);
+                    }
+                    HideLoaderCustom();
+                },
+                error: function (error, status) {
+                    console.log(error);
+                    HideLoaderCustom();
+                }
+            });
+        }
+    }
+</script>
