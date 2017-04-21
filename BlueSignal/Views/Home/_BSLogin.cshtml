@@ -1,7 +1,9 @@
 ﻿@using BlueSignal.Controllers;
 @model BlueSignal.Models.SetPassowrdModel
 
-
+@*@{ 
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}*@
 <div class="alert alert-info text-center">Direct Access to Your Dashboard</div>
 <p>Copy the URL Below and save it in your browser to use in direct log-in access to your BluSignals Dashboard Page</p>
 
@@ -18,9 +20,9 @@
                     @Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })
                 </div>
                 @*<div class="alert alert-success alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>User is already registered with us, Thanks!</strong>
-                </div>*@
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>User is already registered with us, Thanks!</strong>
+                    </div>*@
                 <div class="form-group row">
                     <div class="col-sm-12">
                         <input id="okay" type="button" style="margin-top:30px;" data-dismiss="modal" class="btn btn-primary" value="Ok" />
@@ -84,3 +86,11 @@
 
     </p>
             }
+
+
+@*<script>
+    $(document).ready(function () {
+        $(".sidemenu").hide();
+        $(".dashboard_style").hide();
+    });
+</script>*@

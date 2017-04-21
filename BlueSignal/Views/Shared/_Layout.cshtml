@@ -103,7 +103,6 @@
 
                         }
     }
-
     <div class="col-sm-12 dashboard_style" id="c_1">
         <div class="panel-group accordion" style="margin-bottom:5px; margin-top:5px;">
             <div class="panel">
@@ -114,24 +113,55 @@
                     <div class="panel-body trading_view">
                         <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js">
                             {
+                                //"symbols": [
+                                //  {
+                                //      "description": "The Standard&Poor's Index",
+                                //      "proName": "INDEX:SPX"
+                                //  },
+                                //  {
+                                //      "description": "Gold",
+                                //      "proName": "TVC:GOLD"
+                                //  },
+                                //  {
+                                //      "description": "Euro Fx/U.S. Dollar",
+                                //      "proName": "FX:EURUSD"
+                                //  },
+                                //  {
+                                //      "description": "Light Crude Oil Futures",
+                                //      "proName": "NYMEX:CL1!",
+                                //      "title": "Crude Oil"
+                                //  }
+                                //],
                                 "symbols": [
-                                  {
-                                      "description": "The Standard&Poor's Index",
-                                      "proName": "INDEX:SPX"
-                                  },
-                                  {
-                                      "description": "Gold",
-                                      "proName": "TVC:GOLD"
-                                  },
-                                  {
-                                      "description": "Euro Fx/U.S. Dollar",
-                                      "proName": "FX:EURUSD"
-                                  },
-                                  {
-                                      "description": "Light Crude Oil Futures",
-                                      "proName": "NYMEX:CL1!",
-                                      "title": "Crude Oil"
-                                  }
+    {
+        "description": "The Standard&Poor's Index",
+        "proName": "INDEX:SPX"
+    }
+,
+    {
+        "description": "DOW Industrials",
+        "proName": "INDEX:DOWI"
+    }
+,
+    {
+        "description": "Nasdaq 100 Index",
+        "proName": "INDEX:IUXX"
+    },
+    {
+        "description": "Euro Fx/U.S. Dollar",
+        "proName": "FX_IDC:EURUSD",
+        "title": "EUR/USD"
+    },
+    {
+        "description": "Light Crude Oil Futures",
+        "proName": "NYMEX:CL1!",
+        "title": "Crude Oil"
+    },
+    {
+        "description": "Gold / U.S. Dollar",
+        "proName": "FX_IDC:XAUUSD",
+        "title": "Gold"
+    }
                                 ],
                                 "locale": "en",
                                 "timeframe": "1d"
@@ -145,7 +175,7 @@
     </div>
     <div class="sidemenu">
         <ul>
-            <li id="tab_1" onClick="ToggleTickerIcon1('')" class="showHide_btn arrow"  data-toggle="tooltip" data-placement="right" title="On/Off">
+            <li id="tab_1" onClick="ToggleTickerIcon1('')" class="showHide_btn arrow" data-toggle="tooltip" data-placement="right" title="On/Off">
                 <img src="~/images/white.png" id="up_1" class="arrow_remove" />
             </li>
             <li class="remove Dashboard active"><a href="@Url.Action("Dashboard","Home",new { p = "Dashboard",c="fa-tachometer" })" data-toggle="tooltip" title="Dashboard" data-placement="right"><i class="fa fa-tachometer" aria-hidden="true"></i></a></li>
@@ -154,7 +184,7 @@
             <li class="remove Charts Charts1"><a href="@Url.Action("Charts","Charts",new { p = "Charts",c= "fa-line-chart", css ="Chart1" })" data-toggle="tooltip" title="Symbol Chart: AAPL" data-placement="right" class="sprite_icon1"></a></li>
             <li class="remove Charts Charts2"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart", css ="Chart2" })" data-toggle="tooltip" title="Symbol Chart 2" data-placement="right" class="sprite_icon2"></a></li>
             <li class="remove Charts Charts3"><a href="@Url.Action("Charts","Home",new { p = "Charts",c= "fa-line-chart", css ="Chart3" })" data-toggle="tooltip" title="Symbol Chart 3" data-placement="right" class="sprite_icon3"></a></li>
-            
+
             <li class="remove Research">
                 <a href="@Url.Action("Research","Home",new { p = "Research",c= "Research" })" data-toggle="tooltip" title="Research" data-placement="right">
                     <!--<i class="fa fa-lightbulb-o" aria-hidden="true"></i>
@@ -324,7 +354,7 @@
             $("#c_1").toggleClass("show_tradingview");
             $(".content").toggleClass("content_position");
             $("#up_1").toggleClass("arrow_open");
-            
+
             //var tab = "tab_1";
             //var c = "c_1";
             //var up = "up_1";

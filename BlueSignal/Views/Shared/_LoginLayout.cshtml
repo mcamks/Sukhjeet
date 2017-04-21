@@ -1,0 +1,159 @@
+﻿@using BlueSignal.Controllers;
+@using BlueSignal.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title -BluSignals</title>
+    <link rel="icon" type="image/png" href="~/favicon.ico">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.0/css/select.dataTables.min.css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css">
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/ClearForm.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/common")
+    <script src="~/Scripts/tv.js"></script>
+</head>
+<body>
+    @{
+        if (HttpContextSessionWrapperExtension.SessionUser != null)
+        {
+
+            <div class="navbar navbar-inverse navbar-fixed-top navbar_bg navbar_custom">
+                <div>
+                    <div class="navbar-header">
+                        @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>*@
+                        <a href="http://www.blusignalsystems.com" data-toggle="tooltip" data-placement="right" title="BluSignals Website" target="_blank" class="navbar-brand"><img src="~/images/blu_logo.png" /></a>
+                        @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                    </div>
+                    <div class="active_page">
+                        @if (!string.IsNullOrEmpty(Request.QueryString["p"]) && !string.IsNullOrEmpty(Request.QueryString["c"]))
+                        {
+
+                            if (Request.QueryString["c"] == "Research")
+                            {
+                                <span>
+                                    <img src="~/images/research_icon_active.png" />
+                                </span>
+                            }
+                            else if (Request.QueryString["p"] == "Systems")
+                            {
+                                <span class="cogs_icon">
+                                    <i class="fa @Request.QueryString["c"]" aria-hidden="true"></i>
+                                </span>
+                            }
+                            else
+                            {
+                                <span>
+                                    <i class="fa @Request.QueryString["c"]" aria-hidden="true"></i>
+                                </span>
+                            }
+
+                            <mu id="settabe" onclick="SetActiveClass('@Request.QueryString["p"]')">@Request.QueryString["p"]</mu>
+                        }
+                        else
+                        {
+                            <span>
+                                <i class="fa fa-tachometer" aria-hidden="true"></i>
+                            </span>
+                            <mu id="settabe" onclick="SetActiveClass('Dashboard')">Dashboard</mu>
+                        }
+                    </div>
+                    @{
+                        DateTime eastern = DateTime.UtcNow.AddHours(-5);
+                        var time = eastern.ToString("hh:mm tt");
+                        var tArr = time.Split(' ');
+                    }
+                    <div class="date_time">
+                        <div class="date" id="divDateOnly"><i class="fa fa-calendar" aria-hidden="true"></i>@eastern.ToString("MMM - dd - yyyy")</div>
+                        <div class="time" id="divTimeOnly"><i class="fa fa-clock-o" aria-hidden="true"></i>@tArr[0]<sub>@tArr[1]</sub></div>
+                    </div>
+                </div>
+            </div>
+
+                        }
+                        else
+                        {
+
+                            <h1>@*Please login first*@</h1>
+
+                        }
+    }
+    <div class="content">
+        <div class="col-sm-12">
+            @RenderBody()
+            @{
+                if (HttpContextSessionWrapperExtension.SessionUser != null)
+                {
+                    <hr />
+                    <footer>
+                        <div class="col-sm-12">
+                            <p>&copy; @DateTime.Now.Year BluSignals</p>
+                        </div>
+                    </footer>
+                }
+
+            }
+        </div>
+    </div>
+    <!--loader-->
+    <div class="modal fade" id="loading" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal_position">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center">Please wait...</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="~/images/ajax-loader-bar.gif" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ModelBackGround_Custom" class="modal-backdrop fade in" style="display: none;"></div>
+    <div class="modal fade" id="login_window" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm custom_width">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                    <h4 class="modal-title">Dashboard Link</h4>
+                </div>
+                <div id="_loginBSPartial" class="modal-body">
+                    @{Html.RenderPartial("~/Views/Home/_BSLogin.cshtml", new SetPassowrdModel() { IsSuccess = 0 });}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--loader-->
+    @RenderSection("scripts", required: false)
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/Customer")
+    }
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js">
+    </script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js">
+    </script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js">
+    </script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.0/js/responsive.bootstrap.min.js">
+
+    </script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+</body>
+</html>
