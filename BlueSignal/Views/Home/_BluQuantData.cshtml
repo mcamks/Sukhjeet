@@ -25,163 +25,167 @@
 
 }
 <div class="tab_block">
-    <div class="col-sm-12">
-        <div class="col-sm-5 ">
-            <div class="info_block">
-                <div class="blue_block">
-                    <label class="col-sm-6 symbol_text text-uppercase" for="code"><strong>Selected Security</strong> </label>
+
+    <div class="col-sm-5 ">
+        <div class="info_block">
+            <div class="blue_block">
+                <label class="col-sm-6 symbol_text text-uppercase" for="code"><strong>Selected Security</strong> </label>
+                <div class="col-sm-6">
+                    <button type="button" class="btn btn-primary btn_style pull-right btn_whitegray tooltips" @btnClassToDisabled data-toggle="modal" data-target="#myModalBlueQuant" @* onclick="callYahooFinance()" *@>Major Markets <span class="tiptext">Choose Major Market</span></button>
+                </div>
+            </div>
+            <div class="sub_info">
+                <div class="form-group row">
+                    <label class="col-sm-6"><span><img src="~/images/sideicon.jpg" /></span>Symbol</label>
                     <div class="col-sm-6">
-                        <button type="button" class="btn btn-primary btn_style pull-right btn_whitegray tooltips" @btnClassToDisabled data-toggle="modal" data-target="#myModalBlueQuant" @* onclick="callYahooFinance()" *@>Major Markets <span class="tiptext">Choose Major Market</span></button>
+                        @*<input type="text" id="Name" disabled class="form-control form-width ">*@
+                        @*<label type="text" id="Namequent" class="codeValue form-control form-width"> </label>*@
+                        <input type="text" id="codeDquent" disabled name="code" class="form-control codeValue codeClassbluequont">
                     </div>
                 </div>
-                <div class="sub_info">
-                    <div class="form-group row">
-                        <label class="col-sm-6"><span><img src="~/images/sideicon.jpg" /></span>Symbol</label>
-                        <div class="col-sm-6">
-                            @*<input type="text" id="Name" disabled class="form-control form-width ">*@
-                            @*<label type="text" id="Namequent" class="codeValue form-control form-width"> </label>*@
-                            <input type="text" id="codeDquent" disabled name="code" class="form-control codeValue codeClassbluequont">
-                        </div>
+                <div class="form-group row">
+                    <label class="col-sm-6"><span><img src="~/images/sideicon.jpg" /></span>Name of Security</label>
+                    <div class="col-sm-6">
+                        <input type="text" id="Namequent" disabled class="form-control form-width NameClassbluequont">
+                        @*<label type="text" id="Namequent" class="NameClass form-control form-width NameClassbluequont"> </label>*@
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-6"><span><img src="~/images/sideicon.jpg" /></span>Name of Security</label>
-                        <div class="col-sm-6">
-                            <input type="text" id="Namequent" disabled class="form-control form-width NameClassbluequont">
-                            @*<label type="text" id="Namequent" class="NameClass form-control form-width NameClassbluequont"> </label>*@
-                        </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6"><span><img src="~/images/sideicon.jpg" /></span>Current Price</label>
+                    <div class="col-sm-6">
+                        <input type="text" id="ClosingPrice" disabled class="form-control form-width ClosingPriceClass ClosingPriceClassbluequont">
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-6"><span><img src="~/images/sideicon.jpg" /></span>Current Price</label>
-                        <div class="col-sm-6">
-                            <input type="text" id="ClosingPrice" disabled class="form-control form-width ClosingPriceClass ClosingPriceClassbluequont">
-                        </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6"><span><img src="~/images/sideicon.jpg" /></span> Avg. Volume (90 Days) </label>
+                    <div class="col-sm-6">
+                        <input type="text" id="AvgVolume" disabled class="form-control form-width AvgVolumeClass AvgVolumeClassbluequont">
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-6"><span><img src="~/images/sideicon.jpg" /></span> Avg. Volume (90 Days) </label>
-                        <div class="col-sm-6">
-                            <input type="text" id="AvgVolume" disabled class="form-control form-width AvgVolumeClass AvgVolumeClassbluequont">
-                        </div>
-                        <input id="BlueQuanteCode" style="display:none;" class="form-control codeClass" type="text" value="SPY" />
-                    </div>
+                    <input id="BlueQuanteCode" style="display:none;" class="form-control codeClass" type="text" value="SPY" />
                 </div>
             </div>
         </div>
-        <div class="col-sm-7 terms">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="panel panel-default todays_signal">
-                        <div class="panel-heading text-center text-uppercase">Today's Signals</div>
-                        <div class="panel-body">
-                            <div class="green_heading"><i class="fa fa-shopping-cart" aria-hidden="true"></i> BUY</div>
-                            <div class="red_heading"><i class="fa fa-usd" aria-hidden="true"></i> SELL</div>
-                            <input type="hidden" id="hfcssDisabled" value="@btnClassToDisabled" />
-                            <div class="col-sm-6 border_right">
-                                <div class="todays_signal_list" id="buyItemsDiv">
-                                    <div class="info_row">
-                                        <p>
-                                            QQQ &nbsp; $17.53 &#64;11:03 am
-                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" data-placement="top" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
-                                        </p>
-                                    </div>
-                                    <div class="info_row">
-                                        <p>
-                                            QQQ &nbsp; $17.53 &#64;11:03 am
-                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" data-placement="top" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
-                                        </p>
-                                    </div>
-                                    <div class="info_row">
-                                        <p>
-                                            QQQ &nbsp; $17.53 &#64;11:03 am
-                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
-                                        </p>
-                                    </div>
-                                    <div class="info_row">
-                                        <p>
-                                            QQQ &nbsp; $17.53 &#64;11:03 am
-                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
-                                        </p>
-                                    </div>
-                                    <div class="info_row">
-                                        <p>
-                                            QQQ &nbsp; $17.53 &#64;11:03 am
-                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
-                                        </p>
-                                    </div>
-                                    <div class="info_row">
-                                        <p>
-                                            QQQ &nbsp; $17.53 &#64;11:03 am
-                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
-                                        </p>
-                                    </div>
-                                    <div class="info_row">
-                                        <p>
-                                            QQQ &nbsp; $17.53 &#64;11:03 am
-                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
-                                        </p>
-                                    </div>
+    </div>
+    <div class="col-sm-7 terms">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default todays_signal">
+                    <div class="panel-heading text-center text-uppercase">Today's Signals</div>
+                    <div class="panel-body">
+                        <div class="green_heading"><i class="fa fa-shopping-cart" aria-hidden="true"></i> BUY</div>
+                        <div class="red_heading"><i class="fa fa-usd" aria-hidden="true"></i> SELL</div>
+                        <input type="hidden" id="hfcssDisabled" value="@btnClassToDisabled" />
+                        <div class="col-sm-6 border_right">
+                            <div class="todays_signal_list" id="buyItemsDiv">
+                                <div class="info_row">
+                                    <p>
+                                        QQQ &nbsp; $17.53 &#64;11:03 am
+                                        <input type="button" id="btnloanQuantData" data-toggle="tooltip" data-placement="top" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                    </p>
+                                </div>
+                                <div class="info_row">
+                                    <p>
+                                        QQQ &nbsp; $17.53 &#64;11:03 am
+                                        <input type="button" id="btnloanQuantData" data-toggle="tooltip" data-placement="top" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                    </p>
+                                </div>
+                                <div class="info_row">
+                                    <p>
+                                        QQQ &nbsp; $17.53 &#64;11:03 am
+                                        <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                    </p>
+                                </div>
+                                <div class="info_row">
+                                    <p>
+                                        QQQ &nbsp; $17.53 &#64;11:03 am
+                                        <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                    </p>
+                                </div>
+                                <div class="info_row">
+                                    <p>
+                                        QQQ &nbsp; $17.53 &#64;11:03 am
+                                        <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                    </p>
+                                </div>
+                                <div class="info_row">
+                                    <p>
+                                        QQQ &nbsp; $17.53 &#64;11:03 am
+                                        <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                    </p>
+                                </div>
+                                <div class="info_row">
+                                    <p>
+                                        QQQ &nbsp; $17.53 &#64;11:03 am
+                                        <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                    </p>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="todays_signal_list" id="sellItemsDiv">
-                                    <div class="info_row">
-                                        <p>
-                                            QQQ &nbsp; $17.53 &#64;11:03 am
-                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
-                                        </p>
-                                    </div>
-                                    <div class="info_row">
-                                        <p>
-                                            QQQ &nbsp; $17.53 &#64;11:03 am
-                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
-                                        </p>
-                                    </div>
-                                    <div class="info_row">
-                                        <p>
-                                            QQQ &nbsp; $17.53 &#64;11:03 am
-                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
-                                        </p>
-                                    </div>
-                                    <div class="info_row">
-                                        <p>
-                                            QQQ &nbsp; $17.53 &#64;11:03 am
-                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
-                                        </p>
-                                    </div>
-                                    <div class="info_row">
-                                        <p>
-                                            QQQ &nbsp; $17.53 &#64;11:03 am
-                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
-                                        </p>
-                                    </div>
-                                    <div class="info_row">
-                                        <p>
-                                            QQQ &nbsp; $17.53 &#64;11:03 am
-                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
-                                        </p>
-                                    </div>
-                                    <div class="info_row">
-                                        <p>
-                                            QQQ &nbsp; $17.53 &#64;11:03 am
-                                            <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
-                                        </p>
-                                    </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="todays_signal_list" id="sellItemsDiv">
+                                <div class="info_row">
+                                    <p>
+                                        QQQ &nbsp; $17.53 &#64;11:03 am
+                                        <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                    </p>
+                                </div>
+                                <div class="info_row">
+                                    <p>
+                                        QQQ &nbsp; $17.53 &#64;11:03 am
+                                        <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                    </p>
+                                </div>
+                                <div class="info_row">
+                                    <p>
+                                        QQQ &nbsp; $17.53 &#64;11:03 am
+                                        <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                    </p>
+                                </div>
+                                <div class="info_row">
+                                    <p>
+                                        QQQ &nbsp; $17.53 &#64;11:03 am
+                                        <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                    </p>
+                                </div>
+                                <div class="info_row">
+                                    <p>
+                                        QQQ &nbsp; $17.53 &#64;11:03 am
+                                        <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                    </p>
+                                </div>
+                                <div class="info_row">
+                                    <p>
+                                        QQQ &nbsp; $17.53 &#64;11:03 am
+                                        <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                    </p>
+                                </div>
+                                <div class="info_row">
+                                    <p>
+                                        QQQ &nbsp; $17.53 &#64;11:03 am
+                                        <input type="button" id="btnloanQuantData" data-toggle="tooltip" title="Load Symbol" @btnClassToDisabled class="btn btn-success btn-xs btn_load" onclick="IntializeOnlyBlueQuanteWithCode('QQQ')" value="Load" />
+                                    </p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 <div class="row">
     <div class="col-sm-12">
         <div class="panel-group accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                   
-                    <h4 class="panel-title"> <a data-toggle="collapse" href="#collapse6">Chart</a> </h4>
+
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse6">
+                            <img src="../../images/bluquant_active.png" alt="" />
+                            <span class="blue_text">Blu</span>Quant &nbsp; | &nbsp;  Near-Term @*<span class="bar_type">(Daily Bars)</span>*@
+                        </a>
+                    </h4>
                 </div>
                 <div id="collapse6" class="panel-collapse collapse in">
                     <div class="panel-body">

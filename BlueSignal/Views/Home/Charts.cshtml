@@ -3,24 +3,56 @@
     ViewBag.Title = "Charts";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .panel-body > div,
+    .panel-body > div > iframe {
+        width: 100%;
+        height: 100%;
+    }
 
-<div class="charts">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel-group accordion">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title"> 
-                            <a data-toggle="collapse" href="#collapse">
-                                <i class="fa fa-line-chart" aria-hidden="true"></i> &nbsp;Price Chart
-                            </a>
-</h4>
-                    </div>
-                    <div id="collapse" class="panel-collapse collapse in">
-                        <div class="panel-body" style="height:500px;">
-                            <!-- TradingView Widget BEGIN -->
-                            <script type="text/javascript" src="https://d33t3vvu2t2yu5.cloudfront.net/tv.js"></script>
-                            <script type="text/javascript">
+    .custom_panel {
+        margin-left: -14px;
+        margin-right: 0px;
+        padding-top: 3px;
+    }
+
+        .custom_panel .panel, .custom_panel .panel-group {
+            margin-bottom: 5px;
+        }
+
+    .padding-left-5 {
+        padding-left: 2px;
+    }
+
+    .padding-right-5 {
+        padding-right: 2px;
+    }
+
+    .content {
+        padding-top: 5px;
+    }
+
+    .blue_border {
+        border-top: 5px solid #1e6eff !important;
+    }
+</style>
+<div class="dashboard blue_heading_panel custom_panel ">
+ 
+<div class="row">
+
+    <div class="col-sm-6 padding-right-5">
+        <div class="panel-group accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <i class="fa fa-line-chart" aria-hidden="true"></i> &nbsp;Price Chart
+                    </h4>
+                </div>
+                <div id="collapse" class="panel-collapse collapse in">
+                    <div class="panel-body" style="height:500px;">
+                        <!-- TradingView Widget BEGIN -->
+                        <script type="text/javascript" src="https://d33t3vvu2t2yu5.cloudfront.net/tv.js"></script>
+                        <script type="text/javascript">
                                 new TradingView.widget({
                                     "autosize": true,
                                     "symbol": "NASDAQ:AAPL",
@@ -34,30 +66,27 @@
                                     "allow_symbol_change": true,
                                     "hideideas": true
                                 });
-                            </script>
-                            <!-- TradingView Widget END -->
-                        </div>
+                        </script>
+                        <!-- TradingView Widget END -->
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-sm-12">
-            <div class="panel-group accordion">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                            <h4 class="panel-title"> 
-                                <a data-toggle="collapse" href="#collapse2">
-                                    <i class="fa fa-area-chart" aria-hidden="true"></i> &nbsp;Fundamental Chart
-                                </a>
-                            </h4>
-</div>
-                    <div id="collapse2" class="panel-collapse collapse2 in">
-                        <div class="panel-body" style="height:500px;">
-                            <!-- TradingView Widget BEGIN -->
-                            <span id="tradingview-copyright">Fundamental data is powered by <a href="http://www.tradingview.com" rel="nofollow" target="_blank" style="color: #3BB3E4">TradingView.com</a></span>
-                            <script type="text/javascript" src="https://d33t3vvu2t2yu5.cloudfront.net/tv.js"></script>
-                            <script type="text/javascript">
+    </div>
+    <div class="col-sm-6 padding-left-5">
+        <div class="panel-group accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <i class="fa fa-area-chart" aria-hidden="true"></i> &nbsp;Fundamental Chart
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse2 in">
+                    <div class="panel-body" style="height:500px;">
+                        <!-- TradingView Widget BEGIN -->
+                        <span id="tradingview-copyright">Fundamental data is powered by <a href="http://www.tradingview.com" rel="nofollow" target="_blank" style="color: #3BB3E4">TradingView.com</a></span>
+                        <script type="text/javascript" src="https://d33t3vvu2t2yu5.cloudfront.net/tv.js"></script>
+                        <script type="text/javascript">
                                 new TradingView.widget({
                                     "autosize": true,
                                     "symbol": "NASDAQ:AAPL",
@@ -71,34 +100,115 @@
                                     "hide_side_toolbar": true,
                                     "save_image": false
                                 });
-                            </script>
-                            <!-- TradingView Widget END -->
-                        </div>
+                        </script>
+                        <!-- TradingView Widget END -->
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="col-sm-6 padding-right-5">
+        <div class="panel-group accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <i class="fa fa-line-chart" aria-hidden="true"></i> &nbsp;Price Chart
+                    </h4>
+                </div>
+                <div id="collapse" class="panel-collapse collapse in">
+                    <div class="panel-body" style="height:500px;">
+                        <!-- TradingView Widget BEGIN -->
+                        <script type="text/javascript" src="https://d33t3vvu2t2yu5.cloudfront.net/tv.js"></script>
+                        <script type="text/javascript">
+                                new TradingView.widget({
+                                    "autosize": true,
+                                    "symbol": "NASDAQ:AAPL",
+                                    "interval": "D",
+                                    "timezone": "Etc/UTC",
+                                    "theme": "White",
+                                    "style": "1",
+                                    "locale": "en",
+                                    "toolbar_bg": "#f1f3f6",
+                                    "enable_publishing": false,
+                                    "allow_symbol_change": true,
+                                    "hideideas": true
+                                });
+                        </script>
+                        <!-- TradingView Widget END -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 padding-left-5">
+        <div class="panel-group accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <i class="fa fa-area-chart" aria-hidden="true"></i> &nbsp;Fundamental Chart
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse2 in">
+                    <div class="panel-body" style="height:500px;">
+                        <!-- TradingView Widget BEGIN -->
+                        <span id="tradingview-copyright">Fundamental data is powered by <a href="http://www.tradingview.com" rel="nofollow" target="_blank" style="color: #3BB3E4">TradingView.com</a></span>
+                        <script type="text/javascript" src="https://d33t3vvu2t2yu5.cloudfront.net/tv.js"></script>
+                        <script type="text/javascript">
+                                new TradingView.widget({
+                                    "autosize": true,
+                                    "symbol": "NASDAQ:AAPL",
+                                    "interval": "D",
+                                    "theme": "White",
+                                    "locale": "en",
+                                    "toolbar_bg": "#f1f3f6",
+                                    "fundamental": "Script$EDGR_DIVIDEND_YIELD_V2@tv-scripting",
+                                    "percentage": true,
+                                    "hide_top_toolbar": true,
+                                    "hide_side_toolbar": true,
+                                    "save_image": false
+                                });
+                        </script>
+                        <!-- TradingView Widget END -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-        
-        @*<div class="col-sm-12">
-                <div class="panel-group accordion">
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"> <i class="fa fa-area-chart" aria-hidden="true"></i> &nbsp;Fundamental Chart</h4>
-                        </div>
-                        <div id="collapse2" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <img src="~/images/chart2.jpg" width="100%" />
+</div>
+
+
+@*<div class="charts">
+    <div class="row">
+        <div class="col-sm-12">
+
+        </div>
+
+        <div class="col-sm-12">
+
+        </div>
+
+
+       <div class="col-sm-12">
+                    <div class="panel-group accordion">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"> <i class="fa fa-area-chart" aria-hidden="true"></i> &nbsp;Fundamental Chart</h4>
+                            </div>
+                            <div id="collapse2" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <img src="~/images/chart2.jpg" width="100%" />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>*@
 
 
 
-    </div>
+        </div>
 
 
 
-</div>
+    </div>*@
