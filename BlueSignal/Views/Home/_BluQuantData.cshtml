@@ -25,7 +25,6 @@
 
 }
 <div class="tab_block">
-
     <div class="col-sm-5 ">
         <div class="info_block">
             <div class="blue_block">
@@ -172,14 +171,12 @@
             </div>
         </div>
     </div>
-
 </div>
 <div class="row">
     <div class="col-sm-12">
         <div class="panel-group accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
-
                     <h4 class="panel-title">
                         <a data-toggle="collapse" href="#collapse6">
                             <img src="../../images/bluquant_active.png" alt="" />
@@ -465,25 +462,27 @@
         var newInnerTable = '';
         var categoryId = 0;
         $.each(data.categories, function (i, obj) {
-            htmlContent += '<th>' + obj.Text + '</th>';
+            if (obj.Text.toLowerCase().indexOf("market") != -1) {
+                htmlContent += '<th>' + obj.Text + '</th>';
 
-            var items = $.grep(data.list, function (i, obj1) {
-                return (i.CategoryId == obj.Value);
-            });
-
-            trHtml += categoryId == 0 ? '<tbody><tr><td>' : "<td>";
-
-            var newInnerTable = "<table class='table table-bordered table-striped'>";
-            if (items.length > 0) {
-                $.each(items, function (i, item) {
-                    newInnerTable += '<tr><td><a href="#" class="' + cssClass + '">' + item.SymbolName + ' </td></tr>';
+                var items = $.grep(data.list, function (i, obj1) {
+                    return (i.CategoryId == obj.Value);
                 });
+
+                trHtml += categoryId == 0 ? '<tbody><tr><td>' : "<td>";
+
+                var newInnerTable = "<table class='table table-bordered table-striped'>";
+                if (items.length > 0) {
+                    $.each(items, function (i, item) {
+                        newInnerTable += '<tr><td><a href="#" class="' + cssClass + '">' + item.SymbolName + ' </td></tr>';
+                    });
+                }
+
+                newInnerTable += "</table>";
+                trHtml += newInnerTable + '</td>';
+
+                categoryId = obj.Value;
             }
-
-            newInnerTable += "</table>";
-            trHtml += newInnerTable + '</td>';
-
-            categoryId = obj.Value;
         });
 
         trHtml += '</tr>';
