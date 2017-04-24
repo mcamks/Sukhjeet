@@ -572,7 +572,7 @@ hr{border-color:#d1d1d1; }
     content: "";
     display: inline-block !important;
     position: absolute;
-    right: 200px;
+    left: -11px;
     top: 66px;
     transform:rotate(-89deg);
 }
