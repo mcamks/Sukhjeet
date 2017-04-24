@@ -813,7 +813,7 @@ namespace BlueSignal.Controllers
         public async Task<ActionResult> FinanceInfoView(string symbol)
         {
             if (!string.IsNullOrEmpty(symbol))
-                symbol = symbol.Replace("INDEX:", "");
+                symbol = symbol.Replace("INDEX:", "").Replace("NASDAQ:", "");
 
             var result = string.Empty;
             using (WebClient client = new WebClient())
@@ -827,7 +827,7 @@ namespace BlueSignal.Controllers
         public async Task<JsonResult> ReloadFinanceInfo(string symbol)
         {
             if (!string.IsNullOrEmpty(symbol))
-                symbol = symbol.Replace("INDEX:", "");
+                symbol = symbol.Replace("INDEX:", "").Replace("NASDAQ:", "");
 
             var result = string.Empty;
             using (WebClient client = new WebClient())
@@ -841,7 +841,7 @@ namespace BlueSignal.Controllers
         public async Task<JsonResult> GetMarketChartDataOnLoad(string startDate, string symbol)
         {
             //For Daily
-            startDate = BluSignalComman.DateTime9MonthBack;
+            startDate = BluSignalComman.DateTime1YearBack;
 
             var endDate = BluSignalComman.EndDate;
 
@@ -879,7 +879,7 @@ namespace BlueSignal.Controllers
                 });
 
                 //For Weekly
-                startDate = BluSignalComman.DateTime9MonthWeeksBack;
+                startDate = BluSignalComman.DateTime5YearsBack;
                 chartResult = await GetLoggingData(symbol, startDate, endDate, "weekly");
 
                 var weeklyData = chartResult.results.Select(item => new object[]
@@ -949,7 +949,7 @@ namespace BlueSignal.Controllers
                         });
                     }
 
-                    obj.results = list;
+                    obj.results = list.OrderByDescending(a => a.tradingDay).ToList();
                 }
             }
             catch (Exception ex)

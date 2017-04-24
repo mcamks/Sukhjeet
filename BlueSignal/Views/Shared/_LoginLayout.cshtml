@@ -25,88 +25,75 @@
     <script src="~/Scripts/tv.js"></script>
 </head>
 <body>
-    @{
-        if (HttpContextSessionWrapperExtension.SessionUser != null)
-        {
-
-            <div class="navbar navbar-inverse navbar-fixed-top navbar_bg navbar_custom">
-                <div>
-                    <div class="navbar-header">
-                        @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>*@
-                        <a href="http://www.blusignalsystems.com" data-toggle="tooltip" data-placement="right" title="BluSignals Website" target="_blank" class="navbar-brand"><img src="~/images/blu_logo.png" /></a>
-                        @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
-                    </div>
-                    <div class="active_page">
-                        @if (!string.IsNullOrEmpty(Request.QueryString["p"]) && !string.IsNullOrEmpty(Request.QueryString["c"]))
-                        {
-
-                            if (Request.QueryString["c"] == "Research")
-                            {
-                                <span>
-                                    <img src="~/images/research_icon_active.png" />
-                                </span>
-                            }
-                            else if (Request.QueryString["p"] == "Systems")
-                            {
-                                <span class="cogs_icon">
-                                    <i class="fa @Request.QueryString["c"]" aria-hidden="true"></i>
-                                </span>
-                            }
-                            else
-                            {
-                                <span>
-                                    <i class="fa @Request.QueryString["c"]" aria-hidden="true"></i>
-                                </span>
-                            }
-
-                            <mu id="settabe" onclick="SetActiveClass('@Request.QueryString["p"]')">@Request.QueryString["p"]</mu>
-                        }
-                        else
-                        {
-                            <span>
-                                <i class="fa fa-tachometer" aria-hidden="true"></i>
-                            </span>
-                            <mu id="settabe" onclick="SetActiveClass('Dashboard')">Dashboard</mu>
-                        }
-                    </div>
-                    @{
-                        DateTime eastern = DateTime.UtcNow.AddHours(-5);
-                        var time = eastern.ToString("hh:mm tt");
-                        var tArr = time.Split(' ');
-                    }
-                    <div class="date_time">
-                        <div class="date" id="divDateOnly"><i class="fa fa-calendar" aria-hidden="true"></i>@eastern.ToString("MMM - dd - yyyy")</div>
-                        <div class="time" id="divTimeOnly"><i class="fa fa-clock-o" aria-hidden="true"></i>@tArr[0]<sub>@tArr[1]</sub></div>
-                    </div>
-                </div>
+    <div class="navbar navbar-inverse navbar-fixed-top navbar_bg navbar_custom">
+        <div>
+            <div class="navbar-header">
+                <a href="http://www.blusignalsystems.com" data-toggle="tooltip" data-placement="right" title="BluSignals Website" target="_blank" class="navbar-brand"><img src="~/images/blu_logo.png" /></a>
             </div>
+            <div class="active_page">
+                @if (!string.IsNullOrEmpty(Request.QueryString["p"]) && !string.IsNullOrEmpty(Request.QueryString["c"]))
+                {
 
-                        }
-                        else
-                        {
+                    if (Request.QueryString["c"] == "Research")
+                    {
+                        <span>
+                            <img src="~/images/research_icon_active.png" />
+                        </span>
+                    }
+                    else if (Request.QueryString["p"] == "Systems")
+                    {
+                        <span class="cogs_icon">
+                            <i class="fa @Request.QueryString["c"]" aria-hidden="true"></i>
+                        </span>
+                    }
+                    else
+                    {
+                        <span>
+                            <i class="fa @Request.QueryString["c"]" aria-hidden="true"></i>
+                        </span>
+                    }
 
-                            <h1>@*Please login first*@</h1>
-
-                        }
-    }
+                    <mu id="settabe" onclick="SetActiveClass('@Request.QueryString["p"]')">@Request.QueryString["p"]</mu>
+                }
+                else
+                {
+                    if (HttpContextSessionWrapperExtension.SessionUser != null)
+                    {
+                        <span>
+                            <i class="fa fa-tachometer" aria-hidden="true"></i>
+                        </span>
+                        <mu id="settabe" onclick="SetActiveClass('Dashboard')">Dashboard</mu>
+                    }
+                    else
+                    {
+                        <span>
+                            <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        </span>
+                        <mu id="settabe">Login</mu>
+                    }
+                }
+            </div>
+            @{
+                DateTime eastern = DateTime.UtcNow.AddHours(-5);
+                var time = eastern.ToString("hh:mm tt");
+                var tArr = time.Split(' ');
+            }
+            <div class="date_time">
+                <div class="date" id="divDateOnly"><i class="fa fa-calendar" aria-hidden="true"></i>@eastern.ToString("MMM - dd - yyyy")</div>
+                <div class="time" id="divTimeOnly"><i class="fa fa-clock-o" aria-hidden="true"></i>@tArr[0]<sub>@tArr[1]</sub></div>
+            </div>
+        </div>
+    </div>
     <div class="content">
         <div class="col-sm-12">
             @RenderBody()
             @{
-                if (HttpContextSessionWrapperExtension.SessionUser != null)
-                {
-                    <hr />
-                    <footer>
-                        <div class="col-sm-12">
-                            <p>&copy; @DateTime.Now.Year BluSignals</p>
-                        </div>
-                    </footer>
-                }
-
+                <hr />
+                <footer>
+                    <div class="col-sm-12">
+                        <p>&copy; @DateTime.Now.Year BluSignals</p>
+                    </div>
+                </footer>
             }
         </div>
     </div>
@@ -150,10 +137,16 @@
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js">
     </script>
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.1.0/js/responsive.bootstrap.min.js">
-
     </script>
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
+
     <script src="https://code.highcharts.com/stock/highstock.js"></script>
     <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $('#settabe').click();
+        });
+    </script>
 </body>
 </html>

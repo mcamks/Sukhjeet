@@ -24,5 +24,10 @@ http://marketdata.websol.barchart.com/getQuote.json?key=40ae86537412ad8042cbbaca
         public static string DateTime9MonthWeeksBack { get { return DateTime.Now.AddMonths(-(9 * 43)).ToString("yyyyMMdd000000"); } }
         public static string EndDate { get { return DateTime.Now.ToString("yyyyMMdd000000"); } }
 
+
+        public static string DateTime1YearBack { get { return DateTime.Now.AddYears(-1).ToString("yyyyMMdd000000"); } }
+        public static string DateTime5YearsBack { get { return DateTime.Now.AddYears(-5).ToString("yyyyMMdd000000"); } }
+
+
     }
 }

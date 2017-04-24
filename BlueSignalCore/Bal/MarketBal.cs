@@ -260,22 +260,14 @@ namespace BlueSignalCore.Bal
         #region Users Section
         public async Task<Users> IsUserExists(string userName, string pwd)
         {
-            //using ( var rep = uw.UsersRepository)
-            //{
-            //    var result = rep.Where(x => x.Email.ToLower().Equals(userName) && x.PasswordHash.Equals(pwd));
-            //    //var result = _usersRep.Where(x => x.Email.ToLower().Equals(userName) && x.PasswordHash.Equals(pwd));
-            //    return await result.FirstOrDefaultAsync();
-            //}
             try
             {
-                //var result = _usersRep.Where(x => x.Email.Equals(userName) && x.PasswordHash.Equals(pwd));
-                var result = _usersRep.Where(x => x.Email.Equals(userName));
+                var result = _usersRep.Where(x => x.Email.Equals(userName) && x.PasswordHash.Equals(pwd));
                 return await result.FirstOrDefaultAsync();
             }
             catch (Exception ex)
             {
                 throw ex;
-                return null;
             }
             return null;
         }
