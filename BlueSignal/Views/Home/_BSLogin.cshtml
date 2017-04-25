@@ -2,7 +2,7 @@
 @model BlueSignal.Models.SetPassowrdModel
 
 <div class="alert alert-info text-center">Direct Access to Your Dashboard</div>
-<p>Copy the URL Below and save it in your browser to use in direct log-in access to your BluSignals Dashboard Page</p>
+<p>Copy the URL Below and save it in your browser to use for direct log-in access to your BluSignals Dashboard Page</p>
 
 @using (Html.BeginForm())
 {
@@ -35,16 +35,16 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <strong>Error!</strong> Please fill the required fields.
                     </div>
-
-
                 }
 
                 if (Model.IsSuccess == 2)
                 {
 
                     <div class="alert alert-success alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <strong>Success!</strong> You are registered successfully, Thanks!
+                        @*<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>*@
+                        <strong>Success!</strong> You have registered successfully, Thanks!
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-12">
@@ -86,8 +86,8 @@
 
 
 @*<script>
-    $(document).ready(function () {
-        $(".sidemenu").hide();
-        $(".dashboard_style").hide();
-    });
-</script>*@
+        $(document).ready(function () {
+            $(".sidemenu").hide();
+            $(".dashboard_style").hide();
+        });
+    </script>*@

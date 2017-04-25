@@ -17,13 +17,19 @@ namespace BlueSignal.Controllers
                 switch (css.ToLower())
                 {
                     case "chart1":
-                        return View("_Chart1View");
+                        Session["ActiveCssClass"] = "Charts1";
+                        break;
+                    case "chart2":
+                        Session["ActiveCssClass"] = "Charts2";
+                        break;
+                    case "chart3":
+                        Session["ActiveCssClass"] = "Charts3";
+                        break;
                     default:
                         break;
                 }
             }
-
-            return View();
+            return View("_Chart1View");
         }
 
         [LogonAuthorize]

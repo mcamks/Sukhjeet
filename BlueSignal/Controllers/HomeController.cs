@@ -235,15 +235,19 @@ namespace BlueSignal.Controllers
 
                 var endDate = BluSignalComman.EndDate;
                 var obj = await GetLoggingData(symbol, startDate, endDate, Type);
-                if (obj.results != null && obj.results.Any())
-                {
-                    var data = JsonConvert.SerializeObject(obj.results, new JsonSerializerSettings { ContractResolver = new DynamicContractResolver("timestamp,tradingDay") });
-                    return data.Replace("timestamp1", "timestamp").Replace("tradingDay1", "tradingDay").Replace("//", "");
-                }
+                //if (obj.results != null && obj.results.Any())
+                //{
+                //    //var data = JsonConvert.SerializeObject(obj.results, new JsonSerializerSettings { ContractResolver = new DynamicContractResolver("timestamp,tradingDay") });
+                //    var data = JsonConvert.SerializeObject(obj.results, new JsonSerializerSettings { ContractResolver = new DynamicContractResolver("") });
+                //    //return data.Replace("timestamp1", "timestamp").Replace("tradingDay1", "tradingDay").Replace("//", "");
+                //    return data.Replace("//", "");
+                //}
+                return obj.serializedResult;
+
             }
             catch (WebException ex) //if server is off it will throw exeception and here we need notify user
             {
-
+                throw ex;
             }
             return "Fail";
 
@@ -258,7 +262,6 @@ namespace BlueSignal.Controllers
 
                 if (Type == "weekly")
                     startDate = BluSignalComman.DateTime9MonthWeeksBack;
-
 
                 if (Type == "dailySecond" || Type == "dailyBulQuantData" || Type == "dailyBuleFractal" || Type == "dailyBlueNeural")
                     Type = "daily";
@@ -854,8 +857,11 @@ namespace BlueSignal.Controllers
 
             if (chartResult.results != null && chartResult.results.Any())
             {
-                marketDataDaily = JsonConvert.SerializeObject(chartResult.results, new JsonSerializerSettings { ContractResolver = new DynamicContractResolver("timestamp,tradingDay") });
-                marketDataDaily = marketDataDaily.Replace("timestamp1", "timestamp").Replace("tradingDay1", "tradingDay").Replace("//", "");
+                //marketDataDaily = JsonConvert.SerializeObject(chartResult.results, new JsonSerializerSettings { ContractResolver = new DynamicContractResolver("timestamp,tradingDay") });
+                //marketDataDaily = marketDataDaily.Replace("//", "");
+
+                marketDataDaily = chartResult.serializedResult;
+
                 int lastDays = 90;
 
                 var averageVolumn = chartResult.results.OrderByDescending(a => a.tradingDay).Take(lastDays).Sum(x => Convert.ToSingle(x.volume));
@@ -907,50 +913,73 @@ namespace BlueSignal.Controllers
             return Json("Fail");
         }
 
-        private async Task<Data> GetLoggingData(string symbol, string startDate, string endDate = "", string intervalType = "")
+        private async Task<Data> GetLoggingData(string symbol, string startDate, string endDate = "", string intervalType = "", string order = "")
         {
             var obj = new Data();
             try
             {
-                var pData = new LoggingData { param1 = string.IsNullOrEmpty(symbol) ? "SPY" : symbol };
 
-                if (!string.IsNullOrEmpty(startDate))
-                    pData.param4 = startDate;
+                #region commented
+                //var pData = new LoggingData { param1 = string.IsNullOrEmpty(symbol) ? "SPY" : symbol };
 
-                if (!string.IsNullOrEmpty(endDate))
-                    pData.param5 = endDate;
+                //if (!string.IsNullOrEmpty(startDate))
+                //    pData.param4 = startDate;
 
-                if (!string.IsNullOrEmpty(intervalType))
-                    pData.param6 = intervalType;
+                //if (!string.IsNullOrEmpty(endDate))
+                //    pData.param5 = endDate;
 
-                var client = new HttpClient();
-                var url = $"{ApiBaseUrl}{ApiActions.chartData}";
-                var data = (await client.PostAsync(url, pData, new JsonMediaTypeFormatter())).Content.ReadAsAsync<IEnumerable<LoggingData>>().Result;
-                if (data != null && data.Any())
+                //if (!string.IsNullOrEmpty(intervalType))
+                //    pData.param6 = intervalType;
+
+                //var client = new HttpClient();
+                //var url = $"{ApiBaseUrl}{ApiActions.chartData}";
+                //var data = (await client.PostAsync(url, pData, new JsonMediaTypeFormatter())).Content.ReadAsAsync<IEnumerable<LoggingData>>().Result;
+                //if (data != null && data.Any())
+                //{
+                //    obj.status = new status { code = "200", message = "success" };
+                //    var list = new List<resultsData>();
+                //    foreach (var item in data)
+                //    {
+                //        var dateValue = DateTime.Parse(item.param10);
+                //        list.Add(new resultsData
+                //        {
+                //            symbol = item.param1,
+                //            timestamp1 = item.param10,
+                //            tradingDay1 = item.param10,
+                //            timestamp = dateValue,
+                //            tradingDay = dateValue.Date,
+                //            open = item.param4,
+                //            high = item.param5,
+                //            low = item.param6,
+                //            close = item.param7,
+                //            volume = item.param8,
+                //            openInterest = item.param9
+                //        });
+                //    }
+
+                //    obj.results = list.OrderByDescending(a => a.tradingDay).ToList();
+                //} 
+                #endregion
+
+                order = !string.IsNullOrEmpty(order) ? $"&order={order}" : "&order=asc";
+
+                var url = $"{ApiBaseUrl}&symbol={symbol}&type={intervalType}&startDate={startDate}{order}";
+                var result = await new WebClient().DownloadStringTaskAsync(url);
+
+                var data = await JsonConvert.DeserializeObjectAsync<Data>(result);
+                if (data.results != null && data.results.Any())
                 {
-                    obj.status = new status { code = "200", message = "success" };
-                    var list = new List<resultsData>();
-                    foreach (var item in data)
-                    {
-                        var dateValue = DateTime.Parse(item.param10);
-                        list.Add(new resultsData
-                        {
-                            symbol = item.param1,
-                            timestamp1 = item.param10,
-                            tradingDay1 = item.param10,
-                            timestamp = dateValue,
-                            tradingDay = dateValue.Date,
-                            open = item.param4,
-                            high = item.param5,
-                            low = item.param6,
-                            close = item.param7,
-                            volume = item.param8,
-                            openInterest = item.param9
-                        });
-                    }
-
-                    obj.results = list.OrderByDescending(a => a.tradingDay).ToList();
+                    data.results = data.results.OrderByDescending(a => a.tradingDay);
+                    data.serializedResult = result.Replace("{\"status\":{\"code\":200,\"message\":\"Success.\"},\"results\":", "").Replace("//", "").Trim();
+                    data.serializedResult = data.serializedResult.Remove(data.serializedResult.Length - 1);
                 }
+                else
+                {
+                    data.results = new List<resultsData>();
+                    data.serializedResult = string.Empty;
+                }
+
+                return data;
             }
             catch (Exception ex)
             {
@@ -959,23 +988,28 @@ namespace BlueSignal.Controllers
             return obj;
         }
 
+
         public async Task<JsonResult> GetDailyMarketData(string symbol)
         {
             //For Daily
             var startDate = BluSignalComman.DateTime9MonthBack;
             var endDate = BluSignalComman.EndDate;
-            var chartResult = await GetLoggingData(symbol, startDate, endDate, "daily");
-            var marketDataDaily = string.Empty;
+            var chartResult = await GetLoggingData(symbol, startDate, endDate, "daily", order: "desc");
+            #region Commented Code
+            //var marketDataDaily = string.Empty;
 
-            if (chartResult.results != null && chartResult.results.Any())
-            {
-                marketDataDaily = JsonConvert.SerializeObject(chartResult.results, new JsonSerializerSettings
-                {
-                    ContractResolver = new DynamicContractResolver("timestamp,tradingDay")
-                });
-                marketDataDaily = marketDataDaily.Replace("timestamp1", "timestamp").Replace("tradingDay1", "tradingDay").Replace("//", "");
-            }
-            var jsonResult = new JsonResult { Data = marketDataDaily, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = int.MaxValue };
+            //if (chartResult.results != null && chartResult.results.Any())
+            //{
+            //    marketDataDaily = JsonConvert.SerializeObject(chartResult.results, new JsonSerializerSettings
+            //    {
+            //        //ContractResolver = new DynamicContractResolver("timestamp,tradingDay")
+            //        ContractResolver = new DynamicContractResolver("")
+            //    });
+            //    //marketDataDaily = marketDataDaily.Replace("timestamp1", "timestamp").Replace("tradingDay1", "tradingDay").Replace("//", "");
+            //    marketDataDaily = marketDataDaily.Replace("//", "");
+            //} 
+            #endregion
+            var jsonResult = new JsonResult { Data = chartResult.serializedResult, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = int.MaxValue };
             return jsonResult;
         }
 

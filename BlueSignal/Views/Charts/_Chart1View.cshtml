@@ -17,7 +17,8 @@
         var startDate = "20150101"
         var key = "40ae86537412ad8042cbbaca14906020"
         var type = "minutes";
-        var url = "http://marketdata.websol.barchart.com/getHistory.json?key=" + key + "&symbol=" + sym + "&type=" + type + "&startDate=" + startDate;
+        //var url = "http://marketdata.websol.barchart.com/getHistory.json?key=" + key + "&symbol=" + sym + "&type=" + type + "&startDate=" + startDate;
+        var url = "http://ondemand.websol.barchart.com/getHistoryTradingView.json?&symbol=" + sym + "&apikey=a7842b6d1f7a08b1dd7e889585ff9093&requestType=history";
         var widget = window.tvWidget = new TradingView.widget({
             fullscreen: true,
             symbol: sym,

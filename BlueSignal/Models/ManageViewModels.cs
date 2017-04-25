@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using BlueSignalCore.Dto;
+using Newtonsoft.Json;
 
 namespace BlueSignal.Models
 {
@@ -114,7 +115,9 @@ namespace BlueSignal.Models
     {
         public status status { get; set; }
         public IEnumerable<resultsData> results { get; set; }
+        public string serializedResult { get; set; }
     }
+
     public class status
     {
         public string code { get; set; }
@@ -132,8 +135,12 @@ namespace BlueSignal.Models
         public string close { get; set; }
         public string volume { get; set; }
         public string openInterest { get; set; }
-        public string timestamp1 { get; set; }
-        public string tradingDay1 { get; set; }
+
+        //[JsonProperty("timestamp")]
+        //public string timestamp1 { get; set; }
+
+        ////[JsonProperty("tradingDay")]
+        //public string tradingDay1 { get; set; }
     }
 
     public class ChartDataModel

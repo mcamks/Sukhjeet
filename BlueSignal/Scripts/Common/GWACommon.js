@@ -303,6 +303,7 @@ function GetMarketChartNearTermData(typeID) {
 }
 
 function GetAndBindMarketAllChartsData() {
+    debugger
     var symb = $('#code').val();
     //ShowLoaderCustom();
     var rangeEnabled = true;
@@ -329,26 +330,33 @@ function GetAndBindMarketAllChartsData() {
                     var avgVol = CommaFormatted(parseFloat(avgVolume).toFixed(0));
                     if ($("#AvgVolume").length > 0)
                         $("#AvgVolume").val(avgVol);
-                    if ($("#AvgVolumeClass").length > 0) {
+
+                    if ($(".AvgVolumeClass").length > 0) {
                         $(".AvgVolumeClass").text(avgVol);
                         $(".AvgVolumeClass").val(avgVol);
                     }
 
-                    if ($("#AvgVolumeClassbluequont").length > 0)
+                    if ($(".AvgVolumeClassbluequont").length > 0)
                         $(".AvgVolumeClassbluequont").text(avgVol);
+
+                    if ($("#AvgVolumeQW").length > 0)
+                        $("#AvgVolumeQW").val(avgVol);
                 }
 
                 if (closingPrice != "") {
+                    if ($("#ClosingPriceQW").length > 0)
+                        $("#ClosingPriceQW").val(closingPrice);
+
                     if ($("#ClosingPrice").length > 0)
-                        $("#ClosingPrice").val(data.ClosingPrice);
+                        $("#ClosingPrice").val(closingPrice);
 
                     if ($(".ClosingPriceClass").length > 0) {
-                        $(".ClosingPriceClass").text(data.ClosingPrice);
-                        $(".ClosingPriceClass").val(data.ClosingPrice);
+                        $(".ClosingPriceClass").text(closingPrice);
+                        $(".ClosingPriceClass").val(closingPrice);
                     }
 
                     if ($(".ClosingPriceClassbluequont").length > 0)
-                        $(".ClosingPriceClassbluequont").text(data.ClosingPrice);
+                        $(".ClosingPriceClassbluequont").text(closingPrice);
                 }
 
             }
@@ -369,7 +377,6 @@ function GetAndBindMarketAllChartsData() {
                     BindCharts("chartcontainer_daily", data, symbolTitle, customColor, 1, false, true, true);
                 if ($("#chartcontainer_weekly").length > 0)
                     BindCharts("chartcontainer_weekly", data1, symbolTitle, customColor, 2, false, true, true);
-
                 if ($("#chartcontainer2_weekly").length > 0)
                     BindCharts("chartcontainer2_weekly", data1, symbolTitle, customColor, 2, false, true, true);
 
@@ -433,8 +440,6 @@ function BindCharts(containterID, data, symbolTitle, customColor, symb, rangesel
                 enabled: false
             }
         }
-
-
     });
 }
 
@@ -675,7 +680,8 @@ function bindDatatable(selector, data) {
                     { "data": "close", "name": "close" },
                      { "data": "volume", "name": "volume" }
                       //,{ "data": "openInterest", "name": "openInterest" }
-        ]
+        ],
+        "order": [[0, "desc"]]
     });
 }
 
@@ -828,6 +834,13 @@ function BindBluFractalMarketsPopup(data, selector) {
 
     htmlContent += trHtml;
     $("#" + selector).html(htmlContent);
+
+    if ($("#tblCategoriesListCombo").length > 0)
+        $("#tblCategoriesListCombo").html(htmlContent);
+
+    if ($("#tblCategoriesListNeural").length > 0)
+        $("#tblCategoriesListNeural").html(htmlContent);
+
 }
 
 

@@ -50,7 +50,7 @@
     @*<li class="pull-right help"><a href="@Url.Action("","Help")" data-toggle="tooltip" title="Help" target="_blank"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></li>*@
     @*<li class="pull-right"><a class="detail" data-toggle="tab" title="Detail" href="#Details" onclick="return OpenPopupWithTheQuote();"></a></li>*@
     @*<li class="pull-right"><a class="detail tooltips" data-toggle="tab" href="#Details"><span class="tiptext">Detail</span></a></li>*@
-    <li class="pull-right"><a class="detail tooltips" href="http://www.marketwatch.com/" target="_blank"><span class="tiptext">Detail</span></a></li>
+    <li class="pull-right"><a class="detail tooltips" href="#" onclick="callYahooFinance1();"><span class="tiptext">Detail</span></a></li>
 
     <li class="pull-right">@*<a class="data" data-toggle="tooltip" title="Data" href="#Data"></a>*@</li>
 
@@ -434,7 +434,7 @@
         //    });
         //});
 
-
+        $("#liBluFractal").removeClass("active");
         $("#li" + '@activeTab').addClass("active");
         $("#@activeTab").addClass("in active");
     });

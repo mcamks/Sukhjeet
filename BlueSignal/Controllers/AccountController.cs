@@ -82,7 +82,7 @@ namespace BlueSignal.Controllers
             }
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var IsUserExist = await _marketBal.IsUserExists(model.Email.ToLower(), model.Password);
+            var IsUserExist = await _marketBal.AuthenticateUser(model.Email.ToLower(), model.Password);
 
             //BluSignalsEntities db = new BluSignalsEntities();
             //var IsUserExist = db.Users.FirstOrDefault(x => x.Email.ToLower() == model.Email.ToLower() && x.PasswordHash == model.Password);

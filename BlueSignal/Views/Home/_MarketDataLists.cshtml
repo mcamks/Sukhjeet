@@ -38,6 +38,9 @@
                     <div id="collapseDaily" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <div class="row">
+                                <div class="col-md-12" style="display:none;" id="noRecordsDiv">
+                                    <span style="color:red;">No Records</span>
+                                </div>
                                 <div class="col-sm-12">
                                     <div style="overflow:auto;">
                                         <div class="table-responsive table_style">
@@ -67,11 +70,12 @@
         </div>
     </div>
 </div>
-
 <script>
     function ReloadDailyMarketData(showLoader) {
+        $("#noRecordsDiv").hide();
         var sym = $("#txtMDDailyCode").val();
         if (sym != "") {
+            sym = sym.substr(sym.indexOf(":") + 1, sym.length - 1);
             if (showLoader)
                 ShowLoaderCustom();
             $.ajax({
@@ -82,7 +86,7 @@
                 async: true,
                 data: { "symbol": sym },
                 success: function (data) {
-                    if (data != null && $("#Id_MarketDataListDaily").length > 0) {
+                    if (data != null && data != "" && data.indexOf("1969-12-31") == -1 && $("#Id_MarketDataListDaily").length > 0) {
                         var dailyData = $.parseJSON(data);
                         $.each(dailyData, function (i, d) {
                             d.volume = CommaFormatted(parseFloat(d.volume).toFixed(0));
@@ -90,6 +94,9 @@
 
                         if ($("#Id_MarketDataListDaily").length > 0)
                             bindDatatable('Id_MarketDataListDaily', dailyData);
+                    }
+                    else {
+                        $("#noRecordsDiv").show();
                     }
 
                     if (showLoader)
@@ -102,7 +109,6 @@
             });
         }
     }
-
 
     $(document).ready(function () {
         if ($("#hfSymbol11").val() != "") {

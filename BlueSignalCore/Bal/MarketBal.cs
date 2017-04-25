@@ -258,7 +258,25 @@ namespace BlueSignalCore.Bal
         }
 
         #region Users Section
-        public async Task<Users> IsUserExists(string userName, string pwd)
+        public async Task<Users> IsUserExists(string userName, string pwd = "")
+        {
+            try
+            {
+                //To pass through the authentication if user comes from wordpress site...This case needs to be handled later.
+                if (!string.IsNullOrEmpty(userName))
+                    pwd = string.Empty;
+
+                var result = _usersRep.Where(x => x.Email.Equals(userName) && (string.IsNullOrEmpty(pwd) || x.PasswordHash.Equals(pwd)));
+                return await result.FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return null;
+        }
+
+        public async Task<Users> AuthenticateUser(string userName, string pwd)
         {
             try
             {
