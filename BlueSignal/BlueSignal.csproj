@@ -291,6 +291,10 @@
     <Content Include="images\chart2_gray.png" />
     <Content Include="images\chart3_active.png" />
     <Content Include="images\chart3_gray.png" />
+    <Content Include="images\date_icon-2.png" />
+    <Content Include="images\date_icon.png" />
+    <Content Include="images\days_icon-2.png" />
+    <Content Include="images\dollar_icon-2.png" />
     <Content Include="images\favicon.png" />
     <Content Include="images\arrow_up.png" />
     <Content Include="images\blufractal_active.png" />
