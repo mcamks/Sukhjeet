@@ -93,7 +93,7 @@
         </div>
     </div>
 
-    <div class="col-sm-12 dashboard_style" id="c_1">
+    <div class="col-sm-12 dashboard_style show_tradingview" id="c_1">
         <div class="panel-group accordion" style="margin-bottom:5px; margin-top:5px;">
             <div class="panel">
                 @*<div class="panel-heading">
@@ -146,10 +146,10 @@
             </div>
         </div>
     </div>
-    <div class="sidemenu">
+    <div class="sidemenu sidemenu_position">
         <ul>
             <li id="tab_1" onClick="ToggleTickerIcon1('')" class="showHide_btn arrow" data-toggle="tooltip" data-placement="right" title="Ticker On/Off">
-                <img src="~/images/white.png" id="up_1" class="arrow_remove" />
+                <img src="~/images/white.png" id="up_1" class="arrow_remove arrow_open" />
             </li>
             <li class="remove Dashboard active"><a href="@Url.Action("Dashboard","Home",new { p = "Dashboard",c="fa-tachometer" })" data-toggle="tooltip" title="Dashboard" data-placement="right"><i class="fa fa-tachometer" aria-hidden="true"></i></a></li>
             <li class="remove Settings"><a href="@Url.Action("Index","Home",new { p = "Systems",c= "fa-cogs" })" data-toggle="tooltip" title="Systems" data-placement="right"><i class="fa fa-cogs" aria-hidden="true"></i></a></li>
@@ -208,7 +208,7 @@
             </li>
         </ul>
     </div>
-    <div class="content">
+    <div class="content content_position">
         <div class="">
             <div class="col-sm-12">
                 @RenderBody()
