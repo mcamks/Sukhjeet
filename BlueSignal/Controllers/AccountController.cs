@@ -19,6 +19,9 @@ using System.IO;
 
 namespace BlueSignal.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Authorize]
     public class AccountController : Controller
     {

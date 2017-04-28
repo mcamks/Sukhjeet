@@ -13,7 +13,9 @@
     }
 
     TradingView.onready(function () {
-        var sym = "AAPL";
+        //var sym = "AAPL";
+        var sym = "SKY";
+
         var startDate = "20150101"
         var key = "40ae86537412ad8042cbbaca14906020"
         var type = "minutes";
@@ -89,7 +91,18 @@ new TradingView.widget({
   "locale": "en",
   "toolbar_bg": "#f1f3f6",
   "fundamental": "Script$EDGR_DIVIDEND_YIELD_V2@tv-scripting",
-  "percentage": true
+  "percentage": true,
+    //Added by krishna to show deetails on 28/04.2017
+  "details": true,
+  "news": [
+  "headlines"
+  ],
+  "hideideasbutton": true,
+  "allow_symbol_change": true,
+  "hide_side_toolbar": false,
+    //END
+
+
 });
                             </script>
                             <!-- TradingView Widget END -->
