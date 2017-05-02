@@ -84,7 +84,7 @@ hr{border-color:#d1d1d1; }
 
 /*.tab-pane{padding-top:10px;}*/
 
-.form-width{max-width:100% !important;}
+.form-width{max-width:100% !important; border-radius:0px; border:solid 1px #e7ecf1; box-shadow:none !important;}
 .panel-body p{margin-bottom:2px;color:#707172;}
 
 .modal_style .modal-title{color: #1f6df7; font-weight:normal;font-size: 21px;}
@@ -102,19 +102,19 @@ hr{border-color:#d1d1d1; }
 
 .square span{float:left; width:100%; margin:5px 0 10px;}
 .trend_signal p{margin-bottom:2px;}
-.trend_signal table{border:none; border-radius:4px; margin-bottom:0;}
+.trend_signal table{border:none; /*border-radius:4px;*/ margin-bottom:0;}
 .trend_signal .panel-heading{float: left;
     text-align: left;
     width: 100%;}
 .trend_signal .panel-heading img{margin-top:2px;}
-.trend_signal th{border-radius:5px 0 0 0;}
-.trend_signal th+th{border-radius:0 5px 0 0;}
+.trend_signal th{/*border-radius:5px 0 0 0;*/}
+.trend_signal th+th{/*border-radius:0 5px 0 0;*/}
 .trend_signal td{padding:2px 10px !important;}
 
 .todays_signal .panel-heading{background:#1f6df7; color:#fff; padding:8px 10px;}
 .todays_signal .panel-body{padding:0; border-top:none;}
 
-.fail_points{background:-webkit-gradient(linear,0 0,0 100%,from(#bccdcd),to(#9da4a8)); float:left; width:100%; border-radius:0px 0px 5px 5px; color:#fff;}
+.fail_points{background:-webkit-gradient(linear,0 0,0 100%,from(#bccdcd),to(#9da4a8)); float:left; width:100%; /*border-radius:0px 0px 5px 5px;*/ color:#fff;}
 .fail_points label{float:right; padding:5px 10px; margin-bottom:0;}
 .fail_points .projected{text-align:right;}
 .fail_points .projected i{ margin-left:10px;}
@@ -189,7 +189,7 @@ hr{border-color:#d1d1d1; }
 
 .pannel_title1{margin-top:103px;}
 
-.nav-tabs{background:#eee; border-top:1px solid #d9d7d7; border-left:1px solid #d9d7d7; border-bottom:1px solid #fff; border-radius:5px 5px 0 0;}
+.nav-tabs{background:#eee; border-top:1px solid #d9d7d7; border-left:1px solid #d9d7d7; border-bottom:1px solid #fff; /*border-radius:5px 5px 0 0;*/}
 .nav-tabs > li:first-child > a{border-radius:5px 0 0 0;}
 .nav-tabs > li > a{color:#505050; border-radius:0; padding-left:35px; border:none; border-right:1px solid #d9d7d7; margin-right:0;}
 .nav > li > a:focus, .nav > li > a:hover{background:#fff;}
@@ -200,7 +200,8 @@ hr{border-color:#d1d1d1; }
 .nav-tabs > li > a.BluFractal_BluNeural .combo{float:left; padding:2px 1px; margin-right:5px; line-height:20px;}
 
 .nav-tabs > li > a.detail{height:39px; display:block; padding-left:25px; cursor:pointer;}
-.nav-tabs > li > a.data{height:39px; display:block; padding-left:25px;}
+.nav-tabs > li > a.data{height:39px; display:block; padding-left:25px; }
+.data_border{border-left:solid 1px #d9d7d7 !important;}
 .nav-tabs > li > a.setting{line-height:20px; display:block; padding-left:15px; color:#1f6df7; font-size:17px;}
 
 .nav-tabs > li > a.blufractal{background:#eee url(../images/blufractal_active.png) 10px 11px no-repeat; background-size:19px !important;}
@@ -257,13 +258,13 @@ hr{border-color:#d1d1d1; }
     content:"\e080";
 }
 
-.tab_block{background:#fff; border:1px solid #e5e4e4; border-top:none; border-radius:0px 0px 5px 5px; float:left; width:100%; padding:12px 0 10px; margin-bottom:15px; margin-top:-2px; }
+.tab_block{background:#fff; border:1px solid #e5e4e4; border-top:none; /*border-radius:0px 0px 5px 5px;*/ float:left; width:100%; padding:12px 0 10px; margin-bottom:5px; margin-top:-2px; }
 
-.info_block{/*background:#b9c9ca;*/ border:solid 1px #ddd; background:#fff; float:left; width:100%; border-radius:5px; padding:2px; /*box-shadow:inset 0px 0px 34px #9ca3a7;*/}
+.info_block{/*background:#b9c9ca;*/ border:solid 1px #ddd; background:#fff; float:left; width:100%; /*border-radius:5px;*/ /*padding:2px;*/ /*box-shadow:inset 0px 0px 34px #9ca3a7;*/}
 
-.blue_block{background:#1e6eff; float:left; width:100%; border-radius:5px; padding:10px 0;}
+.blue_block{background:#1e6eff; float:left; width:100%; /*border-radius:5px;*/ padding:10px 0;}
 
-.btn_whitegray{box-shadow:0 4px 0 0 #81a4e4; color:#2a75fc; font-weight:bold;
+.btn_whitegray{box-shadow:0 3px 0 0 #81a4e4; color:#2a75fc; font-weight:bold;
                background: #fff; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(#fff, #ababab); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(#fff, #ababab); /* For Opera 11.1 to 12.0 */
@@ -274,7 +275,7 @@ hr{border-color:#d1d1d1; }
 
 .sub_info {/*background:#ecf0f1;*/ background:#fff; float:left; width:100%; border-radius:5px; margin-top:3px; padding:8px 10px 0; padding-bottom:0;}
 .sub_info span{margin-right:6px;}
-.symbol_text{color:#fff; font-weight:bold; text-transform:uppercase;}
+.symbol_text{color:#fff; font-weight:bold; text-transform:uppercase; line-height:24px; margin-bottom:0px;}
 .symbol_text strong{font-size:16px;}
 
 .search_symbol{position:relative; padding-left:0;}
@@ -435,7 +436,7 @@ hr{border-color:#d1d1d1; }
 .date_time .time sub{color:#a9b2c2;}
 
 .sidemenu{float:left; width:46px; position:fixed; /*z-index:99;*/ z-index:1031;background:#fff;  margin-top: 19px; transition: margin-top 1s; -webkit-transition: margin-top 1s;}
-.sidemenu_position{margin-top:130px;}
+.sidemenu_position{margin-top:138px;}
 .sidemenu ul{list-style:none; padding:0; margin:0;}
 .sidemenu ul li{float:left; border-bottom:1px solid #e7e4e4;}
 .sidemenu ul li a{color:#707070; width:46px; text-align:center; padding:10px 0; display:block; font-size:18px; /*height:41px;*/}
@@ -464,7 +465,7 @@ hr{border-color:#d1d1d1; }
 .sidemenu ul .Charts3.active a{background:#1e6eff url(../images/chart3_active.png) center center no-repeat;}
 
 .content{margin-left:50px; padding-top:7px; margin-top:16px; -webkit-transition: margin-top 1s; transition: margin-top 1s;}
-.content_position{margin-top:126px;}
+.content_position{margin-top:133px;}
 
 .blue_heading_panel .panel{border:1px solid #eaecef;}
 .blue_heading_panel .panel > .panel-heading{padding:10px 15px !important; border-radius:0;}
@@ -492,7 +493,7 @@ hr{border-color:#d1d1d1; }
     .dashboard_style .panel-group {margin:0px !important;}
 
 
-.show_tradingview{height:130px;}
+.show_tradingview{height:138px;}
 /*.show_tradingview .panel-body{height:168px;}*/
 
 /*.sprite_icon1 {
@@ -659,4 +660,8 @@ hr{border-color:#d1d1d1; }
 .arrow_color{color:#2975FF !important;}
 .p-l-5{padding-left:5px !important;}
 .m-b-19{margin-bottom:12px;}
+.m-r-10{margin-right:10px;}
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{background:#fbfcfd;}
+.trend_text{width:100%; float:left; margin-left:22px;}
+.page_margin{margin-left:-15px;}
 

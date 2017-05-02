@@ -6,7 +6,8 @@
 @Html.Partial("_YahooFinanceApp")
 
 
-<input id="codeIntoSession" type="hidden" value="@ViewBag.Code" />
+    <input id="codeIntoSession" type="hidden" value="@ViewBag.Code" />
+
 <script>
     $(document).ready(function () {     
         if ($('#codeIntoSession').val() == "") {
