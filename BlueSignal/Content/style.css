@@ -10,6 +10,7 @@
     font-style: normal;
 
 }
+*{outline:none !important;}
 
 body{font-family:Roboto, Arial; /*background:#e5e5e5;*/ background:#f4f7fd url(../images/sidemenu_bg.png) 0 0 repeat-y;}
 .terms h4{text-transform:uppercase; color:#337ab7;margin-bottom: 3px;}
@@ -271,7 +272,14 @@ hr{border-color:#d1d1d1; }
   background: -moz-linear-gradient(#fff, #ababab); /* For Firefox 3.6 to 15 */
   background: linear-gradient(#fff, #ababab); /* Standard syntax */
 }
-.btn_whitegray:hover, .btn_whitegray:focus{background:#003ec8; color:#fff;}
+.btn_whitegray:hover{background:#003ec8; color:#fff;}
+.btn_whitegray:focus{color:#2a75fc;
+     background: #fff; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#fff, #ababab); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#fff, #ababab); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#fff, #ababab); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#fff, #ababab); /* Standard syntax */
+}
 
 .sub_info {/*background:#ecf0f1;*/ background:#fff; float:left; width:100%; border-radius:5px; margin-top:3px; padding:8px 10px 0; padding-bottom:0;}
 .sub_info span{margin-right:6px;}
