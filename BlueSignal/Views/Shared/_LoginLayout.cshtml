@@ -24,7 +24,7 @@
     @Scripts.Render("~/bundles/common")
     <script src="~/Scripts/tv.js"></script>
 </head>
-<body>
+<body style="background:#f4f7fd;">
     <div class="navbar navbar-inverse navbar-fixed-top navbar_bg navbar_custom">
         <div>
             <div class="navbar-header">
@@ -84,18 +84,16 @@
             </div>
         </div>
     </div>
-    <div class="content">
-        <div class="col-sm-12">
-            @RenderBody()
-            @{
-                <hr />
+    <div class="col-sm-12">
+        @RenderBody()
+        @{
+            <hr />
                 <footer>
                     <div class="col-sm-12">
                         <p>&copy; @DateTime.Now.Year BluSignals</p>
                     </div>
                 </footer>
-            }
-        </div>
+        }
     </div>
     <!--loader-->
     <div class="modal fade" id="loading" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
