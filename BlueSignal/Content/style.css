@@ -190,7 +190,7 @@ hr{border-color:#d1d1d1; }
 
 .pannel_title1{margin-top:103px;}
 
-.nav-tabs{background:#eee; border-top:1px solid #d9d7d7; border-left:1px solid #d9d7d7; border-bottom:1px solid #fff; /*border-radius:5px 5px 0 0;*/}
+.nav-tabs{background:#eee; border-top:1px solid #d9d7d7; border-left:1px solid #d9d7d7; border-bottom:1px solid #fff;  height:44px;/*border-radius:5px 5px 0 0;*/}
 .nav-tabs > li:first-child > a{border-radius:5px 0 0 0;}
 .nav-tabs > li > a{color:#505050; border-radius:0; padding-left:35px; border:none; border-right:1px solid #d9d7d7; margin-right:0;}
 .nav > li > a:focus, .nav > li > a:hover{background:#fff;}
@@ -672,7 +672,7 @@ hr{border-color:#d1d1d1; }
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{background:#fbfcfd;}
 .trend_text{width:100%; float:left; margin-left:22px;}
 .page_margin{margin-left:-15px;}
-.panel_margin{margin-bottom:6px;}
+.panel_margin{margin-bottom:6px !important;}
 .table_custom{border-collapse:separate;}
 .table_custom > thead > tr > th{border-bottom:1px solid #ddd;}
 .table_custom > tbody > tr > td:last-child{border-left:none;}
