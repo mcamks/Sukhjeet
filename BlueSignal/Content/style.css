@@ -65,7 +65,7 @@ hr{border-color:#d1d1d1; }
 .profile a:hover{text-decoration:none; background:#d5e4fe;}
 
 .panel{border-radius:5px;}
-.panel-heading{border-top-left-radius:5px; border-top-right-radius:5px;}
+.panel-heading{border-top-left-radius:0px; border-top-right-radius:0px;}
 
 .terms{margin-bottom:5px;}
 .terms .panel{margin-bottom:5px;}
@@ -90,8 +90,8 @@ hr{border-color:#d1d1d1; }
 .modal_style .modal-title{color: #1f6df7; font-weight:normal;font-size: 21px;}
 .modal_style .modal-body table  tr td a{color: #1f6df7;}
 
-.trend_signal{background: #fff;padding-bottom: 16px; text-align:center;}
-.trend_signal .panel-heading{background:#1f6df7; color:#fff; padding:8px 10px;}
+.trend_signal{background: #fff;padding-bottom: 16px; text-align:center;border-radius:0px !important;}
+.trend_signal .panel-heading{background:#1f6df7; color:#fff; padding:8px 10px; }
 .pannel_inner{background: #fff; border: 6px solid #d0d0d0;border-radius:35px; display: inline-block; height: 63px;
     padding: 14px 0; text-align: center; color:#1f6df7; font-weight:normal; width: 145px; margin:20px 0 25px; font-size:16px; text-transform:uppercase;}
 /*.trend_signal .panel-body {padding:0px;}*/
@@ -110,7 +110,7 @@ hr{border-color:#d1d1d1; }
 .trend_signal th{/*border-radius:5px 0 0 0;*/}
 .trend_signal th+th{/*border-radius:0 5px 0 0;*/}
 .trend_signal td{padding:2px 10px !important;}
-
+.todays_signal{border-radius:0px !important;}
 .todays_signal .panel-heading{background:#1f6df7; color:#fff; padding:8px 10px;}
 .todays_signal .panel-body{padding:0; border-top:none;}
 
@@ -659,7 +659,7 @@ hr{border-color:#d1d1d1; }
 .content_custom{margin-left:36px;}
 .arrow_color{color:#2975FF !important;}
 .p-l-5{padding-left:5px !important;}
-.m-b-19{margin-bottom:12px;}
+.m-b-19{margin-bottom:13px;}
 .m-r-10{margin-right:10px;}
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{background:#fbfcfd;}
 .trend_text{width:100%; float:left; margin-left:22px;}
