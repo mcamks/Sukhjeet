@@ -851,9 +851,15 @@ namespace BlueSignal.Controllers
             Session["DefaultKey"] = symbol;
 
             var chartResult = await GetLoggingData(symbol, startDate, endDate, "daily");
+            var pD = chartResult.results.OrderByDescending(a => a.tradingDay).Take(2).ToList();
             var avgVolume = string.Empty;
             var closingPrice = string.Empty;
             var marketDataDaily = string.Empty;
+            var previousprice = pD[1].close;
+            decimal prePricePercent = 0;
+            string finalPercent = string.Empty;
+
+
 
             if (chartResult.results != null && chartResult.results.Any())
             {
@@ -871,6 +877,11 @@ namespace BlueSignal.Controllers
                 var maxRexord = chartResult.results.OrderByDescending(a => a.timestamp).FirstOrDefault();
                 if (maxRexord != null)
                     closingPrice = maxRexord.close;
+
+               var  PercentValue = ((Convert.ToDecimal(closingPrice) - Convert.ToDecimal(previousprice)) / Convert.ToDecimal(closingPrice));
+                prePricePercent = PercentValue * 100;
+                finalPercent = Convert.ToString( Math.Round(prePricePercent,3) + "%");
+
             }
 
             if (chartResult.results != null && chartResult.results.Any())
@@ -903,7 +914,8 @@ namespace BlueSignal.Controllers
                     weeklyData,
                     marketDataDaily,
                     avgVolume,
-                    closingPrice
+                    closingPrice,
+                    finalPercent
                 };
                 var jsonResult = new JsonResult { Data = jsonToReturn, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = int.MaxValue };
                 return jsonResult;

@@ -303,7 +303,7 @@ function GetMarketChartNearTermData(typeID) {
 }
 
 function GetAndBindMarketAllChartsData() {
-    debugger
+    
     var symb = $('#code').val();
     //ShowLoaderCustom();
     var rangeEnabled = true;
@@ -319,6 +319,7 @@ function GetAndBindMarketAllChartsData() {
             var dataDaily = response.marketDataDaily;
             var avgVolume = response.avgVolume;
             var closingPrice = response.closingPrice;
+            var prePricePercent = response.finalPercent;
 
             if (dataDaily != null) {
                 //if ($("#Id_MarketDataListDaily").length > 0) {
@@ -357,6 +358,13 @@ function GetAndBindMarketAllChartsData() {
 
                     if ($(".ClosingPriceClassbluequont").length > 0)
                         $(".ClosingPriceClassbluequont").text(closingPrice);
+                }
+
+                if (prePricePercent != "") {
+                    $("#PreviousDayPercent").val(prePricePercent);
+                    $("#PreviousDayPercentQuant").val(prePricePercent);
+                    $("#PreviousDayPercentNatural").val(prePricePercent);
+                    $("#PreviousDayPercentCombo").val(prePricePercent);
                 }
 
             }
@@ -421,7 +429,7 @@ function BindCharts(containterID, data, symbolTitle, customColor, symb, rangesel
             type: 'ohlc',
             name: symb,
             data: data,
-            pointInterval: 24 * 3600 * 1000
+           pointInterval: 24 * 3600 * 1000
         }],
 
         exporting: { enabled: isexporting },

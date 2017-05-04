@@ -362,6 +362,7 @@
     <Content Include="fonts\gruppo-regular-webfont.woff2" />
     <None Include="Properties\PublishProfiles\BluSignalPublishFile.pubxml" />
     <None Include="Properties\PublishProfiles\BS.pubxml" />
+    <None Include="Properties\PublishProfiles\ddddd.pubxml" />
     <None Include="Properties\PublishProfiles\SK.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

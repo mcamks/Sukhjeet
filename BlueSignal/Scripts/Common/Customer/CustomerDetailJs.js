@@ -56,7 +56,7 @@ function RebindMarketData(selectedCode) {
         data: { 'startDate': $('#date').val(), 'Type': $('#datafrequency').val(), 'selectedCode': selectedCode },
         success: function (data) {
             if (data != null) {
-
+                
                 if ($("#Id_MarketDataList").length > 0) {
                     var dailyData = $.parseJSON(data.MarketDataDaily);
                     bindDatatable('Id_MarketDataList', dailyData.results);
@@ -84,6 +84,7 @@ function RebindMarketData(selectedCode) {
 
                 $("#code").val(data.Code);
                 $("#Name").val(data.Name);
+               
                 $("#ClosingPrice").val(data.ClosingPrice);
             }
         },
