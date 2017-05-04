@@ -1,8 +1,10 @@
 ﻿@{
     ViewBag.Title = "Help";
 }
-
-<div class="help_content">
+<style>
+    .trading_view{padding-top:6px !important;}
+</style>
+<div class="help_content page_margin">
 
     <div class="need_more_help">
         <h4>Need more help? <span>Can't find what you're looking for? We'd love to talk.</span></h4>
@@ -46,9 +48,11 @@
                         <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Trend Indicator</h4>
                         <p>
                             Confirms directional trend of the security's price and that trend-following trading positions are recommended.<br />
-                            Positive Trend = Blue Bars</br>
-                            Negative Trend = Purple Bars</br>
-                            Neutral Market = Gray Bars</br>
+                            <span class="trend_text">
+                                Positive Trend = Blue Bars</br>
+                                Negative Trend = Purple Bars</br>
+                                Neutral Market = Gray Bars</br>
+                            </span>
 
                             <em>Probability models show that trades placed consistent with the fractal trend have a statistically significant performance improvement compared to conventional analytical techniques.</em>
                         </p>
@@ -56,7 +60,7 @@
                         <p>
                             The price-point that our fractal algorithm projects the current trend will fail.<br />
 
-                            <em>Neutral trends are marked N/A for this value.  If the value displays “UNK”, then the algorithm needs more data to accurately project the fail point (it typically takes a few trading days after the beginning of a new trend for enough data to calculate this value).</em>
+                            <em>Neutral markets are marked N/A for this value.  If the value displays “UNK”, then the algorithm needs more data to accurately project the fail point (it typically takes a few trading days after the beginning of a new trend for enough data to calculate this value).</em>
                         </p>
                         <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Meter</h4>
                         <p>The projected time remaining in the current trend.  All trends begin with the Meter at the very top of the scale. </p>
@@ -86,7 +90,7 @@
                         </div>
                         <h4><i class="fa fa-list-alt" aria-hidden="true"></i> Zone Indicator </h4>
                         <p>
-                            Signals an imminent Price Pivot (Up or Down) for the security and that counter-trend trading positions are recommend.The Zone Indicator reflects the inital change in price behavior before the actual turn in price (or simultaneously to it) is confirmed by the Pivot Indicator.<br />
+                            Signals an imminent Price Pivot (Up or Down) for the security and that counter-trend trading positions are recommend. The Zone Indicator reflects the inital change in price behavior before the actual turn in price (or simultaneously to it) is confirmed by the Pivot Indicator.<br />
 
                             <em>Green Bars for Buy Zones.  Red Bars for Sell Zones.  Probability models show that pivot signals derived from neural network data have a statistically significant performance improvement compared to conventional mean-reversion techniques.</em>
 

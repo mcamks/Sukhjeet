@@ -9,146 +9,146 @@
         activeTab = Convert.ToString(ViewBag.activeTab);
     }
 }
-
-<ul id="AllTables" class="nav nav-tabs">
-
-    @if (HttpContextSessionWrapperExtension.SessionUser.IsBluFactrol)
-    {
-        <li id="liBluFractal" class="active"><a class="blufractal" id="blude_code" data-toggle="tab" href="#BluFractal"><span>Blu</span>Fractal</a></li>
-    }
-    else
-    {
-        <li id="liBluFractal" class="active disabled" data-toggle="tooltip" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage"><a class="blufractal" id="blude_code" data-toggle="tab" href="#BluFractal"><span>Blu</span>Fractal</a></li>
-    }
-
-    @if (HttpContextSessionWrapperExtension.SessionUser.IsBluNeutral)
-    {
-        <li id="liBluNeural"><a class="bluneural" id="blueNureal_codeD" data-toggle="tab" href="#BluNeural"><span>Blu</span>Neural</a></li>
-    }
-    else
-    {
-        <li id="liBluNeural" data-toggle="tooltip" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage"><a class="bluneural disabled" id="blueNureal_codeD" data-toggle="tab" href="#"><span>Blu</span>Neural</a></li>
-    }
-
-    @if (HttpContextSessionWrapperExtension.SessionUser.IsBluCombo)
-    {
-        <li id="liBluFractal_BluNeural"><a class="BluFractal_BluNeural" id="blueCombo_codeBD" data-toggle="tab" href="#BluFractal_BluNeural"><span class="combo"><span class="bf_icon"></span>&nbsp;<span class="bn_icon"></span></span> <span class="combo_txt">Combo</span></a></li>
-    }
-    else
-    {
-        <li id="liBluFractal_BluNeural" data-toggle="tooltip" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage"><a class="BluFractal_BluNeural disabled" id="blueCombo_codeBD" data-toggle="tab" href="#"><span class="combo"><span class="bf_icon"></span>&nbsp;<span class="bn_icon"></span></span> <span class="combo_txt">Combo</span></a></li>
-    }
-    @if (HttpContextSessionWrapperExtension.SessionUser.IsBluQuant)
-    {
-        <li id="liBluQuant" onclick="RebindBuleQuentData('SPY');"><a class="bluquant" id="blueQuote_codeDquent" data-toggle="tab" href="#BluQuant"><span>Blu</span>Quant</a></li>
-    }
-    else
-    {
-        <li id="liBluQuant" data-toggle="tooltip" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage"><a class="bluquant disabled" id="blueQuote_codeDquent" data-toggle="tab" href="#"><span>Blu</span>Quant</a></li>
-    }
-
-    @*<li class="pull-right help"><a href="@Url.Action("","Help")" data-toggle="tooltip" title="Help" target="_blank"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></li>*@
-    @*<li class="pull-right"><a class="detail" data-toggle="tab" title="Detail" href="#Details" onclick="return OpenPopupWithTheQuote();"></a></li>*@
-    @*<li class="pull-right"><a class="detail tooltips" data-toggle="tab" href="#Details"><span class="tiptext">Detail</span></a></li>*@
-    <li class="pull-right"><a class="detail tooltips" href="#" onclick="callYahooFinance1();"><span class="tiptext">Detail</span></a></li>
-
-    <li class="pull-right">@*<a class="data" data-toggle="tooltip" title="Data" href="#Data"></a>*@</li>
-
-    <li id="liMarketDataLists" class="pull-right"><a class="data MarketDataLists tooltips" data-toggle="tab" href="#MarketDataLists"><span class="tiptext">Data</span></a></li>
-
-    <li class="pull-right">@*<a class="data" data-toggle="tooltip" title="Data" href="#Data"></a>*@</li>
-    @*@if (HttpContextSessionWrapperExtension.SessionUser.IsAdminUser)
-        {
-            <li class="pull-right"><a class="glyphicon glyphicon-cog MarketDataSetupLists setting" data-toggle="tab" title="Admin" href="#MarketDataSetupLists"></a></li>
-        }*@
-</ul>
-<div class="tab-content">
-    <div id="BluFractal" class="tab-pane fade">
+<div class="page_margin">
+    <ul id="AllTables" class="nav nav-tabs">
 
         @if (HttpContextSessionWrapperExtension.SessionUser.IsBluFactrol)
-        {
-            @Html.Partial("MarketData")
-        }
-        else
-        {
-            //Empty Or We can show user don't have access
-            @Html.Partial("MarketData")
-        }
-    </div>
-    <div id="BluNeural" class="tab-pane fade">
+    {
+            <li id="liBluFractal" class="active"><a class="blufractal" id="blude_code" data-toggle="tab" href="#BluFractal"><span>Blu</span>Fractal</a></li>
+    }
+    else
+    {
+            <li id="liBluFractal" class="active disabled" data-toggle="tooltip" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage"><a class="blufractal" id="blude_code" data-toggle="tab" href="#BluFractal"><span>Blu</span>Fractal</a></li>
+    }
+
         @if (HttpContextSessionWrapperExtension.SessionUser.IsBluNeutral)
-        {
-            @Html.Partial("_DailyChartData")
-        }
-        else
-        {
-            //Empty Or We can show user don't have access
-        }
-
-    </div>
-    <div id="BluQuant" class="tab-pane fade">
-        @*<h3>Blu Quant</h3>*@
-
-
-        @if (HttpContextSessionWrapperExtension.SessionUser.IsBluQuant)
-        {
-            @Html.Partial("_BluQuantData")
-        }
-        else
-        {
-            //Empty Or We can show user don't have access
-        }
-    </div>
-    <div id="BluFractal_BluNeural" class="tab-pane fade">
-        @*<h3>BluQuant</h3>*@
+    {
+            <li id="liBluNeural"><a class="bluneural" id="blueNureal_codeD" data-toggle="tab" href="#BluNeural"><span>Blu</span>Neural</a></li>
+    }
+    else
+    {
+            <li id="liBluNeural" data-toggle="tooltip" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage"><a class="bluneural disabled" id="blueNureal_codeD" data-toggle="tab" href="#"><span>Blu</span>Neural</a></li>
+    }
 
         @if (HttpContextSessionWrapperExtension.SessionUser.IsBluCombo)
+    {
+            <li id="liBluFractal_BluNeural"><a class="BluFractal_BluNeural" id="blueCombo_codeBD" data-toggle="tab" href="#BluFractal_BluNeural"><span class="combo"><span class="bf_icon"></span>&nbsp;<span class="bn_icon"></span></span> <span class="combo_txt">Combo</span></a></li>
+    }
+    else
+    {
+            <li id="liBluFractal_BluNeural" data-toggle="tooltip" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage"><a class="BluFractal_BluNeural disabled" id="blueCombo_codeBD" data-toggle="tab" href="#"><span class="combo"><span class="bf_icon"></span>&nbsp;<span class="bn_icon"></span></span> <span class="combo_txt">Combo</span></a></li>
+    }
+        @if (HttpContextSessionWrapperExtension.SessionUser.IsBluQuant)
+    {
+            <li id="liBluQuant" onclick="RebindBuleQuentData('SPY');"><a class="bluquant" id="blueQuote_codeDquent" data-toggle="tab" href="#BluQuant"><span>Blu</span>Quant</a></li>
+    }
+    else
+    {
+            <li id="liBluQuant" data-toggle="tooltip" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage"><a class="bluquant disabled" id="blueQuote_codeDquent" data-toggle="tab" href="#"><span>Blu</span>Quant</a></li>
+    }
+
+        @*<li class="pull-right help"><a href="@Url.Action("","Help")" data-toggle="tooltip" title="Help" target="_blank"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a></li>*@
+        @*<li class="pull-right"><a class="detail" data-toggle="tab" title="Detail" href="#Details" onclick="return OpenPopupWithTheQuote();"></a></li>*@
+        @*<li class="pull-right"><a class="detail tooltips" data-toggle="tab" href="#Details"><span class="tiptext">Detail</span></a></li>*@
+        <li class="pull-right"><a class="detail tooltips" href="#" onclick="callYahooFinance1();"><span class="tiptext">Details</span></a></li>
+
+        <li class="pull-right">@*<a class="data" data-toggle="tooltip" title="Data" href="#Data"></a>*@</li>
+
+        <li id="liMarketDataLists" class="pull-right"><a class=" data_border data MarketDataLists tooltips" data-toggle="tab" href="#MarketDataLists"><span class="tiptext">Data</span></a></li>
+
+        <li class="pull-right">@*<a class="data" data-toggle="tooltip" title="Data" href="#Data"></a>*@</li>
+        @*@if (HttpContextSessionWrapperExtension.SessionUser.IsAdminUser)
+            {
+                <li class="pull-right"><a class="glyphicon glyphicon-cog MarketDataSetupLists setting" data-toggle="tab" title="Admin" href="#MarketDataSetupLists"></a></li>
+            }*@
+    </ul>
+    <div class="tab-content">
+        <div id="BluFractal" class="tab-pane fade">
+
+            @if (HttpContextSessionWrapperExtension.SessionUser.IsBluFactrol)
         {
-            @Html.Partial("_BluQuantDataBlueNeturalData")
+                @Html.Partial("MarketData")
+        }
+        else
+        {
+            //Empty Or We can show user don't have access
+            @Html.Partial("MarketData")
+        }
+        </div>
+        <div id="BluNeural" class="tab-pane fade">
+            @if (HttpContextSessionWrapperExtension.SessionUser.IsBluNeutral)
+        {
+                @Html.Partial("_DailyChartData")
         }
         else
         {
             //Empty Or We can show user don't have access
         }
-    </div>
-    <div id="Details" style="height:700px;" class="tab-pane fade yahoo-custom">
-        @*<h3>BluQuant</h3>*@
-        @Html.Partial("_YahooFinanceApp")
-    </div>
-    <div id="MarketDataLists" style="height:700px;" class="tab-pane fade">
-        @*@Html.Partial("_MyPartial", (double) @ViewBag.piValue)*@
-        @Html.Partial("_MarketDataLists", (string)ViewBag.Symbol)
-    </div>
-    <div id="Data" class="tab-pane fade">
-        <div class="tab_block">
-            <div class="col-sm-12">
-                <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Open</th>
-                            <th>High</th>
-                            <th>Low</th>
-                            <th>Close</th>
-                            <th>Volume</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Date</td>
-                            <td>Open</td>
-                            <td>High</td>
-                            <td>Low</td>
-                            <td>Close</td>
-                            <td>Volume</td>
-                        </tr>
-                    </tbody>
-                </table>
+
+        </div>
+        <div id="BluQuant" class="tab-pane fade">
+            @*<h3>Blu Quant</h3>*@
+
+
+            @if (HttpContextSessionWrapperExtension.SessionUser.IsBluQuant)
+        {
+                @Html.Partial("_BluQuantData")
+        }
+        else
+        {
+            //Empty Or We can show user don't have access
+        }
+        </div>
+        <div id="BluFractal_BluNeural" class="tab-pane fade">
+            @*<h3>BluQuant</h3>*@
+
+            @if (HttpContextSessionWrapperExtension.SessionUser.IsBluCombo)
+        {
+                @Html.Partial("_BluQuantDataBlueNeturalData")
+        }
+        else
+        {
+            //Empty Or We can show user don't have access
+        }
+        </div>
+        <div id="Details" style="height:700px;" class="tab-pane fade yahoo-custom">
+            @*<h3>BluQuant</h3>*@
+            @Html.Partial("_YahooFinanceApp")
+        </div>
+        <div id="MarketDataLists" style="height:700px;" class="tab-pane fade">
+            @*@Html.Partial("_MyPartial", (double) @ViewBag.piValue)*@
+            @Html.Partial("_MarketDataLists", (string)ViewBag.Symbol)
+        </div>
+        <div id="Data" class="tab-pane fade">
+            <div class="tab_block">
+                <div class="col-sm-12">
+                    <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Open</th>
+                                <th>High</th>
+                                <th>Low</th>
+                                <th>Close</th>
+                                <th>Volume</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Date</td>
+                                <td>Open</td>
+                                <td>High</td>
+                                <td>Low</td>
+                                <td>Close</td>
+                                <td>Volume</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg modal_style">

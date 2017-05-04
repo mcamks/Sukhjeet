@@ -3,15 +3,19 @@
     ViewBag.Title = "Research";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@Html.Partial("_YahooFinanceApp")
+<style>
+    .trading_view{padding-top:6px !important;}
+</style>
+<div class="page_margin">
+    @Html.Partial("_YahooFinanceApp")
 
+    <input id="codeIntoSession" type="hidden" value="@ViewBag.Code" />
+    <script>
+        $(document).ready(function () {
+            if ($('#codeIntoSession').val() == "") {
+                OpentheMarkeResourceDataFromDashboard('SPY');
+            } else { OpentheMarkeResourceDataFromDashboard($('#codeIntoSession').val()); }
+        });
 
-<input id="codeIntoSession" type="hidden" value="@ViewBag.Code" />
-<script>
-    $(document).ready(function () {     
-        if ($('#codeIntoSession').val() == "") {
-            OpentheMarkeResourceDataFromDashboard('SPY');
-        } else { OpentheMarkeResourceDataFromDashboard($('#codeIntoSession').val()); }
-    });
-
-</script>
+    </script>
+</div>

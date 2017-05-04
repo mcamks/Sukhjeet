@@ -197,19 +197,20 @@
                             <a  style="cursor:default;" href="#">User Name:<br />@email</a>
                         </li>
                         <li>
-                            <a target="_blank" href="https://www.blusignalsystems.com/myaccount/">Account</a>
+                           
+                            <a target="_blank" href="https://www.blusignalsystems.com/myaccount/"><span class="glyphicon glyphicon-user m-r-10" aria-hidden="true"></span>Account</a>
                         </li>
-                        <li><a href="https://www.blusignalsystems.com" target="_blank">Website</a></li>
+                        <li><a href="https://www.blusignalsystems.com" target="_blank"><span class="glyphicon glyphicon-globe m-r-10" aria-hidden="true"></span>Website</a></li>
                         @*title="Copy the URL below and save it in your browser to use in direct log-in access to your BluSignals Dashboard Page, or Press Control+D to add to Favorites."*@
-                        <li><a href="http://dashboard.blusignals.com/account/login?ReturnUrl=%2F" target="_blank" data-toggle="tooltip">Login URL</a></li>
-                        <li><a href="@Url.Action("LogOff","Account")">Logout</a></li>
+                        <li><a href="http://dashboard.blusignals.com/account/login?ReturnUrl=%2F" target="_blank" data-toggle="tooltip"><span class="glyphicon glyphicon-log-in m-r-10" aria-hidden="true"></span>Login URL</a></li>
+                        <li><a href="@Url.Action("LogOff","Account")"><span class="glyphicon glyphicon-log-out m-r-10" aria-hidden="true"></span>Logout</a></li>
                     </ul>
                 </div>
             </li>
         </ul>
     </div>
     <div class="content content_position">
-        <div class="">
+        
             <div class="col-sm-12">
                 @RenderBody()
                 @{
@@ -225,7 +226,7 @@
 
                 }
             </div>
-        </div>
+        
     </div>
     <!--loader-->
     <div class="modal fade" id="loading" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
