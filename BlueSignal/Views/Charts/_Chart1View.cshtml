@@ -31,6 +31,8 @@
               "headlines"
             ],
             "hideideas": true,
+            "hide_side_toolbar": false,
+            "allow_symbol_change": true,
             //	BEWARE: no trailing slash is expected in feed URL
             //datafeed: new Datafeeds.UDFCompatibleDatafeed("https://demo_feed.tradingview.com"),
             datafeed: new Datafeeds.UDFCompatibleDatafeed(url),
@@ -91,29 +93,37 @@
                             <span id="tradingview-copyright">Fundamental data is powered by <a href="http://www.tradingview.com" rel="nofollow" target="_blank" style="color: #3BB3E4">TradingView.com</a></span>
                             <script type="text/javascript" src="https://d33t3vvu2t2yu5.cloudfront.net/tv.js"></script>
                             <script type="text/javascript" src="https://d33t3vvu2t2yu5.cloudfront.net/tv.js"></script>
-                            <script type="text/javascript">
-new TradingView.widget({
-  "autosize": true,
-  "symbol": "NASDAQ:AAPL",
-  "interval": "D",
-  "theme": "White",
-  "locale": "en",
-  "toolbar_bg": "#f1f3f6",
-  "fundamental": "Script$EDGR_DIVIDEND_YIELD_V2@tv-scripting",
-  "percentage": true,
-    //Added by krishna to show deetails on 28/04.2017
-  "details": true,
-  "news": [
-  "headlines"
-  ],
-  "hideideasbutton": true,
-  "allow_symbol_change": true,
-  "hide_side_toolbar": false,
-    //END
+                            <!-- TradingView Widget BEGIN -->
+                            <span id="tradingview-copyright">Fundamental data is powered by <a href="http://www.tradingview.com" rel="nofollow" target="_blank" style="color: #3BB3E4">TradingView.com</a></span>
+                            <script type="text/javascript" src="https://d33t3vvu2t2yu5.cloudfront.net/tv.js"></script>
+                          
+                            @* TradingView Widget END*@
+
+                                <script type="text/javascript">
+    new TradingView.widget({
+      "autosize": true,
+        //"symbol": "NASDAQ:AAPL",
+      "symbol": "SPY",
+      "interval": "D",
+      "theme": "White",
+      "locale": "en",
+      "toolbar_bg": "#f1f3f6",
+      "fundamental": "Script$EDGR_DIVIDEND_YIELD_V2@tv-scripting",
+      "percentage": true,
+        //Added by krishna to show deetails on 28/04.2017
+      "details": true,
+      "news": [
+      "headlines"
+      ],
+      "hideideasbutton": true,
+      "allow_symbol_change": true,
 
 
-});
-                            </script>
+        //END
+
+
+    });
+                                </script>
                             <!-- TradingView Widget END -->
                         </div>
                     </div>
