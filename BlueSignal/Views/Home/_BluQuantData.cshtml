@@ -372,6 +372,7 @@
                                                     <th>Entry Date</th>
                                                     <th>Exit Date</th>
                                                     <th align="center">Result</th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -480,7 +481,9 @@
                 var newInnerTable = "<table class='table table-bordered table-striped'>";
                 if (items.length > 0) {
                     $.each(items, function (i, item) {
-                        newInnerTable += '<tr><td><a href="#" class="' + cssClass + '">' + item.SymbolName + ' </td></tr>';
+                       // newInnerTable += '<tr><td><a  class="' + cssClass + '" onclick="IntializeOnlyBlueQuanteWithCode(' + item.SymbolCode + ')" >' + item.SymbolName + ' </td></tr>';
+                        newInnerTable += "<tr><td><a  class="+ cssClass + " onclick=\"IntializeOnlyBlueQuanteWithCode('"+ item.SymbolCode + "')\" >" + item.SymbolName + " </td></tr>";
+
                     });
                 }
 
@@ -593,7 +596,13 @@
                          "data": null, "name": "Result", render: function (data, type, row) {
                              return "<span> +" + data.Result + "%</span>";
                          }
-                     }]
+                     },
+                     {
+                         "data": null, "name": "Load", "orderable": false, render: function (data, type, row) {
+                             return "<input type=\"button\" id=\"btnloanQuantData\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Load Symbol\" class=\"btn btn-success btn-xs btn_load\" " + cssClassDisabled + " onclick=\"IntializeOnlyBlueQuanteWithCode('" + data.SymbolCode + "')\" value=\"Load\" />";
+                         }
+                     }
+            ]
         });
     }
 </script>

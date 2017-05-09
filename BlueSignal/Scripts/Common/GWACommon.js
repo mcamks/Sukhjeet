@@ -824,7 +824,10 @@ function BindBluFractalMarketsPopup(data, selector) {
         var newInnerTable = "<table class='table table-bordered table-striped'>";
         if (items.length > 0) {
             $.each(items, function (i, item) {
-                newInnerTable += '<tr><td><a href="#" class="btnGetData">' + item.SymbolName + ' </td></tr>';
+                //RebindMarketData($('#code').val()
+                //newInnerTable += '<tr><td><a onclick="IntializeOnlyBlueQuanteWithCode("' + item.SymbolCode+ '")" class="btnGetData">' + item.SymbolName + ' </td></tr>';
+                newInnerTable += "<tr><td><a onclick=\"RebindMarketData('" + item.SymbolCode + "')\" class=\"btnGetData\">" + item.SymbolName + " </td></tr>";
+
             });
         }
 
