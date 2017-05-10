@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "ThirdChart";
     string symb = ViewBag.Symbol;
+    string url = ViewBag.RequestUrl;
 }
 
 <!-- jQuery is not required to use Charting Library. It is used only for sample datafeed ajax requests. -->
@@ -210,7 +211,7 @@
     {
         var ddlValue = $("#ddlChartsId").val();
 
-        window.location.href = 'http://localhost:51170/Charts/SaveUserChartHistory?symbol=' + ddlValue + '&chartType=3' + '&viewType=ThirdChart';
+        window.location.href = 'http://'+'@url'+'/Charts/SaveUserChartHistory?symbol=' + ddlValue + '&chartType=3' + '&viewType=ThirdChart';
 
     }
 </script>

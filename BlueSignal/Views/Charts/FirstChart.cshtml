@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "FirstChart";
     string symb = ViewBag.Symbol;
+    string url = ViewBag.RequestUrl;
 }
 
 
@@ -212,7 +213,9 @@
     {
         var ddlValue = $("#ddlChartsId").val();
        
-        window.location.href = 'http://localhost:51170/Charts/SaveUserChartHistory?symbol=' + ddlValue + '&chartType=1' + '&viewType=FirstChart';
+        //window.location.href = 'http://localhost:51170/Charts/SaveUserChartHistory?symbol=' + ddlValue + '&chartType=1' + '&viewType=FirstChart';
+        window.location.href = 'http://'+'@url'+'/Charts/SaveUserChartHistory?symbol=' + ddlValue + '&chartType=1' + '&viewType=FirstChart';
+
      
     }
 </script>

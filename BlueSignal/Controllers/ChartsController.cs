@@ -59,7 +59,7 @@ namespace BlueSignal.Controllers
         public ActionResult FirstChart(string p, string c, string css)
         {
             var symbol = "";
-          
+            ViewBag.RequestUrl = Request.Url.Authority;
             var sesValue= (WP_User)Session["SystemUser"];
             var result=  _ChartBal.GetUserChartHistory(Convert.ToInt64(sesValue.ID), "1").FirstOrDefault();
             if(result==null)
@@ -91,7 +91,7 @@ namespace BlueSignal.Controllers
         public ActionResult SecondChart(string p, string c, string css)
         {
             var symbol = "";
-
+            ViewBag.RequestUrl = Request.Url.Authority;
             var sesValue = (WP_User)Session["SystemUser"];
             var result = _ChartBal.GetUserChartHistory(Convert.ToInt64(sesValue.ID), "2").FirstOrDefault();
             if (result == null)
@@ -124,7 +124,7 @@ namespace BlueSignal.Controllers
         public ActionResult ThirdChart(string p, string c, string css)
         {
             var symbol = "";
-
+            ViewBag.RequestUrl = Request.Url.Authority;
             var sesValue = (WP_User)Session["SystemUser"];
             var result = _ChartBal.GetUserChartHistory(Convert.ToInt64(sesValue.ID), "3").FirstOrDefault();
             if (result == null)
