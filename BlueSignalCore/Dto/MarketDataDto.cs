@@ -10,6 +10,7 @@ namespace BlueSignalCore.Dto
     public class MarketDataDto : MarketData
     {
         public string ProductName { get; set; }
+
         public string StrEntryDate
         {
             get
@@ -52,6 +53,8 @@ namespace BlueSignalCore.Dto
                 return CreatedDate.Get12HourTimeString();
             }
         }
+
+        
     }
 }
 

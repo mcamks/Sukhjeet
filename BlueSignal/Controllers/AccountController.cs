@@ -95,6 +95,7 @@ namespace BlueSignal.Controllers
                 var userName = IsUserExist.Email;
                 var Password = "Test"; //Option
                 var user = _marketBal.GetWpUser(userName, Password);
+                //user.IsAdminUser = true;
                 if (user == null)
                 {
                     user = new WP_User();

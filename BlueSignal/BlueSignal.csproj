@@ -460,6 +460,9 @@
     <Content Include="Views\Home\_GetMarketChartDataPartial.cshtml" />
     <Content Include="Views\Charts\_Chart1View.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Charts\FirstChart.cshtml" />
+    <Content Include="Views\Charts\SecondChart.cshtml" />
+    <Content Include="Views\Charts\ThirdChart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

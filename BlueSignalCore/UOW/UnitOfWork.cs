@@ -67,6 +67,19 @@ namespace BlueSignalCore.UOW
         #endregion
 
         #region Repositories
+        private UserChartHistoryRepository _UserChartHistoryRepository;
+        public UserChartHistoryRepository UserChartHistoryRepository
+        {
+            get
+            {
+                if (_UserChartHistoryRepository == null)
+                    _UserChartHistoryRepository = new UserChartHistoryRepository();
+                return _UserChartHistoryRepository;
+            }
+        }
+
+
+
         private MarketDataRepository _MarketDataRepository;
         public MarketDataRepository MarketDataRepository
         {

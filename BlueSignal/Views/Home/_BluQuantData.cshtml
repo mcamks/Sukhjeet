@@ -335,10 +335,14 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Symbol</th>
+                                                        <th>Type</th>
                                                         <th width="210" class="text-center">Name</th>
                                                         <th>Entry Date</th>
+                                                        <th>Entry Time</th>
                                                         <th>Entry Price</th>
-                                                        <th></th>
+                                                        <th>Days Open</th>
+                                                        <th>Profit</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -368,11 +372,14 @@
                                             <thead>
                                                 <tr>
                                                     <th>Symbol</th>
+                                                    <th>Type</th>
                                                     <th width="230" class="text-center">Name</th>
                                                     <th>Entry Date</th>
+                                                    <th>Entry Price</th>
                                                     <th>Exit Date</th>
+                                                    <th>Exit Price</th>
                                                     <th align="center">Result</th>
-                                                    <th></th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -560,13 +567,17 @@
             bFilter: false, bInfo: false,
             "columns": [
                      { "data": "SymbolCode", "name": "symbol" },
+                     { "data": "Type", "name": "Tpye" },
                      { "data": "SymbolName", "name": "Name" },
-                     { "data": "StrEntryDate", "name": "EntryDate" },
+                     { "data": "StrEntryDate", "name": "Entry Date" },
+                     { "data": "StrEntryTimeValue", "name": "Entry Time" },
                      {
                          "data": null, "name": "EntryPrice", render: function (data, type, row) {
                              return "<span> $" + data.EntryPrice + " USD </span>";
                          }
                      },
+                     { "data": "DaysOpen", "name": "Days Open" },
+                     { "data": "Profit", "name": "Profit" },
                      {
                          "data": null, "name": "Load", "orderable": false, render: function (data, type, row) {
                              return "<input type=\"button\" id=\"btnloanQuantData\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Load Symbol\" class=\"btn btn-success btn-xs btn_load\" " + cssClassDisabled + " onclick=\"IntializeOnlyBlueQuanteWithCode('" + data.SymbolCode + "')\" value=\"Load\" />";
@@ -589,9 +600,12 @@
             bFilter: false, bInfo: false,
             "columns": [
                      { "data": "SymbolCode", "name": "symbol" },
+                      { "data": "Type", "name": "Type" },
                      { "data": "SymbolName", "name": "Name" },
                      { "data": "StrEntryDate", "name": "EntryDate" },
+                     { "data": "EntryPrice", "name": "Entry Price" },
                      { "data": "StrExitDate", "name": "ExitDate" },
+                       { "data": "ExitPrice", "name": "Exit Price" },
                      {
                          "data": null, "name": "Result", render: function (data, type, row) {
                              return "<span> +" + data.Result + "%</span>";

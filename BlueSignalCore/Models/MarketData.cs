@@ -39,6 +39,14 @@ namespace BlueSignalCore.Models
 
         public int? ModifiedBy { get; set; }
 
+        public string Type { get; set; }
+
+        public string DaysOpen { get; set; }
+
+        public decimal? Profit { get; set; }
+
+        public decimal? ExitPrice { get; set; }
+
     }
 
 
