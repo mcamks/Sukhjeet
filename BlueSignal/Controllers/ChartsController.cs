@@ -61,6 +61,10 @@ namespace BlueSignal.Controllers
             var symbol = "";
             ViewBag.RequestUrl = Request.Url.Authority;
             var sesValue= (WP_User)Session["SystemUser"];
+            if (Convert.ToInt64(sesValue.ID) == null)
+            {
+                return RedirectToAction("Login","Account");
+            }
             var result=  _ChartBal.GetUserChartHistory(Convert.ToInt64(sesValue.ID), "1").FirstOrDefault();
             if(result==null)
                  symbol = "SPY";

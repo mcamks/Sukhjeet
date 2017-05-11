@@ -241,3 +241,78 @@
         @Html.Partial("_GetMarketChartDataPartial")
     </div>
 </div>
+
+<script type="text/javascript">
+     //   $.noConflict();
+        var YAHOO = {
+            Finance: {
+                SymbolSuggest: {}
+            }
+        };
+        $(document).ready(function() {
+
+
+            $.noConflict();
+
+
+            $("#code").autocomplete({
+                source: function (request, response) {
+                 var query = request.term;
+                    $.ajax({
+                        type: "GET",
+                        url: "http://d.yimg.com/autoc.finance.yahoo.com/autoc",
+                        data: { query: query, region: 'US', lang: 'en-US' },
+                        dataType: "jsonp",
+                        jsonp: "callback",
+                        jsonpCallback: "YAHOO.Finance.SymbolSuggest.ssCallback",
+                    });
+                    // call back function
+                    YAHOO.Finance.SymbolSuggest.ssCallback = function (data) {
+                        var suggestions = [];
+                        //alert(JSON.stringify(data.ResultSet.Result));
+                      //  debugger;
+                        $.each(data.ResultSet.Result, function (i, val) {
+                            suggestions.push({
+                                value: val.symbol//, + "-" + val.name + "(" + val.exchDisp + ")"
+                               , label: val.name
+                                , desc: val.exch +'-'+val.exchDisp
+                            });
+                        });
+
+                        response(suggestions);
+                    }
+                },
+                minLength: 1,
+                focus: function (event, ui) {
+                    $("#code").val(ui.item.value);
+                    return false;
+                },
+                select: function (event, ui) {
+
+                    $("#code").val(ui.item.value);
+
+                    return false;
+                },
+                highlightClass: "bold-text"
+            })
+            .autocomplete("instance")._renderItem = function (ul, item) {
+                // alert('abc');
+               // debugger;
+                return $("<li>")
+                  .append("<div>"
+                  + "<p style='color:blue; font-weight:bold;'>"
+                  + item.value
+                  + "<span style='color:black; font-weight:normal; float:right;'>"
+                  + item.desc
+                  + "</span></p>"
+                  + " <p style='text-transform:uppercase;'>"
+                  + item.label
+                  + "</p>"
+                //  + item.value + "<br>" + item.label + +item.desc + "</div>")
+                  + "</div>")
+
+
+                  .appendTo( ul );
+            };
+     });
+</script>
