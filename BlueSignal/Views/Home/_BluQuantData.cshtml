@@ -550,7 +550,7 @@ $(document).ready(function(){
         if (sellItems.length > 0) {
             $.each(sellItems, function (i, bItem) {
                 actionHtml += "<div class='info_row'><p>" + bItem.SymbolCode + "  $" + bItem.Price + " &#64; " + bItem.StrEntryTimeValue;
-                actionHtml += "<input type=\"button\" id=\"btnloanQuantData\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Load Symbol\" " + cssClassDisabled + " class=\"btn btn-success btn-xs btn_load tooltips\" onclick=\"IntializeOnlyBlueQuanteWithCode('" + bItem.SymbolCode + "')\" value=\"Load\" />"
+                actionHtml += "<input type=\"button\" id=\"btnloanQuantData\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Load Symbol\" " + cssClassDisabled + " class=\"btn btn-success btn-xs btn_load\" onclick=\"IntializeOnlyBlueQuanteWithCode('" + bItem.SymbolCode + "')\" value=\"Load\" />"
                 actionHtml += "</p></div>";
             });
 
