@@ -171,6 +171,18 @@ namespace BlueSignal.Controllers
                 _ChartBal.UpdateChartHistory(result);
             }
             ViewBag.Symbol = symbol;
+            if (chartType == "1")
+            {
+                Session["FirstChartSymbol"] = symbol;
+            }
+            else if(chartType=="2")
+            {
+                Session["SecondtChartSymbol"] = symbol;
+            }
+            else
+            {
+                Session["ThirdChartSymbol"] = symbol;
+            }
             return View(viewType);
         }
 

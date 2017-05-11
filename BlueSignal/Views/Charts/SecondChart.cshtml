@@ -4,7 +4,129 @@
     string symb = ViewBag.Symbol;
     string url = ViewBag.RequestUrl;
 }
+<meta charset="UTF-8" name="referrer" content="no-referrer" />
+<meta name="viewport" content="width = device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;">
 
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/yahoo/yahoo-min.js"></script>
+
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<style>
+    #txtTicker-label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 1em;
+    }
+
+    #txtTicker-icon {
+        float: left;
+        height: 32px;
+        width: 32px;
+    }
+
+    #txtTicker-description {
+        margin: 0;
+        padding: 0;
+    }
+
+    .ui-draggable, .ui-droppable {
+        background-position: top;
+    }
+
+    .bold-text {
+        background-color: #3f7bf6;
+    }
+
+    .ttt {
+        background-color: #3f7bf6;
+        background: blue;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<h>Symbol:</h>
+
+
+
+<input style="width: 100px; height: 20px;" id="txtTicker" />
+<script type="text/javascript">
+     //   $.noConflict();
+        var YAHOO = {
+            Finance: {
+                SymbolSuggest: {}
+            }
+        };
+        $(document).ready(function() {
+
+
+            $.noConflict();
+
+
+            $("#txtTicker").autocomplete({
+                source: function (request, response) {
+                 var query = request.term;
+                    $.ajax({
+                        type: "GET",
+                        url: "http://d.yimg.com/autoc.finance.yahoo.com/autoc",
+                        data: { query: query, region: 'US', lang: 'en-US' },
+                        dataType: "jsonp",
+                        jsonp: "callback",
+                        jsonpCallback: "YAHOO.Finance.SymbolSuggest.ssCallback",
+                    });
+                    // call back function
+                    YAHOO.Finance.SymbolSuggest.ssCallback = function (data) {
+                        var suggestions = [];
+                        //alert(JSON.stringify(data.ResultSet.Result));
+                      //  debugger;
+                        $.each(data.ResultSet.Result, function (i, val) {
+                            suggestions.push({
+                                value: val.symbol//, + "-" + val.name + "(" + val.exchDisp + ")"
+                               , label: val.name
+                                , desc: val.exch +'-'+val.exchDisp
+                            });
+                        });
+
+                        response(suggestions);
+                    }
+                },
+                minLength: 1,
+                focus: function (event, ui) {
+                   $("#txtTicker").val(ui.item.value);
+                    return false;
+                },
+                select: function (event, ui) {
+
+                    $("#txtTicker").val(ui.item.value);
+                    window.location.href = 'http://' + '@url' + '/Charts/SaveUserChartHistory?symbol=' + ui.item.value + '&chartType=2' + '&viewType=SecondChart';
+
+                    return false;
+                },
+                highlightClass: "bold-text"
+            })
+            .autocomplete("instance")._renderItem = function (ul, item) {
+                // alert('abc');
+               // debugger;
+                return $("<li>")
+                  .append("<div>"
+                  + "<p style='color:blue; font-weight:bold;'>"
+                  + item.value
+                  + "<span style='color:black; font-weight:normal; float:right;'>"
+                  + item.desc
+                  + "</span></p>"
+                  + " <p style='text-transform:uppercase;'>"
+                  + item.label
+                  + "</p>"
+                //  + item.value + "<br>" + item.label + +item.desc + "</div>")
+                  + "</div>")
+
+
+                  .appendTo( ul );
+            };
+     });
+</script>
 
 <!-- jQuery is not required to use Charting Library. It is used only for sample datafeed ajax requests. -->
 @*<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>*@
@@ -45,7 +167,7 @@
             ],
             "hideideas": true,
             "hide_side_toolbar": false,
-            "allow_symbol_change": true,
+            //"allow_symbol_change": true,
             //	BEWARE: no trailing slash is expected in feed URL
             //datafeed: new Datafeeds.UDFCompatibleDatafeed("https://demo_feed.tradingview.com"),
             datafeed: new Datafeeds.UDFCompatibleDatafeed(url),
@@ -123,12 +245,12 @@
                             </a>
                         </h4>
                     </div>
-                    <select name="Charts" id="ddlChartsId" onchange="BindGraphData()">
+                    @*<select name="Charts" id="ddlChartsId" onchange="BindGraphData()">
                         <option value="SPY">SPY</option>
                         <option value="NASDAQ:AAPL">APPL</option>
                         <option value="SKY">SKY</option>
 
-                    </select>
+                    </select>*@
                     <div id="collapse" class="panel-collapse collapse in">
                         <div class="panel-body" id="tv_chart_container" style="height:500px;">
                         </div>
@@ -206,16 +328,16 @@
         var symbol = '@symb';
         BindPriceChartBind(symbol);
         Fundamentacharts(symbol);
-        $("#ddlChartsId").val(symbol);
+        $("#txtTicker").val(symbol);
     });
    // alert('dsd');
 
 
-    function BindGraphData()
+    @*function BindGraphData()
     {
         var ddlValue = $("#ddlChartsId").val();
 
         window.location.href = 'http://'+'@url'+'/Charts/SaveUserChartHistory?symbol=' + ddlValue + '&chartType=2' + '&viewType=SecondChart';
 
-    }
+    }*@
 </script>
