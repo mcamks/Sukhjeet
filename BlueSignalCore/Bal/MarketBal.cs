@@ -208,6 +208,7 @@ namespace BlueSignalCore.Bal
 
                 var objInListUserType = myDataSetUserType.Tables[0].Rows[0];
                 user.display_AdminKey = Convert.ToString(objInListUserType["meta_value"]).Trim();
+              
             }
 
             if (user != null && user.ID != "0" && user.ID != "")
