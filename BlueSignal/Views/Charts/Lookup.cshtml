@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "Lookup";
+}
+
+    
+
+        <meta charset="UTF-8" name="referrer" content="no-referrer" />
+        <meta name="viewport" content="width = device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;">
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/yahoo/yahoo-min.js"></script>
+    
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <style>
+        #txtTicker-label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 1em;
+        }
+
+        #txtTicker-icon {
+            float: left;
+            height: 32px;
+            width: 32px;
+        }
+
+        #txtTicker-description {
+            margin: 0;
+            padding: 0;
+        }
+
+        .ui-draggable, .ui-droppable {
+            background-position: top;
+        }
+
+        .bold-text {
+            background-color: #3f7bf6;
+        }
+
+        .ttt {
+            background-color: #3f7bf6;
+            background: blue;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    <h>Stock Quotes AutoSuggest </h>
+
+
+    <ul style="margin:0; padding:0; list-style:none; width:300px;">
+        <li>
+            <div>
+                <p style="color:blue; font-weight:bold;">IBP <span style="color:black; font-weight:normal; float:right;">Equity - NYSE</span></p>
+                <p style="text-transform:uppercase;">Installed Building Production....</p>
+
+            </div>
+        </li>
+    </ul>
+
+    <input style="width: 800px; height: 20px;" id="txtTicker" />
+
+    <script type="text/javascript">
+        var YAHOO = {
+            Finance: {
+                SymbolSuggest: {}
+            }
+        };
+        $(function () {
+
+
+
+            $("#txtTicker").autocomplete({
+                source: function (request, response) {
+                 var query = request.term;
+                    $.ajax({
+                        type: "GET",
+                        url: "http://d.yimg.com/autoc.finance.yahoo.com/autoc",
+                        data: { query: query, region: 'US', lang: 'en-US' },
+                        dataType: "jsonp",
+                        jsonp: "callback",
+                        jsonpCallback: "YAHOO.Finance.SymbolSuggest.ssCallback",
+                    });
+                    // call back function
+                    YAHOO.Finance.SymbolSuggest.ssCallback = function (data) {
+                        var suggestions = [];
+                        //alert(JSON.stringify(data.ResultSet.Result));
+                      //  debugger;
+                        $.each(data.ResultSet.Result, function (i, val) {
+                            suggestions.push({
+                                value: val.symbol//, + "-" + val.name + "(" + val.exchDisp + ")"
+                               , label: val.name
+                                , desc: val.exch +'-'+val.exchDisp
+                            });
+                        });
+
+                        response(suggestions);
+                    }
+                },
+                minLength: 1,
+                focus: function (event, ui) {
+                   $("#txtTicker").val(ui.item.value);
+                    return false;
+                },
+                select: function (event, ui) {
+
+                    $("#txtTicker").val(ui.item.value);
+
+
+                    return false;
+                },
+                highlightClass: "bold-text"
+            })
+            .autocomplete("instance")._renderItem = function (ul, item) {
+                // alert('abc');
+               // debugger;
+                return $("<li>")
+                  .append("<div>"
+                  + "<p style='color:blue; font-weight:bold;'>"
+                  + item.value
+                  + "<span style='color:black; font-weight:normal; float:right;'>"
+                  + item.desc
+                  + "</span></p>"
+                  + " <p style='text-transform:uppercase;'>"
+                  + item.label
+                  + "</p>"
+                //  + item.value + "<br>" + item.label + +item.desc + "</div>")
+                  + "</div>")
+
+
+                  .appendTo( ul );
+            };
+     });
+    </script>
+
+
+
+

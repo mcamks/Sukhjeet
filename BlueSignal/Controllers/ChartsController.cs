@@ -69,6 +69,7 @@ namespace BlueSignal.Controllers
 
             ViewBag.Symbol = symbol;
             Session["ActiveCssClass"] = css;
+            Session["FirstChartSymbol"] = symbol;
             if (!string.IsNullOrEmpty(css))
             {
                 switch (css.ToLower())
@@ -100,6 +101,7 @@ namespace BlueSignal.Controllers
                 symbol = result.Symbol;
 
             ViewBag.Symbol = symbol;
+            Session["SecondtChartSymbol"] = symbol;
             Session["ActiveCssClass"] = css;
             if (!string.IsNullOrEmpty(css))
             {
@@ -133,6 +135,7 @@ namespace BlueSignal.Controllers
                 symbol = result.Symbol;
 
             ViewBag.Symbol = symbol;
+            Session["ThirdChartSymbol"] = symbol;
             Session["ActiveCssClass"] = css;
             if (!string.IsNullOrEmpty(css))
             {
@@ -169,6 +172,11 @@ namespace BlueSignal.Controllers
             }
             ViewBag.Symbol = symbol;
             return View(viewType);
+        }
+
+        public ActionResult Lookup()
+        {
+            return View();
         }
       
     }

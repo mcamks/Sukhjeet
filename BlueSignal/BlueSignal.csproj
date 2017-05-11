@@ -463,6 +463,7 @@
     <Content Include="Views\Charts\FirstChart.cshtml" />
     <Content Include="Views\Charts\SecondChart.cshtml" />
     <Content Include="Views\Charts\ThirdChart.cshtml" />
+    <Content Include="Views\Charts\Lookup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
