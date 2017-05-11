@@ -265,12 +265,15 @@ hr{border-color:#d1d1d1; }
 
 .blue_block{background:#1e6eff; float:left; width:100%; /*border-radius:5px;*/ padding:10px 0;}
 
-.btn_whitegray{/*box-shadow:0 3px 0 0 #81a4e4;*/ color:#2a75fc; font-weight:bold; margin-left:-26px; padding:8px 12px 5px 12px !important; /*-webkit-padding-before:8px; -webkit-padding-after: 5px;*/
+.btn_whitegray{/*box-shadow:0 3px 0 0 #81a4e4;*/ color:#2a75fc; font-weight:bold; margin-left:-26px; padding:6px 12px 8px !important; 
                background: #fff; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(#fff, #ababab); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(#fff, #ababab); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(#fff, #ababab); /* For Firefox 3.6 to 15 */
   background: linear-gradient(#fff, #ababab); /* Standard syntax */
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .btn_whitegray{padding:8px 12px 6px 12px !important;}
 }
 .btn_whitegray:hover{background:#003ec8; color:#fff;}
 .btn_whitegray:focus{color:#2a75fc;
@@ -676,5 +679,7 @@ hr{border-color:#d1d1d1; }
 .table_custom{border-collapse:separate;}
 .table_custom > thead > tr > th{border-bottom:1px solid #ddd;}
 .table_custom > tbody > tr > td:last-child{border-left:none;}
+.input_custom{border:1px solid #d2dadb; border-radius:4px; margin-left:6px;padding:5px 10px;}
+
 
 
