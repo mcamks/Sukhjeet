@@ -25,6 +25,7 @@ namespace BlueSignalCore.Models
             modelBuilder.Entity<ContactLog>().ToTable("ContactLog");
             modelBuilder.Entity<EmailTemplate>().ToTable("EmailTemplate");
             modelBuilder.Entity<ProductType>().ToTable("ProductType");
+            modelBuilder.Entity<UserChartHistory>().ToTable("UserChartHistory");
 
             base.OnModelCreating(modelBuilder);
         }
@@ -35,5 +36,6 @@ namespace BlueSignalCore.Models
         public DbSet<EmailTemplate> EmailTemplate { get; set; }
         public DbSet<ProductType> ProductType { get; set; }
         public DbSet<Users> Users { get; set; }
+        public DbSet<UserChartHistory> UserChartHistory { get; set; }
     }
 }

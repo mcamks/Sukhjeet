@@ -1,0 +1,222 @@
+﻿
+@{
+    ViewBag.Title = "ThirdChart";
+    string symb = ViewBag.Symbol;
+    string url = ViewBag.RequestUrl;
+}
+
+<!-- jQuery is not required to use Charting Library. It is used only for sample datafeed ajax requests. -->
+@*<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>*@
+<script>window.jQuery || document.write('<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"><\/script>')</script>
+<script type="text/javascript" src="~/Scripts/charting_library.min.js"></script>
+<script type="text/javascript" src="~/Scripts/datafeed.js"></script>
+<script type="text/javascript">
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+
+    function BindPriceChartBind(symb)
+    {
+        //var sym = "AAPL";
+        //var sym = "SPY";
+        var sym = symb
+
+
+        var startDate = "20150101"
+        var key = "40ae86537412ad8042cbbaca14906020"
+        var type = "minutes";
+        //var url = "http://marketdata.websol.barchart.com/getHistory.json?key=" + key + "&symbol=" + sym + "&type=" + type + "&startDate=" + startDate;
+        var url = "http://ondemand.websol.barchart.com/getHistoryTradingView.json?&symbol=" + sym + "&apikey=a7842b6d1f7a08b1dd7e889585ff9093&requestType=history";
+        var widget = window.tvWidget = new TradingView.widget({
+            fullscreen: true,
+            //symbol: "SPY",
+            symbol: sym,
+
+            interval: 'D',
+            container_id: "tv_chart_container",
+            "details": true,
+            "news": [
+              "headlines"
+            ],
+            "hideideas": true,
+            "hide_side_toolbar": false,
+            "allow_symbol_change": true,
+            //	BEWARE: no trailing slash is expected in feed URL
+            //datafeed: new Datafeeds.UDFCompatibleDatafeed("https://demo_feed.tradingview.com"),
+            datafeed: new Datafeeds.UDFCompatibleDatafeed(url),
+            library_path: "charting_library/",
+            locale: getParameterByName('lang') || "en",
+            //	Regression Trend-related functionality is not implemented yet, so it's hidden for a while
+            drawings_access: { type: 'black', tools: [{ name: "Regression Trend" }] },
+            disabled_features: ["use_localstorage_for_settings"],
+            enabled_features: ["study_templates"],
+            charts_storage_url: 'http://saveload.tradingview.com',
+            charts_storage_api_version: "1.1",
+            client_id: 'tradingview.com',
+            user_id: 'public_user_id',
+            autosize: true,
+        });
+    }
+
+
+    //TradingView.onready(function () {
+    //    //var sym = "AAPL";
+    //    var sym = "SPY";
+    //    //var sym =
+
+
+    //    var startDate = "20150101"
+    //    var key = "40ae86537412ad8042cbbaca14906020"
+    //    var type = "minutes";
+    //    //var url = "http://marketdata.websol.barchart.com/getHistory.json?key=" + key + "&symbol=" + sym + "&type=" + type + "&startDate=" + startDate;
+    //    var url = "http://ondemand.websol.barchart.com/getHistoryTradingView.json?&symbol=" + sym + "&apikey=a7842b6d1f7a08b1dd7e889585ff9093&requestType=history";
+    //    var widget = window.tvWidget = new TradingView.widget({
+    //        fullscreen: true,
+    //        symbol: "SPY",
+    //        interval: 'D',
+    //        container_id: "tv_chart_container",
+    //        "details": true,
+    //        "news": [
+    //          "headlines"
+    //        ],
+    //        "hideideas": true,
+    //        "hide_side_toolbar": false,
+    //        "allow_symbol_change": true,
+    //        //	BEWARE: no trailing slash is expected in feed URL
+    //        //datafeed: new Datafeeds.UDFCompatibleDatafeed("https://demo_feed.tradingview.com"),
+    //        datafeed: new Datafeeds.UDFCompatibleDatafeed(url),
+    //        library_path: "charting_library/",
+    //        locale: getParameterByName('lang') || "en",
+    //        //	Regression Trend-related functionality is not implemented yet, so it's hidden for a while
+    //        drawings_access: { type: 'black', tools: [{ name: "Regression Trend" }] },
+    //        disabled_features: ["use_localstorage_for_settings"],
+    //        enabled_features: ["study_templates"],
+    //        charts_storage_url: 'http://saveload.tradingview.com',
+    //        charts_storage_api_version: "1.1",
+    //        client_id: 'tradingview.com',
+    //        user_id: 'public_user_id',
+    //        autosize: true,
+    //    });
+    //});
+
+</script>
+<style>
+    /*.panel_margin{margin-bottom:6px !important;}*/
+    .trading_view {
+        padding-top: 6px !important;
+    }
+</style>
+<div class="charts">
+    <div class="row">
+        <div class="">
+            <div class="panel-group accordion panel_margin">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse">
+                                <i class="fa fa-line-chart" aria-hidden="true"></i> &nbsp;Price Chart
+                            </a>
+                        </h4>
+                    </div>
+                    <select name="Charts" id="ddlChartsId" onchange="BindGraphData()">
+                        <option value="SPY">SPY</option>
+                        <option value="NASDAQ:AAPL">APPL</option>
+                        <option value="SKY">SKY</option>
+
+                    </select>
+                    <div id="collapse" class="panel-collapse collapse in">
+                        <div class="panel-body" id="tv_chart_container" style="height:500px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="panel-group accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse2">
+                                <i class="fa fa-area-chart" aria-hidden="true"></i> &nbsp;Fundamental Chart
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse2 in">
+                        <div class="panel-body" id="Fundamenta_Chart_container" style="height:500px;">
+                            <!-- TradingView Widget BEGIN -->
+                            @*<span id="tradingview-copyright">Fundamental data is powered by <a href="http://www.tradingview.com" rel="nofollow" target="_blank" style="color: #3BB3E4">TradingView.com</a></span>*@
+                            @*<script type="text/javascript" src="https://d33t3vvu2t2yu5.cloudfront.net/tv.js"></script>*@
+                            @*<script type="text/javascript" src="https://d33t3vvu2t2yu5.cloudfront.net/tv.js"></script>*@
+                            @* TradingView Widget END*@
+                            <!-- TradingView Widget BEGIN -->
+                            <span id="tradingview-copyright">Fundamental data is powered by <a href="http://www.tradingview.com" rel="nofollow" target="_blank" style="color: #3BB3E4">TradingView.com</a></span>
+                            <script type="text/javascript" src="https://d33t3vvu2t2yu5.cloudfront.net/tv.js"></script>
+
+
+
+                            <script type="text/javascript">
+                                function Fundamentacharts(ddlValue) {
+                                    new TradingView.widget({
+                                        "autosize": true,
+                                        //"symbol": "NASDAQ:AAPL",
+                                        "symbol": ddlValue,
+                                        //"symbol": "SPY",
+                                        "interval": "D",
+                                        "theme": "White",
+                                        "locale": "en",
+                                        "toolbar_bg": "#f1f3f6",
+                                        container_id: "Fundamenta_Chart_container",
+                                        "fundamental": "Script$EDGR_DIVIDEND_YIELD_V2@tv-scripting",
+                                        "percentage": true,
+                                        //Added by krishna to show deetails on 28/04.2017
+                                        "details": true,
+                                        "news": [
+                                        "headlines"
+                                        ],
+                                        //"hideideasbutton": true,
+                                        //"allow_symbol_change": true,
+
+
+                                        //END
+
+
+                                    });
+                                }
+
+                            </script>
+                            <!-- TradingView Widget END -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var symbol = '@symb';
+        BindPriceChartBind(symbol);
+        Fundamentacharts(symbol);
+        $("#ddlChartsId").val(symbol);
+    });
+   // alert('dsd');
+
+
+    function BindGraphData()
+    {
+        var ddlValue = $("#ddlChartsId").val();
+
+        window.location.href = 'http://'+'@url'+'/Charts/SaveUserChartHistory?symbol=' + ddlValue + '&chartType=3' + '&viewType=ThirdChart';
+
+    }
+</script>
+
+
+
+
