@@ -265,7 +265,7 @@ hr{border-color:#d1d1d1; }
 
 .blue_block{background:#1e6eff; float:left; width:100%; /*border-radius:5px;*/ padding:10px 0;}
 
-.btn_whitegray{/*box-shadow:0 3px 0 0 #81a4e4;*/ color:#2a75fc; font-weight:bold; margin-left:-18px; padding:7px 12px !important;
+.btn_whitegray{/*box-shadow:0 3px 0 0 #81a4e4;*/ color:#2a75fc; font-weight:bold; margin-left:-26px; padding:7px 12px !important;
                background: #fff; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(#fff, #ababab); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(#fff, #ababab); /* For Opera 11.1 to 12.0 */
