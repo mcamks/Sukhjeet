@@ -45,9 +45,9 @@ namespace BlueSignal
                ));
 
 
-            bundles.Add(new ScriptBundle("~/bundles/Products").Include(
-             "~/Scripts/Common/ProductCountryFeatureMapping/ProductCountryFeatureMappingJs.js"
-               ));
+            //bundles.Add(new ScriptBundle("~/bundles/Products").Include(
+            // "~/Scripts/Common/ProductCountryFeatureMapping/ProductCountryFeatureMappingJs.js"
+            //   ));
 
 
             bundles.Add(new ScriptBundle("~/bundles/Customer").Include(
