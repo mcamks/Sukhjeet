@@ -679,5 +679,7 @@ hr{border-color:#d1d1d1; }
 .table_custom{border-collapse:separate;}
 .table_custom > thead > tr > th{border-bottom:1px solid #ddd;}
 .table_custom > tbody > tr > td:last-child{border-left:none;}
+.input_custom{border:1px solid #d2dadb; border-radius:4px; margin-left:6px;padding:5px 10px;}
+
 
 
