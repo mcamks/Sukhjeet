@@ -273,7 +273,7 @@ hr{border-color:#d1d1d1; }
   background: linear-gradient(#fff, #ababab); /* Standard syntax */
 }
 @media screen and (-webkit-min-device-pixel-ratio:0) {
-    .btn_whitegray{padding:8px 12px 5px 12px !important;}
+    .btn_whitegray{padding:8px 12px 6px 12px !important;}
 }
 .btn_whitegray:hover{background:#003ec8; color:#fff;}
 .btn_whitegray:focus{color:#2a75fc;
