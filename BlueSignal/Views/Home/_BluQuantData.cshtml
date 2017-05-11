@@ -445,6 +445,11 @@
         </div>
     </div>
 </div>
+@*<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>*@
 <script>
     $(function () {
         $.ajax({
@@ -528,11 +533,12 @@
         if (buyItems.length > 0) {
             $.each(buyItems, function (i, bItem) {
                 actionHtml += "<div class='info_row'><p>" + bItem.SymbolCode + "  $" + bItem.Price + " &#64; " + bItem.StrEntryTimeValue;
-                actionHtml += "<input type=\"button\" id=\"btnloanQuantData\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Load Symbol\" " + cssClassDisabled + " class=\"btn btn-success btn-xs btn_load\" onclick=\"IntializeOnlyBlueQuanteWithCode('" + bItem.SymbolCode + "')\" value=\"Load\" />"
+                actionHtml += "<input type=\"button\" id=\"btnloanQuantData\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Load Symbol\" " + cssClassDisabled + " class=\"btn btn-success btn-xs btn_load tooltips\" onclick=\"IntializeOnlyBlueQuanteWithCode('" + bItem.SymbolCode + "')\" value=\"Load\" />"
                 actionHtml += "</p></div>";
             });
 
             $("#buyItemsDiv").html(actionHtml);
+            LoadBtnTooltip();
         }
 
         var sellItems = $.grep(data, function (i, obj) {
@@ -544,11 +550,12 @@
         if (sellItems.length > 0) {
             $.each(sellItems, function (i, bItem) {
                 actionHtml += "<div class='info_row'><p>" + bItem.SymbolCode + "  $" + bItem.Price + " &#64; " + bItem.StrEntryTimeValue;
-                actionHtml += "<input type=\"button\" id=\"btnloanQuantData\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Load Symbol\" " + cssClassDisabled + " class=\"btn btn-success btn-xs btn_load\" onclick=\"IntializeOnlyBlueQuanteWithCode('" + bItem.SymbolCode + "')\" value=\"Load\" />"
+                actionHtml += "<input type=\"button\" id=\"btnloanQuantData\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Load Symbol\" " + cssClassDisabled + " class=\"btn btn-success btn-xs btn_load tooltips\" onclick=\"IntializeOnlyBlueQuanteWithCode('" + bItem.SymbolCode + "')\" value=\"Load\" />"
                 actionHtml += "</p></div>";
             });
 
             $("#sellItemsDiv").html(actionHtml);
+            //LoadBtnTooltip();
         }
         actionHtml = "";
 
@@ -587,6 +594,7 @@
             , select: true,
 
         });
+        LoadBtnTooltip();
     }
 
     function BindLast10CompletedTradesMain(selector, data) {
@@ -618,5 +626,10 @@
                      }
             ]
         });
+        LoadBtnTooltip();
+    }
+    function LoadBtnTooltip()
+    {
+        $('[data-toggle="tooltip"]').tooltip()
     }
 </script>
