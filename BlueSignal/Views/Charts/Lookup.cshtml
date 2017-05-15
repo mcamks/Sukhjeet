@@ -1,144 +1,92 @@
 ﻿
-@{
-    ViewBag.Title = "Lookup";
-}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>jQuery UI Autocomplete functionality</title>
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+          rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
-    
+    <!-- Javascript -->
+    <script>
 
-        <meta charset="UTF-8" name="referrer" content="no-referrer" />
-        <meta name="viewport" content="width = device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;">
+        function DeleteUserNotes() {
+            var jsonData = JSON.stringify({
+                sym: $("#automplete-1").val(),
+            });
+            $.ajax({
+                type: "POST",
+                url: "/Charts/Test",
+                contentType: "application/json; charset=utf-8",
+                data: jsonData,
+                dataType: "json",
+                async: false,
+                success: function (data) {
 
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/yahoo/yahoo-min.js"></script>
-    
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-    <style>
-        #txtTicker-label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 1em;
-        }
+                   
+                    var myArr = $.parseJSON(data);
+                    var arr = [];
 
-        #txtTicker-icon {
-            float: left;
-            height: 32px;
-            width: 32px;
-        }
-
-        #txtTicker-description {
-            margin: 0;
-            padding: 0;
-        }
-
-        .ui-draggable, .ui-droppable {
-            background-position: top;
-        }
-
-        .bold-text {
-            background-color: #3f7bf6;
-        }
-
-        .ttt {
-            background-color: #3f7bf6;
-            background: blue;
-        }
-    </style>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
-    <h>Stock Quotes AutoSuggest </h>
-
-
-    <ul style="margin:0; padding:0; list-style:none; width:300px;">
-        <li>
-            <div>
-                <p style="color:blue; font-weight:bold;">IBP <span style="color:black; font-weight:normal; float:right;">Equity - NYSE</span></p>
-                <p style="text-transform:uppercase;">Installed Building Production....</p>
-
-            </div>
-        </li>
-    </ul>
-
-    <input style="width: 800px; height: 20px;" id="txtTicker" />
-
-    <script type="text/javascript">
-     //   $.noConflict();
-        var YAHOO = {
-            Finance: {
-                SymbolSuggest: {}
-            }
-        };
-        $(document).ready(function() {
-            alert('Hello')
-        
-            $.noConflict();
-
-
-            $("#txtTicker").autocomplete({
-                source: function (request, response) {
-                 var query = request.term;
-                    $.ajax({
-                        type: "GET",
-                        url: "http://d.yimg.com/autoc.finance.yahoo.com/autoc",
-                        data: { query: query, region: 'US', lang: 'en-US' },
-                        dataType: "jsonp",
-                        jsonp: "callback",
-                        jsonpCallback: "YAHOO.Finance.SymbolSuggest.ssCallback",
+                    $.each(myArr.ResultSet.Result,function(i,obj){
+                        arr.push(obj.symbol);
                     });
-                    // call back function
-                    YAHOO.Finance.SymbolSuggest.ssCallback = function (data) {
-                        var suggestions = [];
-                        //alert(JSON.stringify(data.ResultSet.Result));
-                      //  debugger;
-                        $.each(data.ResultSet.Result, function (i, val) {
-                            suggestions.push({
-                                value: val.symbol//, + "-" + val.name + "(" + val.exchDisp + ")"
-                               , label: val.name
-                                , desc: val.exch +'-'+val.exchDisp
-                            });
-                        });
-
-                        response(suggestions);
-                    }
-                },
-                minLength: 1,
-                focus: function (event, ui) {
-                   $("#txtTicker").val(ui.item.value);
-                    return false;
-                },
-                select: function (event, ui) {
-
-                    $("#txtTicker").val(ui.item.value);
+                   
+                    //arr.push(myArr.ResultSet.Result[0].symbol);
+                    //arr.push(myArr.ResultSet.Result[1].symbol);
+                    //arr.push(myArr.ResultSet.Result[2].symbol);
+                    //arr.push(myArr.ResultSet.Result[3].symbol);
+                    //arr.push(myArr.ResultSet.Result[4].symbol);
+                    //arr.push(myArr.ResultSet.Result[5].symbol);
+                    //arr.push(myArr.ResultSet.Result[6].symbol);
+                    //arr.push(myArr.ResultSet.Result[7].symbol);
+                    //arr.push(myArr.ResultSet.Result[8].symbol);
+                    var obj = JSON.parse(data);
 
 
-                    return false;
-                },
-                highlightClass: "bold-text"
-            })
-            .autocomplete("instance")._renderItem = function (ul, item) {
-                // alert('abc');
-               // debugger;
-                return $("<li>")
-                  .append("<div>"
-                  + "<p style='color:blue; font-weight:bold;'>"
-                  + item.value
-                  + "<span style='color:black; font-weight:normal; float:right;'>"
-                  + item.desc
-                  + "</span></p>"
-                  + " <p style='text-transform:uppercase;'>"
-                  + item.label
-                  + "</p>"
-                //  + item.value + "<br>" + item.label + +item.desc + "</div>")
-                  + "</div>")
+                       var availableTutorials  =  [
+                          "ActionScript",
+                          "Boostrap",
+                          "C",
+                          "C++",
+                       ];
+                       $( "#automplete-1" ).autocomplete({
+                           source: arr,
+                           select: function (event, ui) {
+                               $("#automplete-1").val(ui.item.label);
+                               debugger;
+                               return false;
+                           },
+                       });
+                }
 
 
-                  .appendTo( ul );
-            };
-     });
+
+            });
+
+        }
+
+         //$(function() {
+         //   var availableTutorials  =  [
+         //      "ActionScript",
+         //      "Boostrap",
+         //      "C",
+         //      "C++",
+         //   ];
+         //   $( "#automplete-1" ).autocomplete({
+         //      source: availableTutorials
+         //   });
+         //});
     </script>
+</head>
 
-
-
-
+<body>
+    <!-- HTML -->
+    <div class="ui-widget">
+        <p>Type "a" or "s"</p>
+        <label for="automplete-1" >Tags: </label>
+        <input id="automplete-1" onkeyup="DeleteUserNotes()">
+    </div>
+</body>
+</html>

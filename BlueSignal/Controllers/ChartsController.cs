@@ -1,10 +1,14 @@
-﻿using BlueSignalCore.Bal;
+﻿using BlueSignal.Models;
+using BlueSignalCore.Bal;
 using BlueSignalCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace BlueSignal.Controllers
 {
@@ -196,6 +200,40 @@ namespace BlueSignal.Controllers
         {
             return View();
         }
+
+        public ActionResult Test(string sym)
+
+        {
+            using (WebClient web = new WebClient())
+            {
+                string query = sym;
+                //http://d.yimg.com/aq/autoc?query=y&region=US&lang=en-US&callback=YAHOO.util.ScriptNodeDataSource.callbacks
+                string url = "http://d.yimg.com/autoc.finance.yahoo.com/autoc?query=" + query + "&region=us&lang=en-US";//string.Format("http://d.yimg.com/autoc.finance.yahoo.com/autoc?query={0}&region=us&lang=en-US", query);
+
+                string data = web.DownloadString(url);
+
+             
+                
+                //var json = new JavaScriptSerializer().Serialize(data);
+                ////remove the class/method name from the JSON
+                //Match match = Regex.Match(data, @"YAHOO.Finance.SymbolSuggest.ssCallback");
+                //data = match.Groups[1].Value;
+
+                //var serializer = new JavaScriptSerializer();
+                //serializer.RegisterConverters(new[] { new DynamicJsonConverter() });
+                //dynamic obj = serializer.Deserialize(data, typeof(object));
+
+                //foreach (dynamic result in obj.ResultSet.Result)
+                //{
+                //    Console.WriteLine(string.Format("{0} {1} {2}", result.symbol, result.name, result.exch));
+                //}
+
+                //Console.ReadLine();
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+           // return Json("1", JsonRequestBehavior.AllowGet);
+        }
+
       
     }
 }
