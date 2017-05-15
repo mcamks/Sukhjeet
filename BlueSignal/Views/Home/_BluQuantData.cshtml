@@ -28,7 +28,7 @@
     <div class="col-sm-5 ">
         <div class="info_block">
             <div class="blue_block">
-                <label class="col-sm-6 symbol_text text-uppercase" for="code"><strong>Selected Security</strong> </label>
+                <label class="col-sm-6 symbol_text" style="text-transform:capitalize;" for="code"><strong>Selected Security</strong> </label>
                 <div class="col-sm-6">
                     <button type="button" class="btn btn-primary btn_style pull-right btn_whitegray tooltips" @btnClassToDisabled data-toggle="modal" data-target="#myModalBlueQuant" @* onclick="callYahooFinance()" *@>Major Markets <span class="tiptext">Choose Major Market</span></button>
                 </div>
@@ -77,8 +77,8 @@
                 <div class="panel panel-default todays_signal">
                     <div class="panel-heading text-center text-uppercase">Today's Signals</div>
                     <div class="panel-body">
-                        <div class="green_heading"><i class="fa fa-shopping-cart" aria-hidden="true"></i> BUY</div>
-                        <div class="red_heading"><i class="fa fa-usd" aria-hidden="true"></i> SELL</div>
+                        <div class="green_heading"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <strong>BUY</strong></div>
+                        <div class="red_heading"><i class="fa fa-usd" aria-hidden="true"></i> <strong>SELL</strong></div>
                         <input type="hidden" id="hfcssDisabled" value="@btnClassToDisabled" />
                         <div class="col-sm-6 border_right">
                             <div class="todays_signal_list" id="buyItemsDiv">
@@ -192,7 +192,7 @@
                 </div>
                 <div id="collapse6" class="panel-collapse collapse in">
                     <div class="panel-body">
-                        <div id="chartcontainer_dailyBulQuantData" style="height:600px; width:100%;"></div>
+                        <div id="chartcontainer_dailyBulQuantData" style="height:700px; width:100%;"></div>
                     </div>
                 </div>
             </div>
@@ -336,7 +336,7 @@
                                                     <tr>
                                                         <th>Symbol</th>
                                                         <th>Type</th>
-                                                        <th width="210" class="text-center">Name</th>
+                                                        <th width="210">Name</th>
                                                         <th>Entry Date</th>
                                                         <th>Entry Time</th>
                                                         <th>Entry Price</th>
@@ -373,7 +373,7 @@
                                                 <tr>
                                                     <th>Symbol</th>
                                                     <th>Type</th>
-                                                    <th width="230" class="text-center">Name</th>
+                                                    <th width="230">Name</th>
                                                     <th>Entry Date</th>
                                                     <th>Entry Price</th>
                                                     <th>Exit Date</th>
