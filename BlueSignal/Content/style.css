@@ -499,7 +499,7 @@ hr{border-color:#d1d1d1; }
     width: 100% !important;
 }
 
-    .dashboard_style{background: #fafafa; border-bottom:4px solid #1e6eff; height: 0px; margin-top: 0;width:100%; float:left;padding:14px 0 0 0;position:fixed; z-index:1; -webkit-transition: height 1s; transition: height 1s;  overflow:hidden;}
+    .dashboard_style{background: #fafafa; border-bottom:4px solid #1e6eff; height: 0px; margin-top: 0;width:100%; float:left;padding:14px 0 0 0;position:fixed; z-index:999; -webkit-transition: height 1s; transition: height 1s;  overflow:hidden;}
     
     .dashboard_style .panel-body {height:120px; padding:14px 6px 0px; background:#fafafa; -webkit-transition: height 1s; transition: height 1s;}
     .dashboard_style .panel {margin:0px !important; border:none !important; box-shadow:none !important;}
