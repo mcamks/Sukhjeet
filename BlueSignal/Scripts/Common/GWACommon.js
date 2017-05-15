@@ -475,6 +475,9 @@ function RebindMarketData(selectedCode) {
         data: { 'startDate': $('#date').val(), 'Type': $('#datafrequency').val(), 'selectedCode': selectedCode },
         success: function (data) {
             if (data != null) {
+               
+                $("#txtMDDailyCode").val(selectedCode);
+                ReloadDailyMarketData(false);
                 //if ($("#Id_MarketDataListDaily").length > 0) {
                 //    var dailyData = $.parseJSON(data.MarketDataDaily);
                 //    $.each(dailyData.results, function (i, d) {
@@ -555,7 +558,7 @@ function RebindMarketData(selectedCode) {
 
 
                         $(".NameClassbluequont").val(sysmbolName);
-
+                       
                         //var startDate = new Date(symbolData.results[0].tradeTimestamp);
                         //var formattedStartDate = startDate.getMonth() + "/" + startDate.getDate() + "/" + startDate.getFullYear();
 

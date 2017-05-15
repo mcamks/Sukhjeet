@@ -70,12 +70,13 @@
         </div>
     </div>
 </div>
+
 <script>
     function ReloadDailyMarketData(showLoader) {
         $("#noRecordsDiv").hide();
         var sym = $("#txtMDDailyCode").val();
         if (sym != "") {
-            sym = sym.substr(sym.indexOf(":") + 1, sym.length - 1);
+            //sym = sym.substr(sym.indexOf(":") + 1, sym.length - 1);
             if (showLoader)
                 ShowLoaderCustom();
             $.ajax({
@@ -93,7 +94,7 @@
                         });
 
                         if ($("#Id_MarketDataListDaily").length > 0)
-                            bindDatatable('Id_MarketDataListDaily', dailyData);
+                            bindDatatableMarketData('Id_MarketDataListDaily', dailyData);
                     }
                     else {
                         $("#noRecordsDiv").show();
@@ -117,6 +118,54 @@
         else {
             $("#txtMDDailyCode").val('SPY');
         }
+        //if ($("#hfGlobalSymbolName").val() != "") {
+        //    $("#txtMDDailyCode").val($("#hfGlobalSymbolName").val());
+        //}
+        //else {
+        //    $("#txtMDDailyCode").val('SPY');
+        //}
         ReloadDailyMarketData(false);
     });
+
+
+    //function bindDatatableMarket(selector, data) {
+    //    if ($.fn.dataTable.isDataTable('#' + selector)) {
+    //        $('#' + selector).DataTable().destroy();
+    //    }
+    //    var table = $('#' + selector).DataTable({
+    //        aaData: data,
+    //        "columns": [
+    //                 //{ "data": "symbol", "name": "symbol" },
+    //                 //{ "data": "timestamp", "name": "timestamp" },
+    //                 { "data": "tradingDay", "name": "TradingDate" },
+    //                 { "data": "open", "name": "open" },
+    //                  { "data": "high", "name": "high" },
+    //                   { "data": "low", "name": "low" },
+    //                    { "data": "close", "name": "close" },
+    //                     { "data": "volume", "name": "volume" }
+    //                      //,{ "data": "openInterest", "name": "openInterest" }
+    //        ],
+    //        "order": [[0, "desc"]]
+    //    });
+    //}
+    function bindDatatableMarketData(selector, data) {
+        if ($.fn.dataTable.isDataTable('#' + selector)) {
+            $('#' + selector).DataTable().destroy();
+        }
+        var table = $('#' + selector).DataTable({
+            aaData: data,
+            "columns": [
+                     //{ "data": "symbol", "name": "symbol" },
+                     //{ "data": "timestamp", "name": "timestamp" },
+                     { "data": "tradingDay", "name": "TradingDate" },
+                     { "data": "open", "name": "open" },
+                      { "data": "high", "name": "high" },
+                       { "data": "low", "name": "low" },
+                        { "data": "close", "name": "close" },
+                         { "data": "volume", "name": "volume" }
+                          //,{ "data": "openInterest", "name": "openInterest" }
+            ],
+            "order": [[0, "desc"]]
+        });
+    }
 </script>

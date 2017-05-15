@@ -22,9 +22,11 @@ namespace BlueSignal.Controllers
     public class HomeController : BaseController
     {
         private readonly MarketBal _marketBal;
-        public HomeController(MarketBal marketBal)
+        private readonly UserChartHistoryBal _ChartBal;
+        public HomeController(MarketBal marketBal, UserChartHistoryBal ChartBal)
         {
             _marketBal = marketBal;
+            _ChartBal = ChartBal;
         }
 
         public string apiKey = BluSignalComman.APIkey;
@@ -62,6 +64,40 @@ namespace BlueSignal.Controllers
                 Session.Add("firstTimeCheck", "1");
 
             var user = _marketBal.GetWpUser(userName, Password);
+            #region ToolTIp
+            //Dynamic Tool Tip
+            var Firstsymbol = "";
+            var firstChartSymbolResult = _ChartBal.GetUserChartHistory(Convert.ToInt64(user.ID), "1").FirstOrDefault();
+            if (firstChartSymbolResult == null)
+                Firstsymbol = "SPY";
+            else
+                Firstsymbol = firstChartSymbolResult.Symbol;
+            Session["FirstChartSymbol"] = Firstsymbol;
+
+
+            var secondSymbol = "";
+            ViewBag.RequestUrl = Request.Url.Authority;
+            var sesValue = (WP_User)Session["SystemUser"];
+            var result = _ChartBal.GetUserChartHistory(Convert.ToInt64(user.ID), "2").FirstOrDefault();
+            if (result == null)
+                secondSymbol = "SPY";
+            else
+                secondSymbol = result.Symbol;
+
+            ViewBag.Symbol = secondSymbol;
+            Session["SecondtChartSymbol"] = secondSymbol;
+
+
+
+            var thirdSymbol = "";
+
+            var ThirdResult = _ChartBal.GetUserChartHistory(Convert.ToInt64(user.ID), "3").FirstOrDefault();
+            if (ThirdResult == null)
+                thirdSymbol = "SPY";
+            else
+                thirdSymbol = result.Symbol;
+            Session["ThirdChartSymbol"] = thirdSymbol;
+            #endregion
             if (user == null)
             {
                 user = new WP_User();

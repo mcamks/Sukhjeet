@@ -28,9 +28,11 @@ namespace BlueSignal.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private readonly MarketBal _marketBal;
-        public AccountController(MarketBal marketBal)
+        private readonly UserChartHistoryBal _ChartBal;
+        public AccountController(MarketBal marketBal, UserChartHistoryBal ChartBal)
         {
             _marketBal = marketBal;
+            _ChartBal = ChartBal;
         }
 
         //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -95,6 +97,41 @@ namespace BlueSignal.Controllers
                 var userName = IsUserExist.Email;
                 var Password = "Test"; //Option
                 var user = _marketBal.GetWpUser(userName, Password);
+                //Dynamic Tool Tip
+                  var Firstsymbol = "";
+                  var firstChartSymbolResult = _ChartBal.GetUserChartHistory(Convert.ToInt64(user.ID), "1").FirstOrDefault();
+                  if (firstChartSymbolResult == null)
+                    Firstsymbol = "SPY";
+                  else
+                    Firstsymbol = firstChartSymbolResult.Symbol;
+                  Session["FirstChartSymbol"] = Firstsymbol;
+
+
+                var secondSymbol = "";
+                ViewBag.RequestUrl = Request.Url.Authority;
+                var sesValue = (WP_User)Session["SystemUser"];
+                var result = _ChartBal.GetUserChartHistory(Convert.ToInt64(user.ID), "2").FirstOrDefault();
+                if (result == null)
+                    secondSymbol = "SPY";
+                else
+                    secondSymbol = result.Symbol;
+
+                ViewBag.Symbol = secondSymbol;
+                Session["SecondtChartSymbol"] = secondSymbol;
+
+
+
+                var thirdSymbol = "";
+                ViewBag.RequestUrl = Request.Url.Authority;
+               
+                var ThirdResult = _ChartBal.GetUserChartHistory(Convert.ToInt64(user.ID), "3").FirstOrDefault();
+                if (ThirdResult == null)
+                    thirdSymbol = "SPY";
+                else
+                    thirdSymbol = result.Symbol;
+                Session["ThirdChartSymbol"] = thirdSymbol;
+              
+                //End
                 //user.IsAdminUser = true;
                 if (user == null)
                 {
