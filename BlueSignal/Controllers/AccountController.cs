@@ -132,7 +132,9 @@ namespace BlueSignal.Controllers
                 return View(model);
             }
 
+#pragma warning disable CS0162 // Unreachable code detected
             return View(model);
+#pragma warning restore CS0162 // Unreachable code detected
         }
 
         private void SystemLogin(WP_User user)

@@ -214,7 +214,9 @@ namespace BlueSignal.Controllers
                     return s.Replace("//", "");
                 }
             }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (WebException ex) //if server is off it will throw exeception and here we need notify user
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
             }
 
@@ -249,7 +251,9 @@ namespace BlueSignal.Controllers
             {
                 throw ex;
             }
+#pragma warning disable CS0162 // Unreachable code detected
             return "Fail";
+#pragma warning restore CS0162 // Unreachable code detected
 
         }
 
@@ -299,7 +303,9 @@ namespace BlueSignal.Controllers
                     return jsonResult;
                 }
             }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (WebException ex) //if server is off it will throw exeception and here we need notify user
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
             }
             return Json("");
@@ -978,7 +984,9 @@ namespace BlueSignal.Controllers
                 var url = $"{ApiBaseUrl}&symbol={symbol}&type={intervalType}&startDate={startDate}{order}";
                 var result = await new WebClient().DownloadStringTaskAsync(url);
 
+#pragma warning disable CS0618 // 'JsonConvert.DeserializeObjectAsync<T>(string)' is obsolete: 'DeserializeObjectAsync is obsolete. Use the Task.Factory.StartNew method to deserialize JSON asynchronously: Task.Factory.StartNew(() => JsonConvert.DeserializeObject<T>(value))'
                 var data = await JsonConvert.DeserializeObjectAsync<Data>(result);
+#pragma warning restore CS0618 // 'JsonConvert.DeserializeObjectAsync<T>(string)' is obsolete: 'DeserializeObjectAsync is obsolete. Use the Task.Factory.StartNew method to deserialize JSON asynchronously: Task.Factory.StartNew(() => JsonConvert.DeserializeObject<T>(value))'
                 if (data.results != null && data.results.Any())
                 {
                     data.results = data.results.OrderByDescending(a => a.tradingDay);
@@ -997,7 +1005,9 @@ namespace BlueSignal.Controllers
             {
                 throw ex;
             }
+#pragma warning disable CS0162 // Unreachable code detected
             return obj;
+#pragma warning restore CS0162 // Unreachable code detected
         }
 
 

@@ -99,6 +99,11 @@ namespace BlueSignalCore.Bal
                         current.SymbolCode = vm.SymbolCode;
                         current.SymbolName = vm.SymbolName;
                         current.CategoryId = vm.CategoryId;
+                        current.ExitPrice = vm.ExitPrice;
+                        current.Type = vm.Type;
+                        current.DaysOpen = vm.DaysOpen;
+                        current.Profit = vm.Profit;
+
 
                         result = Convert.ToInt32(rep.UpdateEntity(current, current.Id));
                     }

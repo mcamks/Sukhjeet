@@ -23,6 +23,12 @@
                                 <input type="text" id="SymbName1" class="form-control" />
                             </div>
                         </div>
+                        <div class="col-sm-6 userfield" id="SymbolType1">
+                            <div class="form-group">
+                                <label>Type</label>
+                                <input type="text" id="SymbType" class="form-control" />
+                            </div>
+                        </div>
                         <div class="col-sm-6 userfield" id="SymbolCode1">
                             <div class="form-group">
                                 <label>Symbol</label>
@@ -33,6 +39,12 @@
                             <div class="form-group">
                                 <label>Category</label>
                                 <select id="categorySelect" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 userfield" id="DaysOpen1">
+                            <div class="form-group">
+                                <label>Days Open</label>
+                                <input id="DaysOpen" type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="col-sm-6 userfield" id="TradeAction1">
@@ -62,10 +74,29 @@
                                 <input id="EntryTime" type="text" class="form-control timepicker1" />
                             </div>
                         </div>
+                        <div class="col-sm-6 userfield" id="EntryPrice1">
+                            <div class="form-group">
+                                <label>Entry Price</label>
+                                <input id="EntryPrice" type="text" class="form-control" />
+                            </div>
+                        </div>
+                     
+                        <div class="col-sm-6 userfield" id="Profit1">
+                            <div class="form-group">
+                                <label>Profit</label>
+                                <input id="Profit" type="text" class="form-control" />
+                            </div>
+                        </div>
                         <div class="col-sm-6 userfield" id="ExitDate1">
                             <div class="form-group">
                                 <label>Exit Date</label>
                                 <input id="ExitDate" type="text" class="form-control datepicker1" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6 userfield" id="ExitPrice1">
+                            <div class="form-group">
+                                <label>Exit Price</label>
+                                <input id="ExitPrice" type="text" class="form-control" />
                             </div>
                         </div>
                         @*<div class="col-sm-6 userfield" id="EntryPrice1">
@@ -106,7 +137,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 addnew_btn">
-                                <input type="button" style="top:12px;" productType="0" id="BtnMD1" title="Add to Major Markets" rFields="SymbolName1,SymbolCode1,MarketCategory1" onclick="ShowHideFields(this); SetButtonText(this);" class="btn btn-primary pull-right addnew" custom='SymbolName1,SymbolCode1,MarketCategory1' data-toggle="modal" value="Add New">
+                                <input type="button" style="top:12px;" productType="0" id="BtnMD1" title="Add to Major Markets" rFields="SymbolName1,SymbolType1,SymbolCode1,MarketCategory1,EntryDate1,EntryTime1,EntryPrice1,DaysOpen1,Profit1" onclick="ShowHideFields(this); SetButtonText(this);" class="btn btn-primary pull-right addnew" custom='SymbolName1,SymbolType1,SymbolCode1,MarketCategory1,EntryDate1,EntryTime1,EntryPrice1,DaysOpen1,Profit1' data-toggle="modal" value="Add New">
                             </div>
                             <div class="col-sm-12">
                                 <div style="overflow:auto;">
@@ -117,6 +148,12 @@
                                                     <th>Category</th>
                                                     <th>Name</th>
                                                     <th>Symbol</th>
+                                                    <th>Type</th>
+                                                    <th>Entry Date</th>
+                                                    @*<th>Entry Time</th>*@
+                                                    <th>Entry Price</th>
+                                                    <th>Days Open</th>
+                                                    <th>Profit</th>
                                                     <th>Options</th>
                                                 </tr>
                                             </thead>
@@ -216,7 +253,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 @*<input type="button" id="BtnMD3" title="" productType="105" onclick="ShowHideFields(this);" class="btn btn-primary pull-right addnew" custom='SymbolCode1,SymbolName1,EntryDate1,ExitDate1,Result1,EntryPrice1' rFields='SymbolCode1,SymbolName1,EntryDate1,ExitDate1,Result1,EntryPrice1' data-toggle="modal" data-target="#mySetupModal" value="Add New">*@
-                                <input type="button" id="BtnMD3" productType="105" title="Add to Completed Trades List" onclick="ShowHideFields(this); SetButtonText(this);" class="btn btn-primary pull-right addnew" custom='SymbolCode1,SymbolName1,EntryDate1,ExitDate1,Result1,EntryPrice1' rFields='SymbolCode1,SymbolName1,EntryDate1,ExitDate1,Result1,EntryPrice1' data-toggle="modal" value="Add New">
+                                <input type="button" id="BtnMD3" productType="105" title="Add to Completed Trades List" onclick="ShowHideFields(this); SetButtonText(this);" class="btn btn-primary pull-right addnew" custom='SymbolCode1,SymbolType1,SymbolName1,EntryDate1,ExitDate1,Result1,EntryPrice1,ExitPrice1' rFields='SymbolCode1,SymbolType1,SymbolName1,EntryDate1,ExitDate1,Result1,EntryPrice1,ExitPrice1' data-toggle="modal" value="Add New">
                             </div>
                             <div class="col-sm-12">
                                 <div>
@@ -225,9 +262,12 @@
                                             <thead>
                                                 <tr>
                                                     <th>Symbol</th>
+                                                    <th>Type</th>
                                                     <th>Name</th>
                                                     <th>Entry Date</th>
+                                                    <th>Entry Price</th>
                                                     <th>Exit Date</th>
+                                                    <th>Exit Price</th>
                                                     <th>Result</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -393,6 +433,12 @@
                      { "data": "Category", "name": "Category" },
                      { "data": "SymbolName", "name": "Name" },
                      { "data": "SymbolCode", "name": "symbol" },
+                      { "data": "Type", "name": "Type" },
+                      { "data": "StrEntryDate", "name": "Entry Date" },
+                      //{ "data": "EntryTime", "name": "Entry Time" },
+                      { "data": "EntryPrice", "name": "Entry Price" },
+                       { "data": "DaysOpen", "name": "Days Open" },
+                        { "data": "Profit", "name": "Profit" },
                      {
                          "data": null, "name": "Action", "orderable": false, render: function (data, type, row) {
                              return "<div>" +
@@ -514,9 +560,13 @@
             //paging: false,
             "columns": [
                      { "data": "SymbolCode", "name": "Symbol" },
+                     { "data": "Type", "name": "Type" },
                      { "data": "SymbolName", "name": "Name" },
+
                      { "data": "StrEntryDate", "name": "EntryDate" },
+                     { "data": "EntryPrice", "name": "Entry Price" },
                      { "data": "StrExitDate", "name": "ExitDate" },
+                      { "data": "ExitPrice", "name": "Exit Price" },
                      {
                          "data": null, "name": "Result", render: function (data, type, row) {
                              if (data.Result != '') {
@@ -653,7 +703,13 @@
             'StrEntryDate': $("#EntryDate").val(),
             'StrExitDate': $("#ExitDate").val(),
             'Time': $("#EntryTime").val(),
-            'CategoryId': $("#categorySelect").val()
+            'CategoryId': $("#categorySelect").val(),
+            'Type': $("#SymbType").val(),
+            'EntryPrice': $("#EntryPrice").val(),
+            'DaysOpen': $("#DaysOpen").val(),
+            'Profit': $("#Profit").val(),
+            'ExitPrice': $("#ExitPrice").val(),
+           
         };
 
         ShowLoaderCustom();
