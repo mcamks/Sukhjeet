@@ -234,8 +234,12 @@ namespace BlueSignal.Controllers
            // return Json("1", JsonRequestBehavior.AllowGet);
         }
 
+         public ActionResult AutoComplete()
+        {
+            return View();
+        }
 
-       
+
 
 
     }

@@ -272,19 +272,45 @@
                 async: false,
                 success: function (data) {
                     var myArr = $.parseJSON(data);
-                    var arr = [];
-                    $.each(myArr.ResultSet.Result,function(i,obj){
-                        arr.push(obj.symbol);
+                    //var arr = [];
+                    var suggestions = [];
+                    $.each(myArr.ResultSet.Result, function (i, obj) {
+                        //arr.push(obj.symbol);
+                        suggestions.push({
+                            value: obj.symbol//, + "-" + val.name + "(" + val.exchDisp + ")"
+                             , label: obj.name
+                              , desc: obj.exch + '-' + obj.exchDisp
+                        });
                     });
                     $("#codeD").autocomplete({
-                           source: arr,
-                           select: function (event, ui) {
-                               $("#codeD").val(ui.item.label);
+                        source: suggestions,
+                        focus: function (event, ui) {
+                            $("#codeD").val(ui.item.label);
+                            return false;
+                        },
+                        select: function (event, ui) {
+                            $("#codeD").val(ui.item.label);
+
+                            return false;
+                        },
+                    })
+                     .autocomplete("instance")._renderItem = function (ul, item) {
+                         return $("<li>")
+             .append("<div>"
+             + "<p style='color:blue; font-weight:bold;'>"
+             + item.value
+             + "<span style='color:black; font-weight:normal; float:right;'>"
+             + item.desc
+             + "</span></p>"
+             + " <p style='text-transform:uppercase;'>"
+             + item.label
+             + "</p>"
+           //  + item.value + "<br>" + item.label + +item.desc + "</div>")
+             + "</div>")
 
 
-                               return false;
-                           },
-                       });
+             .appendTo(ul);
+                     };
                 }
             });
         }

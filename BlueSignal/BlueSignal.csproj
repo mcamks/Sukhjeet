@@ -467,6 +467,7 @@
     <Content Include="Views\Charts\SecondChart.cshtml" />
     <Content Include="Views\Charts\ThirdChart.cshtml" />
     <Content Include="Views\Charts\Lookup.cshtml" />
+    <Content Include="Views\Charts\AutoComplete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

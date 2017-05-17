@@ -1,6 +1,37 @@
-﻿
+﻿<style>
+    #txtTicker-label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 1em;
+    }
+
+    #txtTicker-icon {
+        float: left;
+        height: 32px;
+        width: 32px;
+    }
+
+    #txtTicker-description {
+        margin: 0;
+        padding: 0;
+    }
+
+    .ui-draggable, .ui-droppable {
+        background-position: top;
+    }
+
+    .bold-text {
+        background-color: #3f7bf6;
+    }
+
+    .ttt {
+        background-color: #3f7bf6;
+        background: blue;
+    }
+</style>
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>jQuery UI Autocomplete functionality</title>
@@ -9,6 +40,8 @@
    
 
     <!-- Javascript -->
+    @*<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>*@
     <script>
 
         function DeleteUserNotes() {
@@ -24,17 +57,45 @@
                 async: false,
                 success: function (data) {
                     var myArr = $.parseJSON(data);
-                    var arr = [];
+                    // var arr = [];
+                    var suggestions = [];
                     $.each(myArr.ResultSet.Result,function(i,obj){
-                        arr.push(obj.symbol);
+                        // arr.push(obj.symbol);
+                        suggestions.push({
+                            value: obj.symbol//, + "-" + val.name + "(" + val.exchDisp + ")"
+                              , label: obj.name
+                               , desc: obj.exch + '-' + obj.exchDisp
+                        });
                     });
                        $( "#automplete-1" ).autocomplete({
-                           source: arr,
+                           source: suggestions,
+                           focus: function (event, ui) {
+                               $("#automplete-1").val(ui.item.label);
+                               return false;
+                           },
                            select: function (event, ui) {
                                $("#automplete-1").val(ui.item.label);
                                return false;
                            },
-                       });
+                       })
+
+                         .autocomplete("instance")._renderItem = function (ul, item) {
+                             return $("<li>")
+                 .append("<div>"
+                 + "<p style='color:blue; font-weight:bold;'>"
+                 + item.value
+                 + "<span style='color:black; font-weight:normal; float:right;'>"
+                 + item.desc
+                 + "</span></p>"
+                 + " <p style='text-transform:uppercase;'>"
+                 + item.label
+                 + "</p>"
+               //  + item.value + "<br>" + item.label + +item.desc + "</div>")
+                 + "</div>")
+
+
+                 .appendTo(ul);
+                         };
                 }
             });
         }
@@ -52,3 +113,7 @@
     </div>
 </body>
 </html>
+
+
+
+
