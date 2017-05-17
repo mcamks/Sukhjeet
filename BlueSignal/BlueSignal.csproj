@@ -371,8 +371,10 @@
     <Content Include="Scripts\ClearForm.js" />
     <Content Include="Scripts\Common\CommonEnums.js" />
     <Content Include="Scripts\Common\Customer\CustomerDetailJs.js" />
+    <Content Include="Scripts\Common\easy-autocomplete.min.css" />
     <Content Include="Scripts\Common\GWACommon.js" />
     <Content Include="Scripts\Common\Index.js" />
+    <Content Include="Scripts\Common\jquery.easy-autocomplete.min.js" />
     <Content Include="Scripts\datafeed.js" />
     <Content Include="Scripts\dataTables.editor.min.js" />
     <Content Include="Scripts\dataTables.select.min.js" />

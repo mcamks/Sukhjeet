@@ -19,7 +19,7 @@
                         <div class="row">
                             <label class="col-sm-3 symbol_text" for="code">Symbol:</label>
                             <div class="col-sm-6 search_symbol">
-                                <input type="text" id="codeD" name="code" placeholder="Type valid Symbol" data-toggle="tooltip" title="Type a Valid Symbol" value="SPY" class="form-control codeValue">
+                                <input type="text" id="codeD" name="code" placeholder="Type valid Symbol" data-toggle="tooltip" title="Type a Valid Symbol" value="SPY" class="form-control codeValue" onkeyup="GetYahooLookUpBluNeural()">
                                 <span onclick="InitilizeMarketListWithCode($('#codeD'))"><i class="fa fa-search" data-toggle="tooltip" title="Lookup Symbol" aria-hidden="true"></i></span>
                             </div>
                             <div class="col-sm-3">
@@ -40,7 +40,7 @@
                         <div class="row">
                             <label class="col-sm-3 symbol_text" for="code">Symbol:</label>
                             <div class="col-sm-6 search_symbol">
-                                <input type="text" id="codeD" readonly name="code" placeholder="Type valid Symbol" data-toggle="tooltip" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage" value="SPY" class="form-control codeValue">
+                                <input type="text" id="codeD" readonly name="code" placeholder="Type valid Symbol" data-toggle="tooltip" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage" value="SPY" class="form-control codeValue" onkeyup="GetYahooLookUpBluNeural()">
                                 <span><i class="fa fa-search" data-toggle="tooltip" title="Lookup Symbol" aria-hidden="true"></i></span>
                             </div>
                             <div class="col-sm-3">
@@ -257,3 +257,37 @@
         </div>
     </div>
 </div>
+<script>
+
+    function GetYahooLookUpBluNeural() {
+            var jsonData = JSON.stringify({
+                sym: $("#codeD").val(),
+            });
+            $.ajax({
+                type: "POST",
+                url: "/Charts/GetLookUpData",
+                contentType: "application/json; charset=utf-8",
+                data: jsonData,
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    var myArr = $.parseJSON(data);
+                    var arr = [];
+                    $.each(myArr.ResultSet.Result,function(i,obj){
+                        arr.push(obj.symbol);
+                    });
+                    $("#codeD").autocomplete({
+                           source: arr,
+                           select: function (event, ui) {
+                               $("#codeD").val(ui.item.label);
+
+
+                               return false;
+                           },
+                       });
+                }
+            });
+        }
+
+
+</script>

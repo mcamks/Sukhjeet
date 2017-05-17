@@ -95,7 +95,7 @@ namespace BlueSignal.Controllers
             if (ThirdResult == null)
                 thirdSymbol = "SPY";
             else
-                thirdSymbol = result.Symbol;
+                thirdSymbol = ThirdResult.Symbol;
             Session["ThirdChartSymbol"] = thirdSymbol;
             #endregion
             if (user == null)

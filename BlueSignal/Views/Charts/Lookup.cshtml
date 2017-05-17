@@ -4,10 +4,9 @@
 <head>
     <meta charset="utf-8">
     <title>jQuery UI Autocomplete functionality</title>
-    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
-          rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+   
+    @*<script src="https://code.jquery.com/jquery-1.10.2.js"></script>*@
+   
 
     <!-- Javascript -->
     <script>
@@ -18,66 +17,29 @@
             });
             $.ajax({
                 type: "POST",
-                url: "/Charts/Test",
+                url: "/Charts/GetLookUpData",
                 contentType: "application/json; charset=utf-8",
                 data: jsonData,
                 dataType: "json",
                 async: false,
                 success: function (data) {
-
-                   
                     var myArr = $.parseJSON(data);
                     var arr = [];
-
                     $.each(myArr.ResultSet.Result,function(i,obj){
                         arr.push(obj.symbol);
                     });
-                   
-                    //arr.push(myArr.ResultSet.Result[0].symbol);
-                    //arr.push(myArr.ResultSet.Result[1].symbol);
-                    //arr.push(myArr.ResultSet.Result[2].symbol);
-                    //arr.push(myArr.ResultSet.Result[3].symbol);
-                    //arr.push(myArr.ResultSet.Result[4].symbol);
-                    //arr.push(myArr.ResultSet.Result[5].symbol);
-                    //arr.push(myArr.ResultSet.Result[6].symbol);
-                    //arr.push(myArr.ResultSet.Result[7].symbol);
-                    //arr.push(myArr.ResultSet.Result[8].symbol);
-                    var obj = JSON.parse(data);
-
-
-                       var availableTutorials  =  [
-                          "ActionScript",
-                          "Boostrap",
-                          "C",
-                          "C++",
-                       ];
                        $( "#automplete-1" ).autocomplete({
                            source: arr,
                            select: function (event, ui) {
                                $("#automplete-1").val(ui.item.label);
-                               debugger;
                                return false;
                            },
                        });
                 }
-
-
-
             });
-
         }
 
-         //$(function() {
-         //   var availableTutorials  =  [
-         //      "ActionScript",
-         //      "Boostrap",
-         //      "C",
-         //      "C++",
-         //   ];
-         //   $( "#automplete-1" ).autocomplete({
-         //      source: availableTutorials
-         //   });
-         //});
+        
     </script>
 </head>
 

@@ -5,15 +5,15 @@
     string symb = ViewBag.Symbol;
     string url = ViewBag.RequestUrl;
 }
-<meta charset="UTF-8" name="referrer" content="no-referrer" />
+@*<meta charset="UTF-8" name="referrer" content="no-referrer" />
 <meta name="viewport" content="width = device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;">
 
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/yahoo/yahoo-min.js"></script>
 
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-<style>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />*@
+@*<style>
     #txtTicker-label {
         display: block;
         font-weight: bold;
@@ -43,9 +43,9 @@
         background-color: #3f7bf6;
         background: blue;
     }
-</style>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</style>*@
+@*<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>*@
 
 
 @*<h>Symbol:</h>*@
@@ -53,7 +53,7 @@
 
 
 
-<script type="text/javascript">
+@*<script type="text/javascript">
      //   $.noConflict();
         var YAHOO = {
             Finance: {
@@ -127,10 +127,48 @@
                   .appendTo( ul );
             };
      });
-</script>
+</script>*@
 
 <!-- jQuery is not required to use Charting Library. It is used only for sample datafeed ajax requests. -->
 @*<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>*@
+
+
+<script>
+
+    function GetYahooLookUp() {
+            var jsonData = JSON.stringify({
+                sym: $("#txtTicker").val(),
+            });
+            $.ajax({
+                type: "POST",
+                url: "/Charts/GetLookUpData",
+                contentType: "application/json; charset=utf-8",
+                data: jsonData,
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    var myArr = $.parseJSON(data);
+                    var arr = [];
+                    $.each(myArr.ResultSet.Result,function(i,obj){
+                        arr.push(obj.symbol);
+                    });
+                    $("#txtTicker").autocomplete({
+                           source: arr,
+                           select: function (event, ui) {
+                               $("#txtTicker").val(ui.item.label);
+                               window.location.href = 'http://' + '@url' + '/Charts/SaveUserChartHistory?symbol=' + ui.item.value + '&chartType=1' + '&viewType=FirstChart';
+
+                               return false;
+                           },
+                       });
+                }
+            });
+        }
+
+
+</script>
+
+
 <script>window.jQuery || document.write('<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"><\/script>')</script>
 <script type="text/javascript" src="~/Scripts/charting_library.min.js"></script>
 <script type="text/javascript" src="~/Scripts/datafeed.js"></script>
@@ -245,7 +283,7 @@
                                 <i class="fa fa-line-chart" aria-hidden="true"></i> &nbsp;Price Chart
                                 
                             </a>
-                            <input id="txtTicker" placeholder="Symbol" class="input_custom" />
+                            <input id="txtTicker" placeholder="Symbol" class="input_custom"  onkeyup="GetYahooLookUp()"/>
                         </h4>
                     </div>
                     @*<select name="Charts" id="ddlChartsId" onchange="BindGraphData()">

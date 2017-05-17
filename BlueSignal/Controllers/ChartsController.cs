@@ -66,7 +66,7 @@ namespace BlueSignal.Controllers
             ViewBag.RequestUrl = Request.Url.Authority;
             var sesValue= (WP_User)Session["SystemUser"];
 #pragma warning disable CS0472 // The result of the expression is always 'false' since a value of type 'long' is never equal to 'null' of type 'long?'
-            if (Convert.ToInt64(sesValue.ID) == null)
+            if (sesValue == null)
 #pragma warning restore CS0472 // The result of the expression is always 'false' since a value of type 'long' is never equal to 'null' of type 'long?'
             {
                 return RedirectToAction("Login","Account");
@@ -201,7 +201,7 @@ namespace BlueSignal.Controllers
             return View();
         }
 
-        public ActionResult Test(string sym)
+        public ActionResult GetLookUpData(string sym)
 
         {
             using (WebClient web = new WebClient())
@@ -234,6 +234,9 @@ namespace BlueSignal.Controllers
            // return Json("1", JsonRequestBehavior.AllowGet);
         }
 
-      
+
+       
+
+
     }
 }
