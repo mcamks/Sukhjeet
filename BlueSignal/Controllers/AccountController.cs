@@ -78,7 +78,7 @@ namespace BlueSignal.Controllers
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+       // [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
@@ -128,7 +128,7 @@ namespace BlueSignal.Controllers
                 if (ThirdResult == null)
                     thirdSymbol = "SPY";
                 else
-                    thirdSymbol = result.Symbol;
+                    thirdSymbol = ThirdResult.Symbol;
                 Session["ThirdChartSymbol"] = thirdSymbol;
               
                 //End

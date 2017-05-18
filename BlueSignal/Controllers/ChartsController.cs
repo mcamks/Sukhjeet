@@ -202,7 +202,6 @@ namespace BlueSignal.Controllers
         }
 
         public ActionResult GetLookUpData(string sym)
-
         {
             using (WebClient web = new WebClient())
             {

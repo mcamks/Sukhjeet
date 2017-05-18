@@ -238,7 +238,15 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="BlogChart.aspx.cs">
+      <DependentUpon>BlogChart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BlogChart.aspx.designer.cs">
+      <DependentUpon>BlogChart.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Common\ApiActions.cs" />
+    <Compile Include="Common\BaseCommunicator.cs" />
     <Compile Include="Common\Helpers.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -261,6 +269,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BlogChart.aspx" />
     <Content Include="Content\bootstrap-datepicker.min.css" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />

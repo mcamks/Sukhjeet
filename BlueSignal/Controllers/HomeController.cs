@@ -920,9 +920,9 @@ namespace BlueSignal.Controllers
                 if (maxRexord != null)
                     closingPrice = maxRexord.close;
 
-               var  PercentValue = ((Convert.ToDecimal(closingPrice) - Convert.ToDecimal(previousprice)) / Convert.ToDecimal(closingPrice));
+                var PercentValue = ((Convert.ToDecimal(closingPrice) - Convert.ToDecimal(previousprice)) / Convert.ToDecimal(closingPrice));
                 prePricePercent = PercentValue * 100;
-                finalPercent = Convert.ToString( Math.Round(prePricePercent,3) + "%");
+                finalPercent = Convert.ToString(Math.Round(prePricePercent, 3) + "%");
 
             }
 
@@ -1018,8 +1018,17 @@ namespace BlueSignal.Controllers
                 order = !string.IsNullOrEmpty(order) ? $"&order={order}" : "&order=asc";
 
                 var url = $"{ApiBaseUrl}&symbol={symbol}&type={intervalType}&startDate={startDate}{order}";
-                var result = await new WebClient().DownloadStringTaskAsync(url);
+                var loggingData = new LoggingData
+                {
+                    param1 = symbol,
+                    param4 = startDate,
+                    param5 = intervalType,
+                    param6 = order
+                };
+                var client = new HttpClient();
 
+                var result = (await client.PostAsJsonAsync(ApiBaseUrl, loggingData)).Content.ReadAsStringAsync().Result;
+                
 #pragma warning disable CS0618 // 'JsonConvert.DeserializeObjectAsync<T>(string)' is obsolete: 'DeserializeObjectAsync is obsolete. Use the Task.Factory.StartNew method to deserialize JSON asynchronously: Task.Factory.StartNew(() => JsonConvert.DeserializeObject<T>(value))'
                 var data = await JsonConvert.DeserializeObjectAsync<Data>(result);
 #pragma warning restore CS0618 // 'JsonConvert.DeserializeObjectAsync<T>(string)' is obsolete: 'DeserializeObjectAsync is obsolete. Use the Task.Factory.StartNew method to deserialize JSON asynchronously: Task.Factory.StartNew(() => JsonConvert.DeserializeObject<T>(value))'
@@ -1085,6 +1094,7 @@ namespace BlueSignal.Controllers
             public string param9 { get; set; }
             public string param10 { get; set; }
         }
+
 
 
         //public class results

@@ -146,10 +146,15 @@
                     var suggestions = [];
                     $.each(myArr.ResultSet.Result,function(i,obj){
                         //arr.push(obj.symbol);
+                        //suggestions.push({
+                        //    value: obj.symbol//, + "-" + val.name + "(" + val.exchDisp + ")"
+                        //     , label: obj.name
+                        //      , desc: obj.exch + '-' + obj.exchDisp
+                        //});
                         suggestions.push({
-                            value: obj.symbol//, + "-" + val.name + "(" + val.exchDisp + ")"
-                             , label: obj.name
-                              , desc: obj.exch + '-' + obj.exchDisp
+                            value: obj.name //obj.symbol
+                            , label: obj.symbol // obj.name
+                             , desc: obj.exch + '-' + obj.exchDisp
                         });
                     });
                     $("#txtTicker").autocomplete({
@@ -160,7 +165,7 @@
                         },
                            select: function (event, ui) {
                                $("#txtTicker").val(ui.item.label);
-                       window.location.href = 'http://' + '@url' + '/Charts/SaveUserChartHistory?symbol=' + ui.item.value + '&chartType=3' + '&viewType=ThirdChart';
+                               window.location.href = 'http://' + '@url' + '/Charts/SaveUserChartHistory?symbol=' + ui.item.label + '&chartType=3' + '&viewType=ThirdChart';
 
 
                                return false;
@@ -170,12 +175,12 @@
                          return $("<li>")
              .append("<div>"
              + "<p style='color:blue; font-weight:bold;'>"
-             + item.value
+             + item.label
              + "<span style='color:black; font-weight:normal; float:right;'>"
              + item.desc
              + "</span></p>"
              + " <p style='text-transform:uppercase;'>"
-             + item.label
+             + item.value
              + "</p>"
            //  + item.value + "<br>" + item.label + +item.desc + "</div>")
              + "</div>")

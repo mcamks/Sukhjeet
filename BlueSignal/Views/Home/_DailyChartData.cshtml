@@ -276,9 +276,14 @@
                     var suggestions = [];
                     $.each(myArr.ResultSet.Result, function (i, obj) {
                         //arr.push(obj.symbol);
+                        //suggestions.push({
+                        //    value: obj.symbol//, + "-" + val.name + "(" + val.exchDisp + ")"
+                        //     , label: obj.name
+                        //      , desc: obj.exch + '-' + obj.exchDisp
+                        //});
                         suggestions.push({
-                            value: obj.symbol//, + "-" + val.name + "(" + val.exchDisp + ")"
-                             , label: obj.name
+                            value: obj.name //obj.symbol
+                             , label: obj.symbol // obj.name
                               , desc: obj.exch + '-' + obj.exchDisp
                         });
                     });
@@ -298,12 +303,12 @@
                          return $("<li>")
              .append("<div>"
              + "<p style='color:blue; font-weight:bold;'>"
-             + item.value
+             + item.label
              + "<span style='color:black; font-weight:normal; float:right;'>"
              + item.desc
              + "</span></p>"
              + " <p style='text-transform:uppercase;'>"
-             + item.label
+             + item.value
              + "</p>"
            //  + item.value + "<br>" + item.label + +item.desc + "</div>")
              + "</div>")
