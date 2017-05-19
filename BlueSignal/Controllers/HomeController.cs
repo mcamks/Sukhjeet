@@ -1035,8 +1035,10 @@ namespace BlueSignal.Controllers
                 if (data.results != null && data.results.Any())
                 {
                     data.results = data.results.OrderByDescending(a => a.tradingDay);
-                    data.serializedResult = result.Replace("{\"status\":{\"code\":200,\"message\":\"Success.\"},\"results\":", "").Replace("//", "").Trim();
-                    data.serializedResult = data.serializedResult.Remove(data.serializedResult.Length - 1);
+                    //data.serializedResult = result.Replace("{\"status\":{\"code\":200,\"message\":\"Success.\"},\"results\":", "").Replace("//", "").Trim();
+                    data.serializedResult = result;
+
+                    //data.serializedResult = data.serializedResult.Remove(data.serializedResult.Length - 1);
                 }
                 else
                 {
