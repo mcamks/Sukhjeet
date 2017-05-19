@@ -686,3 +686,11 @@ hr{border-color:#d1d1d1; }
 
 
 .btnGetDataBlueQuant{cursor:pointer;}
+
+.frame{width:600px; margin:50px auto 0;}
+.explore_options{border:5px solid #1a4cfb; margin-top:50px;}
+.explore_options .head{background:#1a4cfb; padding:20px 0; text-align:center; color:#fff;}
+.explore_options .head h2{font-size:18px; margin-bottom:0px;}
+.explore_options .head h1{font-size:28px; margin-top:12px;}
+.explore_options .webpage_links{padding:50px 0;}
+.explore_options .webpage_links .btn{border-radius:0; background:#1a4cfb; font-size:16px;}

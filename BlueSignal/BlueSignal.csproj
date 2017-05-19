@@ -295,6 +295,7 @@
     <Content Include="images\ajax-loader-bar.gif" />
     <Content Include="images\bar1_active.png" />
     <Content Include="images\bar1_gray.png" />
+    <Content Include="images\blusignal_system_logo.jpg" />
     <Content Include="images\chart1_active.png" />
     <Content Include="images\chart1_gray.png" />
     <Content Include="images\chart2_active.png" />
@@ -348,6 +349,7 @@
     <Content Include="images\sprite_1.png" />
     <Content Include="images\trends.png" />
     <Content Include="images\white.png" />
+    <Content Include="Index.html" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
