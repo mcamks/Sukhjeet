@@ -88,13 +88,22 @@
                 data: { "symbol": sym },
                 success: function (data) {
                     if (data != null && data != "" && data.indexOf("1969-12-31") == -1 && $("#Id_MarketDataListDaily").length > 0) {
-                        var dailyData = $.parseJSON(data);
-                        $.each(dailyData, function (i, d) {
+                        //var response = $.parseJSON(data.replace(/^\(|\)$/g, ''));
+                        var dailyData = "";
+                        try {
+                             dailyData = $.parseJSON(data);
+                        }
+                        catch (err) {
+                            console.log( err.message)
+                            //alert(err.message);
+                        }
+                      
+                        $.each(dailyData.results, function (i, d) {
                             d.volume = CommaFormatted(parseFloat(d.volume).toFixed(0));
                         });
 
                         if ($("#Id_MarketDataListDaily").length > 0)
-                            bindDatatableMarketData('Id_MarketDataListDaily', dailyData);
+                            bindDatatableMarketData('Id_MarketDataListDaily', dailyData.results);
                     }
                     else {
                         $("#noRecordsDiv").show();
