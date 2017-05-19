@@ -33,7 +33,7 @@ hr{border-color:#d1d1d1; }
 .navbar-header{margin:5px;}
 
 .navbar_bg{background:#fff; border-bottom:none; box-shadow:0px 0px 5px #b2b3b4;border-bottom: 4px solid #1E6EFF;}
-.navbar_bg .navbar-brand{color:#fff;}
+.navbar_bg .navbar-brand{color:#fff; position:relative; z-index:9;}
 .navbar-brand > img{width:121px;}
 .navbar_bg .navbar-nav > li > a{color:#1f6df7 ;}
 .navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover{background:#1f6df7; color:#fff;}
@@ -115,7 +115,7 @@ hr{border-color:#d1d1d1; }
 .todays_signal .panel-heading{background:#1f6df7; color:#fff; padding:8px 10px;}
 .todays_signal .panel-body{padding:0; border-top:none;}
 
-.fail_points{background:#ddd; float:left; width:100%; /*border-radius:0px 0px 5px 5px;*/ color:#1756e7;}
+.fail_points{background:#eee; float:left; width:100%; /*border-radius:0px 0px 5px 5px;*/ color:#1756e7;}
 .fail_points label{float:right; padding:5px 10px; margin-bottom:0;}
 .fail_points .projected{text-align:right;}
 .fail_points .projected i{ margin-left:10px; font-style:normal;}
@@ -431,13 +431,13 @@ hr{border-color:#d1d1d1; }
 
 .mandatory:after{content:" *"; color:red;}
 
-.active_page{position:absolute; left:45%; padding:5px 10px; font-size:22px; font-weight:bold; color:#1e6eff;  top:3px;} 
-.active_page span{float:left; padding:1px 7px 0px; background:#1e6eff; border-radius:50%; margin-right:5px; color:#fff; width:36px; height:36px; text-align:center;}
+.active_page{position:absolute; width:100%; padding:5px 10px; font-size:22px; font-weight:bold; color:#1e6eff;  top:3px; text-align:center;} 
+.active_page span{display:inline-block; padding:1px 7px 0px; background:#1e6eff; border-radius:50%; margin-right:5px; color:#fff; width:36px; height:36px; text-align:center;}
 .active_page span.cogs_icon { padding:1px 5px 0px !important; }
 .active_page span i {font-size:16px !important; float:left; margin:9px 0 0 3px;}
 .active_page span img{float:left; margin:6px 0 0 3px;}
 .active_page span i.fa-question{margin:7px 0 0 5px; font-size:20px !important;}
-/*.active_page span mu{line-height:33px;}*/
+.active_page mu{position:relative; top:-10px;}
 /*.active_page span i{float:left;}*/
 
 .date_time{float:right; margin:2px 2px 0 0; font-size:13px;}
