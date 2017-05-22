@@ -621,7 +621,7 @@ function RebindBuleQuentData(selectedCode) {
         data: { 'startDate': $('#date').val(), 'Type': $('#datafrequency').val(), 'selectedCode': selectedCode },
         success: function (data) {
             if (data != null) {
-
+                
                 $("#BlueQuanteCode").val(data.Code);
 
                 $(".codeClassbluequont").text(data.Code);
@@ -664,7 +664,7 @@ function RebindBuleQuentData(selectedCode) {
 
 
 
-
+                ReloadDailyMarketDataBluQuant(false);
 
             }
         },

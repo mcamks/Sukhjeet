@@ -120,6 +120,56 @@
         }
     }
 
+
+    function ReloadDailyMarketDataBluQuant(showLoader) {
+        $("#noRecordsDiv").hide();
+        var sym = $("#codeDquent").val();
+        if (sym != "") {
+            //sym = sym.substr(sym.indexOf(":") + 1, sym.length - 1);
+            if (showLoader)
+                ShowLoaderCustom();
+            $.ajax({
+                type: "GET",
+                url: "/Home/GetDailyMarketData",
+                dataType: "json",
+                data: JSON.stringify({ "symbol": sym }),
+                async: true,
+                data: { "symbol": sym },
+                success: function (data) {
+                    if (data != null && data != "" && data.indexOf("1969-12-31") == -1 && $("#Id_MarketDataListDaily").length > 0) {
+                        //var response = $.parseJSON(data.replace(/^\(|\)$/g, ''));
+                        $("#txtMDDailyCode").val(sym);
+                        var dailyData = "";
+                        try {
+                            dailyData = $.parseJSON(data);
+                        }
+                        catch (err) {
+                            console.log(err.message)
+                            //alert(err.message);
+                        }
+
+                        $.each(dailyData.results, function (i, d) {
+                            d.volume = CommaFormatted(parseFloat(d.volume).toFixed(0));
+                        });
+
+                        if ($("#Id_MarketDataListDaily").length > 0)
+                            bindDatatableMarketData('Id_MarketDataListDaily', dailyData.results);
+                    }
+                    else {
+                        $("#noRecordsDiv").show();
+                    }
+
+                    if (showLoader)
+                        HideLoaderCustom();
+                },
+                error: function (error, status) {
+                    console.log(error);
+                    HideLoaderCustom();
+                }
+            });
+        }
+    }
+
     $(document).ready(function () {
         if ($("#hfSymbol11").val() != "") {
             $("#txtMDDailyCode").val($("#hfSymbol11").val());
