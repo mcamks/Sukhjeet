@@ -121,9 +121,9 @@
     }
 
 
-    function ReloadDailyMarketDataBluQuant(showLoader) {
+    function ReloadDailyMarketDataBluQuant(showLoader ,selectedCode) {
         $("#noRecordsDiv").hide();
-        var sym = $("#codeDquent").val();
+        var sym = selectedCode;
         if (sym != "") {
             //sym = sym.substr(sym.indexOf(":") + 1, sym.length - 1);
             if (showLoader)
