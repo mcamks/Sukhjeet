@@ -1,8 +1,14 @@
-﻿<style>
+﻿@{ 
+    string nterm = (string)Session["LongTermChart"];
+    string lTerm = (string)Session["NearTemChart"];
+}
+
+<style>
     .dataTables_filter {
         display: none;
     }
 </style>
+
 <div class="row admin">
     <div id="mySetupModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -282,11 +288,51 @@
             </div>
         </div>
     </div>
+
+    <div class="col-sm-12">
+        <div class="panel-group accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title pannel_bg_blue"> <a data-toggle="collapse" href="#collapseLivePortfolio">Date Setup</a> </h4>
+                </div>
+                <div id="collapseLivePortfolio" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="addnew_btn">
+                                @*<input type="button" id="BtnMD3" title="Add Live Portfolio" productType="104" onclick="UpdateGlobalCodes(this);"  class="btn btn-primary pull-right addnew"  data-toggle="modal" value="Add New">*@
+                            </div>
+                            <div class="col-sm-12">
+                              <label id="txtMessage"></label>
+                                <div>
+                                   <label>Near Tearm:</label>
+                                    <input type="text" id="txtNearTerm"/>
+
+                                    <label>Long Tearm:</label>
+                                    <input type="text" id="txtLongTerm" />
+
+                                    <input type="button" id="btmGc" title="Update Chart Start date"  onclick="UpdateGlobalCodeValue();" class="btn btn-primary pull-right"  value="Update">
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
     $(function () {
         $("#TradeAction").val('Buy');
 
+        var nearterm = '@nterm';
+        var longTerm = '@lTerm';
+        $("#txtNearTerm").val(nearterm);
+        $("#txtLongTerm").val(longTerm);
+
+        
         GetMarketSetupData();
         $('.datepicker1').datepicker({
             //format: 'mm/dd/yyyy',
@@ -860,5 +906,46 @@
                 BindDataTable1("MarketData1", data);
                 break;
         }
+    }
+
+
+    function UpdateGlobalCodeValue()
+    {
+        //var jsonData = JSON.stringify({
+        //    nearTem: $("#txtNearTerm").val(),
+        //    longTerm: $("#txtLongTerm").val(),
+        //});
+        if($("#txtNearTerm").val().trim() =="")
+        {
+            $("#txtMessage").text("Please Enter Near term cuttOf year");
+            return false;
+        }
+
+        if ($("#txtLongTerm").val().trim() == "") {
+            $("#txtMessage").text("Please Enter Long term cuttOf year");
+            return false;
+        }
+
+
+        $.ajax({
+            type: "GET",
+            url: "/Home/UpateGlobalCodeValue?nearTem=" + $("#txtNearTerm").val()+ "&longTerm="+ $("#txtLongTerm").val(),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+
+            async: true,
+            data: null,//{ 'startDate': $('#date').val(), 'Type': $('#datafrequency').val(), 'selectedCode': selectedCode },
+            success: function (data) {
+                if(data>0)
+                {
+                    $("#txtMessage").text("Update Successfully!!");
+                }
+            },
+            error: function (error, status) {
+                console.log(error);
+                HideLoaderCustom();
+                //alert('Error');
+            }
+        });
     }
 </script>

@@ -622,7 +622,7 @@ function RebindBuleQuentData(selectedCode) {
         success: function (data) {
             ReloadDailyMarketDataBluQuant(false,selectedCode);
             if (data != null) {
-                
+                $("#hfGlobalSymbolName").val(selectedCode);
                 $("#BlueQuanteCode").val(data.Code);
 
                 $(".codeClassbluequont").text(data.Code);

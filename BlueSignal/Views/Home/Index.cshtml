@@ -23,7 +23,7 @@
 
         @if (HttpContextSessionWrapperExtension.SessionUser.IsBluFactrol)
     {
-            <li id="liBluFractal" class="active"><a class="blufractal" id="blude_code" data-toggle="tab" href="#BluFractal"><span>Blu</span>Fractal</a></li>
+            <li id="liBluFractal" class="active" onclick="SetSymbolBluFactrolValue()" ><a class="blufractal" id="blude_code" data-toggle="tab" href="#BluFractal"><span>Blu</span>Fractal</a></li>
     }
     else
     {
@@ -32,7 +32,7 @@
 
         @if (HttpContextSessionWrapperExtension.SessionUser.IsBluNeutral)
     {
-            <li id="liBluNeural"><a class="bluneural" id="blueNureal_codeD" data-toggle="tab" href="#BluNeural"><span>Blu</span>Neural</a></li>
+            <li id="liBluNeural"><a class="bluneural" id="blueNureal_codeD" data-toggle="tab" href="#BluNeural" onclick="SetSymbolNeutralValue()" ><span>Blu</span>Neural</a></li>
     }
     else
     {
@@ -41,7 +41,7 @@
 
         @if (HttpContextSessionWrapperExtension.SessionUser.IsBluCombo)
     {
-            <li id="liBluFractal_BluNeural"><a class="BluFractal_BluNeural" id="blueCombo_codeBD" data-toggle="tab" href="#BluFractal_BluNeural"><span class="combo"><span class="bf_icon"></span>&nbsp;<span class="bn_icon"></span></span> <span class="combo_txt">Combo</span></a></li>
+            <li id="liBluFractal_BluNeural" onclick="SetSymbolBluComboValue()" ><a class="BluFractal_BluNeural" id="blueCombo_codeBD" data-toggle="tab" href="#BluFractal_BluNeural"><span class="combo"><span class="bf_icon"></span>&nbsp;<span class="bn_icon"></span></span> <span class="combo_txt">Combo</span></a></li>
     }
     else
     {
@@ -448,8 +448,22 @@
         $("#@activeTab").addClass("in active");
     });
 
+    function SetSymbolBluFactrolValue() {
+        var symbol = $("#code").val();
+        $("#hfGlobalSymbolName").val('');
+        $("#hfGlobalSymbolName").val(symbol);
+    }
 
-
+    function SetSymbolNeutralValue() {
+        var symbol = $("#codeD").val();
+        $("#hfGlobalSymbolName").val('');
+        $("#hfGlobalSymbolName").val(symbol);
+    }
+    function SetSymbolBluComboValue() {
+        var symbol = $("#codeBD").val();
+        $("#hfGlobalSymbolName").val('');
+        $("#hfGlobalSymbolName").val(symbol);
+    }
 
 </script>
 

@@ -29,10 +29,12 @@ namespace BlueSignal.Controllers
         private ApplicationUserManager _userManager;
         private readonly MarketBal _marketBal;
         private readonly UserChartHistoryBal _ChartBal;
-        public AccountController(MarketBal marketBal, UserChartHistoryBal ChartBal)
+        private readonly GlobalCodesBal _gcBal;
+        public AccountController(MarketBal marketBal, UserChartHistoryBal ChartBal, GlobalCodesBal gcBal)
         {
             _marketBal = marketBal;
             _ChartBal = ChartBal;
+            _gcBal = gcBal;
         }
 
         //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -130,8 +132,13 @@ namespace BlueSignal.Controllers
                 else
                     thirdSymbol = ThirdResult.Symbol;
                 Session["ThirdChartSymbol"] = thirdSymbol;
-              
+
                 //End
+                var gcList = _gcBal.GetGlobalCodesValue("1001").FirstOrDefault();
+                Session["LongTermChart"] = gcList.ExternalValue1;
+                Session["NearTemChart"] = gcList.ExternalValue2;
+                Session["GlobalCodeId"] = gcList.GlobalCodeID;
+
                 //user.IsAdminUser = true;
                 if (user == null)
                 {

@@ -39,6 +39,7 @@
     <script src="~/Scripts/tv.js"></script>
 </head>
 <body>
+   
     <input type="hidden" id="hfGlobalSymbolName" />
     <div class="navbar navbar-inverse navbar-fixed-top navbar_bg navbar_custom">
         <div>
@@ -458,7 +459,14 @@
         }
 
         function callYahooFinance1() {
-            var a = $('#code').val();
+            //var a = $('#code').val();
+            var a = '';
+            if($("#hfGlobalSymbolName").val()=='' || $("#hfGlobalSymbolName").val().length <=0){
+                 a=  $('#code').val();
+            }else{
+            a=  $("#hfGlobalSymbolName").val();
+            }
+
             var _url = 'https://finance.yahoo.com/quote/' + a + '?p=' + a
             window.open(_url, '_blank');
         }
