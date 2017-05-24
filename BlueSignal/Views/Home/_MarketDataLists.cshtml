@@ -138,7 +138,7 @@
                 success: function (data) {
                     if (data != null && data != "" && data.indexOf("1969-12-31") == -1 && $("#Id_MarketDataListDaily").length > 0) {
                         //var response = $.parseJSON(data.replace(/^\(|\)$/g, ''));
-                        $("#txtMDDailyCode").val(sym);
+                        //$("#txtMDDailyCode").val(sym);
                         var dailyData = "";
                         try {
                             dailyData = $.parseJSON(data);
@@ -162,10 +162,10 @@
                     if (showLoader)
                         HideLoaderCustom();
                 },
-                error: function (error, status) {
-                    console.log(error);
-                    HideLoaderCustom();
-                }
+                //error: function (error, status) {
+                //    console.log(error);
+                //    HideLoaderCustom();
+                //}
             });
         }
     }

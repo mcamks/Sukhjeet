@@ -620,6 +620,7 @@ function RebindBuleQuentData(selectedCode) {
         async: true,
         data: { 'startDate': $('#date').val(), 'Type': $('#datafrequency').val(), 'selectedCode': selectedCode },
         success: function (data) {
+            $("#txtMDDailyCode").val(selectedCode);
             ReloadDailyMarketDataBluQuant(false,selectedCode);
             if (data != null) {
                 $("#hfGlobalSymbolName").val(selectedCode);
@@ -652,10 +653,10 @@ function RebindBuleQuentData(selectedCode) {
 
                         clearChart('dailyBulQuantData');
                         alert(symbolData.status.message);
-                        HideLoaderCustom();
+                        //HideLoaderCustom();
                     } else {
                         GetMarketChartNearTermData('dailyBulQuantData');
-                        HideLoaderCustom();
+                        
 
                     }
 
@@ -668,6 +669,7 @@ function RebindBuleQuentData(selectedCode) {
               
 
             }
+            HideLoaderCustom();
         },
         error: function (error) {
             console.log(error);
