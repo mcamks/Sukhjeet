@@ -115,6 +115,18 @@ namespace BlueSignalCore.UOW
         }
 
 
+        private GlobalCodesRepository _GlobalCodesRepository;
+        public GlobalCodesRepository GlobalCodesRepository
+        {
+            get
+            {
+                if (_GlobalCodesRepository == null)
+                    _GlobalCodesRepository = new GlobalCodesRepository();
+                return _GlobalCodesRepository;
+            }
+        }
+
+
         #endregion
     }
 }

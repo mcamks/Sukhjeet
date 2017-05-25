@@ -23,10 +23,12 @@ namespace BlueSignal.Controllers
     {
         private readonly MarketBal _marketBal;
         private readonly UserChartHistoryBal _ChartBal;
-        public HomeController(MarketBal marketBal, UserChartHistoryBal ChartBal)
+        private readonly GlobalCodesBal _gcBal;
+        public HomeController(MarketBal marketBal, UserChartHistoryBal ChartBal, GlobalCodesBal gcBal)
         {
             _marketBal = marketBal;
             _ChartBal = ChartBal;
+            _gcBal = gcBal;
         }
 
         public string apiKey = BluSignalComman.APIkey;
@@ -97,6 +99,11 @@ namespace BlueSignal.Controllers
             else
                 thirdSymbol = ThirdResult.Symbol;
             Session["ThirdChartSymbol"] = thirdSymbol;
+
+            var gcList = _gcBal.GetGlobalCodesValue("1001").FirstOrDefault();
+            Session["LongTermChart"] = gcList.ExternalValue1;
+            Session["NearTemChart"] = gcList.ExternalValue2;
+            Session["GlobalCodeId"] = gcList.GlobalCodeID;
             #endregion
             if (user == null)
             {
@@ -886,7 +893,20 @@ namespace BlueSignal.Controllers
         public async Task<JsonResult> GetMarketChartDataOnLoad(string startDate, string symbol)
         {
             //For Daily
-            startDate = BluSignalComman.DateTime1YearBack;
+
+            string lTermYear = Convert.ToString(Session["LongTermChart"]);
+            string nTermYear = Convert.ToString(Session["NearTemChart"]);
+            if (lTermYear == "" || nTermYear=="")
+            {
+                lTermYear= BluSignalComman.DateTime1YearBack;
+                nTermYear= BluSignalComman.DateTime5YearsBack;
+            }
+
+                string logTerm = DateTime.Now.AddYears(-Convert.ToInt32(lTermYear)).ToString("yyyyMMdd000000");
+                 string nTerm = DateTime.Now.AddYears(-Convert.ToInt32(nTermYear)).ToString("yyyyMMdd000000");
+
+            //startDate = BluSignalComman.DateTime1YearBack;
+            startDate = nTerm;
 
             var endDate = BluSignalComman.EndDate;
 
@@ -938,7 +958,9 @@ namespace BlueSignal.Controllers
                 });
 
                 //For Weekly
-                startDate = BluSignalComman.DateTime5YearsBack;
+                //startDate = BluSignalComman.DateTime5YearsBack;
+                startDate = logTerm;
+
                 chartResult = await GetLoggingData(symbol, startDate, endDate, "weekly");
 
                 var weeklyData = chartResult.results.Select(item => new object[]
@@ -1111,5 +1133,23 @@ namespace BlueSignal.Controllers
         //    public string volume { get; set; }
         //    public string openInterest { get; set; }
         //}
+
+
+
+        public ActionResult UpateGlobalCodeValue(string nearTem, string longTerm)
+        {
+            string gcId = Convert.ToString(Session["GlobalCodeId"]);
+           var model= _gcBal.GetGlobalCodes(Convert.ToInt64(gcId)).FirstOrDefault();
+            model.ExternalValue1 = nearTem;
+            model.ExternalValue2 = longTerm;
+            var result=  _gcBal.UpdateGlobalCodes(model);
+            if(result> 0)
+            {
+                Session["LongTermChart"] = longTerm;
+                Session["NearTemChart"] = nearTem;
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }

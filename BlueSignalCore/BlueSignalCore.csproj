@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Bal\BaseBal.cs" />
     <Compile Include="Bal\MarketBal.cs" />
+    <Compile Include="Bal\GlobalCodesBal.cs" />
     <Compile Include="Bal\UserChartHistoryBal.cs" />
     <Compile Include="Context\DataAccessBase.cs" />
     <Compile Include="Context\DbContextFactory.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BlueSignalContext.cs" />
     <Compile Include="Models\EmailTemplate.cs" />
+    <Compile Include="Models\GlobalCodes.cs" />
     <Compile Include="Models\ProductType.cs" />
     <Compile Include="Models\ContactLog.cs" />
     <Compile Include="Models\UserChartHistory.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="Models\MarketData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\GlobalCodesRepository.cs" />
     <Compile Include="Repository\UserChartHistoryRepository.cs" />
     <Compile Include="Repository\UsersRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
