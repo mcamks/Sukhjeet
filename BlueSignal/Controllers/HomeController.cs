@@ -942,7 +942,9 @@ namespace BlueSignal.Controllers
 
                 var PercentValue = ((Convert.ToDecimal(closingPrice) - Convert.ToDecimal(previousprice)) / Convert.ToDecimal(closingPrice));
                 prePricePercent = PercentValue * 100;
-                finalPercent = Convert.ToString(Math.Round(prePricePercent, 3) + "%");
+                //finalPercent = Convert.ToString(Math.Round(prePricePercent, 3) + "%");
+                finalPercent = Convert.ToString(Math.Round(prePricePercent, 3));
+
 
             }
 

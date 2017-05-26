@@ -23,36 +23,40 @@
                     <input type="hidden" id="hdProductTypeId" value="0" />
                     <input type="hidden" id="hfSelectedEventId" value="" />
                     <div class="row">
+                        <div class="col-sm-6 userfield" id="SymbolCode1">
+                            <div class="form-group">
+                                <label>Symbol</label>
+                                <input type="text" id="Symbol" class="form-control"  onkeyup="GetYahooLookUp()"/>
+                            </div>
+                        </div>
+
                         <div class="col-sm-6 userfield" id="SymbolName1">
                             <div class="form-group">
                                 <label>Name</label>
                                 <input type="text" id="SymbName1" class="form-control" />
                             </div>
                         </div>
+
+
                         <div class="col-sm-6 userfield" id="SymbolType1">
                             <div class="form-group">
                                 <label>Type</label>
                                 <input type="text" id="SymbType" class="form-control" />
                             </div>
                         </div>
-                        <div class="col-sm-6 userfield" id="SymbolCode1">
-                            <div class="form-group">
-                                <label>Symbol</label>
-                                <input type="text" id="Symbol" class="form-control" />
-                            </div>
-                        </div>
+                       
                         <div class="col-sm-6 userfield" id="MarketCategory1">
                             <div class="form-group">
                                 <label>Category</label>
                                 <select id="categorySelect" class="form-control"></select>
                             </div>
                         </div>
-                        <div class="col-sm-6 userfield" id="DaysOpen1">
+                        @*<div class="col-sm-6 userfield" id="DaysOpen1">
                             <div class="form-group">
                                 <label>Days Open</label>
                                 <input id="DaysOpen" type="text" class="form-control" />
                             </div>
-                        </div>
+                        </div>*@
                         <div class="col-sm-6 userfield" id="TradeAction1">
                             <div class="form-group">
                                 <label>Action</label>
@@ -80,7 +84,7 @@
                                 <input id="EntryTime" type="text" class="form-control timepicker1" />
                             </div>
                         </div>
-                        <div class="col-sm-6 userfield" id="EntryPrice1">
+                        @*<div class="col-sm-6 userfield" id="EntryPrice1">
                             <div class="form-group">
                                 <label>Entry Price</label>
                                 <input id="EntryPrice" type="text" class="form-control" />
@@ -92,7 +96,7 @@
                                 <label>Profit</label>
                                 <input id="Profit" type="text" class="form-control" />
                             </div>
-                        </div>
+                        </div>*@
                         <div class="col-sm-6 userfield" id="ExitDate1">
                             <div class="form-group">
                                 <label>Exit Date</label>
@@ -143,7 +147,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 addnew_btn">
-                                <input type="button" style="top:12px;" productType="0" id="BtnMD1" title="Add to Major Markets" rFields="SymbolName1,SymbolType1,SymbolCode1,MarketCategory1,EntryDate1,EntryTime1,EntryPrice1,DaysOpen1,Profit1" onclick="ShowHideFields(this); SetButtonText(this);" class="btn btn-primary pull-right addnew" custom='SymbolName1,SymbolType1,SymbolCode1,MarketCategory1,EntryDate1,EntryTime1,EntryPrice1,DaysOpen1,Profit1' data-toggle="modal" value="Add New">
+                                <input type="button" style="top:12px;" productType="0" id="BtnMD1" title="Add to Major Markets" rFields="SymbolName1,SymbolType1,SymbolCode1,MarketCategory1,EntryDate1,EntryTime1" onclick="ShowHideFields(this); SetButtonText(this);" class="btn btn-primary pull-right addnew" custom='SymbolName1,SymbolType1,SymbolCode1,MarketCategory1,EntryDate1,EntryTime1' data-toggle="modal" value="Add New">
                             </div>
                             <div class="col-sm-12">
                                 <div style="overflow:auto;">
@@ -157,9 +161,9 @@
                                                     <th>Type</th>
                                                     <th>Entry Date</th>
                                                     @*<th>Entry Time</th>*@
-                                                    <th>Entry Price</th>
+                                                    @*<th>Entry Price</th>
                                                     <th>Days Open</th>
-                                                    <th>Profit</th>
+                                                    <th>Profit</th>*@
                                                     <th>Options</th>
                                                 </tr>
                                             </thead>
@@ -184,7 +188,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="addnew_btn">
-                                <input type="button" id="BtnMD2" title="Send New Trade" productType="103" onclick="ShowHideFields(this); SetButtonText(this);" class="btn btn-primary pull-right addnew" custom='SymbolName1,SymbolCode1,TradeAction1,Price1,EntryDate1,EntryTime1' rFields='SymbolName1,SymbolCode1,TradeAction1,Price1,EntryDate1,EntryTime1' data-toggle="modal" value="Send Signal">
+                                <input type="button" id="BtnMD2" title="Send New Trade" productType="103" onclick="ShowHideFields(this); SetButtonText(this);" class="btn btn-primary pull-right addnew" custom='SymbolCode1,SymbolName1,TradeAction1,Price1,EntryDate1,EntryTime1' rFields='SymbolCode1,SymbolName1,TradeAction1,Price1,EntryDate1,EntryTime1' data-toggle="modal" value="Send Signal">
                             </div>
                             <div class="col-sm-12">
                                 <div>
@@ -222,7 +226,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="addnew_btn">
-                                <input type="button" id="BtnMD3" title="Add Live Portfolio" productType="104" onclick="ShowHideFields(this); SetButtonText(this);" class="btn btn-primary pull-right addnew" custom='SymbolName1,SymbolCode1,EntryDate1,EntryPrice1' rFields='SymbolName1,SymbolCode1,EntryDate1,EntryPrice1' data-toggle="modal" value="Add New">
+                                <input type="button" id="BtnMD3" title="Add Live Portfolio" productType="104" onclick="ShowHideFields(this); SetButtonText(this);" class="btn btn-primary pull-right addnew" custom='SymbolCode1,SymbolName1,EntryDate1,EntryPrice1' rFields='SymbolCode1,SymbolName1,EntryDate1,EntryPrice1' data-toggle="modal" value="Add New">
                             </div>
                             <div class="col-sm-12">
                                 <div>
@@ -293,7 +297,7 @@
         <div class="panel-group accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title pannel_bg_blue"> <a data-toggle="collapse" href="#collapseLivePortfolio">Date Setup</a> </h4>
+                    <h4 class="panel-title pannel_bg_blue"> <a data-toggle="collapse" href="#collapseLivePortfolio">System Chart Time Span</a> </h4>
                 </div>
                 <div id="collapseLivePortfolio" class="panel-collapse collapse in">
                     <div class="panel-body">
@@ -304,10 +308,10 @@
                             <div class="col-sm-12">
                               <label id="txtMessage"></label>
                                 <div>
-                                   <label>Near Tearm:</label>
+                                   <label>Near-Tearm:</label>
                                     <input type="text" id="txtNearTerm"/>
 
-                                    <label>Long Tearm:</label>
+                                    <label>Long-Tearm:</label>
                                     <input type="text" id="txtLongTerm" />
 
                                     <input type="button" id="btmGc" title="Update Chart Start date"  onclick="UpdateGlobalCodeValue();" class="btn btn-primary pull-right"  value="Update">
@@ -482,14 +486,14 @@
                       { "data": "Type", "name": "Type" },
                       { "data": "StrEntryDate", "name": "Entry Date" },
                       //{ "data": "EntryTime", "name": "Entry Time" },
-                      { "data": "EntryPrice", "name": "Entry Price" },
-                       { "data": "DaysOpen", "name": "Days Open" },
-                        { "data": "Profit", "name": "Profit" },
+                      //{ "data": "EntryPrice", "name": "Entry Price" },
+                      // { "data": "DaysOpen", "name": "Days Open" },
+                      //  { "data": "Profit", "name": "Profit" },
                      {
                          "data": null, "name": "Action", "orderable": false, render: function (data, type, row) {
                              return "<div>" +
                                  //"<a class='glyphicon glyphicon-plus-sign' href='#'></a> " +
-                                 "<a class='glyphicon glyphicon-edit' id='btnEdit1' rFields=\"SymbolName1,SymbolCode1,MarketCategory1\" title=\"Edit Major Market\" custom='SymbolName1,SymbolCode1,MarketCategory1' onclick='GetSingle(" + data.Id + ", this)' href='#'></a> " +
+                                 "<a class='glyphicon glyphicon-edit' id='btnEdit1' rFields=\"SymbolCode1,SymbolName1,MarketCategory1\" title=\"Edit Major Market\" custom='SymbolCode1,SymbolName1,MarketCategory1' onclick='GetSingle(" + data.Id + ", this)' href='#'></a> " +
                                  "<a class='glyphicon glyphicon-remove-circle' href='#' onclick='RemoveData(" + data.Id + ", this)'></a>" +
                              "</div>";
                          }
@@ -538,7 +542,7 @@
                      {
                          "data": null, "name": "Action", "orderable": false, render: function (data, type, row) {
                              return "<div>" +
-                                 "<a class='glyphicon glyphicon-edit' id='btnEdit2' title=\"Edit BluQuant Trade\" rFields=\"SymbolName1,SymbolCode1,TradeAction1,Price1,EntryDate1,EntryTime1\"  custom='SymbolName1,SymbolCode1,TradeAction1,Price1,EntryDate1,EntryTime1' onclick='GetSingle(" + data.Id + ", this)' href='#'></a> " +
+                                 "<a class='glyphicon glyphicon-edit' id='btnEdit2' title=\"Edit BluQuant Trade\" rFields=\"SymbolCode1,SymbolName1,TradeAction1,Price1,EntryDate1,EntryTime1\"  custom='SymbolCode1,SymbolName1,TradeAction1,Price1,EntryDate1,EntryTime1' onclick='GetSingle(" + data.Id + ", this)' href='#'></a> " +
                                  "<a class='glyphicon glyphicon-remove-circle' href='#' onclick='RemoveData(" + data.Id + ", this)'></a>" +
                              "</div>";
                          }
@@ -582,7 +586,7 @@
                          "data": null, "name": "Action", "orderable": false, render: function (data, type, row) {
                              return "<div>" +
                                  //"<a class='glyphicon glyphicon-plus-sign' href='#'></a> " +
-                                 "<a class='glyphicon glyphicon-edit' id='btnEdit3' title=\"Live Portfolio Edit\" custom='SymbolName1,SymbolCode1,EntryDate1,EntryPrice1' rFields='SymbolName1,SymbolCode1,EntryDate1,EntryPrice1' onclick='GetSingle(" + data.Id + ", this)' href='#'></a> " +
+                                 "<a class='glyphicon glyphicon-edit' id='btnEdit3' title=\"Live Portfolio Edit\" custom='SymbolCode1,SymbolName1,EntryDate1,EntryPrice1' rFields='SymbolCode1,SymbolName1,EntryDate1,EntryPrice1' onclick='GetSingle(" + data.Id + ", this)' href='#'></a> " +
                                  "<a class='glyphicon glyphicon-remove-circle' href='#' onclick='RemoveData(" + data.Id + ", this)'></a>" +
                              "</div>";
                          }
@@ -948,4 +952,106 @@
             }
         });
     }
+</script>
+
+<style>
+    #Symbol-label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 1em;
+
+    }
+
+    #Symbol-icon {
+        float: left;
+        height: 32px;
+        width: 32px;
+    }
+
+    #Symbol-description {
+        margin: 0;
+        padding: 0;
+    }
+
+    .ui-draggable, .ui-droppable {
+        background-position: top;
+        z-index:9999;
+    }
+
+    .bold-text {
+        background-color: #3f7bf6;
+    }
+
+    .ttt {
+        background-color: #3f7bf6;
+        background: blue;
+    }
+</style>
+
+<script>
+
+    function GetYahooLookUp() {
+            var jsonData = JSON.stringify({
+                sym: $("#Symbol").val(),
+            });
+            $.ajax({
+                type: "POST",
+                url: "/Charts/GetLookUpData",
+                contentType: "application/json; charset=utf-8",
+                data: jsonData,
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    var myArr = $.parseJSON(data);
+                    //var arr = [];
+                    var suggestions = [];
+                    $.each(myArr.ResultSet.Result,function(i,obj){
+                        //arr.push(obj.symbol);
+                        //suggestions.push({
+                        //    value: obj.symbol//, + "-" + val.name + "(" + val.exchDisp + ")"
+                        //     , label: obj.name
+                        //      , desc: obj.exch + '-' + obj.exchDisp
+                        //});
+                        suggestions.push({
+                            value: obj.name //obj.symbol
+                             , label: obj.symbol // obj.name
+                              , desc: obj.exch + '-' + obj.exchDisp
+                        });
+                    });
+                    $("#Symbol").autocomplete({
+                        source: suggestions,
+                        focus: function (event, ui) {
+                            $("#Symbol").val(ui.item.label);
+                            return false;
+                        },
+                           select: function (event, ui) {
+                               $("#txtTicker").val(ui.item.label);
+
+                               return false;
+                           },
+                    })
+                     .autocomplete("instance")._renderItem = function (ul, item) {
+                         return $("<li>")
+             .append("<div>"
+             + "<p style='color:blue; font-weight:bold;'>"
+             + item.label
+             + "<span style='color:black; font-weight:normal; float:right;'>"
+             + item.desc
+             + "</span></p>"
+             + " <p style='text-transform:uppercase;'>"
+             + item.value
+             + "</p>"
+
+             + "</div>")
+
+
+             .appendTo(ul);
+                     };
+
+
+                }
+            });
+        }
+
+
 </script>

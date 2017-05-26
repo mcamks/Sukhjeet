@@ -361,10 +361,24 @@ function GetAndBindMarketAllChartsData() {
                 }
 
                 if (prePricePercent != "") {
-                    $("#PreviousDayPercent").val(prePricePercent);
-                    $("#PreviousDayPercentQuant").val(prePricePercent);
-                    $("#PreviousDayPercentNatural").val(prePricePercent);
-                    $("#PreviousDayPercentCombo").val(prePricePercent);
+                    $("#PreviousDayPercent").val(prePricePercent + "%");
+                    $("#PreviousDayPercentQuant").val(prePricePercent + "%");
+                    $("#PreviousDayPercentNatural").val(prePricePercent + "%");
+                    $("#PreviousDayPercentCombo").val(prePricePercent + "%");
+                }
+                if(prePricePercent > 0)
+                {
+                    $("#PreviousDayPercent").addClass('green_text');
+                    $("#PreviousDayPercentQuant").addClass('green_text');
+                    $("#PreviousDayPercentQuant").addClass('green_text');
+                    $("#PreviousDayPercentQuant").addClass('green_text');
+                    
+                }
+                else {
+                    $("#PreviousDayPercent").addClass('red_text');
+                    $("#PreviousDayPercentQuant").addClass('red_text');
+                    $("#PreviousDayPercentQuant").addClass('red_text');
+                    $("#PreviousDayPercentQuant").addClass('red_text');
                 }
 
             }
