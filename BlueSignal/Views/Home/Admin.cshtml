@@ -3,7 +3,9 @@
     ViewBag.Title = "Admin";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+    .ui-menu{z-index:9999 !important; height:185px; overflow:auto; padding:0 5px;}
+</style>
 
 @Html.Partial("_MarketDataSetupLists")
 

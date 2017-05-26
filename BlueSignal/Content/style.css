@@ -695,4 +695,10 @@ hr{border-color:#d1d1d1; }
 .explore_options .head h2{font-size:18px; margin-bottom:0px;}
 .explore_options .head h1{font-size:28px; margin-top:12px;}
 .explore_options .webpage_links{padding:50px 0;}
-.explore_options .webpage_links .btn{border-radius:0; background:#1a4cfb; font-size:16px;} 
+.explore_options .webpage_links .btn{border-radius:0; background:#1a4cfb; font-size:16px;}
+
+
+.green_text{color:#0c9215;}
+.red_text{color:#d31d0f;} 
+
+ 
