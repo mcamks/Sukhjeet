@@ -51,12 +51,12 @@
                                 <select id="categorySelect" class="form-control"></select>
                             </div>
                         </div>
-                        @*<div class="col-sm-6 userfield" id="DaysOpen1">
+                        <div class="col-sm-6 userfield" id="DaysOpen1">
                             <div class="form-group">
                                 <label>Days Open</label>
                                 <input id="DaysOpen" type="text" class="form-control" />
                             </div>
-                        </div>*@
+                        </div>
                         <div class="col-sm-6 userfield" id="TradeAction1">
                             <div class="form-group">
                                 <label>Action</label>
@@ -81,10 +81,10 @@
                         <div class="col-sm-6 userfield" id="EntryTime1">
                             <div class="form-group">
                                 <label>Entry Time</label>
-                                <input id="EntryTime" type="text" class="form-control timepicker1" />
+                                <input id="EntryTime" type="text" class="form-control timepicker12" />
                             </div>
                         </div>
-                        @*<div class="col-sm-6 userfield" id="EntryPrice1">
+                        <div class="col-sm-6 userfield" id="EntryPrice1">
                             <div class="form-group">
                                 <label>Entry Price</label>
                                 <input id="EntryPrice" type="text" class="form-control" />
@@ -96,7 +96,7 @@
                                 <label>Profit</label>
                                 <input id="Profit" type="text" class="form-control" />
                             </div>
-                        </div>*@
+                        </div>
                         <div class="col-sm-6 userfield" id="ExitDate1">
                             <div class="form-group">
                                 <label>Exit Date</label>
@@ -226,7 +226,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="addnew_btn">
-                                <input type="button" id="BtnMD3" title="Add Live Portfolio" productType="104" onclick="ShowHideFields(this); SetButtonText(this);" class="btn btn-primary pull-right addnew" custom='SymbolCode1,SymbolName1,EntryDate1,EntryPrice1' rFields='SymbolCode1,SymbolName1,EntryDate1,EntryPrice1' data-toggle="modal" value="Add New">
+                                <input type="button" id="BtnMD3" title="Add Live Portfolio" productType="104" onclick="ShowHideFields(this); SetButtonText(this);" class="btn btn-primary pull-right addnew" custom='SymbolCode1,SymbolType1,SymbolName1,DaysOpen1,EntryDate1,EntryPrice1,EntryTime1,Profit1' rFields='SymbolCode1,SymbolType1,SymbolName1,DaysOpen1,EntryDate1,EntryPrice1,EntryTime1,Profit1' data-toggle="modal" value="Add New">
                             </div>
                             <div class="col-sm-12">
                                 <div>
@@ -235,9 +235,13 @@
                                             <thead>
                                                 <tr>
                                                     <th>Symbol</th>
+                                                    <th>Type</th>
                                                     <th>Name</th>
                                                     <th>Entry Date</th>
+                                                    <th>Entry Time</th>
                                                     <th>Entry Price</th>
+                                                    <th>Days Open</th>
+                                                    <th>Profit</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -308,10 +312,10 @@
                             <div class="col-sm-12">
                               <label id="txtMessage"></label>
                                 <div>
-                                   <label>Near-Tearm:</label>
+                                   <label>Near-Term:</label>
                                     <input type="text" id="txtNearTerm"/>
 
-                                    <label>Long-Tearm:</label>
+                                    <label>Long-Term:</label>
                                     <input type="text" id="txtLongTerm" />
 
                                     <input type="button" id="btmGc" title="Update Chart Start date"  onclick="UpdateGlobalCodeValue();" class="btn btn-primary pull-right"  value="Update">
@@ -345,7 +349,7 @@
             //pickSeconds: false,
             //maxView: 1,
         });
-        $('.timepicker1').datetimepicker({
+        $('.timepicker12').datetimepicker({
             format: 'hh:ii',
             use24hours: true,
             pickDate: false,
@@ -354,6 +358,7 @@
             startView: 0,
             todayHighlight: true,
             maxView: 0,
+            minuteStep: 1,
             //showMeridian: true,
             //startView: 1,
         });
@@ -573,7 +578,9 @@
             "columns": [
                      { "data": "SymbolCode", "name": "symbol" },
                      { "data": "SymbolName", "name": "Name" },
+                      { "data": "Type", "name": "Tpye" },
                      { "data": "StrEntryDate", "name": "EntryDate" },
+                      { "data": "StrEntryTimeValue", "name": "Entry Time" },
                      {
                          "data": null, "name": "EntryPrice", render: function (data, type, row) {
                              if (data.EntryPrice != null)
@@ -582,11 +589,13 @@
                                  return "<span></span>";
                          }
                      },
+                      { "data": "DaysOpen", "name": "Days Open" },
+                       { "data": "Profit", "name": "Profit" },
                      {
                          "data": null, "name": "Action", "orderable": false, render: function (data, type, row) {
                              return "<div>" +
                                  //"<a class='glyphicon glyphicon-plus-sign' href='#'></a> " +
-                                 "<a class='glyphicon glyphicon-edit' id='btnEdit3' title=\"Live Portfolio Edit\" custom='SymbolCode1,SymbolName1,EntryDate1,EntryPrice1' rFields='SymbolCode1,SymbolName1,EntryDate1,EntryPrice1' onclick='GetSingle(" + data.Id + ", this)' href='#'></a> " +
+                                 "<a class='glyphicon glyphicon-edit' id='btnEdit3' title=\"Live Portfolio Edit\" custom='SymbolCode1,SymbolType1,DaysOpen1,SymbolName1,EntryDate1,EntryPrice1,EntryTime1,Profit1' rFields='SymbolCode1,SymbolType1,DaysOpen1,SymbolName1,EntryDate1,EntryPrice1,EntryTime1,Profit1' onclick='GetSingle(" + data.Id + ", this)' href='#'></a> " +
                                  "<a class='glyphicon glyphicon-remove-circle' href='#' onclick='RemoveData(" + data.Id + ", this)'></a>" +
                              "</div>";
                          }
@@ -628,7 +637,7 @@
                      {
                          "data": null, "name": "Action", "orderable": false, render: function (data, type, row) {
                              return "<div>" +
-                                 "<a class='glyphicon glyphicon-edit' id='btnEdit4' title=\"Edit Completed Trade\" rFields='SymbolCode1,SymbolName1,EntryDate1,ExitDate1,Result1,,EntryPrice1' custom='SymbolCode1,SymbolName1,EntryDate1,ExitDate1,Result1,,EntryPrice1' onclick='GetSingle(" + data.Id + ", this)' href='#'></a> " +
+                                 "<a class='glyphicon glyphicon-edit' id='btnEdit4' title=\"Edit Completed Trade\" rFields='SymbolCode1,SymbolName1,EntryDate1,ExitDate1,Result1,EntryPrice1' custom='SymbolCode1,SymbolName1,EntryDate1,ExitDate1,Result1,EntryPrice1' onclick='GetSingle(" + data.Id + ", this)' href='#'></a> " +
                                  "<a class='glyphicon glyphicon-remove-circle' href='#' onclick='RemoveData(" + data.Id + ", this)'></a>" +
                              "</div>";
                          }
@@ -687,6 +696,9 @@
         $("#SymbName1").val(data.SymbolName);
         $("#categorySelect").val(data.CategoryId);
         $("#BtnSave").val('Update');
+        $("#SymbType").val(data.Type);
+        $("#DaysOpen").val(data.DaysOpen);
+        $("#Profit").val(data.Profit);
     }
     /*Edit Events, END here */
 
