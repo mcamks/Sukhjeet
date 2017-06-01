@@ -216,7 +216,13 @@
             "columns": [
                      //{ "data": "symbol", "name": "symbol" },
                      //{ "data": "timestamp", "name": "timestamp" },
-                     { "data": "tradingDay", "name": "TradingDate" },
+                     //{ "data": "tradingDay", "name": "TradingDate"},
+                     {
+                         "data": "tradingDay", "name": "TradingDate", "mRender": function (data, type, row)
+                         {
+                             return data.substr(5, 2) + '/' + data.substr(8, 2) + '/' + data.substr(0, 4);
+                         }
+                     } ,
                      { "data": "open", "name": "open" },
                       { "data": "high", "name": "high" },
                        { "data": "low", "name": "low" },
