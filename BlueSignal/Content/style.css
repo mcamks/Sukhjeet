@@ -701,4 +701,8 @@ hr{border-color:#d1d1d1; }
 .green_text{color:#0c9215;}
 .red_text{color:#d31d0f;} 
 
+.datepicker-days .day{cursor:pointer;}
+.datepicker-days .next{cursor:pointer;}
+.datepicker-days .prev{cursor:pointer;}
+
  
