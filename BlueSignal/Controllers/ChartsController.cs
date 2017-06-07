@@ -47,7 +47,27 @@ namespace BlueSignal.Controllers
         [LogonAuthorize]
         public ActionResult SetTickerToggleState(string state)
         {
-            Session["TickerToggleState"] = state;
+            var sessionValue = Session["TickerToggleState"];
+            if (Session["TickerToggleState"] == null)
+            {
+                sessionValue = "close";
+            }
+            else
+            {
+                if (sessionValue == "close")
+                {
+
+                    Session["TickerToggleState"] = "open";
+                }
+
+                if (sessionValue == "open")
+                {
+
+                    Session["TickerToggleState"] = "close";
+                }
+            }
+            state = Convert.ToString(Session["TickerToggleState"]);
+           // Session["TickerToggleState"] = state;
             return Json(state, JsonRequestBehavior.AllowGet);
         }
 
@@ -64,16 +84,16 @@ namespace BlueSignal.Controllers
         {
             var symbol = "";
             ViewBag.RequestUrl = Request.Url.Authority;
-            var sesValue= (WP_User)Session["SystemUser"];
+            var sesValue = (WP_User)Session["SystemUser"];
 #pragma warning disable CS0472 // The result of the expression is always 'false' since a value of type 'long' is never equal to 'null' of type 'long?'
             if (sesValue == null)
 #pragma warning restore CS0472 // The result of the expression is always 'false' since a value of type 'long' is never equal to 'null' of type 'long?'
             {
-                return RedirectToAction("Login","Account");
+                return RedirectToAction("Login", "Account");
             }
-            var result=  _ChartBal.GetUserChartHistory(Convert.ToInt64(sesValue.ID), "1").FirstOrDefault();
-            if(result==null)
-                 symbol = "SPY";
+            var result = _ChartBal.GetUserChartHistory(Convert.ToInt64(sesValue.ID), "1").FirstOrDefault();
+            if (result == null)
+                symbol = "SPY";
             else
                 symbol = result.Symbol;
 
@@ -171,11 +191,11 @@ namespace BlueSignal.Controllers
         {
             var sesValue = (WP_User)Session["SystemUser"];
             var result = _ChartBal.GetUserChartHistory(Convert.ToInt64(sesValue.ID), chartType).FirstOrDefault();
-            if(result==null)
+            if (result == null)
             {
                 _ChartBal.SaveUserChartHistory(symbol, Convert.ToInt64(86), chartType);
             }
-           else
+            else
             {
                 result.Symbol = symbol;
                 _ChartBal.UpdateChartHistory(result);
@@ -185,7 +205,7 @@ namespace BlueSignal.Controllers
             {
                 Session["FirstChartSymbol"] = symbol;
             }
-            else if(chartType=="2")
+            else if (chartType == "2")
             {
                 Session["SecondtChartSymbol"] = symbol;
             }
@@ -211,8 +231,8 @@ namespace BlueSignal.Controllers
 
                 string data = web.DownloadString(url);
 
-             
-                
+
+
                 //var json = new JavaScriptSerializer().Serialize(data);
                 ////remove the class/method name from the JSON
                 //Match match = Regex.Match(data, @"YAHOO.Finance.SymbolSuggest.ssCallback");
@@ -230,10 +250,10 @@ namespace BlueSignal.Controllers
                 //Console.ReadLine();
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
-           // return Json("1", JsonRequestBehavior.AllowGet);
+            // return Json("1", JsonRequestBehavior.AllowGet);
         }
 
-         public ActionResult AutoComplete()
+        public ActionResult AutoComplete()
         {
             return View();
         }

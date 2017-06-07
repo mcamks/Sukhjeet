@@ -120,39 +120,47 @@
                                 "symbols": [
     {
         "description": "The Standard&Poor's Index",
-        "proName": "INDEX:SPX"
+        "proName": "INDEX:SPX",
+        "symbol" : "SPY"
     },
     {
         "description": "DOW Industrials",
-        "proName": "INDEX:DOWI"
+        "proName": "INDEX:DOWI",
+        "symbol" :"DOW"
     },
     {
         "description": "Nasdaq 100 Index",
-        "proName": "INDEX:IUXX"
-    },
+        "proName": "INDEX:IUXX",
+        "symbol" :"INX"
+},
     {
         "description": "Euro Fx/U.S. Dollar",
         "proName": "FX_IDC:EURUSD",
-        "title": "EUR/USD"
+        "title": "EUR/USD",
+        "symbol": "EURUSD=X"
+      
     },
     {
         "description": "Light Crude Oil Futures",
         "proName": "NYMEX:CL1!",
-        "title": "Crude Oil"
+        "title": "Crude Oil",
+        "symbol": "CL=F"
     },
     {
         "description": "Gold / U.S. Dollar",
         "proName": "FX_IDC:XAUUSD",
-        "title": "Gold"
+        "title": "Gold",
+        "symbol" : "GC=F"
     },
     {
         "description": "CBOE Volatilty Index",
-        "proName": "NASDAQ:CBOE"
+        "proName": "NASDAQ:CBOE",
+        "symbol" : "SI=F"
     }
                                 ],
                                 "locale": "en",
                                 "timeframe": "1d",
-                                "linkPageTemplate": "http://dashboard.blusignals.com/home/Index?tvwidgetsymbol={{proName}}"
+                                "linkPageTemplate": "http://dashboard.blusignals.com/Home/DataList?symbol={{symbol}}"
                             }
                         </script>
                         <!-- TradingView Widget END -->
@@ -169,7 +177,7 @@
     </div>
     <div class="sidemenu sidemenu_position">
         <ul>
-            <li id="tab_1" onClick="ToggleTickerIcon1('')" class="showHide_btn arrow" data-toggle="tooltip" data-placement="right" title="Ticker On/Off">
+            <li id="tab_1" onClick="ToggleTickerIcon1('')" class="showHide_btn arrow" data-toggle="tooltip" value="2" data-placement="right" title="Ticker On/Off">
                 <img src="~/images/white.png" id="up_1" class="arrow_remove arrow_open" />
             </li>
             <li class="remove Dashboard active "><a href="@Url.Action("Dashboard","Home",new { p = "Dashboard",c="fa-tachometer",css="Dashboard" })" data-toggle="tooltip" title="Dashboard" data-placement="right"><i class="fa fa-tachometer" aria-hidden="true"></i></a></li>
@@ -349,18 +357,30 @@
                 }
             });
         }
-
+        function ToggleTickerIconOnLoad(data) {
+            $(".sidemenu").toggleClass("sidemenu_position");
+            $("#c_1").toggleClass("show_tradingview");
+            $(".content").toggleClass("content_position");
+            $("#up_1").toggleClass("arrow_open");
+            $("#tab_1").addClass('toggelState');
+        }
         function ToggleTickerIcon1(state)
         {
             $(".sidemenu").toggleClass("sidemenu_position");
             $("#c_1").toggleClass("show_tradingview");
             $(".content").toggleClass("content_position");
             $("#up_1").toggleClass("arrow_open");
+            $("#tab_1").addClass('toggelState');
 
+            SetTickerToggleState("tt");
+            //var toggelValue= $("#tab_1").val(); // 2 for open, 3 for close
+           
             //var tab = "tab_1";
             //var c = "c_1";
             //var up = "up_1";
-            //if (state == "open" || $("#" + c).is(':hidden')) {
+            ////if (state == "open" || $("#" + c).is(':hidden')) {
+            //if (toggelValue == "2") {
+            //    $("#tab_1").val('3');
             //    $(".open").hide();
             //    $(".arrow_remove").removeClass("arrow_open");
             //    $("#" + c).removeClass("hide_tradingview");
@@ -371,6 +391,7 @@
             //    $("#"+tab).attr("title","Close");
             //    state="open";
             //} else {
+            //    $("#tab_1").val('2');
             //    $("#" + c).removeClass("show_tradingview");
             //    $("#" + c).addClass("hide_tradingview");
             //    $(".arrow_remove").removeClass("arrow_open");
@@ -411,10 +432,11 @@
 
             SetActiveClass('@Helpers2.ActiveCssClass');
 
-            var ttState = '@Helpers2.TickerToggleState';
+            @*var ttState = '@Helpers2.TickerToggleState';*@
+            var ttState = '@Convert.ToString(Session["TickerToggleState"])';
 
             if(ttState.toLowerCase() == "open")
-                ToggleTickerIcon1(ttState);
+                ToggleTickerIconOnLoad(ttState);
 
 
             $("#login_window1").click(function() {

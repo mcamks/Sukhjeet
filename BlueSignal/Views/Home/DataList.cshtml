@@ -1,0 +1,137 @@
+﻿
+@{
+    ViewBag.Title = "DataList";
+    var sym = ViewBag.Symbol;
+}
+
+<div class="col-sm-12">
+    <div class="panel-group accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title"> <a data-toggle="collapse" href="#collapseDaily">Market Data - Daily</a> </h4>
+            </div>
+            <div id="collapseDaily" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12" style="display:none;" id="noRecordsDiv">
+                            <span style="color:red;">No Records</span>
+                        </div>
+                        <div class="col-sm-12">
+                            <div style="overflow:auto;">
+                                <div class="table-responsive table_style">
+                                    <table id="Id_MarketDataListDaily" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                               
+                                                <th>Trading Date</th>
+                                                <th>Open</th>
+                                                <th>High</th>
+                                                <th>Low</th>
+                                                <th>Close</th>
+                                                <th>Change</th>
+                                                <th>Volume</th>
+                                              
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function ReloadDailyMarketData(showLoader) {
+        $("#noRecordsDiv").hide();
+        //var sym = $("#txtMDDailyCode").val();
+        var sym = '@sym';
+
+        if (sym != "") {
+            //sym = sym.substr(sym.indexOf(":") + 1, sym.length - 1);
+            if (showLoader)
+                ShowLoaderCustom();
+            $.ajax({
+                type: "GET",
+                url: "/Home/GetDailyMarketData",
+                dataType: "json",
+                data: JSON.stringify({ "symbol": sym }),
+                async: true,
+                data: { "symbol": sym },
+                success: function (data) {
+                    //if (data != null && data != "" && data.indexOf("1969-12-31") == -1 && $("#Id_MarketDataListDaily").length > 0) {
+                    if (data != null && data != ""  && $("#Id_MarketDataListDaily").length > 0) {
+                        var dailyData = data.results;
+                        $.each(dailyData.results, function (i, d) {
+                            d.volume = CommaFormatted(parseFloat(d.volume).toFixed(0));
+                        });
+
+                        if ($("#Id_MarketDataListDaily").length > 0)
+                            bindDatatableMarketData('Id_MarketDataListDaily', dailyData);
+
+                    }
+                    else {
+                        $("#noRecordsDiv").show();
+                    }
+
+                    if (showLoader)
+                        HideLoaderCustom();
+                },
+                error: function (error, status) {
+                    console.log(error);
+                    HideLoaderCustom();
+                }
+            });
+        }
+    }
+
+
+   
+
+    $(document).ready(function () {
+        if ($("#hfSymbol11").val() != "") {
+            $("#txtMDDailyCode").val($("#hfSymbol11").val());
+        }
+        else {
+            $("#txtMDDailyCode").val('SPY');
+        }
+     
+        ReloadDailyMarketData(false);
+    });
+
+
+    
+    function bindDatatableMarketData(selector, data) {
+        if ($.fn.dataTable.isDataTable('#' + selector)) {
+            $('#' + selector).DataTable().destroy();
+        }
+        var table = $('#' + selector).DataTable({
+            aaData: data,
+            
+            "columns": [
+                    
+                     {
+                         "data": "tradingDay", "name": "TradingDate", "mRender": function (data, type, row)
+                         {
+                             return data.substr(5, 2) + '/' + data.substr(8, 2) + '/' + data.substr(0, 4);
+                         }
+                     } ,
+                     { "data": "open", "name": "open" },
+                      { "data": "high", "name": "high" },
+                       { "data": "low", "name": "low" },
+                        { "data": "close", "name": "close" },
+                         {
+                             mData: "",
+                             bSortable: true,
+                             mRender: function (cellvalue, options, rowObject) {
+                                 return '<lable  class=' + rowObject.cssClass + '> ' + rowObject.change + '</lable>';
+                             },
+                         },
+                         { "data": "volume", "name": "volume" }
+            ],
+            "order": [[0, "desc"]]
+        });
+    }
+</script>

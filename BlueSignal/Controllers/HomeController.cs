@@ -1081,6 +1081,12 @@ namespace BlueSignal.Controllers
 #pragma warning restore CS0162 // Unreachable code detected
         }
 
+        public ActionResult DataList(string symbol)
+        {
+            ViewBag.Symbol = symbol;
+            return View();
+        }
+
 
         public async Task<JsonResult> GetDailyMarketData(string symbol)
         {
@@ -1088,6 +1094,40 @@ namespace BlueSignal.Controllers
             var startDate = BluSignalComman.DateTime9MonthBack;
             var endDate = BluSignalComman.EndDate;
             var chartResult = await GetLoggingData(symbol, startDate, endDate, "daily", order: "desc");
+
+
+            JavaScriptSerializer json_serializer = new JavaScriptSerializer();
+            var chartList = new JavaScriptSerializer().Deserialize<RootObject>(chartResult.serializedResult);
+            var listcount = chartList.results.Count();
+            decimal yesterdayClosingPrice = 0.0M;
+            int _lpIndex  = 1;
+            foreach (var item in chartList.results)
+            {
+                if(listcount==_lpIndex)
+                {
+                    yesterdayClosingPrice = 0.0M;
+                }
+                else
+                {
+                    yesterdayClosingPrice = Convert.ToDecimal(chartList.results[_lpIndex].close);
+
+                }
+               
+                    //item.change = ((Convert.ToDecimal(item.close) - yesterdayClosingPrice) / Convert.ToDecimal(item.close));
+                    item.change = ((Convert.ToDecimal(item.close) - yesterdayClosingPrice) / Convert.ToDecimal(item.close));
+                    item.change = Math.Round(Convert.ToDecimal((item.change)), 5);
+                     _lpIndex++;
+
+                if (item.change > 0)
+                {
+                    item.cssClass = "green_text";
+                }
+                else
+                {
+                    item.cssClass = "red_text";
+                }
+            }
+
             #region Commented Code
             //var marketDataDaily = string.Empty;
 
@@ -1102,10 +1142,39 @@ namespace BlueSignal.Controllers
             //    marketDataDaily = marketDataDaily.Replace("//", "");
             //} 
             #endregion
-            var jsonResult = new JsonResult { Data = chartResult.serializedResult, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = int.MaxValue };
-            return jsonResult;
+            //var jsonResult = new JsonResult { Data = chartResult.serializedResult, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = int.MaxValue };
+            //var jsonResult = new JsonResult { chartList, JsonRequestBehavior = JsonRequestBehavior.AllowGet, MaxJsonLength = int.MaxValue };
+        return    Json(chartList, JsonRequestBehavior.AllowGet);
+
+            //return jsonResult;
+        }
+        public class Status
+        {
+            public string code { get; set; }
+            public string message { get; set; }
         }
 
+        public class Result
+        {
+            public string symbol { get; set; }
+            public string timestamp { get; set; }
+            public string tradingDay { get; set; }
+            public string open { get; set; }
+            public string high { get; set; }
+            public string low { get; set; }
+            public string close { get; set; }
+            public string volume { get; set; }
+            public object openInterest { get; set; }
+            public decimal change { get; set; }
+            public string cssClass { get; set; }
+        }
+
+        public class RootObject
+        {
+            public Status status { get; set; }
+            public List<Result> results { get; set; }
+            public object serializedResult { get; set; }
+        }
 
         public class LoggingData
         {

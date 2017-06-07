@@ -54,6 +54,7 @@
                                                         <th>High</th>
                                                         <th>Low</th>
                                                         <th>Close</th>
+                                                        <th>Change</th>
                                                         <th>Volume</th>
                                                         @*<th>Open Interest</th>*@
                                                     </tr>
@@ -87,23 +88,27 @@
                 async: true,
                 data: { "symbol": sym },
                 success: function (data) {
-                    if (data != null && data != "" && data.indexOf("1969-12-31") == -1 && $("#Id_MarketDataListDaily").length > 0) {
+                    //if (data != null && data != "" && data.indexOf("1969-12-31") == -1 && $("#Id_MarketDataListDaily").length > 0) {
+                    if (data != null && data != ""  && $("#Id_MarketDataListDaily").length > 0) {
+
                         //var response = $.parseJSON(data.replace(/^\(|\)$/g, ''));
-                        var dailyData = "";
-                        try {
-                             dailyData = $.parseJSON(data);
-                        }
-                        catch (err) {
-                            console.log( err.message)
-                            //alert(err.message);
-                        }
+                        var dailyData = data.results;
+                        //try {
+                        //     dailyData = $.parseJSON(data);
+                        //}
+                        //catch (err) {
+                        //    console.log( err.message)
+                        //    //alert(err.message);
+                        //}
                       
                         $.each(dailyData.results, function (i, d) {
                             d.volume = CommaFormatted(parseFloat(d.volume).toFixed(0));
                         });
 
                         if ($("#Id_MarketDataListDaily").length > 0)
-                            bindDatatableMarketData('Id_MarketDataListDaily', dailyData.results);
+                            //bindDatatableMarketData('Id_MarketDataListDaily', dailyData.results);
+                            bindDatatableMarketData('Id_MarketDataListDaily', dailyData);
+
                     }
                     else {
                         $("#noRecordsDiv").show();
@@ -213,6 +218,9 @@
         }
         var table = $('#' + selector).DataTable({
             aaData: data,
+            "columnDefs": [
+    { className: "my_class", "targets": [ 5 ] }
+            ],
             "columns": [
                      //{ "data": "symbol", "name": "symbol" },
                      //{ "data": "timestamp", "name": "timestamp" },
@@ -227,6 +235,14 @@
                       { "data": "high", "name": "high" },
                        { "data": "low", "name": "low" },
                         { "data": "close", "name": "close" },
+                         //{ "data": "change", "name": "change", "sClass": "cssClass" },
+                         {
+                             mData: "",
+                             bSortable: true,
+                             mRender: function (cellvalue, options, rowObject) {
+                                 return '<lable  class=' + rowObject.cssClass + '> ' + rowObject.change + '</lable>';
+                             },
+                         },
                          { "data": "volume", "name": "volume" }
                           //,{ "data": "openInterest", "name": "openInterest" }
             ],

@@ -1,4 +1,8 @@
-﻿function ShowLoader()
+﻿$(document).ready(function () {
+    GetToggleTickerState();
+});
+
+function ShowLoader()
 { $(".customLoader").fadeIn("slow"); }
 
 
@@ -887,6 +891,7 @@ function BindBluFractalMarketsPopup(data, selector) {
 
 function GetToggleTickerState() {
     $.get("/Charts/GetTickerToggleState", null, function (data) {
-        ToggleTickerIcon1(data);
+        ToggleTickerIconOnLoad(data);
     });
 }
+
