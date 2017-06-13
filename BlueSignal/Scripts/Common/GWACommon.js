@@ -411,6 +411,8 @@ function GetAndBindMarketAllChartsData() {
 
                 if ($("#chartcontainer_daily").length > 0)
                     BindCharts("chartcontainer_daily", data, symbolTitle, customColor, 1, false, true, true);
+                    //BindCharts("chartcontainer_daily", data1, symbolTitle, customColor, 1, false, true, true);
+
                 if ($("#chartcontainer_weekly").length > 0)
                     BindCharts("chartcontainer_weekly", data1, symbolTitle, customColor, 2, false, true, true);
                 if ($("#chartcontainer2_weekly").length > 0)

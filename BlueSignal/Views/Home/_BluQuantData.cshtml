@@ -598,6 +598,7 @@ $(document).ready(function(){
     }
 
     function BindLast10CompletedTradesMain(selector, data) {
+        var cssClassDisabled = $("#hfcssDisabled").val();
         if ($.fn.dataTable.isDataTable('#' + selector)) {
             $('#' + selector).DataTable().destroy();
         }

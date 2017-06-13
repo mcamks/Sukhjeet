@@ -1,14 +1,9 @@
-﻿using BlueSignal.Models;
-using BlueSignalCore.Bal;
+﻿using BlueSignalCore.Bal;
 using BlueSignalCore.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 
 namespace BlueSignal.Controllers
 {
@@ -75,7 +70,7 @@ namespace BlueSignal.Controllers
         public ActionResult GetTickerToggleState()
         {
             if (Session["TickerToggleState"] == null)
-                Session["TickerToggleState"] = "close";
+                Session["TickerToggleState"] = "open";
 
             return Json(Convert.ToString(Session["TickerToggleState"]), JsonRequestBehavior.AllowGet);
         }

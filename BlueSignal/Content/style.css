@@ -506,7 +506,7 @@ hr{border-color:#d1d1d1; }
     .dashboard_style .panel-body {height:120px; padding:14px 6px 0px; background:#fafafa; -webkit-transition: height 1s; transition: height 1s;}
     .dashboard_style .panel {margin:0px !important; border:none !important; box-shadow:none !important;}
     .dashboard_style .panel-group {margin:0px !important;}
-
+    .dashboard_style .trading_view{margin-top:13px;}
 
 .show_tradingview{height:133px;}
 /*.show_tradingview .panel-body{height:168px;}*/

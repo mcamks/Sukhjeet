@@ -957,7 +957,7 @@ namespace BlueSignal.Controllers
                        Math.Round(Convert.ToDecimal((item.high)),2),
                        Math.Round(Convert.ToDecimal((item.low)),2),
                        Math.Round(Convert.ToDecimal((item.close)),2)
-                });
+                }).Take(200);
 
                 //For Weekly
                 //startDate = BluSignalComman.DateTime5YearsBack;
@@ -1116,6 +1116,7 @@ namespace BlueSignal.Controllers
                     //item.change = ((Convert.ToDecimal(item.close) - yesterdayClosingPrice) / Convert.ToDecimal(item.close));
                     item.change = ((Convert.ToDecimal(item.close) - yesterdayClosingPrice) / Convert.ToDecimal(item.close));
                     item.change = Math.Round(Convert.ToDecimal((item.change)), 5);
+                item.CustomChangeValue = Convert.ToString(item.change) + "%";
                      _lpIndex++;
 
                 if (item.change > 0)
@@ -1167,6 +1168,8 @@ namespace BlueSignal.Controllers
             public object openInterest { get; set; }
             public decimal change { get; set; }
             public string cssClass { get; set; }
+            public string CustomChangeValue { get; set; }
+
         }
 
         public class RootObject
