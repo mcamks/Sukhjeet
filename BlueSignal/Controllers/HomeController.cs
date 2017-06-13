@@ -893,7 +893,7 @@ namespace BlueSignal.Controllers
         public async Task<JsonResult> GetMarketChartDataOnLoad(string startDate, string symbol)
         {
             //For Daily
-
+           
             string lTermYear = Convert.ToString(Session["LongTermChart"]);
             string nTermYear = Convert.ToString(Session["NearTemChart"]);
             if (lTermYear == "" || nTermYear=="")
@@ -947,7 +947,7 @@ namespace BlueSignal.Controllers
 
 
             }
-
+            //var dataTakeValue = 200;
             if (chartResult.results != null && chartResult.results.Any())
             {
                 var dailyData = chartResult.results.Select(item => new object[]
@@ -957,7 +957,7 @@ namespace BlueSignal.Controllers
                        Math.Round(Convert.ToDecimal((item.high)),2),
                        Math.Round(Convert.ToDecimal((item.low)),2),
                        Math.Round(Convert.ToDecimal((item.close)),2)
-                }).Take(200);
+                });
 
                 //For Weekly
                 //startDate = BluSignalComman.DateTime5YearsBack;

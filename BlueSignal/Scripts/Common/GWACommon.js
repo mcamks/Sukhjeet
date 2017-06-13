@@ -318,7 +318,12 @@ function GetAndBindMarketAllChartsData() {
         dataType: "json",
         data: { 'startDate': $('#date').val(), 'symbol': symb },
         success: function (response) {
+            console.log(response);
+            debugger;
+
             var data = response.dailyData;
+            console.log('--------------------------');
+            console.log(data);
             var data1 = response.weeklyData;
             var dataDaily = response.marketDataDaily;
             var avgVolume = response.avgVolume;
@@ -453,13 +458,19 @@ function BindCharts(containterID, data, symbolTitle, customColor, symb, rangesel
             selected: rangeselectorValue
         },
         navigator: {
-            enabled: isNavigator
+            enabled: isNavigator,
+            series: {
+                data: data
+            }
         },
         series: [{
             type: 'ohlc',
             name: symb,
             data: data,
-           pointInterval: 24 * 3600 * 1000
+            pointInterval: 24 * 3600 * 1000,
+            dataGrouping: {
+                enabled: false
+            }
         }],
 
         exporting: { enabled: isexporting },
