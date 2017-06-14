@@ -479,9 +479,11 @@ function BindCharts(containterID, data, symbolTitle, customColor, symb, rangesel
         },
 
         yAxis: {
-            lineWidth: 2,
-            offset: 20,
-            tickWidth: 1
+            //lineWidth: 2,
+            //offset: 20,
+            //tickWidth: 1
+            type: 'logarithmic',
+            minorTickInterval: 0.1
         },
 
         xAxis: {
