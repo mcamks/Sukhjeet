@@ -158,8 +158,8 @@ hr{border-color:#d1d1d1; }
 .compact_view .panel-body .info_row{margin-bottom: 4px !important;
     padding: 2px 10px!important;}
 
-.panel .green_heading{background:#1ba914; float:left; width:50%; padding:7px 5px 6px; text-align:center; color:#fff;}
-.panel .red_heading{background:#cd1419; float:left; width:50%; padding:7px 5px 6px;  text-align:center; color:#fff;}
+.panel .green_heading{background:#1ba914; float:left; width:50%; padding:7px 43px 6px 0; color:#fff;}
+.panel .red_heading{background:#cd1419; float:left; width:50%; padding:7px 43px 6px 0;  color:#fff;}
 
 .meter{width:20px; height:222px; border:1px solid #d1d1d1; border-radius:3px; position:relative;}
 .meter .points{position:absolute; right:-4px; top:0;}
@@ -299,7 +299,7 @@ hr{border-color:#d1d1d1; }
 
 .meter_title{background:#f1c40f !important; color:#1e6eff !important; text-align:center;}
 
-.info_row{/*background:#fbfcfd; border:solid 1px #e7ecf1;*/ border-radius:5px; float:left; padding: 4px 10px; width:100%; margin-bottom:5px;}
+.info_row{/*background:#fbfcfd; border:solid 1px #e7ecf1;*/ border-radius:5px; float:left; padding: 4px 10px 4px 0; width:100%; margin-bottom:5px;}
 .info_row label{margin-bottom:0;}
 .info_row_btn{margin: 38% auto;
     vertical-align: middle;background:#fbfcfd; border:solid 1px #e7ecf1; border-radius:5px; float:left; padding: 4px 10px; width:100%;}
