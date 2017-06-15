@@ -319,7 +319,7 @@ function GetAndBindMarketAllChartsData() {
         data: { 'startDate': $('#date').val(), 'symbol': symb },
         success: function (response) {
             console.log(response);
-            debugger;
+            
 
             var data = response.dailyData;
             console.log('--------------------------');
@@ -449,6 +449,9 @@ function GetAndBindMarketAllChartsData() {
 
 function BindCharts(containterID, data, symbolTitle, customColor, symb, rangeselectorValue, isRangeSelector, isNavigator, isexporting) {
     Highcharts.stockChart(containterID, {
+        chart: {
+            zoomType: 'x'
+        },
         title: {
             text: symbolTitle
         },
@@ -457,6 +460,34 @@ function BindCharts(containterID, data, symbolTitle, customColor, symb, rangesel
             enabled: isRangeSelector,
             selected: rangeselectorValue
         },
+        //rangeSelector: {
+
+        //    buttons: [{
+        //        type: 'day',
+        //        count: 3,
+        //        text: '3d'
+        //    }, {
+        //        type: 'week',
+        //        count: 1,
+        //        text: '1w'
+        //    }, {
+        //        type: 'month',
+        //        count: 1,
+        //        text: '1m'
+        //    }, {
+        //        type: 'month',
+        //        count: 6,
+        //        text: '6m'
+        //    }, {
+        //        type: 'year',
+        //        count: 1,
+        //        text: '1y'
+        //    }, {
+        //        type: 'all',
+        //        text: 'All'
+        //    }],
+        //    selected: 5
+        //},
         navigator: {
             enabled: isNavigator,
             series: {
@@ -464,10 +495,10 @@ function BindCharts(containterID, data, symbolTitle, customColor, symb, rangesel
             }
         },
         series: [{
-            type: 'ohlc',
+            //type: 'ohlc',
             name: symb,
             data: data,
-            pointInterval: 24 * 3600 * 1000,
+           // pointInterval: 24 * 3600 * 1000,
             dataGrouping: {
                 enabled: false
             }
@@ -488,7 +519,7 @@ function BindCharts(containterID, data, symbolTitle, customColor, symb, rangesel
 
         xAxis: {
             scrollbar: {
-                enabled: false
+                enabled: true
             }
         }
     });
