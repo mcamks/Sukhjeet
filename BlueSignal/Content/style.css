@@ -705,4 +705,7 @@ hr{border-color:#d1d1d1; }
 .datepicker-days .next{cursor:pointer;}
 .datepicker-days .prev{cursor:pointer;}
 
- 
+
+#Id_MarketDataListDaily > thead:first-child > tr:first-child > th {
+    width: 200px !important;
+}

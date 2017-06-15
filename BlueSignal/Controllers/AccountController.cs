@@ -135,8 +135,10 @@ namespace BlueSignal.Controllers
 
                 //End
                 var gcList = _gcBal.GetGlobalCodesValue("1001").FirstOrDefault();
-                Session["LongTermChart"] = gcList.ExternalValue1;
-                Session["NearTemChart"] = gcList.ExternalValue2;
+                Session["NearTemChart"] = gcList.ExternalValue1;
+                Session["LongTermChart"] = gcList.ExternalValue2;
+
+                
                 Session["GlobalCodeId"] = gcList.GlobalCodeID;
 
                 //user.IsAdminUser = true;

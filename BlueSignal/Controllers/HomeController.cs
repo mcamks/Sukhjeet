@@ -101,8 +101,8 @@ namespace BlueSignal.Controllers
             Session["ThirdChartSymbol"] = thirdSymbol;
 
             var gcList = _gcBal.GetGlobalCodesValue("1001").FirstOrDefault();
-            Session["LongTermChart"] = gcList.ExternalValue1;
-            Session["NearTemChart"] = gcList.ExternalValue2;
+            Session["LongTermChart"] = gcList.ExternalValue2;
+            Session["NearTemChart"] = gcList.ExternalValue1;
             Session["GlobalCodeId"] = gcList.GlobalCodeID;
             #endregion
             if (user == null)
@@ -1115,8 +1115,9 @@ namespace BlueSignal.Controllers
                
                     //item.change = ((Convert.ToDecimal(item.close) - yesterdayClosingPrice) / Convert.ToDecimal(item.close));
                     item.change = ((Convert.ToDecimal(item.close) - yesterdayClosingPrice) / Convert.ToDecimal(item.close));
-                    item.change = Math.Round(Convert.ToDecimal((item.change)), 5);
-                item.CustomChangeValue = Convert.ToString(item.change) + "%";
+                    item.change= item.change * 100;
+                    item.change = Math.Round(Convert.ToDecimal((item.change)), 3);
+                     item.CustomChangeValue = Convert.ToString(item.change) + "%";
                      _lpIndex++;
 
                 if (item.change > 0)
