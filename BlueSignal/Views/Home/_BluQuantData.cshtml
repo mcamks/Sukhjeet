@@ -334,15 +334,15 @@
                                             <table class="table table-bordered table-striped" id="livePortfolio1" style="width:100%;">
                                                 <thead>
                                                     <tr>
-                                                        <th>Symbol</th>
-                                                        <th>Type</th>
-                                                        <th width="210">Name</th>
-                                                        <th>Entry Date</th>
-                                                        <th>Entry Time</th>
-                                                        <th>Entry Price(Avg)</th>
-                                                        <th>Days Open</th>
-                                                        <th>Profit</th>
-                                                        <th style="text-align:center;">Action</th>
+                                                        <th class="width10">Symbol</th>
+                                                        <th class="width10">Type</th>
+                                                        <th class="width20">Name</th>
+                                                        <th class="width10">Entry Date</th>
+                                                        <th class="width10">Entry Time</th>
+                                                        <th class="width15">Entry Price (Avg)</th>
+                                                        <th class="width10">Days Open</th>
+                                                        <th class="width10">Profit</th>
+                                                        <th class="width5" style="text-align:center;">Action</th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -371,15 +371,15 @@
                                         <table class="table table-bordered table-striped" id="lastCompletedTradesMain" style="width:100%;">
                                             <thead>
                                                 <tr>
-                                                    <th>Symbol</th>
-                                                    <th>Type</th>
-                                                    <th width="230">Name</th>
-                                                    <th>Entry Date</th>
-                                                    <th>Entry Price(Avg)</th>
-                                                    <th>Exit Date</th>
-                                                    <th>Exit Price</th>
-                                                    <th>Result</th>
-                                                    <th style="text-align:center;">Action</th>
+                                                    <th class="width10">Symbol</th>
+                                                    <th class="width10">Type</th>
+                                                    <th class="width20">Name</th>
+                                                    <th class="width10">Entry Date</th>
+                                                    <th class="width10">Exit Date</th>
+                                                    <th class="width15">Entry Price (Avg)</th>
+                                                    <th class="width10">Exit Price</th>
+                                                    <th class="width10">Result</th>
+                                                    <th class="width5"  style="text-align:center;">Action</th>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -612,8 +612,8 @@ $(document).ready(function(){
                       { "data": "Type", "name": "Type" },
                      { "data": "SymbolName", "name": "Name" },
                      { "data": "StrEntryDate", "name": "EntryDate" },
-                     { "data": "EntryPrice", "name": "Entry Price" },
                      { "data": "StrExitDate", "name": "ExitDate" },
+                     { "data": "EntryPrice", "name": "Entry Price" },
                        { "data": "ExitPrice", "name": "Exit Price" },
                      {
                          "data": null, "name": "Result", render: function (data, type, row) {

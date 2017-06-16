@@ -213,6 +213,10 @@ hr{border-color:#d1d1d1; }
 .nav-tabs > li > a.bluquant{background:#eee url(../images/bluquant_active.png) 10px 11px no-repeat; background-size:19px !important;}
 .nav-tabs > li > a.detail{background:#eee url(../images/detail_active.png) 10px 9px no-repeat;}
 .nav-tabs > li > a.data{background:#eee url(../images/data_active.png) 10px 11px no-repeat;}
+.nav-tabs > li > a.search{background:#eee; padding-left:15px;}
+.nav-tabs > li > a.watch{background:#eee; padding-left:15px;}
+.nav-tabs > li > a.search i{color:#1e6eff; margin-right:3px;}
+.nav-tabs > li > a.watch i{color:#1e6eff; margin-right:3px;}
 
 
 
@@ -232,9 +236,11 @@ hr{border-color:#d1d1d1; }
 .nav-tabs > li > a.BluFractal_BluNeural:hover .bf_icon{background:#fff url(../images/blufractal_active.png) 0px 0px no-repeat; }
 .nav-tabs > li > a.BluFractal_BluNeural:hover .bn_icon{background:#fff url(../images/bluneural_active.png) 0px 0px no-repeat; }
 .nav-tabs > li > a.BluFractal_BluNeural:hover .combo_txt{color:#1f6df7;}
+.nav-tabs > li > a.search:hover{background:#fff;}
+.nav-tabs > li > a.watch:hover{background:#fff;}
 
 
-.nav-tabs > li.active > a.blufractal{background:#fff url(../images/blufractal_active.png) 10px 10px no-repeat;}
+.nav-tabs > li.active > a.blufractal{background:#fff url(../images/blufractal_active.png) 10px 11px no-repeat;}
 .nav-tabs > li.active > a.bluneural{background:#fff url(../images/bluneural_active.png) 10px 11px no-repeat;}
 .nav-tabs > li.active > a.bluquant{background:#fff url(../images/bluquant_active.png) 10px 10px no-repeat;}
 .nav-tabs > li.active > a.detail{background:#fff url(../images/detail_active.png) 10px 9px no-repeat;}
@@ -243,6 +249,8 @@ hr{border-color:#d1d1d1; }
 .nav-tabs > li.active > a.BluFractal_BluNeural .bf_icon{background:#fff url(../images/blufractal_active.png) 0px 0px no-repeat; }
 .nav-tabs > li.active > a.BluFractal_BluNeural .bn_icon{background:#fff url(../images/bluneural_active.png) 0px 0px no-repeat;  }
 .nav-tabs > li.active > a.BluFractal_BluNeural .combo_txt{color:#1f6df7;}
+.nav-tabs > li.active > a.search{background:#fff;}
+.nav-tabs > li.active > a.watch{background:#fff;}
 
 .nav-tabs > li.help i{font-size:22px;}
 .nav-tabs > li.help a{padding-left:15px; color:#1e6eff;}
@@ -709,3 +717,8 @@ hr{border-color:#d1d1d1; }
 #Id_MarketDataListDaily > thead:first-child > tr:first-child > th {
     width: 200px !important;
 }
+
+.width5{width:5% !important;}
+.width10{width:10% !important;}
+.width15{width:15% !important;}
+.width20{width:20% !important;}

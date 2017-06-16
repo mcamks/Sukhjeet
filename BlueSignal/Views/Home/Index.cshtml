@@ -21,6 +21,9 @@
 <div class="">
     <ul id="AllTables" class="nav nav-tabs">
 
+        <li id="liSearch" data-toggle="tooltip" title="Search"><a class="search disabled" id="search" data-toggle="tab" href="#"><i class="fa fa-search" aria-hidden="true"></i> Search</a></li>
+        <li id="liWatch" data-toggle="tooltip" title="Watch"><a class="watch disabled" id="watch" data-toggle="tab" href="#"><i class="fa fa-folder-open" aria-hidden="true"></i> Watch</a></li>
+
         @if (HttpContextSessionWrapperExtension.SessionUser.IsBluFactrol)
     {
             <li id="liBluFractal" class="active" onclick="SetSymbolBluFactrolValue()" ><a class="blufractal" id="blude_code" data-toggle="tab" href="#BluFractal"><span>Blu</span>Fractal</a></li>
@@ -72,6 +75,12 @@
             }*@
     </ul>
     <div class="tab-content">
+        @*<div id="search" class="tab-pane fade">
+            
+        </div>
+        <div id="watch" class="tab-pane fade">
+
+        </div>*@
         <div id="BluFractal" class="tab-pane fade">
 
             @if (HttpContextSessionWrapperExtension.SessionUser.IsBluFactrol)
