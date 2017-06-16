@@ -450,7 +450,8 @@ function GetAndBindMarketAllChartsData() {
 function BindCharts(containterID, data, symbolTitle, customColor, symb, rangeselectorValue, isRangeSelector, isNavigator, isexporting) {
     Highcharts.stockChart(containterID, {
         chart: {
-            zoomType: 'x'
+            zoomType: 'x',
+            //type:'bar'
         },
         title: {
             text: symbolTitle
