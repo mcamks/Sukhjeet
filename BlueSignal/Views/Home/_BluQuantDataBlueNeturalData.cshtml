@@ -35,7 +35,7 @@
                             @if (btnClassToDisabled == "")
                             {
                                 <input type="text" id="codeBD" name="code" placeholder="Type valid Symbol" data-toggle="tooltip" title="Type a Valid Symbol" value="SPY" class="form-control codeValue" onkeyup="GetYahooLookUp()">
-                                <span><i class="fa fa-search" data-toggle="tooltip" title="Lookup Symbol" aria-hidden="true"  onclick="InitilizeMarketListWithCode($('#codeBD'))"></i></span>
+                                <span><i class="fa fa-search" data-toggle="tooltip" title="Lookup Symbol" aria-hidden="true"  onclick="InitilizeMarketListWithCode($('#codeBD'),3)"></i></span>
                             }
                             else
                             {
@@ -44,7 +44,7 @@
                             }
                            
                         </div>
-                        <div class="col-sm-3">
+                        @*<div class="col-sm-3">
 
                             @if (btnClassToDisabled == "")
                             {
@@ -52,7 +52,7 @@
                             }
                             else
                             {  <button type="button" id="btnLoad" @btnClassToDisabled data-toggle="tooltip" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage" class="btn btn-primary btn_style btn_whitegray" onclick="return false">Load</button> }
-                        </div>
+                        </div>*@
 
                     </div>
                 </div>

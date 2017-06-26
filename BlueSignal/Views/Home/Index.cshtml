@@ -9,6 +9,7 @@
         activeTab = Convert.ToString(ViewBag.activeTab);
     }
 }
+
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js">
 </script>
@@ -18,6 +19,7 @@
 
 
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
+<input type="hidden" id="hfBluFractalValue" />
 <div class="">
     <ul id="AllTables" class="nav nav-tabs">
 
@@ -25,8 +27,17 @@
         <li id="liWatch" data-toggle="tooltip" title="Watch"><a class="watch disabled" id="watch" data-toggle="tab" href="#"><i class="fa fa-folder-open" aria-hidden="true"></i> Watch</a></li>
 
         @if (HttpContextSessionWrapperExtension.SessionUser.IsBluFactrol)
-    {
-            <li id="liBluFractal" class="active" onclick="SetSymbolBluFactrolValue()" ><a class="blufractal" id="blude_code" data-toggle="tab" href="#BluFractal"><span>Blu</span>Fractal</a></li>
+        {
+            string tTipValue = "";
+            if(Session["tabSymbol"]==null)
+            {
+                tTipValue = "SPY";
+            }
+            else
+            {
+                tTipValue = Convert.ToString(Session["tabSymbol"]);
+            }
+            <li id="liBluFractal" class="active" data-toggle="tooltip" title='' onclick="SetSymbolBluFactrolValue()" ><a class="blufractal" id="blude_code" data-toggle="tab" href="#BluFractal"><span>Blu</span>Fractal</a></li>
     }
     else
     {
@@ -35,7 +46,7 @@
 
         @if (HttpContextSessionWrapperExtension.SessionUser.IsBluNeutral)
     {
-            <li id="liBluNeural"><a class="bluneural" id="blueNureal_codeD" data-toggle="tab" href="#BluNeural" onclick="SetSymbolNeutralValue()" ><span>Blu</span>Neural</a></li>
+            <li id="liBluNeural" data-toggle="tooltip" title="SPY"><a class="bluneural" id="blueNureal_codeD" data-toggle="tab" href="#BluNeural" onclick="SetSymbolNeutralValue()" ><span>Blu</span>Neural</a></li>
     }
     else
     {
@@ -44,7 +55,7 @@
 
         @if (HttpContextSessionWrapperExtension.SessionUser.IsBluCombo)
     {
-            <li id="liBluFractal_BluNeural" onclick="SetSymbolBluComboValue()" ><a class="BluFractal_BluNeural" id="blueCombo_codeBD" data-toggle="tab" href="#BluFractal_BluNeural"><span class="combo"><span class="bf_icon"></span>&nbsp;<span class="bn_icon"></span></span> <span class="combo_txt">Combo</span></a></li>
+            <li id="liBluFractal_BluNeural"  data-toggle="tooltip" title="SPY" onclick="SetSymbolBluComboValue()" ><a class="BluFractal_BluNeural" id="blueCombo_codeBD" data-toggle="tab" href="#BluFractal_BluNeural"><span class="combo"><span class="bf_icon"></span>&nbsp;<span class="bn_icon"></span></span> <span class="combo_txt">Combo</span></a></li>
     }
     else
     {
@@ -52,7 +63,7 @@
     }
         @if (HttpContextSessionWrapperExtension.SessionUser.IsBluQuant)
     {
-            <li id="liBluQuant" onclick="RebindBuleQuentData('SPY');"><a class="bluquant" id="blueQuote_codeDquent" data-toggle="tab" href="#BluQuant"><span>Blu</span>Quant</a></li>
+            <li id="liBluQuant"  data-toggle="tooltip" title="SPY" onclick="RebindBuleQuentData('SPY');"><a class="bluquant" id="blueQuote_codeDquent" data-toggle="tab" href="#BluQuant"><span>Blu</span>Quant</a></li>
     }
     else
     {
@@ -461,6 +472,7 @@
         var symbol = $("#code").val();
         $("#hfGlobalSymbolName").val('');
         $("#hfGlobalSymbolName").val(symbol);
+        $("#hfBluFractalValue").val(symbol);
     }
 
     function SetSymbolNeutralValue() {

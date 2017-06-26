@@ -369,8 +369,10 @@ namespace BlueSignal.Controllers
 
 
 
-        public async Task<JsonResult> GetAllMarketData(string startDate, string Type, string selectedCode)
+        public async Task<JsonResult> GetAllMarketData(string startDate, string Type, string selectedCode, string tabType)
         {
+
+            Session["tabSymbol"] = selectedCode;
             startDate = BluSignalComman.DateTime9MonthBack;
             MarketDataViewModel vm = new MarketDataViewModel();
 
@@ -937,6 +939,18 @@ namespace BlueSignal.Controllers
                     avgVolume = Convert.ToString(Math.Round((averageVolumn / lastDays), 0));
 
                 var maxRexord = chartResult.results.OrderByDescending(a => a.timestamp).FirstOrDefault();
+                var timeStampValue=   maxRexord.timestamp.Date;
+                var currentDate = DateTime.Now.Date;
+                var preVDayData = currentDate.AddDays(-1);
+                if(timeStampValue == currentDate)
+                {
+                    maxRexord = chartResult.results.Where(x => x.timestamp == preVDayData).FirstOrDefault();
+
+                }
+                else
+                {
+                    maxRexord = chartResult.results.OrderByDescending(a => a.timestamp).FirstOrDefault();
+                }
                 if (maxRexord != null)
                     closingPrice = maxRexord.close;
 

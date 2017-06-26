@@ -185,15 +185,15 @@ function InitilizeMarketList() {
     if (!ValidateTheCodeInTextBox()) {
         return false;
     }
-    RebindMarketData($('#code').val());
+    RebindMarketData($('#code').val(),1);
 }
 
-function InitilizeMarketListWithCode(item) {
+function InitilizeMarketListWithCode(item,id) {
     if (!ValidateTheCodeInTextBoxWithBox(item)) {
         return false;
     }
 
-    RebindMarketData(item.val());
+    RebindMarketData(item.val(),id);
 }
 
 
@@ -448,47 +448,49 @@ function GetAndBindMarketAllChartsData() {
 }
 
 function BindCharts(containterID, data, symbolTitle, customColor, symb, rangeselectorValue, isRangeSelector, isNavigator, isexporting) {
+  
+
     Highcharts.stockChart(containterID, {
         chart: {
             zoomType: 'x',
-            //type:'bar'
+            //type: 'column',
         },
         title: {
             text: symbolTitle
         },
         colors: customColor,
-        rangeSelector: {
-            enabled: isRangeSelector,
-            selected: rangeselectorValue
-        },
         //rangeSelector: {
-
-        //    buttons: [{
-        //        type: 'day',
-        //        count: 3,
-        //        text: '3d'
-        //    }, {
-        //        type: 'week',
-        //        count: 1,
-        //        text: '1w'
-        //    }, {
-        //        type: 'month',
-        //        count: 1,
-        //        text: '1m'
-        //    }, {
-        //        type: 'month',
-        //        count: 6,
-        //        text: '6m'
-        //    }, {
-        //        type: 'year',
-        //        count: 1,
-        //        text: '1y'
-        //    }, {
-        //        type: 'all',
-        //        text: 'All'
-        //    }],
-        //    selected: 5
+        //    enabled: isRangeSelector,
+        //    selected: rangeselectorValue
         //},
+        rangeSelector: {
+
+            buttons: [{
+                type: 'day',
+                count: 3,
+                text: '3d'
+            }, {
+                type: 'week',
+                count: 1,
+                text: '1w'
+            }, {
+                type: 'month',
+                count: 1,
+                text: '1m'
+            }, {
+                type: 'month',
+                count: 6,
+                text: '6m'
+            }, {
+                type: 'year',
+                count: 1,
+                text: '1y'
+            }, {
+                type: 'all',
+                text: 'All'
+            }],
+            selected: 5
+        },
         navigator: {
             enabled: isNavigator,
             series: {
@@ -496,7 +498,7 @@ function BindCharts(containterID, data, symbolTitle, customColor, symb, rangesel
             }
         },
         series: [{
-            //type: 'ohlc',
+            type: 'ohlc',
             name: symb,
             data: data,
            // pointInterval: 24 * 3600 * 1000,
@@ -539,7 +541,7 @@ function CloseGWAModelPopup2(id) {
     $('#' + id).modal('hide');
     $('.close').click();
 }
-function RebindMarketData(selectedCode) {
+function RebindMarketData(selectedCode,id) {
     var a = $('#date').val(); var Type = $('#datafrequency').val();
     ShowLoaderCustom();
     $.ajax({
@@ -547,7 +549,7 @@ function RebindMarketData(selectedCode) {
         url: "/Home/GetAllMarketData",
         dataType: "json",
         async: true,
-        data: { 'startDate': $('#date').val(), 'Type': $('#datafrequency').val(), 'selectedCode': selectedCode },
+        data: { 'startDate': $('#date').val(), 'Type': $('#datafrequency').val(), 'selectedCode': selectedCode, tabType:id },
         success: function (data) {
             if (data != null) {
                

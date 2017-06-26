@@ -20,12 +20,12 @@
                             <label class="col-sm-3 symbol_text" for="code">Symbol:</label>
                             <div class="col-sm-6 search_symbol">
                                 <input type="text" id="codeD" name="code" placeholder="Type valid Symbol" data-toggle="tooltip" title="Type a Valid Symbol" value="SPY" class="form-control codeValue" onkeyup="GetYahooLookUpBluNeural()">
-                                <span onclick="InitilizeMarketListWithCode($('#codeD'))"><i class="fa fa-search" data-toggle="tooltip" title="Lookup Symbol" aria-hidden="true"></i></span>
+                                <span onclick="InitilizeMarketListWithCode($('#codeD'),2)"><i class="fa fa-search" data-toggle="tooltip" title="Lookup Symbol" aria-hidden="true"></i></span>
                             </div>
-                            <div class="col-sm-3">
+                            @*<div class="col-sm-3">
 
                                 <button type="button" id="btnLoad" data-toggle="tooltip" title="Load Symbol" class="btn btn-primary btn_style btn_whitegray" onclick="InitilizeMarketListWithCode($('#codeD'))">Load</button>
-                            </div>
+                            </div>*@
 
                         </div>
                     </div>
@@ -43,10 +43,10 @@
                                 <input type="text" id="codeD" readonly name="code" placeholder="Type valid Symbol" data-toggle="tooltip" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage" value="SPY" class="form-control codeValue" onkeyup="GetYahooLookUpBluNeural()">
                                 <span><i class="fa fa-search" data-toggle="tooltip" title="Lookup Symbol" aria-hidden="true"></i></span>
                             </div>
-                            <div class="col-sm-3">
+                            @*<div class="col-sm-3">
 
                                 <button type="button" disabled="disabled" id="btnLoad" data-toggle="tooltip" title="@HttpContextSessionWrapperExtension.UnAuthorizedUserAccessMessage" class="btn btn-primary btn_style btn_whitegray" onclick="InitilizeMarketListWithCode($('#codeD'))">Load</button>
-                            </div>
+                            </div>*@
 
                         </div>
                     </div>
