@@ -109,6 +109,11 @@ namespace BlueSignal.Models
 
         public IEnumerable<MarketDataDto> MarketLists { get; set; }
         public IEnumerable<SelectItem> Categories { get; set; }
+
+        public string FirstTabSymbol { get; set; }
+        public string SecondTabSymbol { get; set; }
+        public string ThirdTabSymbol { get; set; }
+        public string ForthTabSymbol { get; set; }
     }
 
     public class Data

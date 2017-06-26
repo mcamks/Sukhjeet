@@ -39,6 +39,12 @@ namespace BlueSignal.Controllers
         [LogonAuthorize]
         public async Task<ActionResult> Index(string symbol)
         {
+            Session["fisrtTabSymbol"] = "SPY";
+                 Session["secondTabSymbol"]=  "SPY";
+                 Session["thirdTabSymbol"]=   "SPY";
+                 Session["forthTabSymbol"] = "SPY";
+
+
             if (Session["SystemUser"] == null)
                 await Auth();
 
@@ -372,7 +378,27 @@ namespace BlueSignal.Controllers
         public async Task<JsonResult> GetAllMarketData(string startDate, string Type, string selectedCode, string tabType)
         {
 
-            Session["tabSymbol"] = selectedCode;
+            if(tabType=="1")
+            {
+                Session["fisrtTabSymbol"] = selectedCode;
+            }
+            else if(tabType=="2")
+            {
+                Session["secondTabSymbol"] = selectedCode;
+            }
+            else if (tabType == "3")
+            {
+                Session["thirdTabSymbol"] = selectedCode;
+            }
+            else
+            {
+                Session["forthTabSymbol"] = selectedCode;
+            }
+
+           
+
+
+
             startDate = BluSignalComman.DateTime9MonthBack;
             MarketDataViewModel vm = new MarketDataViewModel();
 
@@ -530,6 +556,10 @@ namespace BlueSignal.Controllers
 
                 vm.MarketLists = await _marketBal.GetMarketData();
                 vm.Categories = await _marketBal.GetActiveMarketCategories();
+                vm.FirstTabSymbol = Convert.ToString(Session["fisrtTabSymbol"]);
+                vm.SecondTabSymbol = Convert.ToString(Session["secondTabSymbol"]);
+                vm.ThirdTabSymbol = Convert.ToString(Session["thirdTabSymbol"]);
+                vm.ForthTabSymbol = Convert.ToString(Session["forthTabSymbol"]);
             }
             catch (WebException ex) //if server is off it will throw exeception and here we need notify user
             {
@@ -961,17 +991,20 @@ namespace BlueSignal.Controllers
 
 
             }
-            //var dataTakeValue = 200;
+            var dataTakeValue = 200;
+
             if (chartResult.results != null && chartResult.results.Any())
             {
                 var dailyData = chartResult.results.Select(item => new object[]
                 {
                        item.tradingDay.ToString(),
+                      //(item.tradingDay- new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds,
                        Math.Round(Convert.ToDecimal((item.open)),2),
                        Math.Round(Convert.ToDecimal((item.high)),2),
                        Math.Round(Convert.ToDecimal((item.low)),2),
-                       Math.Round(Convert.ToDecimal((item.close)),2)
-                });
+                       Math.Round(Convert.ToDecimal((item.close)),2),
+                       //Convert.ToDouble( item.volume)
+            });
 
                 //For Weekly
                 //startDate = BluSignalComman.DateTime5YearsBack;
@@ -982,10 +1015,12 @@ namespace BlueSignal.Controllers
                 var weeklyData = chartResult.results.Select(item => new object[]
                 {
                        item.tradingDay.ToString(),
+                       //(item.tradingDay- new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds,
                        Math.Round(Convert.ToDecimal((item.open)),2),
                        Math.Round(Convert.ToDecimal((item.high)),2),
                        Math.Round(Convert.ToDecimal((item.low)),2),
-                       Math.Round(Convert.ToDecimal((item.close)),2)
+                       Math.Round(Convert.ToDecimal((item.close)),2),
+                       // Convert.ToDouble( item.volume)
                 });
 
                 var jsonToReturn = new

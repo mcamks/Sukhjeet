@@ -322,8 +322,19 @@ function GetAndBindMarketAllChartsData() {
             
 
             var data = response.dailyData;
+            //var dailydataExmple = response.dailyData;
+            //var tempdate = '6/23/2017 12:00:00 AM';
+            //$.each(dailydataExmple, function (key, value) {
+            //    debugger;
+            //    tempdate, dateTimeParts = dateString.split(' '),
+            //    timeParts = dateTimeParts[1].split(':'),
+            //    dateParts = dateTimeParts[0].split('-'),
+            //    date;
+            //      dailydataExmple.tradingDay = new Date(dateParts[2], parseInt(dateParts[1], 10) - 1, dateParts[0], timeParts[0], timeParts[1]);
+
+            //});
             console.log('--------------------------');
-            console.log(data);
+           // console.log(data.tradingDay);
             var data1 = response.weeklyData;
             var dataDaily = response.marketDataDaily;
             var avgVolume = response.avgVolume;
@@ -448,7 +459,96 @@ function GetAndBindMarketAllChartsData() {
 }
 
 function BindCharts(containterID, data, symbolTitle, customColor, symb, rangeselectorValue, isRangeSelector, isNavigator, isexporting) {
-  
+   
+        // split the data set into ohlc and volume
+        //var ohlc = [],
+        //    volume = [],
+        //    dataLength = data.length,
+        //    // set the allowed units for data grouping
+        //    groupingUnits = [[
+        //        'week',                         // unit name
+        //        [1]                             // allowed multiples
+        //    ], [
+        //        'month',
+        //        [1, 2, 3, 4, 6]
+        //    ]],
+
+        //    i = 0;
+
+        //for (i; i < dataLength; i += 1) {
+          
+        //    ohlc.push([
+        //        data[i][0], // the date
+        //        data[i][1], // open
+        //        data[i][2], // high
+        //        data[i][3], // low
+        //        data[i][4] // close
+        //    ]);
+
+        //    volume.push([
+        //        data[i][0], // the date
+        //        data[i][5] // the volume
+        //    ]);
+        //}
+
+
+        //// create the chart
+        //Highcharts.stockChart(containterID, {
+
+        //    rangeSelector: {
+        //        selected: 1
+        //    },
+
+        //    title: {
+        //        text: symbolTitle
+        //    },
+
+        //    yAxis: [{
+        //        labels: {
+        //            align: 'right',
+        //            x: -3
+        //        },
+        //        title: {
+        //            text: 'OHLC'
+        //        },
+        //        height: '60%',
+        //        lineWidth: 2
+        //    }, {
+        //        labels: {
+        //            align: 'right',
+        //            x: -3
+        //        },
+        //        title: {
+        //            text: 'Volume'
+        //        },
+        //        top: '65%',
+        //        height: '35%',
+        //        offset: 0,
+        //        lineWidth: 2
+        //    }],
+
+        //    tooltip: {
+        //        split: true
+        //    },
+
+        //    series: [{
+        //        type: 'candlestick',
+        //        name: 'AAPL',
+        //        data: ohlc,
+        //        //dataGrouping: {
+        //        //    units: groupingUnits
+        //        //}
+        //    }, {
+        //        type: 'column',
+        //        name: 'Volume',
+        //        data: volume,
+        //        yAxis: 1,
+        //        //dataGrouping: {
+        //        //    units: groupingUnits
+        //        //}
+        //    }]
+        //});
+  //  });
 
     Highcharts.stockChart(containterID, {
         chart: {
@@ -593,6 +693,10 @@ function RebindMarketData(selectedCode,id) {
 
                 /* $$$$$$$$$$$$--Commented for now, by AJ ---------$$$$$$$$$$$$$$$$$ */
 
+                $("#liBluFractal").attr('data-original-title', data.FirstTabSymbol);
+                $("#liBluNeural").attr('data-original-title', data.SecondTabSymbol);
+                $("#liBluFractal_BluNeural").attr('data-original-title', data.ThirdTabSymbol);
+                $("#liBluQuant").attr('data-original-title', data.ForthTabSymbol);
 
                 var avgVol = CommaFormatted(parseFloat(data.AverageVolumn).toFixed(0));
 
